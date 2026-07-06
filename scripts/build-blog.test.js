@@ -178,6 +178,7 @@ test("buildBlog renders public article markdown without internal knowledge-base 
       "来源：[[raw/2026-05-01-note]]",
       "原文位置：[[raw/2026-05-01-note#section]]",
       "相关项目：[[Internal Project]]",
+      "模板保留在 [内部模板](/root/code/AiKnowledgebase/resources/private/index.md)。",
       "",
       "See [[Knowledge Base|the public title]] and [[path/to/Named Page]] and [[Simple Page]].",
       "Read https://example.com/path?a=1&b=2 for details.",
@@ -204,6 +205,7 @@ test("buildBlog renders public article markdown without internal knowledge-base 
   assert.doesNotMatch(articleHtml, /来源：/);
   assert.doesNotMatch(articleHtml, /原文位置：/);
   assert.doesNotMatch(articleHtml, /相关项目：/);
+  assert.doesNotMatch(articleHtml, /\/root\/code\//);
   assert.doesNotMatch(articleHtml, /\[\[/);
   assert.doesNotMatch(articleHtml, /\]\]/);
   assert.match(

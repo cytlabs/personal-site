@@ -158,7 +158,8 @@ function shouldOmitPublicLine(line) {
   return (
     /^来源：\[\[raw\//.test(line) ||
     /^原文位置：\[\[raw\//.test(line) ||
-    /^相关项目：\[\[/.test(line)
+    /^相关项目：\[\[/.test(line) ||
+    /\/root\/code\//.test(line)
   );
 }
 
