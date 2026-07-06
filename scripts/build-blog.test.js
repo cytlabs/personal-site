@@ -147,6 +147,70 @@ test("buildBlog writes sorted blog index and article pages", () => {
   assert.match(articleHtml, /<li>item<\/li>/);
 });
 
+test("buildBlog renders public article markdown without internal knowledge-base syntax", () => {
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "blog-public-render-"));
+  const resourcesDir = path.join(tempDir, "resources");
+  const siteDir = path.join(tempDir, "site");
+  fs.mkdirSync(resourcesDir);
+  fs.mkdirSync(siteDir);
+
+  fs.writeFileSync(
+    path.join(resourcesDir, "public.md"),
+    [
+      "---",
+      "publish: true",
+      "slug: public-post",
+      "title: Public Post",
+      "summary: Public rendering",
+      "category: Delivery",
+      "tags: [FDE]",
+      "published: 2026-05-01",
+      "---",
+      "# Public Post",
+      "",
+      "来源：[[raw/2026-05-01-note]]",
+      "原文位置：[[raw/2026-05-01-note#section]]",
+      "相关项目：[[Internal Project]]",
+      "",
+      "See [[Knowledge Base|the public title]] and [[path/to/Named Page]] and [[Simple Page]].",
+      "",
+      "> quoted insight",
+      "",
+      "1. first step",
+      "2. second step",
+      "",
+      "```js",
+      "const value = \"<safe>\";",
+      "```",
+    ].join("\n"),
+    "utf8"
+  );
+
+  buildBlog({ resourcesDir, siteDir });
+
+  const articleHtml = fs.readFileSync(
+    path.join(siteDir, "blog", "public-post", "index.html"),
+    "utf8"
+  );
+
+  assert.doesNotMatch(articleHtml, /来源：/);
+  assert.doesNotMatch(articleHtml, /原文位置：/);
+  assert.doesNotMatch(articleHtml, /相关项目：/);
+  assert.doesNotMatch(articleHtml, /\[\[/);
+  assert.doesNotMatch(articleHtml, /\]\]/);
+  assert.match(
+    articleHtml,
+    /See the public title and Named Page and Simple Page\./
+  );
+  assert.match(articleHtml, /<blockquote>\s*<p>quoted insight<\/p>\s*<\/blockquote>/);
+  assert.match(articleHtml, /<ol>\s*<li>first step<\/li>\s*<li>second step<\/li>\s*<\/ol>/);
+  assert.match(
+    articleHtml,
+    /<pre><code class="language-js">const value = &quot;&lt;safe&gt;&quot;;\n<\/code><\/pre>/
+  );
+  assert.doesNotMatch(articleHtml, /```/);
+});
+
 test("buildBlog escapes hostile values in generated HTML", () => {
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "blog-escape-"));
   const resourcesDir = path.join(tempDir, "resources");
