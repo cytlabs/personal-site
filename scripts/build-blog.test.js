@@ -146,3 +146,121 @@ test("buildBlog writes sorted blog index and article pages", () => {
   assert.match(articleHtml, /<h1>Newer Post<\/h1>/);
   assert.match(articleHtml, /<li>item<\/li>/);
 });
+
+test("buildBlog escapes hostile values in generated HTML", () => {
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "blog-escape-"));
+  const resourcesDir = path.join(tempDir, "resources");
+  const siteDir = path.join(tempDir, "site");
+  fs.mkdirSync(resourcesDir);
+  fs.mkdirSync(siteDir);
+
+  fs.writeFileSync(
+    path.join(resourcesDir, "hostile.md"),
+    [
+      "---",
+      "publish: true",
+      "slug: hostile-post",
+      'title: Hostile <script>alert("title")</script> & "Title"',
+      'summary: Summary <script>alert("summary")</script> & "Summary"',
+      'category: Category <script>alert("category")</script> & "Category"',
+      'tags: [Tag <script>alert("tag")</script> & "Tag"]',
+      "published: 2026-03-01",
+      "---",
+      '# Body <script>alert("body")</script> & "Body"',
+      "",
+      'Paragraph <script>alert("paragraph")</script> & "Paragraph"',
+    ].join("\n"),
+    "utf8"
+  );
+
+  buildBlog({ resourcesDir, siteDir });
+
+  const indexHtml = fs.readFileSync(path.join(siteDir, "blog", "index.html"), "utf8");
+  const articleHtml = fs.readFileSync(
+    path.join(siteDir, "blog", "hostile-post", "index.html"),
+    "utf8"
+  );
+  const combinedHtml = `${indexHtml}\n${articleHtml}`;
+
+  assert.doesNotMatch(combinedHtml, /<script>alert\("title"\)<\/script>/);
+  assert.doesNotMatch(combinedHtml, /<script>alert\("summary"\)<\/script>/);
+  assert.doesNotMatch(combinedHtml, /<script>alert\("category"\)<\/script>/);
+  assert.doesNotMatch(combinedHtml, /<script>alert\("tag"\)<\/script>/);
+  assert.doesNotMatch(combinedHtml, /<script>alert\("body"\)<\/script>/);
+  assert.doesNotMatch(combinedHtml, /<script>alert\("paragraph"\)<\/script>/);
+  assert.match(
+    combinedHtml,
+    /Hostile &lt;script&gt;alert\(&quot;title&quot;\)&lt;\/script&gt; &amp; &quot;Title&quot;/
+  );
+  assert.match(
+    combinedHtml,
+    /Summary &lt;script&gt;alert\(&quot;summary&quot;\)&lt;\/script&gt; &amp; &quot;Summary&quot;/
+  );
+  assert.match(
+    combinedHtml,
+    /Category &lt;script&gt;alert\(&quot;category&quot;\)&lt;\/script&gt; &amp; &quot;Category&quot;/
+  );
+  assert.match(
+    combinedHtml,
+    /Tag &lt;script&gt;alert\(&quot;tag&quot;\)&lt;\/script&gt; &amp; &quot;Tag&quot;/
+  );
+  assert.match(
+    articleHtml,
+    /Body &lt;script&gt;alert\(&quot;body&quot;\)&lt;\/script&gt; &amp; &quot;Body&quot;/
+  );
+  assert.match(
+    articleHtml,
+    /Paragraph &lt;script&gt;alert\(&quot;paragraph&quot;\)&lt;\/script&gt; &amp; &quot;Paragraph&quot;/
+  );
+});
+
+test("buildBlog removes stale generated outputs without deleting unrelated site files", () => {
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "blog-clean-"));
+  const resourcesDir = path.join(tempDir, "resources");
+  const siteDir = path.join(tempDir, "site");
+  fs.mkdirSync(resourcesDir);
+  fs.mkdirSync(path.join(siteDir, "generated"), { recursive: true });
+  fs.mkdirSync(path.join(siteDir, "blog", "stale-post"), { recursive: true });
+  fs.mkdirSync(path.join(siteDir, "assets"), { recursive: true });
+
+  fs.writeFileSync(path.join(siteDir, "generated", "stale.json"), "stale", "utf8");
+  fs.writeFileSync(path.join(siteDir, "blog", "stale.html"), "stale", "utf8");
+  fs.writeFileSync(
+    path.join(siteDir, "blog", "stale-post", "index.html"),
+    "stale",
+    "utf8"
+  );
+  fs.writeFileSync(path.join(siteDir, "keep.txt"), "keep", "utf8");
+  fs.writeFileSync(path.join(siteDir, "assets", "keep.txt"), "keep", "utf8");
+  fs.writeFileSync(
+    path.join(resourcesDir, "fresh.md"),
+    [
+      "---",
+      "publish: true",
+      "slug: fresh-post",
+      "title: Fresh Post",
+      "summary: Fresh summary",
+      "category: Delivery",
+      "tags: [FDE]",
+      "published: 2026-04-01",
+      "---",
+      "# Fresh Post",
+    ].join("\n"),
+    "utf8"
+  );
+
+  buildBlog({ resourcesDir, siteDir });
+
+  assert.equal(fs.existsSync(path.join(siteDir, "generated", "stale.json")), false);
+  assert.equal(fs.existsSync(path.join(siteDir, "blog", "stale.html")), false);
+  assert.equal(
+    fs.existsSync(path.join(siteDir, "blog", "stale-post", "index.html")),
+    false
+  );
+  assert.equal(fs.readFileSync(path.join(siteDir, "keep.txt"), "utf8"), "keep");
+  assert.equal(
+    fs.readFileSync(path.join(siteDir, "assets", "keep.txt"), "utf8"),
+    "keep"
+  );
+  assert.equal(fs.existsSync(path.join(siteDir, "blog", "fresh-post", "index.html")), true);
+});
