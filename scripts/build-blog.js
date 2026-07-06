@@ -78,6 +78,20 @@ function parseFrontmatter(frontmatter) {
   return parsed;
 }
 
+function isValidPublishedDate(value) {
+  if (typeof value !== "string" || !DATE_PATTERN.test(value)) {
+    return false;
+  }
+
+  const [year, month, day] = value.split("-").map(Number);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  return (
+    date.getUTCFullYear() === year &&
+    date.getUTCMonth() === month - 1 &&
+    date.getUTCDate() === day
+  );
+}
+
 function validatePost(post, file) {
   for (const field of REQUIRED_FIELDS) {
     if (
@@ -97,7 +111,7 @@ function validatePost(post, file) {
     throw new Error(`${file} has invalid field: tags`);
   }
 
-  if (!DATE_PATTERN.test(post.published) || Number.isNaN(Date.parse(post.published))) {
+  if (!isValidPublishedDate(post.published)) {
     throw new Error(`${file} has invalid field: published`);
   }
 }

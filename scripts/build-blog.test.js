@@ -62,6 +62,25 @@ test("validatePost throws when a published post is missing a required field", ()
   );
 });
 
+test("validatePost rejects invalid real calendar dates", () => {
+  assert.throws(
+    () =>
+      validatePost(
+        {
+          publish: true,
+          slug: "bad-date",
+          title: "Bad Date",
+          summary: "Invalid date example",
+          category: "Delivery",
+          tags: ["FDE"],
+          published: "2026-02-30",
+        },
+        "bad-date.md"
+      ),
+    /bad-date.md has invalid field: published/
+  );
+});
+
 test("buildBlog writes sorted blog index and article pages", () => {
   const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "blog-build-"));
   const resourcesDir = path.join(tempDir, "resources");
@@ -118,6 +137,7 @@ test("buildBlog writes sorted blog index and article pages", () => {
     fs.readFileSync(path.join(siteDir, "generated", "blog-index.json"), "utf8")
   );
   assert.equal(blogIndex[0].url, "./newer-post/");
+  assert.equal(fs.existsSync(path.join(siteDir, "blog", "index.html")), true);
 
   const articleHtml = fs.readFileSync(
     path.join(siteDir, "blog", "newer-post", "index.html"),
