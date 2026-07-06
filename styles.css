@@ -400,6 +400,227 @@ a {
   color: var(--white);
 }
 
+.nav a[aria-current="page"] {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+.home-hero {
+  min-height: calc(92vh - 72px);
+}
+
+.page-layout {
+  min-height: calc(100vh - 72px);
+}
+
+.page-hero {
+  display: block;
+  min-height: auto;
+  padding: 76px 6vw 54px;
+  border-bottom: 1px solid rgba(17, 24, 39, 0.14);
+}
+
+.page-hero .hero-copy {
+  max-width: 940px;
+}
+
+.compact-hero h1 {
+  max-width: 920px;
+  margin: 0;
+  font-size: clamp(38px, 5vw, 68px);
+  line-height: 1.08;
+}
+
+.single-column {
+  display: block;
+}
+
+.inline-heading {
+  position: static;
+  margin-bottom: 28px;
+}
+
+.post-grid,
+.blog-list {
+  display: grid;
+  gap: 18px;
+}
+
+.post-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  max-width: 1120px;
+}
+
+.blog-index {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  align-items: start;
+}
+
+.blog-index .blog-filters,
+.blog-index .blog-list {
+  grid-column: 2;
+}
+
+.blog-list {
+  max-width: 980px;
+}
+
+.blog-card {
+  min-height: 220px;
+  padding: 24px;
+  background: var(--white);
+  border: 1px solid rgba(17, 24, 39, 0.18);
+  border-radius: 8px;
+}
+
+.blog-card h2 {
+  margin: 0 0 12px;
+  font-size: 25px;
+  line-height: 1.25;
+}
+
+.blog-card a {
+  text-decoration: none;
+}
+
+.blog-card a:hover {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.blog-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.blog-card time,
+.post-meta {
+  display: block;
+  margin-top: 18px;
+  color: var(--muted);
+  font-family: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", sans-serif;
+  font-size: 13px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.tag-list span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 9px;
+  background: rgba(31, 111, 104, 0.09);
+  border: 1px solid rgba(31, 111, 104, 0.22);
+  border-radius: 6px;
+  color: var(--green);
+  font-family: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.blog-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.blog-filters button {
+  min-height: 38px;
+  padding: 0 14px;
+  background: rgba(255, 250, 242, 0.66);
+  border: 1px solid rgba(17, 24, 39, 0.28);
+  border-radius: 6px;
+  color: var(--ink);
+  cursor: pointer;
+  font-family: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", sans-serif;
+  font-weight: 700;
+}
+
+.blog-filters button:hover,
+.blog-filters button[aria-current] {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.blog-article {
+  display: block;
+}
+
+.blog-article article {
+  max-width: 860px;
+}
+
+.blog-article h1 {
+  margin: 14px 0 18px;
+  font-size: clamp(38px, 5vw, 64px);
+  line-height: 1.12;
+}
+
+.blog-article .markdown-panel {
+  margin-top: 34px;
+}
+
+.blog-article .markdown-panel h1:first-child {
+  display: none;
+}
+
+.markdown-panel h3 {
+  margin: 28px 0 10px;
+  font-size: 22px;
+}
+
+.markdown-panel blockquote {
+  margin: 24px 0;
+  padding: 4px 0 4px 18px;
+  border-left: 4px solid var(--green);
+  color: var(--muted);
+}
+
+.markdown-panel ol {
+  display: grid;
+  gap: 8px;
+  margin: 0 0 22px;
+  padding-left: 24px;
+}
+
+.markdown-panel pre {
+  overflow-x: auto;
+  margin: 24px 0;
+  padding: 16px;
+  background: #111827;
+  border-radius: 8px;
+  color: var(--white);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.markdown-panel code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+}
+
+.back-link {
+  color: var(--green);
+  font-family: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", sans-serif;
+  font-weight: 800;
+  text-underline-offset: 5px;
+}
+
+.site-footer {
+  padding: 28px 6vw;
+  border-top: 1px solid rgba(17, 24, 39, 0.14);
+  color: var(--muted);
+  font-family: "Noto Sans SC", "Source Han Sans SC", "PingFang SC", sans-serif;
+  font-size: 13px;
+}
+
 @media (max-width: 920px) {
   .site-header {
     align-items: flex-start;
@@ -441,8 +662,18 @@ a {
   }
 
   .proof-strip,
-  .case-grid {
+  .case-grid,
+  .post-grid {
     grid-template-columns: 1fr;
+  }
+
+  .single-column {
+    display: block;
+  }
+
+  .blog-index .blog-filters,
+  .blog-index .blog-list {
+    grid-column: 1;
   }
 
   .proof-strip {
@@ -475,6 +706,11 @@ a {
   .lead,
   .markdown-panel {
     font-size: 16px;
+  }
+
+  .compact-hero h1,
+  .blog-article h1 {
+    font-size: 38px;
   }
 
   .button {
