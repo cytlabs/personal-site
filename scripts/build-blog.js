@@ -329,21 +329,25 @@ function blogIndexEntry(post) {
   };
 }
 
-function siteHeader(prefix) {
+function siteHeader(prefix, active = "") {
+  const links = [
+    ["首页", `${prefix}index.html`, "home"],
+    ["关于", `${prefix}about/`, "about"],
+    ["博客", `${prefix}blog/`, "blog"],
+    ["案例", `${prefix}cases/`, "cases"],
+  ];
+
   return `<header class="site-header">
       <a class="brand" href="${prefix}index.html" aria-label="返回首页">夏目</a>
       <nav class="nav" aria-label="主导航">
-        <a href="${prefix}index.html#positioning">定位</a>
-        <a href="${prefix}index.html#services">服务</a>
-        <a href="${prefix}index.html#resume">简历</a>
-        <a href="${prefix}index.html#cases">案例</a>
-        <a href="${prefix}blog/">文章</a>
-        <a href="${prefix}index.html#contact">联系</a>
+        ${links
+          .map(([label, href, key]) => `<a href="${href}"${active === key ? ' aria-current="page"' : ""}>${label}</a>`)
+          .join("\n        ")}
       </nav>
     </header>`;
 }
 
-function pageShell({ title, description, prefix, body, script }) {
+function pageShell({ title, description, prefix, body, script, active }) {
   const scriptTag = script ? `\n    <script src="${script}"></script>` : "";
   return `<!doctype html>
 <html lang="zh-CN">
@@ -355,7 +359,7 @@ function pageShell({ title, description, prefix, body, script }) {
     <link rel="stylesheet" href="${prefix}styles.css">
   </head>
   <body>
-    ${siteHeader(prefix)}
+    ${siteHeader(prefix, active)}
     ${body}
     <footer class="site-footer">
       <p>作者：夏目</p>
@@ -386,14 +390,15 @@ function renderBlogIndex(posts) {
     .join("\n        ");
 
   return pageShell({
-    title: "文章 | 夏目",
+    title: "博客 | 夏目",
     description: "夏目的 AI 工作流、自动化和职业转型文章。",
     prefix: "../",
     script: "../script.js",
+    active: "blog",
     body: `<main class="content-section blog-index">
       <div class="section-heading">
         <p>Blog</p>
-        <h1>文章</h1>
+        <h1>博客</h1>
       </div>
       <div class="blog-filters" aria-label="文章分类筛选">
         <button type="button" data-category="all">全部</button>
@@ -412,9 +417,10 @@ function renderArticle(post) {
     title: `${post.title} | 夏目`,
     description: post.summary,
     prefix: "../../",
+    active: "blog",
     body: `<main class="content-section blog-article">
       <article>
-        <a class="back-link" href="../">返回文章列表</a>
+        <a class="back-link" href="../">返回博客列表</a>
         <p class="eyebrow">${escapeHtml(post.category)}</p>
         <h1>${escapeHtml(post.title)}</h1>
         <p class="lead">${escapeHtml(post.summary)}</p>

@@ -9,36 +9,34 @@
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="#top" aria-label="返回首页">夏目</a>
+      <a class="brand" href="./index.html" aria-label="返回首页">夏目</a>
       <nav class="nav" aria-label="主导航">
-        <a href="#positioning">定位</a>
-        <a href="#services">服务</a>
-        <a href="#resume">简历</a>
-        <a href="#cases">案例</a>
-        <a href="#contact">联系</a>
+        <a href="./index.html" aria-current="page">首页</a>
+        <a href="./about/">关于</a>
+        <a href="./blog/">博客</a>
+        <a href="./cases/">案例</a>
       </nav>
     </header>
 
     <main id="top">
-      <section class="hero">
+      <section class="hero home-hero">
         <div class="hero-copy">
-          <p class="eyebrow">AI Workflow / DevOps / Automation</p>
-          <h1>把企业重复流程做成可运行的 AI 工具。</h1>
-          <p class="lead">近 7 年 DevOps、技术支持、自动化和远程技术交付经验，专注 AI 工作流、知识库、SOP 自动化和内部工具落地。</p>
+          <p class="eyebrow">AI Workflow / DevOps / Knowledge Systems</p>
+          <h1>把复杂流程拆清楚，再做成可运行的 AI 工具。</h1>
+          <p class="lead">近 7 年 DevOps、技术支持、自动化和远程技术交付经验，正在把 AI 工作流、知识库和企业内部工具沉淀成可复用的交付能力。</p>
           <div class="actions">
-            <a class="button primary" href="#cases">查看案例</a>
-            <a class="button secondary" href="mailto:xb990815@163.com">联系合作</a>
+            <a class="button primary" href="./cases/">查看案例</a>
+            <a class="button secondary" href="./blog/">阅读文章</a>
           </div>
         </div>
-        <aside class="hero-card" aria-label="可交付方向">
-          <p class="card-kicker">Available for</p>
-          <h2>远程技术岗位 / AI 应用实施 / 自动化项目</h2>
+        <aside class="hero-card" aria-label="当前方向">
+          <p class="card-kicker">Current Focus</p>
+          <h2>AI 交付、知识库系统和职业竞争力工作流</h2>
           <ul>
-            <li>AI Workflow Demo 与业务流程自动化</li>
-            <li>企业知识库、SOP 问答和技术支持自动化</li>
-            <li>内部工具、脚本、部署、监控和稳定性支持</li>
+            <li>企业流程拆解与 AI Workflow Demo</li>
+            <li>知识库、SOP 和内部工具自动化</li>
+            <li>远程技术岗位与 FDE 型交付能力建设</li>
           </ul>
-          <a href="#contact">讨论具体需求</a>
         </aside>
       </section>
 
@@ -46,88 +44,47 @@
         <div class="proof-strip" aria-label="可信度摘要">
           <div><strong>7 年</strong><span>技术岗位经验</span></div>
           <div><strong>50+</strong><span>应用容器化迁移</span></div>
-          <div><strong>4 类</strong><span>AI / 自动化代表案例</span></div>
+          <div><strong>3 类</strong><span>公开知识主题</span></div>
           <div><strong>远程</strong><span>异步交付经验</span></div>
         </div>
-        <div class="summary-grid">
-          <article>
-            <span>01</span>
-            <h2>工程基本盘</h2>
-            <p>DevOps、Kubernetes、CI/CD、监控告警、日志平台和线上稳定性。</p>
-          </article>
-          <article>
-            <span>02</span>
-            <h2>流程拆解</h2>
-            <p>把模糊需求拆成字段、规则、AI 节点、人工确认和异常分支。</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h2>AI 工具落地</h2>
-            <p>把 Prompt、结构化输出、Dify Workflow、RAG 和全栈工具接进真实流程。</p>
-          </article>
-        </div>
       </section>
 
-      <section id="positioning" class="content-section">
-        <div class="section-heading">
-          <p>Positioning</p>
-          <h2>个人定位</h2>
+      <section class="content-section single-column">
+        <div class="section-heading inline-heading">
+          <p>Latest Posts</p>
+          <h2>最近公开文章</h2>
         </div>
-        <div class="markdown-panel" data-md="profile"></div>
+        <div class="post-grid" data-latest-posts></div>
       </section>
 
-      <section id="services" class="content-section alt">
-        <div class="section-heading">
-          <p>Services</p>
-          <h2>服务方向</h2>
-        </div>
-        <div class="markdown-panel" data-md="services"></div>
-      </section>
-
-      <section id="resume" class="content-section">
-        <div class="section-heading">
-          <p>Resume</p>
-          <h2>简历概览</h2>
-        </div>
-        <div class="markdown-panel" data-md="resume"></div>
-      </section>
-
-      <section id="cases" class="content-section alt">
-        <div class="section-heading">
+      <section class="content-section single-column alt">
+        <div class="section-heading inline-heading">
           <p>Cases</p>
           <h2>代表案例</h2>
         </div>
-        <div>
-          <div class="case-grid">
-            <a class="case-card" href="./content/cases/brief-ai-workflow.md">
-              <span>AI Workflow</span>
-              <h3>达人营销 AI 工作流</h3>
-              <p>把客户 Brief、达人匹配、外联话术和异常提醒拆成可执行流程。</p>
-            </a>
-            <a class="case-card" href="./content/cases/keysafe.md">
-              <span>Full-stack / Web3</span>
-              <h3>KeySafe 密码管理工具</h3>
-              <p>钱包登录、主密码验证、AES 加密和 IPFS 存储的全栈原型。</p>
-            </a>
-            <a class="case-card" href="./content/cases/job-search-skill.md">
-              <span>Skill / Workflow</span>
-              <h3>求职材料 Skill</h3>
-              <p>把简历、项目故事、面试话术和投递反馈做成可复用系统。</p>
-            </a>
-            <a class="case-card" href="./content/cases/gitops-platform.md">
-              <span>DevOps</span>
-              <h3>GitOps 发布平台</h3>
-              <p>Kustomize、ArgoCD 和 GitLab Runner 驱动的标准化发布流程。</p>
-            </a>
-          </div>
-          <div class="markdown-panel compact" data-md="cases"></div>
+        <div class="case-grid">
+          <a class="case-card" href="./content/cases/brief-ai-workflow.md">
+            <span>AI Workflow</span>
+            <h3>达人营销 AI 工作流</h3>
+            <p>把客户 Brief、达人匹配、外联话术和异常提醒拆成可执行流程。</p>
+          </a>
+          <a class="case-card" href="./content/cases/keysafe.md">
+            <span>Full-stack / Web3</span>
+            <h3>KeySafe 密码管理工具</h3>
+            <p>钱包登录、主密码验证、AES 加密和 IPFS 存储的全栈原型。</p>
+          </a>
+          <a class="case-card" href="./content/cases/job-search-skill.md">
+            <span>Skill / Workflow</span>
+            <h3>求职材料 Skill</h3>
+            <p>把简历、项目故事、面试话术和投递反馈做成可复用系统。</p>
+          </a>
         </div>
       </section>
 
       <section id="contact" class="contact-section">
         <div>
           <p class="eyebrow">Contact</p>
-          <h2>如果你需要一个能把需求拆清楚、把 Demo 做出来、把交付跑通的人，可以直接联系我。</h2>
+          <h2>如果你需要把需求拆清楚、把 Demo 做出来、把交付跑通，可以直接联系我。</h2>
         </div>
         <div class="contact-actions">
           <a class="button primary" href="mailto:xb990815@163.com">xb990815@163.com</a>

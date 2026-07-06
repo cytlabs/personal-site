@@ -139,12 +139,19 @@ test("buildBlog writes sorted blog index and article pages", () => {
   assert.equal(blogIndex[0].url, "./newer-post/");
   assert.equal(fs.existsSync(path.join(siteDir, "blog", "index.html")), true);
 
+  const indexHtml = fs.readFileSync(path.join(siteDir, "blog", "index.html"), "utf8");
+  assert.match(indexHtml, /<a href="\.\.\/blog\/" aria-current="page">博客<\/a>/);
+  assert.match(indexHtml, /<a href="\.\.\/about\/">关于<\/a>/);
+  assert.doesNotMatch(indexHtml, /index\.html#positioning/);
+
   const articleHtml = fs.readFileSync(
     path.join(siteDir, "blog", "newer-post", "index.html"),
     "utf8"
   );
   assert.match(articleHtml, /<h1>Newer Post<\/h1>/);
   assert.match(articleHtml, /<li>item<\/li>/);
+  assert.match(articleHtml, /<a href="\.\.\/\.\.\/blog\/" aria-current="page">博客<\/a>/);
+  assert.doesNotMatch(articleHtml, /返回文章列表/);
 });
 
 test("buildBlog renders public article markdown without internal knowledge-base syntax", () => {

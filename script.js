@@ -1,8 +1,11 @@
+const scriptElement = document.querySelector('script[src$="script.js"]');
+const basePath = scriptElement?.getAttribute("src")?.replace(/script\.js$/, "") || "./";
+
 const files = {
-  profile: "./content/profile.md",
-  services: "./content/services.md",
-  resume: "./content/resume.md",
-  cases: "./content/cases.md",
+  profile: `${basePath}content/profile.md`,
+  services: `${basePath}content/services.md`,
+  resume: `${basePath}content/resume.md`,
+  cases: `${basePath}content/cases.md`,
 };
 
 const fallback = {
@@ -66,10 +69,11 @@ Next.js + PostgreSQL / Prisma + 钱包登录 + AES-256-GCM + IPFS 的全栈原�
 };
 
 function escapeHtml(value) {
-  return value
+  return String(value)
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;");
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;");
 }
 
 function inlineMarkdown(value) {
@@ -142,7 +146,7 @@ async function loadMarkdown(key) {
   }
 }
 
-async function hydrate() {
+async function hydrateMarkdown() {
   const panels = document.querySelectorAll("[data-md]");
   for (const panel of panels) {
     const key = panel.getAttribute("data-md");
@@ -151,4 +155,75 @@ async function hydrate() {
   }
 }
 
-hydrate();
+async function loadBlogIndex() {
+  try {
+    const response = await fetch(`${basePath}generated/blog-index.json`, {
+      cache: "no-cache",
+    });
+    if (!response.ok) {
+      throw new Error("Failed to load generated blog index");
+    }
+    return await response.json();
+  } catch {
+    return [];
+  }
+}
+
+function postUrl(post) {
+  return `${basePath}blog/${encodeURIComponent(post.slug)}/`;
+}
+
+function renderPostCard(post) {
+  const tags = Array.isArray(post.tags) ? post.tags : [];
+  return `<article class="blog-card">
+    <p class="eyebrow">${escapeHtml(post.category || "")}</p>
+    <h2><a href="${escapeHtml(postUrl(post))}">${escapeHtml(post.title || "")}</a></h2>
+    <p>${escapeHtml(post.summary || "")}</p>
+    <time datetime="${escapeHtml(post.published || "")}">${escapeHtml(post.published || "")}</time>
+    <div class="tag-list">${tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
+  </article>`;
+}
+
+function renderLatestPosts(posts) {
+  const mounts = document.querySelectorAll("[data-latest-posts]");
+  if (!mounts.length) {
+    return;
+  }
+
+  const latest = posts.slice(0, 3);
+  for (const mount of mounts) {
+    mount.innerHTML = latest.length
+      ? latest.map(renderPostCard).join("")
+      : "<p>暂无公开文章。</p>";
+  }
+}
+
+function enableBlogFilters() {
+  const filters = document.querySelectorAll(".blog-filters [data-category]");
+  const cards = document.querySelectorAll(".blog-list [data-category]");
+  if (!filters.length || !cards.length) {
+    return;
+  }
+
+  for (const button of filters) {
+    button.addEventListener("click", () => {
+      const category = button.getAttribute("data-category") || "all";
+      for (const filter of filters) {
+        filter.toggleAttribute("aria-current", filter === button);
+      }
+      for (const card of cards) {
+        const visible = category === "all" || card.getAttribute("data-category") === category;
+        card.hidden = !visible;
+      }
+    });
+  }
+}
+
+async function hydrateBlog() {
+  const posts = await loadBlogIndex();
+  renderLatestPosts(posts);
+  enableBlogFilters();
+}
+
+hydrateMarkdown();
+hydrateBlog();
