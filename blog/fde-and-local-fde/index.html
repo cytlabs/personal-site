@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FDE 与土 FDE：从工程师到现场交付 | 夏目</title>
+    <meta name="description" content="梳理 FDE、土 FDE、业务调研、流程拆解和 AI 交付方法，帮助工程师理解现场交付能力。">
+    <link rel="stylesheet" href="../../styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="../../index.html" aria-label="返回首页">夏目</a>
+      <nav class="nav" aria-label="主导航">
+        <a href="../../index.html#positioning">定位</a>
+        <a href="../../index.html#services">服务</a>
+        <a href="../../index.html#resume">简历</a>
+        <a href="../../index.html#cases">案例</a>
+        <a href="../../blog/">文章</a>
+        <a href="../../index.html#contact">联系</a>
+      </nav>
+    </header>
+    <main class="content-section blog-article">
+      <article>
+        <a class="back-link" href="../">返回文章列表</a>
+        <p class="eyebrow">AI交付</p>
+        <h1>FDE 与土 FDE：从工程师到现场交付</h1>
+        <p class="lead">梳理 FDE、土 FDE、业务调研、流程拆解和 AI 交付方法，帮助工程师理解现场交付能力。</p>
+        <div class="post-meta">
+          <time datetime="2026-07-06">2026-07-06</time>
+          <div class="tag-list"><span>FDE</span><span>AI交付</span><span>职业转型</span></div>
+        </div>
+        <div class="markdown-panel">
+<h1>FDE 与土 FDE 解析</h1>
+<p>来源：[[raw/2026-07-05-article-ChatGPT-FDE与土FDE解析]]</p>
+<h2>核心理解</h2>
+<p>FDE（Forward Deployed Engineer）的核心不是单纯写代码，也不是传统实施，而是在真实业务现场中理解问题、拆流程、找关键断点，并用工程能力把一个可验证的业务闭环跑通。</p>
+<p>土 FDE 更偏向小团队或个人交付：不依赖大厂平台和完整交付体系，而是用 Dify、飞书、n8n、脚本、API、数据库、AI Workflow 等工具，把客户现场的混乱流程先切成一个可运行 MVP。</p>
+<h2>与普通开发和实施的区别</h2>
+<ul>
+<li>普通开发通常接收需求文档后实现功能。</li>
+<li>传统实施通常配置和上线已有系统。</li>
+<li>FDE 要在需求不清晰时进入现场，先判断真实业务，再设计方案、交付 MVP、验证效果，并把经验沉淀成可复用能力。</li>
+</ul>
+<p>判断一个 FDE 项目是否靠谱，需要看是否有明确 MVP 目标、合作边界、现场资源配合、安全合规边界，以及项目完成后是否能沉淀 SOP、模板、工作流、Demo 或案例。</p>
+<h2>AI 时代的商业判断</h2>
+<p>AI 让写代码、改页面、接 API 和生成工作流的成本下降，因此小颗粒度定制需求更值得被服务。</p>
+<p>但这不等于纯定制比标准化更好。更合理的模式是：</p>
+<p>&gt; 底层标准化，上层定制化。</p>
+<p>可以标准化的是身份、权限、数据库、日志、任务队列、LLM 调用、RAG、Workflow、Webhook、部署监控、调研模板、方案模板和验收模板。</p>
+<p>需要定制化的是客户业务流程、字段、审批规则、Prompt、报表格式、Agent 行为和人工兜底节点。</p>
+<h2>FDE 核心能力</h2>
+<p>FDE 能力可以拆成五块：</p>
+<p>1. 业务调研能力：快速理解公司靠什么赚钱、核心流程是什么。</p>
+<p>2. 流程拆解能力：把模糊业务拆成角色、触发、输入、处理、输出、工具、异常、验收。</p>
+<p>3. 问题诊断能力：找到重复、耗时、易错、依赖经验、跨系统流转的流程断点。</p>
+<p>4. 方案设计能力：判断哪些地方适合 AI、规则、Workflow、RAG 或人工确认。</p>
+<p>5. 现场交付能力：用最小闭环跑通真实输入到可见输出。</p>
+<h2>1 小时业务调研框架</h2>
+<p>前 10 分钟：搞清公司基本业务，包括客户、收入来源、当前目标和希望 AI 解决的问题。</p>
+<p>第 10-25 分钟：梳理主流程，包括步骤、负责人、工具、数据、审批和客户参与点。</p>
+<p>第 25-40 分钟：定位痛点，包括耗时、错误、经验依赖、管理困难、老板想看但看不到的数据。</p>
+<p>第 40-50 分钟：定义 MVP，包括两周内优先解决的问题、第一用户、成功标准、节省时间、减少错误、系统权限。</p>
+<p>第 50-60 分钟：确认边界，包括必须自动化和可以人工处理的部分、数据访问、不能接的系统、验收人和拍板人。</p>
+<h2>可直接复用的流程拆解模板</h2>
+<p>```text</p>
+<p>角色 -&gt; 触发 -&gt; 输入 -&gt; 处理 -&gt; 输出 -&gt; 工具 -&gt; 异常 -&gt; 验收</p>
+<p>```</p>
+<p>这个模板的作用是把业务语言转成工程方案。比如“客户咨询后生成报价”可以映射成：AI 提取客户需求、结构化报价规则、生成报价草稿、不确定项进入人工审批、最终由销售确认发送。</p>
+<h2>AI 自动化机会类型</h2>
+<ul>
+<li>信息整理：聊天记录、会议纪要、客户需求、邮件、工单摘要。</li>
+<li>文案生成：报价说明、客户回复、销售跟进、合同初稿、日报周报。</li>
+<li>分类判断：客户意向、工单分类、优先级、风险判断。</li>
+<li>流程流转：表单、审批、报价、合同、交付任务流转。</li>
+<li>查询问答：SOP、产品资料、政策制度、客服知识库。</li>
+<li>数据报表：销售汇总、客户状态、项目进度、异常提醒。</li>
+<li>人工兜底：AI 处理 70%，关键节点由人确认。</li>
+</ul>
+<h2>对当前阶段的意义</h2>
+<p>这篇文章可以作为 FDE 学习和咨询服务探索的基础资料。它给出的方向不是继续堆技术栈，而是训练“快速理解业务、拆流程、定义 MVP、交付闭环”的方法。</p>
+<p>更具体地说，当前应该把 FDE 表达为：</p>
+<p>&gt; 我能现场理解业务，把混乱流程拆成可执行的 AI Workflow，并交付一个能跑起来的 MVP。</p>
+<p>相关项目：[[FDE转型与咨询服务探索]]</p>
+        </div>
+      </article>
+    </main>
+    <footer class="site-footer">
+      <p>作者：夏目</p>
+    </footer>
+  </body>
+</html>

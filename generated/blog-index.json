@@ -1,0 +1,41 @@
+[
+  {
+    "slug": "fde-and-local-fde",
+    "title": "FDE 与土 FDE：从工程师到现场交付",
+    "summary": "梳理 FDE、土 FDE、业务调研、流程拆解和 AI 交付方法，帮助工程师理解现场交付能力。",
+    "category": "AI交付",
+    "tags": [
+      "FDE",
+      "AI交付",
+      "职业转型"
+    ],
+    "published": "2026-07-06",
+    "url": "./fde-and-local-fde/"
+  },
+  {
+    "slug": "local-fde-action-guide",
+    "title": "土 FDE 入门行动手册",
+    "summary": "面向工程师的现场交付入门清单，从业务理解、流程拆解到 AI 工具落地。",
+    "category": "行动手册",
+    "tags": [
+      "FDE",
+      "现场交付",
+      "AI工具"
+    ],
+    "published": "2026-07-05",
+    "url": "./local-fde-action-guide/"
+  },
+  {
+    "slug": "career-competitiveness-workflow",
+    "title": "职业竞争力工作流",
+    "summary": "把定位、简历、案例、内容和反馈循环组织成一个长期职业资产系统。",
+    "category": "职业发展",
+    "tags": [
+      "职业发展",
+      "知识库",
+      "个人系统"
+    ],
+    "published": "2026-07-04",
+    "url": "./career-competitiveness-workflow/"
+  }
+]
