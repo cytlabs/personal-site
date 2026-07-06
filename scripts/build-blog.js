@@ -141,13 +141,17 @@ function publicMarkdownText(value) {
 }
 
 function inlineMarkdown(value) {
-  const escaped = escapeHtml(publicMarkdownText(value));
-  const linked = escaped.replace(
+  const text = publicMarkdownText(value);
+  const linked = text.replace(
     /(https?:\/\/[^\s<]+)/g,
     (url) =>
-      `<a href="${escapeAttribute(url)}" target="_blank" rel="noreferrer">${url}</a>`
+      `<a href="${escapeAttribute(url)}" target="_blank" rel="noreferrer">${escapeHtml(url)}</a>`
   );
-  return linked.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+  const escaped = linked
+    .split(/(<a href="[^"]+" target="_blank" rel="noreferrer">[^<]+<\/a>)/g)
+    .map((part) => (part.startsWith("<a ") ? part : escapeHtml(part)))
+    .join("");
+  return escaped.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
 }
 
 function shouldOmitPublicLine(line) {

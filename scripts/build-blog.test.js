@@ -180,6 +180,7 @@ test("buildBlog renders public article markdown without internal knowledge-base 
       "相关项目：[[Internal Project]]",
       "",
       "See [[Knowledge Base|the public title]] and [[path/to/Named Page]] and [[Simple Page]].",
+      "Read https://example.com/path?a=1&b=2 for details.",
       "",
       "> quoted insight",
       "",
@@ -209,6 +210,11 @@ test("buildBlog renders public article markdown without internal knowledge-base 
     articleHtml,
     /See the public title and Named Page and Simple Page\./
   );
+  assert.match(
+    articleHtml,
+    /<a href="https:\/\/example\.com\/path\?a=1&amp;b=2" target="_blank" rel="noreferrer">https:\/\/example\.com\/path\?a=1&amp;b=2<\/a>/
+  );
+  assert.doesNotMatch(articleHtml, /amp;amp/);
   assert.match(articleHtml, /<blockquote>\s*<p>quoted insight<\/p>\s*<\/blockquote>/);
   assert.match(articleHtml, /<ol>\s*<li>first step<\/li>\s*<li>second step<\/li>\s*<\/ol>/);
   assert.match(
