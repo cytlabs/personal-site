@@ -1,41 +1,67 @@
 [
   {
     "slug": "fde-and-local-fde",
-    "title": "FDE 与土 FDE：从工程师到现场交付",
-    "summary": "梳理 FDE、土 FDE、业务调研、流程拆解和 AI 交付方法，帮助工程师理解现场交付能力。",
+    "title": "FDE 与土 FDE：把工程能力带到业务现场",
+    "summary": "FDE 的核心不是会写更多代码，而是在真实业务现场里识别关键动作、切出可验证闭环，并用工程方法把价值交付出来。",
     "category": "AI交付",
     "tags": [
       "FDE",
       "AI交付",
-      "职业转型"
+      "业务调研"
     ],
-    "published": "2026-07-06",
+    "published": "2026-07-08",
     "url": "./fde-and-local-fde/"
   },
   {
     "slug": "local-fde-action-guide",
-    "title": "土 FDE 入门行动手册",
-    "summary": "面向工程师的现场交付入门清单，从业务理解、流程拆解到 AI 工具落地。",
+    "title": "土 FDE 入门行动手册：从真实输入开始",
+    "summary": "一份面向工程师的现场交付清单：如何找场景、问问题、做薄切片、定义验收，并避免把 AI Demo 做成无效玩具。",
     "category": "行动手册",
     "tags": [
       "FDE",
       "现场交付",
-      "AI工具"
+      "AI工作流"
     ],
-    "published": "2026-07-05",
+    "published": "2026-07-07",
     "url": "./local-fde-action-guide/"
   },
   {
     "slug": "career-competitiveness-workflow",
-    "title": "职业竞争力工作流",
-    "summary": "把定位、简历、案例、内容和反馈循环组织成一个长期职业资产系统。",
+    "title": "职业竞争力工作流：把经历变成可被检查的证据",
+    "summary": "一个职业系统不应该只产出简历，而应该把经历、案例、文章、反馈和学习计划组织成可持续更新的证据链。",
     "category": "职业发展",
     "tags": [
       "职业发展",
       "知识库",
       "个人系统"
     ],
-    "published": "2026-07-04",
+    "published": "2026-07-06",
     "url": "./career-competitiveness-workflow/"
+  },
+  {
+    "slug": "ai-workflow-acceptance",
+    "title": "AI 工作流验收框架：不要用“看起来很智能”判断交付",
+    "summary": "AI 工作流的验收不能停留在演示效果，而要回到输入覆盖、规则边界、人工确认、失败处理和可兑现业务价值。",
+    "category": "AI交付",
+    "tags": [
+      "AI工作流",
+      "验收",
+      "交付"
+    ],
+    "published": "2026-07-05",
+    "url": "./ai-workflow-acceptance/"
+  },
+  {
+    "slug": "knowledge-base-boundaries",
+    "title": "企业知识库落地边界：RAG 不是把文档扔进去",
+    "summary": "企业知识库项目的关键不是接一个问答机器人，而是先整理文档责任、适用条件、更新机制和人工兜底。",
+    "category": "知识库",
+    "tags": [
+      "知识库",
+      "RAG",
+      "SOP"
+    ],
+    "published": "2026-07-04",
+    "url": "./knowledge-base-boundaries/"
   }
 ]

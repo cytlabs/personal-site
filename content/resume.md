@@ -1,34 +1,22 @@
-# 简历概览
+# 经历概览
 
-夏目，近 7 年技术岗位经验，主线是 DevOps / 技术支持 / 自动化 / 企业 AI 工具落地。
+夏目，AI 工作流交付工程师。背景覆盖 DevOps、技术支持、自动化脚本、内部工具、知识库和 LLM Workflow。
 
-## 求职方向
+## 能力组合
 
-- 远程 DevOps / SRE / 运维开发
-- 技术支持 / 解决方案支持 / AI 应用实施
-- 全栈工程师 / 企业 AI 产品 / AI Workflow 开发
+- 业务流程拆解：角色、触发、输入、处理、输出、异常、验收。
+- AI 工作流：结构化输出、Prompt 版本管理、Dify Workflow、人工确认节点。
+- 知识库与 SOP：文档切片、工单分类、标准回复、排查路径、升级条件。
+- 工程交付：Linux、Docker、Kubernetes、GitLab CI、ArgoCD、Prometheus、Grafana。
+- 内部工具：Python、Shell、REST API、数据库、轻量前端和部署文档。
 
-## 一句话版本
+## 合作边界
 
-有工程稳定性背景，能把业务流程拆成数据结构、规则判断、AI 节点、人工确认和异常处理，并推进到 Demo、文档或可运行工具。
-
-## 技术主线
-
-近 7 年技术岗位经验，经历覆盖 DevOps 运维、云平台、自动化平台、技术支持、全栈工具、Web3 工具和企业 AI 工作流落地。熟悉需求拆解、方案设计、前后端开发、数据库设计、API 集成、部署上线、监控告警和稳定性保障。
-
-## 核心技能
-
-- Linux、Nginx、Docker、Kubernetes
-- CI/CD、GitOps、ArgoCD、Jenkins、GitLab CI
-- Prometheus、Grafana、ELK、Alertmanager
-- Python / Shell 自动化
-- React / Next.js / TypeScript
-- FastAPI / Django / REST API
-- OpenAI / Claude API、Prompt、结构化输出、Dify Workflow
-- SOP 文档、技术支持、故障排查和问题闭环
+- 适合：明确场景、有真实输入、可以一周内验证一个业务动作的小型交付。
+- 谨慎：没有一线用户、没有样例数据、只想先听“大方案”的需求。
+- 不做：大模型训练、纯算法研究、无边界长期外包和无法验收的泛咨询。
 
 ## 联系
 
 - 邮箱：xb990815@163.com
 - GitHub：https://github.com/cyt1999
-- 电话：按需提供

@@ -3,47 +3,116 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>关于我 | 夏目</title>
-    <meta name="description" content="夏目的个人介绍、技术背景、AI 工作流方向和合作方式。">
-    <link rel="stylesheet" href="../styles.css">
+    <title>关于 | 夏目</title>
+    <meta name="description" content="夏目的工作方式、能力边界、技术背景和 AI 工作流交付方法。">
+    <link rel="stylesheet" href="../styles.css?v=product-site">
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="../index.html" aria-label="返回首页">夏目</a>
-      <nav class="nav" aria-label="主导航">
-        <a href="../index.html">首页</a>
-        <a href="./" aria-current="page">关于</a>
-        <a href="../blog/">博客</a>
-        <a href="../cases/">案例</a>
-      </nav>
+      <div class="header-inner">
+        <a class="brand" href="../index.html" aria-label="返回首页">夏目 <span>AI Delivery Engineer</span></a>
+        <nav class="nav" aria-label="主导航">
+          <a href="../index.html">首页</a>
+          <a href="./" aria-current="page">关于</a>
+          <a href="../blog/">博客</a>
+          <a href="../cases/">案例</a>
+        </nav>
+      </div>
     </header>
 
     <main class="page-layout">
-      <section class="hero page-hero compact-hero">
+      <section class="hero page-hero">
         <div class="hero-copy">
           <p class="eyebrow">About</p>
-          <h1>一个从 DevOps 和技术支持转向 AI 交付的工程师。</h1>
-          <p class="lead">我关注如何把复杂流程拆成规则、数据、AI 节点、人工确认和可运行工具。</p>
+          <h1>我把 AI 落地看作交付问题，而不是单纯的模型问题。</h1>
+          <p class="lead">我的背景横跨 DevOps、技术支持、自动化脚本、内部工具和 AI Workflow。相比追逐新工具，我更关注一个问题：真实业务输入进来以后，谁负责判断、谁确认结果、哪里会失败、怎么验收。</p>
         </div>
       </section>
 
-      <section class="content-section">
-        <div class="section-heading">
-          <p>Profile</p>
-          <h2>个人定位</h2>
+      <section class="section">
+        <div class="section-head">
+          <p class="eyebrow">Positioning</p>
+          <div>
+            <h2>适合我的问题，通常长这样。</h2>
+            <p>它们不一定宏大，但每天都在消耗团队时间，并且常常卡在“没人把流程讲清楚”。</p>
+          </div>
         </div>
-        <div class="markdown-panel" data-md="profile"></div>
+        <div class="service-grid">
+          <article class="service-card">
+            <h3>信息整理压力大</h3>
+            <p>客户 Brief、聊天记录、工单、PDF、Excel、邮件每天都要人工整理，格式不稳定，漏字段以后还要反复追问。</p>
+          </article>
+          <article class="service-card">
+            <h3>SOP 沉在文档里</h3>
+            <p>团队有经验和文档，但新人找不到、工单复用不了、标准回复靠记忆，最后知识仍然锁在少数人脑子里。</p>
+          </article>
+          <article class="service-card">
+            <h3>流程跨系统流转</h3>
+            <p>业务动作分散在表格、IM、工单系统、数据库和手工脚本里，AI 必须嵌进去，而不是再造一个没人用的平台。</p>
+          </article>
+          <article class="service-card">
+            <h3>Demo 无法进入交付</h3>
+            <p>Prompt 能演示，但缺日志、权限、异常、人工确认、回滚和验收标准，所以无法进入真实团队工作流。</p>
+          </article>
+        </div>
       </section>
 
-      <section class="content-section alt">
-        <div class="section-heading">
-          <p>Resume</p>
-          <h2>经历概览</h2>
+      <section class="section alt">
+        <div class="section-head">
+          <p class="eyebrow">Method</p>
+          <div>
+            <h2>我的交付方式：先切动作，再做系统。</h2>
+            <p>第一版不追求完整平台，而是先验证一个高频动作是否真的能被 AI、规则和人工确认共同改善。</p>
+          </div>
         </div>
-        <div class="markdown-panel" data-md="resume"></div>
+        <div class="capability-grid">
+          <article class="capability-card">
+            <h3>1. 现场调研</h3>
+            <p>确认使用者、输入样本、处理步骤、输出格式、错误成本和验收人，拒绝停留在“想做 AI”的抽象需求。</p>
+          </article>
+          <article class="capability-card">
+            <h3>2. 薄切片 Demo</h3>
+            <p>只跑通“真实输入 -> 处理 -> 可见输出”，先证明它能节省时间、减少漏项或降低返工。</p>
+          </article>
+          <article class="capability-card">
+            <h3>3. 可维护交付</h3>
+            <p>把 Demo 补齐为可继续使用的工具：字段表、提示词、异常分支、日志、SOP、部署和交接文档。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <p class="eyebrow">Stack</p>
+          <div>
+            <h2>技术栈服务于交付边界。</h2>
+            <p>我不会把技术栈当卖点。真正重要的是：在当前约束下，哪种组合能最快跑通闭环，并且后续可以维护。</p>
+          </div>
+        </div>
+        <div class="two-column">
+          <article class="note-card">
+            <h3>工程与自动化</h3>
+            <p>Linux、Docker、Kubernetes、GitLab CI、ArgoCD、Prometheus、Grafana、Python、Shell、REST API、数据库与部署监控。</p>
+          </article>
+          <article class="note-card">
+            <h3>AI 与内部工具</h3>
+            <p>LLM API、结构化输出、Prompt 版本管理、RAG 基础、Dify Workflow、Lark 多维表格、轻量 Web 工具和 SOP 文档。</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section dark">
+        <div class="contact-section">
+          <div>
+            <p class="eyebrow">Boundary</p>
+            <h2>适合先做小闭环，不适合一上来做大平台。</h2>
+          </div>
+          <div class="contact-actions">
+            <a class="button primary" href="../cases/">看案例</a>
+            <a class="button secondary" href="mailto:xb990815@163.com">联系我</a>
+          </div>
+        </div>
       </section>
     </main>
-
-    <script src="../script.js"></script>
   </body>
 </html>

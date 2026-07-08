@@ -343,12 +343,14 @@ function siteHeader(prefix, active = "") {
   ];
 
   return `<header class="site-header">
-      <a class="brand" href="${prefix}index.html" aria-label="返回首页">夏目</a>
-      <nav class="nav" aria-label="主导航">
-        ${links
-          .map(([label, href, key]) => `<a href="${href}"${active === key ? ' aria-current="page"' : ""}>${label}</a>`)
-          .join("\n        ")}
-      </nav>
+      <div class="header-inner">
+        <a class="brand" href="${prefix}index.html" aria-label="返回首页">夏目 <span>AI Delivery Engineer</span></a>
+        <nav class="nav" aria-label="主导航">
+          ${links
+            .map(([label, href, key]) => `<a href="${href}"${active === key ? ' aria-current="page"' : ""}>${label}</a>`)
+            .join("\n          ")}
+        </nav>
+      </div>
     </header>`;
 }
 
@@ -361,13 +363,13 @@ function pageShell({ title, description, prefix, body, script, active }) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>${escapeHtml(title)}</title>
     <meta name="description" content="${escapeAttribute(description)}">
-    <link rel="stylesheet" href="${prefix}styles.css">
+    <link rel="stylesheet" href="${prefix}styles.css?v=product-site">
   </head>
   <body>
     ${siteHeader(prefix, active)}
     ${body}
     <footer class="site-footer">
-      <p>作者：夏目</p>
+      <p>夏目 / AI Workflow Delivery / Knowledge Ops</p>
     </footer>${scriptTag}
   </body>
 </html>
@@ -396,21 +398,24 @@ function renderBlogIndex(posts) {
 
   return pageShell({
     title: "博客 | 夏目",
-    description: "夏目的 AI 工作流、自动化和职业转型文章。",
+    description: "夏目的 AI 工作流、业务流程自动化和交付工程文章。",
     prefix: "../",
     script: "../script.js",
     active: "blog",
-    body: `<main class="content-section blog-index">
+    body: `<main class="section blog-index">
       <div class="section-heading">
-        <p>Blog</p>
+        <p class="eyebrow">Blog</p>
         <h1>博客</h1>
+        <p class="lead">围绕业务调研、AI 工作流验收、知识库、DevOps 和交付边界写作。</p>
       </div>
-      <div class="blog-filters" aria-label="文章分类筛选">
-        <button type="button" data-category="all">全部</button>
-          ${filters}
-      </div>
-      <div class="blog-list">
-        ${cards}
+      <div>
+        <div class="blog-filters" aria-label="文章分类筛选">
+          <button type="button" data-category="all">全部</button>
+            ${filters}
+        </div>
+        <div class="blog-list">
+          ${cards}
+        </div>
       </div>
     </main>`,
   });
@@ -423,7 +428,7 @@ function renderArticle(post) {
     description: post.summary,
     prefix: "../../",
     active: "blog",
-    body: `<main class="content-section blog-article">
+    body: `<main class="section blog-article">
       <article>
         <a class="back-link" href="../">返回博客列表</a>
         <p class="eyebrow">${escapeHtml(post.category)}</p>

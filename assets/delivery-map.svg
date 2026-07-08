@@ -1,0 +1,66 @@
+<svg width="1040" height="720" viewBox="0 0 1040 720" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AI workflow delivery map">
+  <rect width="1040" height="720" rx="18" fill="#FFFFFF"/>
+  <rect x="38" y="38" width="964" height="644" rx="14" fill="#F6F7F2" stroke="#D8DED8"/>
+  <text x="72" y="92" fill="#17201D" font-family="Arial, sans-serif" font-size="24" font-weight="700">AI Workflow Delivery Map</text>
+  <text x="72" y="124" fill="#66736F" font-family="Arial, sans-serif" font-size="15">from raw business input to reviewed output</text>
+
+  <g>
+    <rect x="72" y="176" width="196" height="112" rx="10" fill="#FFFFFF" stroke="#D8DED8"/>
+    <text x="96" y="214" fill="#0F766E" font-family="Arial, sans-serif" font-size="13" font-weight="700">01 Intake</text>
+    <text x="96" y="246" fill="#17201D" font-family="Arial, sans-serif" font-size="20" font-weight="700">真实输入</text>
+    <text x="96" y="272" fill="#66736F" font-family="Arial, sans-serif" font-size="14">Brief / 工单 / 表格 / PDF</text>
+  </g>
+
+  <g>
+    <rect x="316" y="176" width="196" height="112" rx="10" fill="#FFFFFF" stroke="#D8DED8"/>
+    <text x="340" y="214" fill="#0F766E" font-family="Arial, sans-serif" font-size="13" font-weight="700">02 Structure</text>
+    <text x="340" y="246" fill="#17201D" font-family="Arial, sans-serif" font-size="20" font-weight="700">字段与规则</text>
+    <text x="340" y="272" fill="#66736F" font-family="Arial, sans-serif" font-size="14">缺失项 / 校验 / 分支</text>
+  </g>
+
+  <g>
+    <rect x="560" y="176" width="196" height="112" rx="10" fill="#FFFFFF" stroke="#D8DED8"/>
+    <text x="584" y="214" fill="#0F766E" font-family="Arial, sans-serif" font-size="13" font-weight="700">03 AI Node</text>
+    <text x="584" y="246" fill="#17201D" font-family="Arial, sans-serif" font-size="20" font-weight="700">生成与判断</text>
+    <text x="584" y="272" fill="#66736F" font-family="Arial, sans-serif" font-size="14">摘要 / 草稿 / 分类 / 建议</text>
+  </g>
+
+  <g>
+    <rect x="804" y="176" width="128" height="112" rx="10" fill="#17201D"/>
+    <text x="828" y="214" fill="#D6F3ED" font-family="Arial, sans-serif" font-size="13" font-weight="700">04 Review</text>
+    <text x="828" y="246" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="20" font-weight="700">人工确认</text>
+    <text x="828" y="272" fill="#CBD5CF" font-family="Arial, sans-serif" font-size="14">放行 / 退回</text>
+  </g>
+
+  <path d="M268 232H316" stroke="#9AA7A1" stroke-width="2"/>
+  <path d="M512 232H560" stroke="#9AA7A1" stroke-width="2"/>
+  <path d="M756 232H804" stroke="#9AA7A1" stroke-width="2"/>
+
+  <g>
+    <rect x="72" y="372" width="268" height="172" rx="12" fill="#EAF3F0" stroke="#BFD8D2"/>
+    <text x="100" y="416" fill="#0B4F49" font-family="Arial, sans-serif" font-size="18" font-weight="700">交付边界</text>
+    <text x="100" y="452" fill="#31413C" font-family="Arial, sans-serif" font-size="15">不先做平台，先做薄切片</text>
+    <text x="100" y="482" fill="#31413C" font-family="Arial, sans-serif" font-size="15">不只写 Prompt，先定验收口径</text>
+    <text x="100" y="512" fill="#31413C" font-family="Arial, sans-serif" font-size="15">不替代流程，先嵌入关键动作</text>
+  </g>
+
+  <g>
+    <rect x="386" y="372" width="268" height="172" rx="12" fill="#FFF8E8" stroke="#E6C98E"/>
+    <text x="414" y="416" fill="#8A5A11" font-family="Arial, sans-serif" font-size="18" font-weight="700">验收指标</text>
+    <text x="414" y="452" fill="#31413C" font-family="Arial, sans-serif" font-size="15">一次处理时长</text>
+    <text x="414" y="482" fill="#31413C" font-family="Arial, sans-serif" font-size="15">缺失字段发现率</text>
+    <text x="414" y="512" fill="#31413C" font-family="Arial, sans-serif" font-size="15">返工与人工确认成本</text>
+  </g>
+
+  <g>
+    <rect x="700" y="372" width="232" height="172" rx="12" fill="#FFFFFF" stroke="#D8DED8"/>
+    <text x="728" y="416" fill="#9F5135" font-family="Arial, sans-serif" font-size="18" font-weight="700">沉淀物</text>
+    <text x="728" y="452" fill="#31413C" font-family="Arial, sans-serif" font-size="15">调研记录</text>
+    <text x="728" y="482" fill="#31413C" font-family="Arial, sans-serif" font-size="15">流程图与字段表</text>
+    <text x="728" y="512" fill="#31413C" font-family="Arial, sans-serif" font-size="15">Demo / SOP / 复盘</text>
+  </g>
+
+  <path d="M160 326C218 348 280 348 338 326" stroke="#0F766E" stroke-width="3" stroke-linecap="round"/>
+  <path d="M488 326C546 348 608 348 666 326" stroke="#B7791F" stroke-width="3" stroke-linecap="round"/>
+  <path d="M760 326C804 344 850 344 894 326" stroke="#9F5135" stroke-width="3" stroke-linecap="round"/>
+</svg>

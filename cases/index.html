@@ -4,63 +4,165 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>案例 | 夏目</title>
-    <meta name="description" content="夏目的 AI 工作流、自动化工具、DevOps 和全栈项目案例。">
-    <link rel="stylesheet" href="../styles.css">
+    <meta name="description" content="夏目的 AI 工作流、知识库、DevOps 和内部工具交付案例。">
+    <link rel="stylesheet" href="../styles.css?v=product-site">
   </head>
   <body>
     <header class="site-header">
-      <a class="brand" href="../index.html" aria-label="返回首页">夏目</a>
-      <nav class="nav" aria-label="主导航">
-        <a href="../index.html">首页</a>
-        <a href="../about/">关于</a>
-        <a href="../blog/">博客</a>
-        <a href="./" aria-current="page">案例</a>
-      </nav>
+      <div class="header-inner">
+        <a class="brand" href="../index.html" aria-label="返回首页">夏目 <span>AI Delivery Engineer</span></a>
+        <nav class="nav" aria-label="主导航">
+          <a href="../index.html">首页</a>
+          <a href="../about/">关于</a>
+          <a href="../blog/">博客</a>
+          <a href="./" aria-current="page">案例</a>
+        </nav>
+      </div>
     </header>
 
     <main class="page-layout">
-      <section class="hero page-hero compact-hero">
+      <section class="hero page-hero">
         <div class="hero-copy">
           <p class="eyebrow">Cases</p>
-          <h1>用案例说明我如何拆问题、做工具、跑交付。</h1>
-          <p class="lead">案例区强调已完成的交付和工程能力，和博客中的方法思考分开。</p>
+          <h1>案例不是证明“我会工具”，而是证明我能处理真实约束。</h1>
+          <p class="lead">下面的案例按照同一套标准呈现：业务动作是什么、为什么不能只靠 Prompt、第一版怎么切、哪些地方需要人工确认，以及如何判断它是否值得继续做。</p>
         </div>
       </section>
 
-      <section class="content-section single-column">
-        <div class="case-grid">
-          <article class="case-card">
-            <span>AI Workflow</span>
-            <h3>达人营销 AI 工作流</h3>
-            <p>把客户 Brief、达人匹配、外联话术和异常提醒拆成可执行流程。</p>
-          </article>
-          <article class="case-card">
-            <span>Full-stack / Web3</span>
-            <h3>KeySafe 密码管理工具</h3>
-            <p>钱包登录、主密码验证、AES 加密和 IPFS 存储的全栈原型。</p>
-          </article>
-          <article class="case-card">
-            <span>Skill / Workflow</span>
-            <h3>求职材料 Skill</h3>
-            <p>把简历、项目故事、面试话术和投递反馈做成可复用系统。</p>
-          </article>
-          <article class="case-card">
-            <span>DevOps</span>
-            <h3>GitOps 发布平台</h3>
-            <p>Kustomize、ArgoCD 和 GitLab Runner 驱动的标准化发布流程。</p>
-          </article>
-        </div>
+      <section class="section">
+        <article id="brief-intake" class="case-study">
+          <div>
+            <span class="case-study-label">AI Workflow</span>
+            <h2>营销 Brief 处理工作流</h2>
+            <div class="case-study-meta">
+              <span>场景：达人营销 / 项目启动 / 多维表格</span>
+              <span>交付物：字段表、Workflow、Prompt、异常分支、演示数据</span>
+              <span>目标：把客户自然语言需求转成可启动的项目摘要</span>
+            </div>
+          </div>
+          <div class="case-study-body">
+            <section>
+              <h3>业务问题</h3>
+              <p>客户 Brief 经常以聊天记录、邮件或文档形式进入团队，预算、平台、地区、KPI、交付周期和禁忌项并不完整。项目负责人需要先读懂、补字段、追问客户，再生成达人筛选条件和内部启动摘要。</p>
+            </section>
+            <section>
+              <h3>方案设计</h3>
+              <ul>
+                <li>规则层负责字段校验、预算区间、平台枚举和必填项缺失判断。</li>
+                <li>LLM 层负责语义提取、摘要、追问清单和外联话术草稿。</li>
+                <li>人工层负责确认预算、达人名单和最终客户沟通口径。</li>
+              </ul>
+            </section>
+            <section>
+              <h3>结果与复盘</h3>
+              <p>第一版只覆盖“Brief 输入到项目启动摘要”这一段，不碰合同、付款和完整 CRM。这个取舍让 Demo 可以在一周内被业务人员试用，也暴露出最关键的问题：AI 不是替代负责人，而是先减少漏字段、重复整理和无效追问。</p>
+            </section>
+          </div>
+        </article>
+
+        <article id="support-copilot" class="case-study">
+          <div>
+            <span class="case-study-label">Knowledge Ops</span>
+            <h2>技术支持 SOP Copilot</h2>
+            <div class="case-study-meta">
+              <span>场景：工单处理 / 告警解释 / SOP 检索</span>
+              <span>交付物：知识切片规则、问答流程、回复模板、升级路径</span>
+              <span>目标：缩短一线支持从问题描述到初步处理建议的时间</span>
+            </div>
+          </div>
+          <div class="case-study-body">
+            <section>
+              <h3>业务问题</h3>
+              <p>技术支持团队常见问题不是“没有文档”，而是文档分散、命名不一致、告警和工单语言不统一。新人无法快速判断应该看哪份 SOP，资深同事则不断重复解释同类问题。</p>
+            </section>
+            <section>
+              <h3>方案设计</h3>
+              <ul>
+                <li>先把 SOP 拆成“适用条件、排查步骤、风险提示、升级条件”四类字段。</li>
+                <li>工单进入后先做问题分类和关键信息抽取，再检索相关 SOP。</li>
+                <li>输出不是最终答案，而是排查路径、缺失信息和可复制的客户回复草稿。</li>
+              </ul>
+            </section>
+            <section>
+              <h3>结果与复盘</h3>
+              <p>这类工具的核心不是一次回答正确，而是减少一线从“模糊问题”到“下一步动作”的时间。验收指标应该放在首响准备时间、重复问答次数、升级质量和 SOP 更新频率上。</p>
+            </section>
+          </div>
+        </article>
+
+        <article id="release-control" class="case-study">
+          <div>
+            <span class="case-study-label">DevOps</span>
+            <h2>GitOps 发布控制台</h2>
+            <div class="case-study-meta">
+              <span>场景：Kubernetes / 多环境配置 / 发布审计</span>
+              <span>交付物：Kustomize 模板、ArgoCD 流程、CI 检查、回滚文档</span>
+              <span>目标：把人工发布改造成可审计、可回滚、可复用的发布流程</span>
+            </div>
+          </div>
+          <div class="case-study-body">
+            <section>
+              <h3>业务问题</h3>
+              <p>发布依赖手工操作时，真正的问题不只是慢，而是责任边界不清：谁改了配置、变更有没有审核、失败后如何回滚、线上状态是否和 Git 一致，都很难被追踪。</p>
+            </section>
+            <section>
+              <h3>方案设计</h3>
+              <ul>
+                <li>用 Git 作为配置事实源，把环境差异收敛到模板和 overlay。</li>
+                <li>CI 阶段做语法校验、镜像标签检查和基础策略检查。</li>
+                <li>CD 阶段由 ArgoCD 同步并保留差异、状态和回滚记录。</li>
+              </ul>
+            </section>
+            <section>
+              <h3>结果与复盘</h3>
+              <p>GitOps 的价值不是“自动发布”四个字，而是让发布变成可讨论的流程资产。对于 AI 工具交付，这段经验也很关键：Demo 最终要进入团队流程，就必须有版本、回滚、监控和责任边界。</p>
+            </section>
+          </div>
+        </article>
+
+        <article id="reconciliation-assistant" class="case-study">
+          <div>
+            <span class="case-study-label">Internal Tool</span>
+            <h2>订单对账异常助手</h2>
+            <div class="case-study-meta">
+              <span>场景：运营表格 / 对账 / 异常解释</span>
+              <span>交付物：上传页面、校验规则、异常摘要、人工确认清单</span>
+              <span>目标：减少运营人员在多张表之间查漏项和解释异常的时间</span>
+            </div>
+          </div>
+          <div class="case-study-body">
+            <section>
+              <h3>业务问题</h3>
+              <p>订单、发货、退款和结算数据来自不同来源，字段命名不一致。人工对账时最耗时的不是计算，而是判断异常来自缺字段、时间差、金额差还是业务规则差异。</p>
+            </section>
+            <section>
+              <h3>方案设计</h3>
+              <ul>
+                <li>先把不同表格映射成统一字段，再做金额、数量、状态和时间窗口校验。</li>
+                <li>规则引擎输出确定性异常，LLM 只负责把异常解释成业务人员能看懂的摘要。</li>
+                <li>所有高风险结果必须进入人工确认清单，不能直接写回生产系统。</li>
+              </ul>
+            </section>
+            <section>
+              <h3>结果与复盘</h3>
+              <p>这类场景非常适合 AI 参与“解释”和“整理”，但不适合让 AI 直接做财务判断。第一版的价值应该是减少查漏项时间，而不是承诺完全自动对账。</p>
+            </section>
+          </div>
+        </article>
       </section>
 
-      <section class="content-section alt">
-        <div class="section-heading">
-          <p>Notes</p>
-          <h2>案例补充</h2>
+      <section class="section dark">
+        <div class="contact-section">
+          <div>
+            <p class="eyebrow">Next Step</p>
+            <h2>有类似场景时，先拿一份真实输入，我们可以把它拆成第一版薄切片。</h2>
+          </div>
+          <div class="contact-actions">
+            <a class="button primary" href="mailto:xb990815@163.com">发邮件沟通</a>
+            <a class="button secondary" href="../blog/">看方法文章</a>
+          </div>
         </div>
-        <div class="markdown-panel" data-md="cases"></div>
       </section>
     </main>
-
-    <script src="../script.js"></script>
   </body>
 </html>

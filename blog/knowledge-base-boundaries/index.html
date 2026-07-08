@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>企业知识库落地边界：RAG 不是把文档扔进去 | 夏目</title>
+    <meta name="description" content="企业知识库项目的关键不是接一个问答机器人，而是先整理文档责任、适用条件、更新机制和人工兜底。">
+    <link rel="stylesheet" href="../../styles.css?v=product-site">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="../../index.html" aria-label="返回首页">夏目 <span>AI Delivery Engineer</span></a>
+        <nav class="nav" aria-label="主导航">
+          <a href="../../index.html">首页</a>
+          <a href="../../about/">关于</a>
+          <a href="../../blog/" aria-current="page">博客</a>
+          <a href="../../cases/">案例</a>
+        </nav>
+      </div>
+    </header>
+    <main class="section blog-article">
+      <article>
+        <a class="back-link" href="../">返回博客列表</a>
+        <p class="eyebrow">知识库</p>
+        <h1>企业知识库落地边界：RAG 不是把文档扔进去</h1>
+        <p class="lead">企业知识库项目的关键不是接一个问答机器人，而是先整理文档责任、适用条件、更新机制和人工兜底。</p>
+        <div class="post-meta">
+          <time datetime="2026-07-04">2026-07-04</time>
+          <div class="tag-list"><span>知识库</span><span>RAG</span><span>SOP</span></div>
+        </div>
+        <div class="markdown-panel">
+<h1>企业知识库落地边界：RAG 不是把文档扔进去</h1>
+<p>很多企业知识库项目失败，不是因为向量数据库不好，也不是因为模型能力不够，而是因为文档本身没有业务边界。</p>
+<p>如果 SOP 过期、命名混乱、适用条件不清、答案没人负责更新，把这些文档全部丢进 RAG，只会得到一个更会包装混乱的问答机器人。</p>
+<h2>知识库首先是责任系统</h2>
+<p>一个可落地的知识库，至少要回答：</p>
+<ul>
+<li>这份知识适用于什么场景。</li>
+<li>谁负责维护。</li>
+<li>最后一次验证是什么时候。</li>
+<li>遇到冲突以哪份为准。</li>
+<li>哪些问题不能自动回答，必须升级给人。</li>
+</ul>
+<p>没有这些字段，问答准确率很难长期稳定。</p>
+<h2>文档切片不是越碎越好</h2>
+<p>很多人以为 RAG 的关键是把文档切得足够细。切片当然重要，但更重要的是切片语义是否完整。</p>
+<p>一个好的 SOP 切片应该包含：</p>
+<ul>
+<li>问题现象。</li>
+<li>适用条件。</li>
+<li>排查步骤。</li>
+<li>风险提示。</li>
+<li>升级条件。</li>
+<li>相关系统或负责人。</li>
+</ul>
+<p>如果只切出一段孤立文字，模型可能检索到了内容，却不知道它适用于哪个场景。</p>
+<h2>问答不是唯一输出</h2>
+<p>企业知识库不一定要以聊天机器人为中心。很多时候，更有价值的输出是：</p>
+<ul>
+<li>工单摘要。</li>
+<li>推荐 SOP。</li>
+<li>缺失信息清单。</li>
+<li>标准回复草稿。</li>
+<li>升级路径建议。</li>
+<li>复盘模板。</li>
+</ul>
+<p>这些输出更容易进入真实工作流，也更容易验收。</p>
+<h2>适合先做知识库 Copilot 的场景</h2>
+<p>优先选择这些场景：</p>
+<ol>
+<li>问题类型重复，历史文档或工单足够多。</li>
+<li>一线人员需要快速找到下一步动作。</li>
+<li>答案允许人工确认，而不是必须完全自动。</li>
+<li>文档可以持续更新。</li>
+<li>有明确升级路径。</li>
+</ol>
+<p>不适合的场景包括：文档大量过期、责任人缺失、问题高度个性化、答案涉及强合规风险但没有审核流程。</p>
+<h2>最小可行版本</h2>
+<p>一个知识库 Copilot 的第一版可以很小：</p>
+<pre><code class="language-text">输入一条工单 -&gt; 提取关键信息 -&gt; 检索相关 SOP -&gt; 输出排查路径和回复草稿 -&gt; 人工确认
+</code></pre>
+<p>第一版不需要覆盖所有问题。它只需要证明：在一个高频问题类型上，能减少查找时间、减少重复解释，并让新人更快找到下一步动作。</p>
+<h2>真正的交付物</h2>
+<p>知识库项目的交付物不应该只有一个问答入口，还应该包括：</p>
+<ul>
+<li>文档字段规范。</li>
+<li>SOP 切片规则。</li>
+<li>不回答清单。</li>
+<li>升级规则。</li>
+<li>反馈入口。</li>
+<li>更新节奏。</li>
+<li>典型问题测试集。</li>
+</ul>
+<p>RAG 是技术实现，知识库是组织流程。两者必须一起设计，项目才有机会长期可用。</p>
+        </div>
+      </article>
+    </main>
+    <footer class="site-footer">
+      <p>夏目 / AI Workflow Delivery / Knowledge Ops</p>
+    </footer>
+  </body>
+</html>
