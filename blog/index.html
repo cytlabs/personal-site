@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>博客 | 夏目</title>
     <meta name="description" content="夏目的 AI 工作流、业务流程自动化和交付工程文章。">
-    <link rel="stylesheet" href="../styles.css?v=product-site">
+    <link rel="stylesheet" href="../styles.css?v=product-site-3">
   </head>
   <body>
     <header class="site-header">
@@ -19,22 +19,40 @@
         </nav>
       </div>
     </header>
-    <main class="section blog-index">
-      <div class="section-heading">
-        <p class="eyebrow">Blog</p>
-        <h1>博客</h1>
-        <p class="lead">围绕业务调研、AI 工作流验收、知识库、DevOps 和交付边界写作。</p>
-      </div>
-      <div>
-        <div class="blog-filters" aria-label="文章分类筛选">
-          <button type="button" data-category="all">全部</button>
-            <button type="button" data-category="AI交付">AI交付</button>
+    <main class="page-layout">
+      <section class="hero page-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Blog</p>
+          <h1>博客</h1>
+          <p class="lead">围绕业务调研、AI 工作流验收、知识库、DevOps 和交付边界写作。</p>
+        </div>
+        <aside class="hero-panel" aria-label="写作主题">
+          <div>
+            <p class="card-kicker">Writing Focus</p>
+            <h2>文章不是工具教程，而是交付判断标准。</h2>
+            <ul>
+              <li>怎么判断 AI 工作流是否可验收</li>
+              <li>怎么把知识库做进真实流程</li>
+              <li>怎么把项目经历变成证据链</li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+      <section class="section blog-index blog-page">
+        <div class="section-heading">
+          <p class="eyebrow">Topics</p>
+          <h2>文章</h2>
+        </div>
+        <div>
+          <div class="blog-filters" aria-label="文章分类筛选">
+            <button type="button" data-category="all">全部</button>
+              <button type="button" data-category="AI交付">AI交付</button>
           <button type="button" data-category="行动手册">行动手册</button>
           <button type="button" data-category="职业发展">职业发展</button>
           <button type="button" data-category="知识库">知识库</button>
-        </div>
-        <div class="blog-list">
-          <article class="blog-card" data-category="AI交付">
+          </div>
+          <div class="blog-list">
+            <article class="blog-card" data-category="AI交付">
           <p class="eyebrow">AI交付</p>
           <h2><a href="./fde-and-local-fde/">FDE 与土 FDE：把工程能力带到业务现场</a></h2>
           <p>FDE 的核心不是会写更多代码，而是在真实业务现场里识别关键动作、切出可验证闭环，并用工程方法把价值交付出来。</p>
@@ -69,8 +87,9 @@
           <time datetime="2026-07-04">2026-07-04</time>
           <div class="tag-list"><span>知识库</span><span>RAG</span><span>SOP</span></div>
         </article>
+          </div>
         </div>
-      </div>
+      </section>
     </main>
     <footer class="site-footer">
       <p>夏目 / AI Workflow Delivery / Knowledge Ops</p>

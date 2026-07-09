@@ -363,7 +363,7 @@ function pageShell({ title, description, prefix, body, script, active }) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>${escapeHtml(title)}</title>
     <meta name="description" content="${escapeAttribute(description)}">
-    <link rel="stylesheet" href="${prefix}styles.css?v=product-site">
+    <link rel="stylesheet" href="${prefix}styles.css?v=product-site-3">
   </head>
   <body>
     ${siteHeader(prefix, active)}
@@ -402,21 +402,40 @@ function renderBlogIndex(posts) {
     prefix: "../",
     script: "../script.js",
     active: "blog",
-    body: `<main class="section blog-index">
-      <div class="section-heading">
-        <p class="eyebrow">Blog</p>
-        <h1>博客</h1>
-        <p class="lead">围绕业务调研、AI 工作流验收、知识库、DevOps 和交付边界写作。</p>
-      </div>
-      <div>
-        <div class="blog-filters" aria-label="文章分类筛选">
-          <button type="button" data-category="all">全部</button>
-            ${filters}
+    body: `<main class="page-layout">
+      <section class="hero page-hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Blog</p>
+          <h1>博客</h1>
+          <p class="lead">围绕业务调研、AI 工作流验收、知识库、DevOps 和交付边界写作。</p>
         </div>
-        <div class="blog-list">
-          ${cards}
+        <aside class="hero-panel" aria-label="写作主题">
+          <div>
+            <p class="card-kicker">Writing Focus</p>
+            <h2>文章不是工具教程，而是交付判断标准。</h2>
+            <ul>
+              <li>怎么判断 AI 工作流是否可验收</li>
+              <li>怎么把知识库做进真实流程</li>
+              <li>怎么把项目经历变成证据链</li>
+            </ul>
+          </div>
+        </aside>
+      </section>
+      <section class="section blog-index blog-page">
+        <div class="section-heading">
+          <p class="eyebrow">Topics</p>
+          <h2>文章</h2>
         </div>
-      </div>
+        <div>
+          <div class="blog-filters" aria-label="文章分类筛选">
+            <button type="button" data-category="all">全部</button>
+              ${filters}
+          </div>
+          <div class="blog-list">
+            ${cards}
+          </div>
+        </div>
+      </section>
     </main>`,
   });
 }
