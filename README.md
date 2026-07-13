@@ -78,6 +78,14 @@ BLOG_RESOURCES_DIR=../AiKnowledgebase/resources npm run build:blog
 npm test
 ```
 
+构建部署产物：
+
+```bash
+npm run build
+```
+
+`npm run build` 会先生成博客页面，再把公开静态文件复制到 `dist/`。Vercel 部署时使用 `vercel.json` 中的配置：构建命令为 `npm run build`，输出目录为 `dist`。
+
 本地预览：
 
 ```bash
@@ -88,4 +96,24 @@ npm run dev
 
 ```text
 http://localhost:4173
+```
+
+## 部署到 Vercel
+
+推荐使用 GitHub 连接 Vercel：
+
+1. 把仓库推到 GitHub。
+2. 在 Vercel 里选择 Add New Project，导入这个仓库。
+3. Framework Preset 选择 Other。
+4. Build Command 使用 `npm run build`。
+5. Output Directory 使用 `dist`。
+6. 点击 Deploy。
+
+项目已经包含 `vercel.json`，正常情况下 Vercel 会自动读取上面的构建配置。之后每次 push 到主分支都会自动触发一次生产部署，Pull Request 会生成预览部署。
+
+也可以用 CLI：
+
+```bash
+npm i -g vercel
+vercel --prod
 ```
