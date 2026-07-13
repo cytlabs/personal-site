@@ -1,5 +1,6 @@
 const scriptElement = document.querySelector('script[src$="script.js"]');
 const basePath = scriptElement?.getAttribute("src")?.replace(/script\.js$/, "") || "./";
+const { escapeHtml, renderMarkdown } = window.SiteMarkdown;
 
 const files = {
   profile: `${basePath}content/profile.md`,
@@ -65,72 +66,6 @@ const fallback = {
 
 把多环境发布流程变成可审计、可回滚、可复用的团队流程。`,
 };
-
-function escapeHtml(value) {
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;");
-}
-
-function inlineMarkdown(value) {
-  const escaped = escapeHtml(value);
-  const linked = escaped.replace(
-    /(https?:\/\/[^\s<]+)/g,
-    '<a href="$1" target="_blank" rel="noreferrer">$1</a>'
-  );
-  return linked.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-}
-
-function renderMarkdown(markdown) {
-  const lines = markdown.split(/\r?\n/);
-  const html = [];
-  let listOpen = false;
-
-  const closeList = () => {
-    if (listOpen) {
-      html.push("</ul>");
-      listOpen = false;
-    }
-  };
-
-  for (const rawLine of lines) {
-    const line = rawLine.trim();
-
-    if (!line) {
-      closeList();
-      continue;
-    }
-
-    if (line.startsWith("## ")) {
-      closeList();
-      html.push(`<h2>${inlineMarkdown(line.slice(3))}</h2>`);
-      continue;
-    }
-
-    if (line.startsWith("# ")) {
-      closeList();
-      html.push(`<h1>${inlineMarkdown(line.slice(2))}</h1>`);
-      continue;
-    }
-
-    if (line.startsWith("- ")) {
-      if (!listOpen) {
-        html.push("<ul>");
-        listOpen = true;
-      }
-      html.push(`<li>${inlineMarkdown(line.slice(2))}</li>`);
-      continue;
-    }
-
-    closeList();
-    html.push(`<p>${inlineMarkdown(line)}</p>`);
-  }
-
-  closeList();
-  return html.join("");
-}
 
 async function loadMarkdown(key) {
   try {

@@ -9,6 +9,7 @@ const {
   extractFrontmatter,
   parseFrontmatter,
   parseMarkdownFile,
+  resolveResourcesDir,
   validatePost,
 } = require("./build-blog");
 
@@ -41,6 +42,12 @@ test("parseFrontmatter supports booleans, strings, dates, and inline arrays", ()
     tags: ["FDE", "AI交付", "职业转型"],
     published: "2026-07-06",
   });
+});
+
+test("resolveResourcesDir defaults to the repository posts directory", () => {
+  const siteDir = path.join(os.tmpdir(), "personal-site");
+
+  assert.equal(resolveResourcesDir(siteDir), path.join(siteDir, "posts"));
 });
 
 test("parseMarkdownFile returns null for unpublished markdown files", () => {

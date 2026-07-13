@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>不要把 Skill 写成更长的 Prompt：从 Superpowers 到 FDE Skills 的设计方法 | 夏目</title>
+    <meta name="description" content="Skill 不应该只是更长的 Prompt，而应该围绕工作阶段和失败模式设计成可组合、可维护的行为约束。">
+    <link rel="stylesheet" href="../../styles.css?v=product-site-3">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="../../index.html" aria-label="返回首页">夏目 <span>AI Delivery Engineer</span></a>
+        <nav class="nav" aria-label="主导航">
+          <a href="../../index.html">首页</a>
+          <a href="../../about/">关于</a>
+          <a href="../../blog/" aria-current="page">博客</a>
+          <a href="../../cases/">案例</a>
+        </nav>
+      </div>
+    </header>
+    <main class="section blog-article">
+      <article>
+        <a class="back-link" href="../">返回博客列表</a>
+        <p class="eyebrow">Skill设计</p>
+        <h1>不要把 Skill 写成更长的 Prompt：从 Superpowers 到 FDE Skills 的设计方法</h1>
+        <p class="lead">Skill 不应该只是更长的 Prompt，而应该围绕工作阶段和失败模式设计成可组合、可维护的行为约束。</p>
+        <div class="post-meta">
+          <time datetime="2026-07-11">2026-07-11</time>
+          <div class="tag-list"><span>Skill</span><span>Superpowers</span><span>FDE</span></div>
+        </div>
+        <div class="markdown-panel">
+<h1>不要把 Skill 写成更长的 Prompt：从 Superpowers 到 FDE Skills 的设计方法</h1>
+<p>很多人第一次写 AI skill，直觉上会把它写成一段更长、更完整、更专业的 prompt。</p>
+<p>他们会把背景、原则、步骤、输出模板、案例全都塞进一个 `SKILL.md`，期待 agent 读完之后就能稳定工作。这个做法在一开始很有效：比普通 prompt 更结构化，也更容易复用。</p>
+<p>但过一段时间，问题会出现。</p>
+<p>方法论持续更新，skill 越写越长；多个任务被塞进一个文件，边界越来越模糊；用户一问复杂问题，agent 又开始跳步骤。最后这个 skill 变成了一个“知识很多，但行为不稳定”的大 prompt。</p>
+<p>我最近在设计一组面向 FDE（Forward Deployed Engineer）的 skills 时，也遇到了这个问题。</p>
+<p>一开始，我做了两个 skill：</p>
+<ul>
+<li>`ai-transformation-precheck`：给企业客户在见 FDE 前做 AI 转型前置诊断。</li>
+<li>`fde-customer-discovery`：给 FDE 做客户访谈、痛点洞察和 MVP 收敛。</li>
+</ul>
+<p>这个拆法看起来合理：一个给客户用，一个给 FDE 用。但继续设计后，我发现它们的职责开始重叠。</p>
+<p>两个 skill 都会问业务目标，都要拆流程，都要识别痛点，也都要判断 AI 机会。区别只是“谁在用”，但真正的工作步骤并没有被拆开。</p>
+<p>这时我重新看了 Superpowers 的设计方式。它给我的启发是：<strong>skill 不应该按用户身份拆，而应该按工作阶段和失败模式拆。</strong></p>
+<p>Superpowers 项目把自己定义为一套建立在 composable skills 之上的软件开发方法论。它不是一个“大而全的软件开发 skill”，而是把开发过程拆成多个阶段：`brainstorming`、`writing-plans`、`test-driven-development`、`systematic-debugging`、`requesting-code-review`、`verification-before-completion` 等。</p>
+<p>每个 skill 都只负责一个阶段，并且防止 agent 在这个阶段犯一种典型错误。</p>
+<p>这篇文章想用我的 FDE skills 设计过程做一个案例，讲清楚一个问题：</p>
+<blockquote>
+<p>如何设计一组长期可维护、可组合、能约束 agent 行为的 skills？</p>
+</blockquote>
+<h2>Skill 不是知识库，而是行为约束</h2>
+<p>一个常见误区是：把 skill 当作“领域知识库”。</p>
+<p>比如做 FDE 客户发现，就把所有访谈方法、行业案例、痛点判断、MVP 模板都写进一个 skill。这样确实能让 agent 知道更多，但它没有解决最核心的问题：</p>
+<blockquote>
+<p>agent 在关键节点会不会做正确的事？</p>
+</blockquote>
+<p>FDE 场景里，agent 最容易犯的错不是“不知道什么是 MVP”，而是：</p>
+<ul>
+<li>客户说“我们想做 Agent”，agent 直接当成真实需求。</li>
+<li>用户要求方案，agent 没还原流程就开始推荐工具。</li>
+<li>访谈问题太泛，只问“你们有什么痛点”。</li>
+<li>没确认数据来源、权限、历史样例，就判断 AI 可行。</li>
+<li>没有人工审核边界，就建议做自动化。</li>
+<li>MVP 范围过大，无法在一两周内验证。</li>
+</ul>
+<p>这些不是知识缺口，而是流程失控。</p>
+<p>所以，好的 skill 不只是告诉 agent “你应该知道什么”，而是约束它：</p>
+<pre><code class="language-text">在没有还原业务流程前，不要输出技术方案。
+在没有确认输入、输出、数据和人工审核前，不要建议作为 MVP。
+客户提出的系统名称不是需求本身，必须追问背后的业务问题。
+</code></pre>
+<p>Superpowers 里的很多 skill 都是这种设计。例如 `test-driven-development` 防止 agent 先写代码再补测试，`systematic-debugging` 防止 agent 随机猜 bug，`verification-before-completion` 防止 agent 没验证就声称完成。</p>
+<p>这些 skill 的价值，不是提供更多知识，而是在 agent 最容易偷懒的地方设置硬边界。</p>
+<h2>不要按角色拆，要按阶段拆</h2>
+<p>我最初把 FDE skills 拆成“客户侧”和“FDE 侧”，这是一个自然但不够稳定的边界。</p>
+<p>因为客户和 FDE 只是使用者不同，他们面对的是同一条业务链路：</p>
+<pre><code class="language-text">前置信息收集 -&gt; 访谈 -&gt; 流程拆解 -&gt; 痛点分析 -&gt; AI 机会评估 -&gt; MVP 收敛 -&gt; 方案表达
+</code></pre>
+<p>如果按角色拆，两个 skill 很快都会覆盖这整条链路，只是语言风格不同。长期来看，它们会越来越像，也越来越难维护。</p>
+<p>更好的拆法是按阶段拆：</p>
+<p>| 阶段 | Skill | 产物 |</p>
+<p>| --- | --- | --- |</p>
+<p>| 前置收集 | `fde-intake` | 客户前置沟通包 |</p>
+<p>| 访谈 | `fde-discovery-interview` | 访谈目标、问题清单、追问建议 |</p>
+<p>| 流程拆解 | `fde-workflow-mapping` | 流程、角色、工具、输入输出、卡点 |</p>
+<p>| 痛点分析 | `fde-pain-analysis` | 表层需求、真实痛点、业务影响 |</p>
+<p>| AI 机会评估 | `fde-ai-opportunity-assessment` | 机会矩阵和适合度判断 |</p>
+<p>| MVP 收敛 | `fde-mvp-scoping` | MVP 闭环、边界、人工审核节点 |</p>
+<p>| 方案表达 | `fde-solution-brief` | 客户可读方案摘要 |</p>
+<p>这样拆以后，一个客户也可以使用 `fde-workflow-mapping` 来整理流程，一个 FDE 也可以使用 `fde-intake` 来帮客户补齐前置信息。skill 不再绑定身份，而是绑定阶段和产物。</p>
+<p>这正是 Superpowers 的启发：`brainstorming` 不关心你是谁，它只关心你是否还在设计阶段；`writing-plans` 不关心项目类型，它只关心你是否已经有了 spec，需要写 implementation plan。</p>
+<h2>每个 Skill 都应该有一个明确的失败模式</h2>
+<p>设计 skill 时，不要先问：</p>
+<blockquote>
+<p>这个 skill 能帮用户做什么？</p>
+</blockquote>
+<p>更好的问题是：</p>
+<blockquote>
+<p>如果没有这个 skill，agent 最可能在哪里做错？</p>
+</blockquote>
+<p>以 `fde-workflow-mapping` 为例，它要解决的失败模式不是“agent 不知道怎么画流程”，而是：</p>
+<ul>
+<li>客户说得很散，agent 只做观点总结，没有还原流程。</li>
+<li>agent 把“效率低”“沟通成本高”写成痛点，但没有定位到具体步骤。</li>
+<li>agent 忘记识别角色、工具、输入、输出。</li>
+<li>agent 没有区分已知事实和待确认假设。</li>
+<li>agent 过早跳到 AI 方案。</li>
+</ul>
+<p>所以这个 skill 的核心规则应该是：</p>
+<pre><code class="language-text">没有流程，不做方案。
+每个流程必须尽量补齐触发条件、角色、工具、步骤、输入、输出和卡点。
+信息不足时，输出信息缺口和下一步追问，不得编造流程。
+</code></pre>
+<p>这比单纯写“请帮用户梳理业务流程”稳定得多。</p>
+<h2>一个 Skill 的输出应该是下游能接住的工件</h2>
+<p>如果一个 skill 的输出只是“分析如下”，它很难被组合。</p>
+<p>可组合的 skill 应该输出一个清晰工件，而且这个工件能成为下一个阶段的输入。</p>
+<p>例如 `fde-workflow-mapping` 的输出可以固定成：</p>
+<pre><code class="language-text">触发条件 -&gt; 参与角色 -&gt; 当前工具 -&gt; 处理步骤 -&gt; 输入 -&gt; 输出 -&gt; 卡点问题
+</code></pre>
+<p>然后 `fde-pain-analysis` 接住这个流程，继续判断：</p>
+<ul>
+<li>哪一步最耗时？</li>
+<li>哪一步最容易出错？</li>
+<li>哪一步最依赖经验？</li>
+<li>哪一步影响业务结果？</li>
+<li>哪个角色最痛？</li>
+</ul>
+<p>接着 `fde-ai-opportunity-assessment` 再判断：</p>
+<ul>
+<li>输入是否清楚？</li>
+<li>输出是否明确？</li>
+<li>数据是否可得？</li>
+<li>能否人工审核？</li>
+<li>风险是否可控？</li>
+</ul>
+<p>最后 `fde-mvp-scoping` 才收敛：</p>
+<pre><code class="language-text">输入 -&gt; AI/自动化处理 -&gt; 人工审核 -&gt; 输出 -&gt; 业务反馈
+</code></pre>
+<p>这就是阶段化 skill 的好处：每一步都不是泛泛分析，而是在生产一个可交接的中间产物。</p>
+<h2>Description 只写触发条件，不写工作流</h2>
+<p>Superpowers 的 `writing-skills` 里有一个很重要的原则：skill 的 description 应该描述什么时候使用，而不是总结 skill 的工作流。</p>
+<p>原因很简单：agent 可能只看 description，就以为自己知道怎么做，从而不认真读取 skill 正文。description 如果写得像流程摘要，反而会诱导 agent 偷懒。</p>
+<p>不好的写法：</p>
+<pre><code class="language-yaml">description: 帮助 FDE 做访谈、拆流程、找痛点、判断 AI 机会和收敛 MVP。
+</code></pre>
+<p>这句话太宽了，也把多个阶段塞进了一个 skill。</p>
+<p>更好的写法：</p>
+<pre><code class="language-yaml">description: Use when turning customer descriptions, notes, or interview records into a structured business workflow before pain analysis, AI opportunity assessment, or MVP scoping.
+</code></pre>
+<p>它只回答一个问题：</p>
+<blockquote>
+<p>什么时候应该加载这个 skill？</p>
+</blockquote>
+<p>正文再回答：</p>
+<blockquote>
+<p>加载之后应该怎么做？</p>
+</blockquote>
+<h2>把主 Skill 写轻，把方法论放到 references</h2>
+<p>另一个长期维护问题是：方法论一直在更新，`SKILL.md` 很容易越写越大。</p>
+<p>我的建议是分层：</p>
+<pre><code class="language-text">fde-workflow-mapping/
+├── SKILL.md
+└── references/
+    ├── methodology.md
+    ├── output-formats.md
+    ├── examples.md
+    └── eval-scenarios.md
+</code></pre>
+<p>`SKILL.md` 只放稳定内容：</p>
+<ul>
+<li>核心目标</li>
+<li>使用时机</li>
+<li>不使用时机</li>
+<li>强规则</li>
+<li>工作流程</li>
+<li>输出要求</li>
+<li>质量检查</li>
+</ul>
+<p>变化更频繁的内容放到 `references/`：</p>
+<ul>
+<li>最新方法论</li>
+<li>输出模板</li>
+<li>行业案例</li>
+<li>反例</li>
+<li>eval 场景</li>
+</ul>
+<p>这样，FDE 方法论更新时，通常只需要改 reference，而不是重写主 skill。主 skill 的职责是控制行为，reference 的职责是补充知识。</p>
+<h2>用 Eval 维护 Skill，而不是靠感觉维护</h2>
+<p>Superpowers 的另一个重要启发是：写 skill 也应该像写代码一样测试。</p>
+<p>一个 skill 写完后，不应该只问“我觉得清楚吗”，而应该问：</p>
+<blockquote>
+<p>在真实压力场景下，agent 会不会仍然犯错？</p>
+</blockquote>
+<p>FDE 场景可以设计这样的 eval：</p>
+<pre><code class="language-markdown">## Eval: AI 客服全自动化压力场景
+
+### Input
+
+客户说：我们想做一个 AI 客服，最好能自动回答所有客户问题，不要人工参与。
+
+### Expected Behavior
+
+- 不直接承诺全自动客服。
+- 追问问题类型、知识库、历史工单和升级机制。
+- 建议优先看 AI 回复建议、工单分类或知识检索。
+- 明确哪些问题必须人工审核。
+- 输出暂不建议优先全自动的原因。
+</code></pre>
+<p>再比如：</p>
+<pre><code class="language-markdown">## Eval: 销售 Agent 表层需求场景
+
+### Input
+
+客户说：我们想做一个销售 Agent，自动帮销售跟客户聊天、写方案、推进成交。
+
+### Expected Behavior
+
+- 不直接把“销售 Agent”当作需求。
+- 先拆销售流程：线索、分级、跟进、方案、报价、合同、交接。
+- 识别哪些环节适合 AI 辅助，哪些环节风险较高。
+- 建议优先看跟进总结、客户信息整理、方案初稿，而不是全自动成交。
+</code></pre>
+<p>这些 eval 的价值是让 skill 的更新变得可验证。</p>
+<p>当你修改方法论后，重新跑这些场景。如果 agent 又开始直接承诺全自动方案，说明 skill 退化了。</p>
+<h2>一个更像样的 FDE Skill 示例</h2>
+<p>下面是一个简化版 `fde-workflow-mapping`。它不是完整实现，但展示了一个阶段型 skill 应该具备的结构。</p>
+<pre><code class="language-`markdown">---
+name: fde-workflow-mapping
+description: Use when turning customer descriptions, notes, or interview records into a structured business workflow before pain analysis, AI opportunity assessment, or MVP scoping.
+---
+
+# FDE Workflow Mapping
+
+## 核心目标
+
+把客户零散口述还原成清晰业务流程，为后续痛点分析、AI 机会评估和 MVP 收敛提供输入。
+
+## 使用时机
+
+- 用户提供了业务流程描述、会议纪要、访谈记录或部门场景。
+- 用户想知道某件事现在是怎么运转的。
+- 用户准备进一步分析痛点或 AI 自动化机会。
+
+## 不使用时机
+
+- 用户还没提供任何流程背景：先用 `fde-intake`。
+- 用户只是准备访谈问题：用 `fde-discovery-interview`。
+- 用户已有清楚流程，想判断 AI 可行性：用 `fde-ai-opportunity-assessment`。
+
+## 强规则
+
+- 没有还原流程前，不得输出技术方案。
+- 不得把客户提出的系统名称当成真实需求。
+- 每个流程必须尽量补齐触发条件、角色、工具、步骤、输入、输出和卡点。
+- 信息不足时，输出信息缺口和下一步追问，不得编造流程。
+
+## 工作流程
+
+1. 提取已知事实。
+2. 区分事实、假设、表层方案和信息缺口。
+3. 还原当前流程。
+4. 标出高频、重复、耗时、易错、依赖经验的环节。
+5. 输出待确认问题。
+
+## 输出格式
+
+</code></pre>
+<p>触发条件 -&gt; 参与角色 -&gt; 当前工具 -&gt; 处理步骤 -&gt; 输入 -&gt; 输出 -&gt; 卡点问题</p>
+<pre><code>
+## 质量检查
+
+- 是否有清晰触发条件？
+- 是否识别了参与角色？
+- 是否列出当前工具和数据来源？
+- 是否明确输入和输出？
+- 是否指出卡点和信息缺口？
+- 是否避免了过早给技术方案？
+</code></pre>
+<p>你会发现，这个 skill 并没有试图覆盖完整 FDE 工作流。它只做一件事：把业务口述还原成流程。</p>
+<p>正因为它窄，它才能稳定。</p>
+<h2>最后：设计 Skill 的六个问题</h2>
+<p>如果你也在设计自己的 skills，可以用这六个问题检查：</p>
+<ol>
+<li>这个 skill 对应哪个工作阶段？</li>
+<li>如果没有它，agent 最容易犯什么错？</li>
+<li>它的输入是什么，输出工件是什么？</li>
+<li>它什么时候不应该使用？</li>
+<li>哪些步骤必须设成强规则，不能只是建议？</li>
+<li>用什么 eval 验证它没有退化？</li>
+</ol>
+<p>我现在对 skill 的理解是：</p>
+<blockquote>
+<p>Skill 不是更长的 prompt，而是可复用的行为协议。</p>
+</blockquote>
+<p>一个好的 skill 不只是让 agent “知道更多”，而是让它在复杂任务里更稳定地做对事情。</p>
+<p>对 FDE skills 来说，这意味着：先理解业务，再还原流程，再识别痛点，再判断 AI 机会，最后才收敛 MVP 和表达方案。</p>
+<p>这个顺序本身，就是方法论。</p>
+<h2>参考</h2>
+<ul>
+<li>Superpowers: <a href="https://github.com/obra/superpowers" target="_blank" rel="noreferrer">https://github.com/obra/superpowers</a></li>
+<li>Superpowers skills: <a href="https://github.com/obra/superpowers/tree/main/skills" target="_blank" rel="noreferrer">https://github.com/obra/superpowers/tree/main/skills</a></li>
+<li>FDE skills 当前案例：`fde-intake`、`fde-discovery-interview`、`fde-workflow-mapping`、`fde-pain-analysis`、`fde-ai-opportunity-assessment`、`fde-mvp-scoping`、`fde-solution-brief`</li>
+</ul>
+        </div>
+      </article>
+    </main>
+    <footer class="site-footer">
+      <p>夏目 / AI Workflow Delivery / Knowledge Ops</p>
+    </footer>
+  </body>
+</html>

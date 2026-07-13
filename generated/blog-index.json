@@ -1,67 +1,67 @@
 [
   {
-    "slug": "fde-and-local-fde",
-    "title": "FDE 与土 FDE：把工程能力带到业务现场",
-    "summary": "FDE 的核心不是会写更多代码，而是在真实业务现场里识别关键动作、切出可验证闭环，并用工程方法把价值交付出来。",
+    "slug": "ai-native-process",
+    "title": "AI Native 不是消灭流程，而是让人不再操作流程",
+    "summary": "AI Native 不只是把按钮换成聊天框，而是让软件理解人的工作，并把流程隐藏到系统背后。",
     "category": "AI交付",
     "tags": [
-      "FDE",
-      "AI交付",
-      "业务调研"
+      "AI Native",
+      "AI Workflow",
+      "流程设计"
     ],
-    "published": "2026-07-08",
-    "url": "./fde-and-local-fde/"
+    "published": "2026-07-13",
+    "url": "./ai-native-process/"
   },
   {
-    "slug": "local-fde-action-guide",
-    "title": "土 FDE 入门行动手册：从真实输入开始",
-    "summary": "一份面向工程师的现场交付清单：如何找场景、问问题、做薄切片、定义验收，并避免把 AI Demo 做成无效玩具。",
-    "category": "行动手册",
+    "slug": "fde-nine-grid-ai-project",
+    "title": "FDE 九宫格：从模糊需求到可交付 AI 项目",
+    "summary": "用 FDE 九宫格拆解不同客户类型下的商务、产品和研发打法，把“AI 提效”转成可判断、可交付的项目。",
+    "category": "FDE",
     "tags": [
       "FDE",
-      "现场交付",
-      "AI工作流"
+      "客户判断",
+      "AI交付"
     ],
-    "published": "2026-07-07",
-    "url": "./local-fde-action-guide/"
+    "published": "2026-07-12",
+    "url": "./fde-nine-grid-ai-project/"
   },
   {
-    "slug": "career-competitiveness-workflow",
-    "title": "职业竞争力工作流：把经历变成可被检查的证据",
-    "summary": "一个职业系统不应该只产出简历，而应该把经历、案例、文章、反馈和学习计划组织成可持续更新的证据链。",
-    "category": "职业发展",
+    "slug": "skill-design-superpowers-fde-skills",
+    "title": "不要把 Skill 写成更长的 Prompt：从 Superpowers 到 FDE Skills 的设计方法",
+    "summary": "Skill 不应该只是更长的 Prompt，而应该围绕工作阶段和失败模式设计成可组合、可维护的行为约束。",
+    "category": "Skill设计",
     "tags": [
-      "职业发展",
-      "知识库",
-      "个人系统"
+      "Skill",
+      "Superpowers",
+      "FDE"
     ],
-    "published": "2026-07-06",
-    "url": "./career-competitiveness-workflow/"
+    "published": "2026-07-11",
+    "url": "./skill-design-superpowers-fde-skills/"
   },
   {
-    "slug": "ai-workflow-acceptance",
-    "title": "AI 工作流验收框架：不要用“看起来很智能”判断交付",
-    "summary": "AI 工作流的验收不能停留在演示效果，而要回到输入覆盖、规则边界、人工确认、失败处理和可兑现业务价值。",
+    "slug": "ai-workflow-fde-lessons",
+    "title": "从一份 AI Workflow 方案里，我总结了 9 条 FDE 经验",
+    "summary": "从企业 AI Workflow 方案拆解中总结 FDE 的范围取舍、验证目标、交付节奏和落地经验。",
+    "category": "FDE",
+    "tags": [
+      "FDE",
+      "AI Workflow",
+      "方案拆解"
+    ],
+    "published": "2026-07-10",
+    "url": "./ai-workflow-fde-lessons/"
+  },
+  {
+    "slug": "ai-training-and-fde-delivery",
+    "title": "企业做 AI，培训解决认知，FDE 解决落地",
+    "summary": "AI 培训可以解决认知和启发问题，但真正落地需要 FDE 进入业务流程，识别场景并交付可验证闭环。",
     "category": "AI交付",
     "tags": [
-      "AI工作流",
-      "验收",
-      "交付"
+      "AI培训",
+      "FDE",
+      "企业落地"
     ],
-    "published": "2026-07-05",
-    "url": "./ai-workflow-acceptance/"
-  },
-  {
-    "slug": "knowledge-base-boundaries",
-    "title": "企业知识库落地边界：RAG 不是把文档扔进去",
-    "summary": "企业知识库项目的关键不是接一个问答机器人，而是先整理文档责任、适用条件、更新机制和人工兜底。",
-    "category": "知识库",
-    "tags": [
-      "知识库",
-      "RAG",
-      "SOP"
-    ],
-    "published": "2026-07-04",
-    "url": "./knowledge-base-boundaries/"
+    "published": "2026-07-09",
+    "url": "./ai-training-and-fde-delivery/"
   }
 ]
