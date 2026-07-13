@@ -160,6 +160,8 @@ test("buildBlog writes sorted blog index and article pages", () => {
   assert.match(articleHtml, /<h1>Newer Post<\/h1>/);
   assert.match(articleHtml, /<li>item<\/li>/);
   assert.match(articleHtml, /<a href="\.\.\/\.\.\/blog\/" aria-current="page">博客<\/a>/);
+  assert.match(articleHtml, /data-article-toc/);
+  assert.match(articleHtml, /<script src="\.\.\/\.\.\/script\.js"><\/script>/);
   assert.doesNotMatch(articleHtml, /返回文章列表/);
 });
 

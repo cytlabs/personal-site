@@ -172,6 +172,85 @@ function enableBackToTop() {
   window.addEventListener("scroll", updateVisibility, { passive: true });
 }
 
+function headingIdFromText(text, index) {
+  return `toc-${index + 1}-${text
+    .trim()
+    .toLowerCase()
+    .replace(/[^\p{Letter}\p{Number}]+/gu, "-")
+    .replace(/^-|-$/g, "") || "section"}`;
+}
+
+function enableArticleToc() {
+  const toc = document.querySelector("[data-article-toc]");
+  const markdown = document.querySelector(".blog-article .markdown-panel");
+  if (!toc || !markdown) {
+    return;
+  }
+
+  const headings = [...markdown.querySelectorAll("h2, h3")].filter(
+    (heading) => heading.textContent.trim()
+  );
+  const list = toc.querySelector(".toc-list");
+  const pin = toc.querySelector(".toc-pin");
+  if (!headings.length || !list || !pin) {
+    toc.hidden = true;
+    return;
+  }
+
+  const usedIds = new Set();
+  const links = headings.map((heading, index) => {
+    if (!heading.id) {
+      let id = headingIdFromText(heading.textContent, index);
+      let counter = 2;
+      while (usedIds.has(id) || document.getElementById(id)) {
+        id = `${id}-${counter}`;
+        counter += 1;
+      }
+      heading.id = id;
+    }
+    usedIds.add(heading.id);
+
+    const link = document.createElement("a");
+    link.href = `#${heading.id}`;
+    link.textContent = heading.textContent.trim();
+    link.className = heading.tagName === "H3" ? "toc-link depth-3" : "toc-link";
+    list.append(link);
+    return link;
+  });
+  links[0]?.classList.add("is-active");
+
+  const setPinned = (pinned) => {
+    toc.classList.toggle("is-pinned", pinned);
+    pin.setAttribute("aria-pressed", pinned ? "true" : "false");
+    pin.setAttribute("aria-label", pinned ? "取消固定大纲" : "固定大纲");
+  };
+
+  pin.addEventListener("click", () => {
+    setPinned(!toc.classList.contains("is-pinned"));
+  });
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+      if (!visible) {
+        return;
+      }
+      links.forEach((link) => {
+        link.classList.toggle("is-active", link.hash === `#${visible.target.id}`);
+      });
+    },
+    {
+      rootMargin: "-22% 0px -68% 0px",
+      threshold: 0,
+    }
+  );
+
+  headings.forEach((heading) => observer.observe(heading));
+}
+
 hydrateMarkdown();
 hydrateBlog();
 enableBackToTop();
+enableArticleToc();
