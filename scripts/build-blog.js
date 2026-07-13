@@ -153,15 +153,14 @@ function blogIndexEntry(post) {
 
 function siteHeader(prefix, active = "") {
   const links = [
-    ["首页", `${prefix}index.html`, "home"],
-    ["关于", `${prefix}about/`, "about"],
     ["博客", `${prefix}blog/`, "blog"],
     ["案例", `${prefix}cases/`, "cases"],
+    ["关于", `${prefix}about/`, "about"],
   ];
 
   return `<header class="site-header">
       <div class="header-inner">
-        <a class="brand" href="${prefix}index.html" aria-label="返回首页">夏目 <span>AI Delivery Engineer</span></a>
+        <a class="brand" href="${prefix}blog/" aria-label="返回博客">夏目 <span>AI Delivery Engineer</span></a>
         <nav class="nav" aria-label="主导航">
           ${links
             .map(([label, href, key]) => `<a href="${href}"${active === key ? ' aria-current="page"' : ""}>${label}</a>`)
@@ -188,7 +187,7 @@ function pageShell({ title, description, prefix, body, script, active }) {
     ${siteHeader(prefix, active)}
     ${body}
     <footer class="site-footer">
-      <p>夏目 / AI Workflow Delivery / Knowledge Ops</p>
+      <p>© 2026 夏目 · Powered by 夏目 &amp; AI · Built with HTML &amp; Node</p>
     </footer>${scriptTag}
   </body>
 </html>

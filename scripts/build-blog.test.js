@@ -148,7 +148,9 @@ test("buildBlog writes sorted blog index and article pages", () => {
 
   const indexHtml = fs.readFileSync(path.join(siteDir, "blog", "index.html"), "utf8");
   assert.match(indexHtml, /<a href="\.\.\/blog\/" aria-current="page">博客<\/a>/);
+  assert.match(indexHtml, /<a href="\.\.\/cases\/">案例<\/a>/);
   assert.match(indexHtml, /<a href="\.\.\/about\/">关于<\/a>/);
+  assert.doesNotMatch(indexHtml, />首页<\/a>/);
   assert.doesNotMatch(indexHtml, /index\.html#positioning/);
 
   const articleHtml = fs.readFileSync(
