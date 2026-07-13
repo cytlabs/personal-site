@@ -235,8 +235,9 @@ function renderArticle(post) {
     title: `${post.title} | 夏目`,
     description: post.summary,
     prefix: "../../",
+    script: "../../script.js",
     active: "blog",
-    body: `<main class="section blog-article">
+    body: `<main id="top" class="section blog-article">
       <article>
         <nav class="breadcrumb" aria-label="面包屑">
           <a href="../">主页</a>
@@ -253,6 +254,7 @@ function renderArticle(post) {
 ${renderMarkdown(post.body)}
         </div>
       </article>
+      <a class="back-to-top" href="#top" aria-label="返回顶部"></a>
     </main>`,
   });
 }

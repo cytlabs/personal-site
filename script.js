@@ -158,5 +158,20 @@ async function hydrateBlog() {
   enableBlogFilters();
 }
 
+function enableBackToTop() {
+  const button = document.querySelector(".back-to-top");
+  if (!button) {
+    return;
+  }
+
+  const updateVisibility = () => {
+    button.classList.toggle("is-visible", window.scrollY > 320);
+  };
+
+  updateVisibility();
+  window.addEventListener("scroll", updateVisibility, { passive: true });
+}
+
 hydrateMarkdown();
 hydrateBlog();
+enableBackToTop();
