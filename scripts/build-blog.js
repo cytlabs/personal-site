@@ -195,21 +195,16 @@ function pageShell({ title, description, prefix, body, script, active }) {
 }
 
 function renderBlogIndex(posts) {
-  const categories = [...new Set(posts.map((post) => post.category))];
-  const filters = categories
-    .map(
-      (category) =>
-        `<button type="button" data-category="${escapeAttribute(category)}">${escapeHtml(category)}</button>`
-    )
-    .join("\n          ");
   const cards = posts
     .map(
-      (post) => `<article class="blog-card" data-category="${escapeAttribute(post.category)}">
-          <p class="eyebrow">${escapeHtml(post.category)}</p>
+      (post) => `<article class="blog-card">
           <h2><a href="./${escapeAttribute(post.slug)}/">${escapeHtml(post.title)}</a></h2>
           <p>${escapeHtml(post.summary)}</p>
-          <time datetime="${escapeAttribute(post.published)}">${escapeHtml(post.published)}</time>
-          <div class="tag-list">${post.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
+          <div class="post-meta">
+            <time datetime="${escapeAttribute(post.published)}">${escapeHtml(post.published)}</time>
+            <span>·</span>
+            <span>${escapeHtml(post.category)}</span>
+          </div>
         </article>`
     )
     .join("\n        ");
@@ -221,39 +216,15 @@ function renderBlogIndex(posts) {
     script: "../script.js",
     active: "blog",
     body: `<main class="page-layout">
-      <section class="hero page-hero">
-        <div class="hero-copy">
-          <p class="eyebrow">Blog</p>
+      <div class="content-column">
+        <section class="page-heading">
           <h1>博客</h1>
-          <p class="lead">围绕业务调研、AI 工作流验收、知识库、DevOps 和交付边界写作。</p>
-        </div>
-        <aside class="hero-panel" aria-label="写作主题">
-          <div>
-            <p class="card-kicker">Writing Focus</p>
-            <h2>文章不是工具教程，而是交付判断标准。</h2>
-            <ul>
-              <li>怎么判断 AI 工作流是否可验收</li>
-              <li>怎么把知识库做进真实流程</li>
-              <li>怎么把项目经历变成证据链</li>
-            </ul>
-          </div>
-        </aside>
-      </section>
-      <section class="section blog-index blog-page">
-        <div class="section-heading">
-          <p class="eyebrow">Topics</p>
-          <h2>文章</h2>
-        </div>
-        <div>
-          <div class="blog-filters" aria-label="文章分类筛选">
-            <button type="button" data-category="all">全部</button>
-              ${filters}
-          </div>
-          <div class="blog-list">
-            ${cards}
-          </div>
-        </div>
-      </section>
+          <p>记录 AI 工作流、FDE 交付、技术积累和项目复盘。</p>
+        </section>
+        <section class="post-list">
+          ${cards}
+        </section>
+      </div>
     </main>`,
   });
 }

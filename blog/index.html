@@ -19,75 +19,59 @@
       </div>
     </header>
     <main class="page-layout">
-      <section class="hero page-hero">
-        <div class="hero-copy">
-          <p class="eyebrow">Blog</p>
+      <div class="content-column">
+        <section class="page-heading">
           <h1>博客</h1>
-          <p class="lead">围绕业务调研、AI 工作流验收、知识库、DevOps 和交付边界写作。</p>
-        </div>
-        <aside class="hero-panel" aria-label="写作主题">
-          <div>
-            <p class="card-kicker">Writing Focus</p>
-            <h2>文章不是工具教程，而是交付判断标准。</h2>
-            <ul>
-              <li>怎么判断 AI 工作流是否可验收</li>
-              <li>怎么把知识库做进真实流程</li>
-              <li>怎么把项目经历变成证据链</li>
-            </ul>
-          </div>
-        </aside>
-      </section>
-      <section class="section blog-index blog-page">
-        <div class="section-heading">
-          <p class="eyebrow">Topics</p>
-          <h2>文章</h2>
-        </div>
-        <div>
-          <div class="blog-filters" aria-label="文章分类筛选">
-            <button type="button" data-category="all">全部</button>
-              <button type="button" data-category="AI交付">AI交付</button>
-          <button type="button" data-category="FDE">FDE</button>
-          <button type="button" data-category="Skill设计">Skill设计</button>
-          </div>
-          <div class="blog-list">
-            <article class="blog-card" data-category="AI交付">
-          <p class="eyebrow">AI交付</p>
+          <p>记录 AI 工作流、FDE 交付、技术积累和项目复盘。</p>
+        </section>
+        <section class="post-list">
+          <article class="blog-card">
           <h2><a href="./ai-native-process/">AI Native 不是消灭流程，而是让人不再操作流程</a></h2>
           <p>AI Native 不只是把按钮换成聊天框，而是让软件理解人的工作，并把流程隐藏到系统背后。</p>
-          <time datetime="2026-07-13">2026-07-13</time>
-          <div class="tag-list"><span>AI Native</span><span>AI Workflow</span><span>流程设计</span></div>
+          <div class="post-meta">
+            <time datetime="2026-07-13">2026-07-13</time>
+            <span>·</span>
+            <span>AI交付</span>
+          </div>
         </article>
-        <article class="blog-card" data-category="FDE">
-          <p class="eyebrow">FDE</p>
+        <article class="blog-card">
           <h2><a href="./fde-nine-grid-ai-project/">FDE 九宫格：从模糊需求到可交付 AI 项目</a></h2>
           <p>用 FDE 九宫格拆解不同客户类型下的商务、产品和研发打法，把“AI 提效”转成可判断、可交付的项目。</p>
-          <time datetime="2026-07-12">2026-07-12</time>
-          <div class="tag-list"><span>FDE</span><span>客户判断</span><span>AI交付</span></div>
+          <div class="post-meta">
+            <time datetime="2026-07-12">2026-07-12</time>
+            <span>·</span>
+            <span>FDE</span>
+          </div>
         </article>
-        <article class="blog-card" data-category="Skill设计">
-          <p class="eyebrow">Skill设计</p>
+        <article class="blog-card">
           <h2><a href="./skill-design-superpowers-fde-skills/">不要把 Skill 写成更长的 Prompt：从 Superpowers 到 FDE Skills 的设计方法</a></h2>
           <p>Skill 不应该只是更长的 Prompt，而应该围绕工作阶段和失败模式设计成可组合、可维护的行为约束。</p>
-          <time datetime="2026-07-11">2026-07-11</time>
-          <div class="tag-list"><span>Skill</span><span>Superpowers</span><span>FDE</span></div>
+          <div class="post-meta">
+            <time datetime="2026-07-11">2026-07-11</time>
+            <span>·</span>
+            <span>Skill设计</span>
+          </div>
         </article>
-        <article class="blog-card" data-category="FDE">
-          <p class="eyebrow">FDE</p>
+        <article class="blog-card">
           <h2><a href="./ai-workflow-fde-lessons/">从一份 AI Workflow 方案里，我总结了 9 条 FDE 经验</a></h2>
           <p>从企业 AI Workflow 方案拆解中总结 FDE 的范围取舍、验证目标、交付节奏和落地经验。</p>
-          <time datetime="2026-07-10">2026-07-10</time>
-          <div class="tag-list"><span>FDE</span><span>AI Workflow</span><span>方案拆解</span></div>
+          <div class="post-meta">
+            <time datetime="2026-07-10">2026-07-10</time>
+            <span>·</span>
+            <span>FDE</span>
+          </div>
         </article>
-        <article class="blog-card" data-category="AI交付">
-          <p class="eyebrow">AI交付</p>
+        <article class="blog-card">
           <h2><a href="./ai-training-and-fde-delivery/">企业做 AI，培训解决认知，FDE 解决落地</a></h2>
           <p>AI 培训可以解决认知和启发问题，但真正落地需要 FDE 进入业务流程，识别场景并交付可验证闭环。</p>
-          <time datetime="2026-07-09">2026-07-09</time>
-          <div class="tag-list"><span>AI培训</span><span>FDE</span><span>企业落地</span></div>
-        </article>
+          <div class="post-meta">
+            <time datetime="2026-07-09">2026-07-09</time>
+            <span>·</span>
+            <span>AI交付</span>
           </div>
-        </div>
-      </section>
+        </article>
+        </section>
+      </div>
     </main>
     <footer class="site-footer">
       <p>© 2026 夏目 · Powered by 夏目 &amp; AI · Built with HTML &amp; Node</p>
