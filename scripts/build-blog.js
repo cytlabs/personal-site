@@ -238,13 +238,16 @@ function renderArticle(post) {
     active: "blog",
     body: `<main class="section blog-article">
       <article>
-        <a class="back-link" href="../">返回博客列表</a>
-        <p class="eyebrow">${escapeHtml(post.category)}</p>
+        <nav class="breadcrumb" aria-label="面包屑">
+          <a href="../">主页</a>
+          <span>»</span>
+          <span>${escapeHtml(post.category)}</span>
+        </nav>
         <h1>${escapeHtml(post.title)}</h1>
         <p class="lead">${escapeHtml(post.summary)}</p>
         <div class="post-meta">
           <time datetime="${escapeAttribute(post.published)}">${escapeHtml(post.published)}</time>
-          <div class="tag-list">${tags}</div>
+          <div class="tag-list inline-tags">${tags}</div>
         </div>
         <div class="markdown-panel">
 ${renderMarkdown(post.body)}

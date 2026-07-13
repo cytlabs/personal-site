@@ -455,6 +455,24 @@ a {
   font-weight: 800;
 }
 
+.breadcrumb {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  color: var(--ink-soft);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.breadcrumb a {
+  color: var(--teal-dark);
+  text-underline-offset: 4px;
+}
+
+.inline-tags {
+  margin-top: 0;
+}
+
 .blog-index {
   display: grid;
   grid-template-columns: 240px minmax(0, 1fr);
@@ -495,7 +513,6 @@ a {
 }
 
 .page-heading p {
-  max-width: 680px;
   margin: 12px 0 0;
   color: var(--muted);
   font-size: 15px;
@@ -551,7 +568,8 @@ a {
 .post-list {
   width: var(--content-frame);
   margin: 0 auto;
-  padding: 8px 0 56px;
+  padding: 18px 0 56px;
+  border-top: 1px solid var(--line);
 }
 
 .content-column .post-list {
@@ -569,10 +587,10 @@ a {
 }
 
 .blog-article h1 {
-  margin: 16px 0 18px;
+  margin: 24px 0 18px;
   font-family: "Noto Serif SC", "Source Han Serif SC", Georgia, serif;
-  font-size: clamp(38px, 5vw, 62px);
-  line-height: 1.14;
+  font-size: clamp(32px, 4.2vw, 48px);
+  line-height: 1.18;
 }
 
 .blog-article .markdown-panel h1:first-child {
@@ -702,7 +720,8 @@ a {
 .resume-page {
   width: var(--content-frame);
   margin: 0 auto;
-  padding: 10px 0 64px;
+  padding: 18px 0 64px;
+  border-top: 1px solid var(--line);
 }
 
 .resume-block {
@@ -848,6 +867,10 @@ a {
   .hero h1,
   .page-hero h1 {
     font-size: 34px;
+  }
+
+  .blog-article h1 {
+    font-size: 30px;
   }
 
   .lead,
