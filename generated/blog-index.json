@@ -1,5 +1,31 @@
 [
   {
+    "slug": "ai-native-product-rewrites-interaction",
+    "title": "吃饭是目的，点外卖只是手段：AI Native 产品会如何重写交互",
+    "summary": "AI Native 产品不是把按钮换成聊天框，而是围绕用户目的重新组织上下文、流程、确认和执行，让多余操作从用户侧消失。",
+    "category": "AI交付",
+    "tags": [
+      "AI Native",
+      "产品设计",
+      "交互设计"
+    ],
+    "published": "2026-07-17",
+    "url": "./ai-native-product-rewrites-interaction/"
+  },
+  {
+    "slug": "product-manager-understand-business-process",
+    "title": "优秀产品经理如何快速理解业务流程",
+    "summary": "快速理解业务流程不是简单调研行业和收集需求，而是建立一套围绕价值流、真实任务、成本和优先级的产品判断框架。",
+    "category": "产品方法",
+    "tags": [
+      "产品经理",
+      "业务流程",
+      "需求判断"
+    ],
+    "published": "2026-07-16",
+    "url": "./product-manager-understand-business-process/"
+  },
+  {
     "slug": "ai-native-process",
     "title": "AI Native 不是消灭流程，而是让人不再操作流程",
     "summary": "AI Native 不只是把按钮换成聊天框，而是让软件理解人的工作，并把流程隐藏到系统背后。",
