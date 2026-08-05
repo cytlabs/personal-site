@@ -1,5 +1,20 @@
 [
   {
+    "slug": "designing-agent-environment-harness",
+    "title": "当模型能自己行动，产品应该如何设计它周围的环境？",
+    "summary": "Agent 产品的关键不是写出更长的 Prompt，而是为模型提供可观察、可行动、可验证且受约束的环境。本文从一次真实对话失误出发，讨论 Skill、工具、Harness、CLI 与 LangGraph 的职责边界。",
+    "category": "Agent设计",
+    "tags": [
+      "Agent",
+      "Harness",
+      "Skill",
+      "MCP",
+      "LangGraph"
+    ],
+    "published": "2026-08-05",
+    "url": "./designing-agent-environment-harness/"
+  },
+  {
     "slug": "ai-native-product-rewrites-interaction",
     "title": "吃饭是目的，点外卖只是手段：AI Native 产品会如何重写交互",
     "summary": "AI Native 产品不是把按钮换成聊天框，而是围绕用户目的重新组织上下文、流程、确认和执行，让多余操作从用户侧消失。",
