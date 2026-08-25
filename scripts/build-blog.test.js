@@ -193,6 +193,7 @@ test("buildBlog renders public article markdown without internal knowledge-base 
       "",
       "See [[Knowledge Base|the public title]] and [[path/to/Named Page]] and [[Simple Page]].",
       "Read https://example.com/path?a=1&b=2 for details.",
+      "Read [OpenAI documentation](https://developers.openai.com/resources/) by title.",
       "",
       "> quoted insight",
       "",
@@ -232,6 +233,11 @@ test("buildBlog renders public article markdown without internal knowledge-base 
     articleHtml,
     /<a href="https:\/\/example\.com\/path\?a=1&amp;b=2" target="_blank" rel="noreferrer">https:\/\/example\.com\/path\?a=1&amp;b=2<\/a>/
   );
+  assert.match(
+    articleHtml,
+    /<a href="https:\/\/developers\.openai\.com\/resources\/" target="_blank" rel="noreferrer">OpenAI documentation<\/a>/
+  );
+  assert.doesNotMatch(articleHtml, /\[OpenAI documentation\]/);
   assert.doesNotMatch(articleHtml, /amp;amp/);
   assert.match(articleHtml, /<div class="markdown-table-wrap"><table>/);
   assert.match(articleHtml, /<th>能力<\/th><th>作用<\/th>/);
