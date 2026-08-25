@@ -82,15 +82,17 @@
 </code></pre>
 <p>如果按角色拆，两个 skill 很快都会覆盖这整条链路，只是语言风格不同。长期来看，它们会越来越像，也越来越难维护。</p>
 <p>更好的拆法是按阶段拆：</p>
-<p>| 阶段 | Skill | 产物 |</p>
-<p>| --- | --- | --- |</p>
-<p>| 前置收集 | `fde-intake` | 客户前置沟通包 |</p>
-<p>| 访谈 | `fde-discovery-interview` | 访谈目标、问题清单、追问建议 |</p>
-<p>| 流程拆解 | `fde-workflow-mapping` | 流程、角色、工具、输入输出、卡点 |</p>
-<p>| 痛点分析 | `fde-pain-analysis` | 表层需求、真实痛点、业务影响 |</p>
-<p>| AI 机会评估 | `fde-ai-opportunity-assessment` | 机会矩阵和适合度判断 |</p>
-<p>| MVP 收敛 | `fde-mvp-scoping` | MVP 闭环、边界、人工审核节点 |</p>
-<p>| 方案表达 | `fde-solution-brief` | 客户可读方案摘要 |</p>
+<div class="markdown-table-wrap"><table>
+<thead><tr><th>阶段</th><th>Skill</th><th>产物</th></tr></thead>
+<tbody>
+<tr><td>前置收集</td><td>`fde-intake`</td><td>客户前置沟通包</td></tr>
+<tr><td>访谈</td><td>`fde-discovery-interview`</td><td>访谈目标、问题清单、追问建议</td></tr>
+<tr><td>流程拆解</td><td>`fde-workflow-mapping`</td><td>流程、角色、工具、输入输出、卡点</td></tr>
+<tr><td>痛点分析</td><td>`fde-pain-analysis`</td><td>表层需求、真实痛点、业务影响</td></tr>
+<tr><td>AI 机会评估</td><td>`fde-ai-opportunity-assessment`</td><td>机会矩阵和适合度判断</td></tr>
+<tr><td>MVP 收敛</td><td>`fde-mvp-scoping`</td><td>MVP 闭环、边界、人工审核节点</td></tr>
+<tr><td>方案表达</td><td>`fde-solution-brief`</td><td>客户可读方案摘要</td></tr>
+</tbody></table></div>
 <p>这样拆以后，一个客户也可以使用 `fde-workflow-mapping` 来整理流程，一个 FDE 也可以使用 `fde-intake` 来帮客户补齐前置信息。skill 不再绑定身份，而是绑定阶段和产物。</p>
 <p>这正是 Superpowers 的启发：`brainstorming` 不关心你是谁，它只关心你是否还在设计阶段；`writing-plans` 不关心项目类型，它只关心你是否已经有了 spec，需要写 implementation plan。</p>
 <h2>每个 Skill 都应该有一个明确的失败模式</h2>

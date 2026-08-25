@@ -673,6 +673,38 @@ a {
   line-height: 1.7;
 }
 
+.markdown-table-wrap {
+  overflow-x: auto;
+  margin: 26px 0 30px;
+}
+
+.markdown-panel table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.markdown-panel th,
+.markdown-panel td {
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.markdown-panel th {
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.markdown-panel tbody tr:nth-child(even) {
+  background: var(--surface-soft);
+}
+
 .article-toc[hidden] {
   display: none;
 }

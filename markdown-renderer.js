@@ -54,6 +54,19 @@
     );
   }
 
+  function parseTableRow(line) {
+    const trimmed = line.trim().replace(/^\|/, "").replace(/\|$/, "");
+    return trimmed.split("|").map((cell) => cell.trim());
+  }
+
+  function isTableDivider(line) {
+    if (!line || !line.includes("|")) {
+      return false;
+    }
+    const cells = parseTableRow(line);
+    return cells.length > 0 && cells.every((cell) => /^:?-{3,}:?$/.test(cell));
+  }
+
   function renderMarkdown(markdown) {
     const lines = markdown.split(/\r?\n/);
     const html = [];
@@ -91,7 +104,8 @@
       closeBlockquote();
     };
 
-    for (const rawLine of lines) {
+    for (let lineIndex = 0; lineIndex < lines.length; lineIndex += 1) {
+      const rawLine = lines[lineIndex];
       const line = rawLine.trim();
 
       if (codeBlockOpen) {
@@ -125,6 +139,34 @@
         codeBlockClassName = language ? ` class="language-${escapeAttribute(language)}"` : "";
         codeBlockLines = [];
         codeBlockOpen = true;
+        continue;
+      }
+
+      const nextLine = lines[lineIndex + 1]?.trim();
+      if (line.includes("|") && isTableDivider(nextLine)) {
+        closeBlocks();
+        const headers = parseTableRow(line);
+        const rows = [];
+        lineIndex += 2;
+        while (lineIndex < lines.length) {
+          const rowLine = lines[lineIndex].trim();
+          if (!rowLine || !rowLine.includes("|")) {
+            lineIndex -= 1;
+            break;
+          }
+          rows.push(parseTableRow(rowLine));
+          lineIndex += 1;
+        }
+        if (lineIndex >= lines.length) {
+          lineIndex = lines.length;
+        }
+        html.push("<div class=\"markdown-table-wrap\"><table>");
+        html.push(`<thead><tr>${headers.map((cell) => `<th>${inlineMarkdown(cell)}</th>`).join("")}</tr></thead>`);
+        html.push("<tbody>");
+        for (const row of rows) {
+          html.push(`<tr>${headers.map((_header, index) => `<td>${inlineMarkdown(row[index] || "")}</td>`).join("")}</tr>`);
+        }
+        html.push("</tbody></table></div>");
         continue;
       }
 

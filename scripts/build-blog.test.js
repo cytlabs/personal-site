@@ -199,6 +199,11 @@ test("buildBlog renders public article markdown without internal knowledge-base 
       "1. first step",
       "2. second step",
       "",
+      "| 能力 | 作用 |",
+      "| --- | --- |",
+      "| 上下文组装 | 为模型提供当前项目 |",
+      "| 权限与确认 | 高风险操作前暂停 |",
+      "",
       "```js",
       "const value = \"<safe>\";",
       "```",
@@ -228,6 +233,9 @@ test("buildBlog renders public article markdown without internal knowledge-base 
     /<a href="https:\/\/example\.com\/path\?a=1&amp;b=2" target="_blank" rel="noreferrer">https:\/\/example\.com\/path\?a=1&amp;b=2<\/a>/
   );
   assert.doesNotMatch(articleHtml, /amp;amp/);
+  assert.match(articleHtml, /<div class="markdown-table-wrap"><table>/);
+  assert.match(articleHtml, /<th>能力<\/th><th>作用<\/th>/);
+  assert.match(articleHtml, /<td>上下文组装<\/td><td>为模型提供当前项目<\/td>/);
   assert.match(articleHtml, /<blockquote>\s*<p>quoted insight<\/p>\s*<\/blockquote>/);
   assert.match(articleHtml, /<ol>\s*<li>first step<\/li>\s*<li>second step<\/li>\s*<\/ol>/);
   assert.match(
