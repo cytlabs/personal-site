@@ -954,13 +954,12 @@ a {
 
 /* About: a personal manual rather than a chronological resume. */
 .about-page { width: var(--frame); margin: 0 auto; }
-.about-hero { width: 100%; max-width: var(--read-width); margin: 0 auto; padding: 108px 0 96px; }
+.about-hero { width: 100%; max-width: var(--read-width); margin: 0 auto; padding: 64px 0 56px; }
 .about-hero h1 { max-width: 900px; margin: 0; font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif; font-size: 30px; font-weight: 700; line-height: 1.25; letter-spacing: 0; }
-.about-intro { max-width: 760px; margin: 36px 0 0; color: var(--ink-soft); font-size: 20px; line-height: 1.9; }
-.about-hero-detail { max-width: 760px; margin-top: 30px; }
+.about-hero-detail { max-width: 740px; margin-top: 24px; }
 .about-hero-detail p { margin: 0 0 18px; color: var(--ink-soft); font-size: 17px; line-height: 1.95; }
 .about-body { width: 100%; max-width: var(--read-width); margin: 0 auto; padding-bottom: 72px; border-top: 1px solid var(--line); }
-.about-section { padding: 68px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 88px; }
+.about-section { padding: 56px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 88px; }
 .about-section h2 { margin: 0 0 30px; font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", Georgia, serif; font-size: 27px; line-height: 1.2; }
 .about-section > p, .practice-item p { margin: 0 0 18px; color: var(--ink-soft); font-size: 17px; line-height: 1.95; }
 .about-list { display: grid; gap: 0; margin: 28px 0 32px; padding: 0; list-style: none; border-top: 1px solid var(--line); }
@@ -970,12 +969,12 @@ a {
 .question-list { margin: 30px 0 38px; padding: 0; list-style: none; counter-reset: question; }
 .question-list li { display: grid; grid-template-columns: 42px minmax(0, 1fr); gap: 14px; align-items: baseline; padding: 15px 0; border-bottom: 1px solid var(--line); color: var(--ink); font-family: "Noto Serif SC", "Source Han Serif SC", Georgia, serif; font-size: 19px; line-height: 1.55; counter-increment: question; }
 .question-list li::before { color: var(--teal); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; font-weight: 800; content: "0" counter(question); }
-.practice-item { padding: 30px 0; border-top: 1px solid var(--line); }
+.practice-item { padding: 24px 0; }
 .practice-item h3 { margin: 0 0 20px; font-family: "Noto Serif SC", "Source Han Serif SC", Georgia, serif; font-size: 21px; line-height: 1.35; }
 .capability-table-wrap { overflow-x: auto; margin: 6px 0 34px; }
 .capability-table { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.7; }
 .capability-table th, .capability-table td { padding: 16px 18px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
-.capability-table th { background: var(--ink); color: #fff; font-size: 12px; letter-spacing: .08em; }
+.capability-table th { background: var(--surface-soft); color: var(--ink); font-size: 12px; letter-spacing: .06em; }
 .capability-table th:first-child, .capability-table td:first-child { width: 150px; font-weight: 800; }
 .beliefs-section ul { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
 .beliefs-section li { padding: 22px 0; border-top: 1px solid var(--line); color: var(--ink); font-family: "Noto Serif SC", "Source Han Serif SC", Georgia, serif; font-size: 20px; line-height: 1.65; }
@@ -1141,9 +1140,8 @@ a {
 
 @media (max-width: 560px) {
   .about-page { width: min(calc(100% - 32px), var(--site-width)); }
-  .about-hero { padding: 68px 0 58px; }
-  .about-intro { margin-top: 26px; font-size: 17px; }
-  .about-section { padding: 52px 0; }
+  .about-hero { padding: 48px 0 42px; }
+  .about-section { padding: 48px 0; }
   .about-section > p, .practice-item p { font-size: 16px; }
   .question-list li { grid-template-columns: 32px minmax(0, 1fr); font-size: 17px; }
   .capability-table { min-width: 620px; }

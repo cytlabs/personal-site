@@ -152,9 +152,10 @@ function blogIndexEntry(post) {
 }
 
 function siteHeader(prefix, active = "") {
+  const showCasesNavigation = false;
   const links = [
     ["博客", `${prefix}blog/`, "blog"],
-    ["案例", `${prefix}cases/`, "cases"],
+    ...(showCasesNavigation ? [["案例", `${prefix}cases/`, "cases"]] : []),
     ["关于", `${prefix}about/`, "about"],
   ];
 
