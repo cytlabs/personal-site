@@ -3,70 +3,128 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>关于 | 夏目</title>
-    <meta name="description" content="夏目的个人介绍、经历、能力方向和联系方式。">
-    <link rel="stylesheet" href="../styles.css?v=product-site-3">
+    <title>夏目｜个人说明</title>
+    <meta name="description" content="夏目的个人说明：连接业务、产品与技术，用 AI 和工程能力解决真实问题。">
+    <link rel="stylesheet" href="../styles.css?v=about-4">
   </head>
   <body>
     <header class="site-header">
       <div class="header-inner">
         <a class="brand" href="../blog/" aria-label="返回博客">夏目 <span>AI Delivery Engineer</span></a>
         <nav class="nav" aria-label="主导航">
-          <a href="../blog/">博客</a>
-          <a href="../cases/">案例</a>
-          <a href="./" aria-current="page">关于</a>
+          <a href="../blog/">博客</a><a href="../cases/">案例</a><a href="./" aria-current="page">关于</a>
         </nav>
       </div>
     </header>
 
-    <main class="page-layout">
-      <section class="page-heading">
-        <h1>关于</h1>
-        <p>我是一名偏交付侧的 AI Workflow / DevOps 工程师，关注业务流程、知识库、内部工具和可验证 Demo。</p>
+    <main id="top" class="about-page">
+      <section class="about-hero">
+        <h1>夏目｜个人说明</h1>
+        <p class="about-intro">我希望成为连接业务、产品与技术的人：进入一个真实场景，理解它为什么存在、问题发生在哪里，再用 AI 和工程能力把解决方案做出来。</p>
       </section>
 
-      <section class="resume-page">
-        <article class="resume-block">
-          <h2>个人定位</h2>
-          <p>我把 AI 落地看作交付问题：先理解真实输入、角色、规则、异常和验收方式，再决定用规则、LLM、Workflow、脚本或人工确认去完成哪一段。</p>
-        </article>
+      <div class="about-body">
+        <div class="about-content">
+          <section id="about-me" class="about-section">
+            <h2>关于我</h2>
+            <p>我有近 7 年互联网相关工作与项目经验，职业经历从运维开始，后来转向开发，现在主要关注 AI 应用、Agent、Skills 与企业工作流。</p>
+            <p>如果只用职位描述我，可能很难准确概括。我做过运维、开发、产品验证和企业现场交付，也能够独立完成从需求沟通、方案设计，到前后端开发、数据库、部署上线的完整过程。但相比“我会哪些技术”，我现在更关心的是：一个问题是否真实、为什么值得解决，以及最终是否产生了价值。</p>
+            <p>我擅长从模糊的信息中梳理目标和流程，把一个还说不清楚的想法拆成可以验证的方案，再通过 AI、自动化或软件系统将它实现。我目前更接近一名 AI 业务落地工程师：既能理解和实现技术，也愿意走进业务现场，对问题判断和交付结果负责。</p>
+          </section>
 
-        <article class="resume-block">
-          <h2>经历背景</h2>
-          <ul>
-            <li>7 年左右 DevOps、技术支持、自动化脚本、内部工具和远程交付经验。</li>
-            <li>做过 Kubernetes、GitLab CI、ArgoCD、监控告警、发布流程和 SOP 相关工作。</li>
-            <li>近阶段重点转向 AI Workflow、FDE 现场交付、知识库和轻量业务工具。</li>
-          </ul>
-        </article>
+          <section id="problems" class="about-section">
+            <h2>我能解决什么问题</h2>
+            <p>我比较适合参与处在早期、存在不确定性、需要边做边验证的事情，例如：</p>
+            <ul class="about-list">
+              <li>进入一个陌生业务，理解公司的目标、岗位职责和实际工作流程；</li><li>从员工描述、聊天记录和现有操作中，识别重复劳动、信息断点与关键决策环节；</li><li>判断问题应该通过流程优化、AI、自动化还是传统系统解决；</li><li>将模糊需求转化为清晰的 MVP，并独立完成产品和技术实现；</li><li>把员工的经验、人工修正和项目反馈沉淀为可复用的 Skills、规则、案例与评测；</li><li>在不大幅改变用户习惯的前提下，让 AI 进入现有工作入口和业务流程。</li>
+            </ul>
+            <p class="about-callout">我不希望为了使用 AI 而制造一个复杂系统。对很多企业场景而言，更合适的形态可能只是现有聊天入口，加上 Agent、Skills、少量数据库和确定性的业务工具。系统复杂度应当服从业务价值，而不是成为价值本身。</p>
+          </section>
 
-        <article class="resume-block">
-          <h2>能力方向</h2>
-          <ul>
-            <li>业务流程拆解：角色、触发、输入、处理、输出、异常、验收。</li>
-            <li>AI 工作流：结构化输出、Prompt 版本管理、Dify Workflow、人工确认节点。</li>
-            <li>工程交付：脚本、API、轻量前端、部署、日志、权限、SOP 和交接文档。</li>
-          </ul>
-        </article>
+          <section id="method" class="about-section">
+            <h2>我如何理解和解决问题</h2>
+            <p>我过去有比较明显的技术思维：拿到需求后，容易迅速进入实现，把大量精力放在如何把功能做出来。技术上可能完成了，但回过头才发现，对业务了解得不够，解决方案也未必有人真正需要。</p>
+            <p>企业现场项目让我更具体地认识到：做出了东西，不等于解决了问题；AI 能做到，也不等于值得做。</p>
+            <p>现在面对一项新的工作，我会尽量从下面几个问题开始：</p>
+            <ol class="question-list">
+              <li>最终目标是什么，谁对这个结果负责？</li><li>为了达成目标，现在的完整流程是什么？</li><li>真正影响结果的卡点发生在哪里？</li><li>团队目前如何解决，为什么仍然没有解决好？</li><li>这个问题是否真实、重要，并且值得投入成本？</li><li>最小可验证方案是什么，如何判断它是否有效？</li>
+            </ol>
+            <p>这套方式并不是我一直以来都做得很好，而是我在实际错误中逐渐建立起来的工作原则。它也让我开始从“完成任务”转向“对结果负责”，从关注功能实现，转向同时理解用户、业务与商业目标。</p>
+            <p>我对企业 AI 的另一个判断是：第一版方案不可能包含所有隐性经验。更现实的路径，是让 AI 带着不完整规则进入工作，由业务人员审核和纠正，再把修改原因转化为规则、案例和评测，持续更新 Skills 与 Workflow。AI 的能力不是一次性设计出来的，而是在真实使用中逐渐形成的。</p>
+          </section>
 
-        <article class="resume-block">
-          <h2>我适合参与的事情</h2>
-          <ul>
-            <li>把混乱输入整理成可运行的 AI 工作流薄切片。</li>
-            <li>把团队文档、工单和 SOP 组织成可检索、可复用的知识流。</li>
-            <li>把重复整理、查漏项、生成摘要和跨系统搬运做成可维护工具。</li>
-          </ul>
-        </article>
+          <section id="practice" class="about-section">
+            <h2>代表性实践</h2>
+            <article class="practice-item">
+              <h3 id="field-ai-workflow">企业现场 AI 提效与工作流验证</h3>
+              <p>我曾进入达人营销公司的真实业务现场，了解从客户需求、达人搜索、候选评估到交付协作的工作过程，并尝试使用 AI 改善其中的部分环节。</p>
+              <p>早期实践中，我过快进入了开发阶段，对业务目标、使用意愿和验收标准理解不足。虽然完成了产品和功能，但没有充分证明它能进入真实工作流。这次经历暴露了我在产品判断和业务调研上的不足，也直接改变了我后续开展项目的方式。</p>
+              <p>此后，我开始把重点放在小而真实的 Workflow MVP 上：先选定一个具体流程，明确输入、人工判断、输出和验收标准，再决定使用 Skills、Agent、数据库或前端系统。相比展示一个复杂的 AI 产品，我更重视它是否真的被使用，以及是否减少了实际工作成本。</p>
+            </article>
+            <article class="practice-item">
+              <h3 id="creator-discovery">AI 达人发现与交付助手</h3>
+              <p>在达人营销场景中，我持续研究如何根据客户需求寻找、评估和管理合适的内容创作者。这个问题表面上是“搜索达人”，实际包含需求结构化、候选发现、内容判断、人工反馈、重复数据处理和项目经验沉淀等多个环节。</p>
+              <p>前期验证让我认识到，搜索准确率和搜索广度是两个不同的问题；平台标签能够完成初筛，却不能代替对达人主页、内容和受众的判断。基于这些认识，我参与推进了从需求理解、搜索策略生成、候选评估到反馈沉淀的 Skills 方案，并持续探索如何通过同事与 AI 的真实对话更新规则和案例。</p>
+              <p>这个项目让我进一步确认：有价值的不只是一个搜索工具，而是一套能够随着业务反馈持续进化的组织能力。</p>
+            </article>
+            <article class="practice-item">
+              <h3 id="end-to-end-delivery">从运维、开发到端到端交付</h3>
+              <p>我的职业起点是运维，做过 Linux、部署、稳定性和自动化相关工作，后来逐渐学习并承担前后端开发。运维经历让我习惯考虑系统边界、异常情况和长期可维护性；开发能力让我能够把想法快速变成可以运行的产品。</p>
+              <p>我能够独立完成需求梳理、方案设计、前后端开发、数据库设计、部署上线与后续迭代。这种端到端能力尤其适合早期项目：沟通链路短，能够快速验证，也能较早发现产品判断与技术实现之间的偏差。</p>
+            </article>
+          </section>
 
-        <article class="resume-block">
-          <h2>联系</h2>
-          <p>邮箱：<a href="mailto:xb990815@163.com">xb990815@163.com</a></p>
-          <p>GitHub：<a href="https://github.com/cyt1999">github.com/cyt1999</a></p>
-        </article>
-      </section>
+          <section id="capabilities" class="about-section">
+            <h2>我的能力结构</h2>
+            <div class="capability-table-wrap"><table class="capability-table">
+              <thead><tr><th>方向</th><th>相关能力</th></tr></thead>
+              <tbody><tr><td>业务与产品</td><td>业务调研、流程梳理、需求分析、方案设计、MVP 验证</td></tr><tr><td>AI 应用</td><td>Agent、Skills、Workflow、RAG、提示词、人工反馈与评测闭环</td></tr><tr><td>产品开发</td><td>React、Next.js、TypeScript、Python、FastAPI、Django、Node.js、PostgreSQL</td></tr><tr><td>工程与交付</td><td>Linux、Docker、自动化、部署运维、系统稳定性、第三方服务集成</td></tr><tr><td>工作方式</td><td>远程协作、独立交付、快速学习、从模糊问题推进到可运行方案</td></tr></tbody>
+            </table></div>
+            <p>我并不把自己定义为某一项技术的专家。我的优势更接近组合能力：能够理解问题、形成方案，也能够亲手完成技术验证。当前我仍在持续补足商业判断、产品表达、方案沟通以及更复杂的企业级 AI 生产经验。</p>
+          </section>
+
+          <section id="looking-for" class="about-section">
+            <h2>我在寻找什么</h2>
+            <p>我希望继续参与 AI 应用、Agent、Skills、企业工作流或 AI 产品从 0 到 1 方向的工作。</p>
+            <p>相比边界固定、只按照既定需求完成开发的岗位，我更适合问题尚未完全定义，需要理解业务、快速验证并持续迭代的环境。我愿意进入实际工作现场，与业务人员一起理解问题，也能够承担从方案到产品落地的早期工作。</p>
+            <p>我希望加入一个真正关注结果、允许坦诚讨论问题，并愿意长期积累业务能力的团队。工作机会、项目合作或共同探索都可以讨论；我能够适应远程协作，也愿意面向海外和跨文化环境长期发展。</p>
+          </section>
+
+          <section id="beliefs" class="about-section beliefs-section">
+            <h2>一些我相信的事情</h2>
+            <ul><li>技术是解决问题的手段，而不是工作的起点。</li><li>做一件事之前，要先理解为什么出发；执行过程中，也要不断抬头确认方向。</li><li>复杂并不天然代表专业，最小但有效的方案通常更有价值。</li><li>失败的项目不一定没有价值，但必须诚实地识别错误，并让下一次行动发生变化。</li><li>AI 不只是替代一次任务，更重要的是让个人和组织的经验能够被记录、复用和持续改进。</li><li>真正对结果负责，意味着不仅完成自己擅长的部分，也要关心最终目标是否实现。</li></ul>
+          </section>
+
+          <section id="basic-info" class="about-section">
+            <h2>基本信息</h2>
+            <dl class="info-list"><div><dt>姓名</dt><dd>夏目</dd></div><div><dt>职业方向</dt><dd>AI 应用 / Agent / Skills / 企业 AI 落地</dd></div><div><dt>工作方式</dt><dd>可远程，长期接受海外发展</dd></div><div><dt>GitHub</dt><dd><a href="https://github.com/cytlabs" target="_blank" rel="noreferrer">github.com/cytlabs</a></dd></div><div><dt>旧博客</dt><dd><a href="https://blog.csdn.net/cyt0906" target="_blank" rel="noreferrer">blog.csdn.net/cyt0906</a></dd></div><div><dt>邮箱</dt><dd><a href="mailto:cytlabss@gmail.com">cytlabss@gmail.com</a></dd></div><div><dt>微信</dt><dd>xiamudewx</dd></div></dl>
+            <div class="about-closing"><p>这不是一份试图证明我已经足够成熟的说明。我仍然在补足产品、商业与表达能力，也经历过方向错误和无效投入。但我正在形成一套更完整的工作方式：理解目标，进入现场，识别真正的问题，用技术完成验证，再从反馈中持续改进。</p><p>我希望找到的，也正是愿意一起把真实问题解决好的人。</p></div>
+          </section>
+        </div>
+      </div>
+      <aside class="article-toc" data-article-toc data-toc-content=".about-content" aria-label="页面大纲">
+        <div class="toc-rail" aria-hidden="true"></div>
+        <div class="toc-panel">
+          <button class="toc-pin" type="button" aria-label="固定大纲" aria-pressed="false"></button>
+          <nav class="toc-list" aria-label="页面大纲">
+            <a class="toc-link" href="#about-me">关于我</a>
+            <a class="toc-link" href="#problems">我能解决什么问题</a>
+            <a class="toc-link" href="#method">我如何理解和解决问题</a>
+            <a class="toc-link" href="#practice">代表性实践</a>
+            <a class="toc-link depth-3" href="#field-ai-workflow">企业现场 AI 提效与工作流验证</a>
+            <a class="toc-link depth-3" href="#creator-discovery">AI 达人发现与交付助手</a>
+            <a class="toc-link depth-3" href="#end-to-end-delivery">从运维、开发到端到端交付</a>
+            <a class="toc-link" href="#capabilities">我的能力结构</a>
+            <a class="toc-link" href="#looking-for">我在寻找什么</a>
+            <a class="toc-link" href="#beliefs">一些我相信的事情</a>
+            <a class="toc-link" href="#basic-info">基本信息</a>
+          </nav>
+        </div>
+      </aside>
+      <a class="back-to-top" href="#top" aria-label="返回顶部"></a>
     </main>
-    <footer class="site-footer">
-      <p>© 2026 夏目 · Powered by 夏目 &amp; AI · Built with HTML &amp; Node</p>
-    </footer>
+    <footer class="site-footer"><p>© 2026 夏目 · Powered by 夏目 &amp; AI · Built with HTML &amp; Node</p></footer>
+    <script src="../markdown-renderer.js"></script>
+    <script src="../script.js"></script>
   </body>
 </html>

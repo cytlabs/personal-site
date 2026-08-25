@@ -182,7 +182,8 @@ function headingIdFromText(text, index) {
 
 function enableArticleToc() {
   const toc = document.querySelector("[data-article-toc]");
-  const markdown = document.querySelector(".blog-article .markdown-panel");
+  const contentSelector = toc?.getAttribute("data-toc-content") || ".blog-article .markdown-panel";
+  const markdown = document.querySelector(contentSelector);
   if (!toc || !markdown) {
     return;
   }
@@ -197,6 +198,7 @@ function enableArticleToc() {
     return;
   }
 
+  list.replaceChildren();
   const usedIds = new Set();
   const links = headings.map((heading, index) => {
     if (!heading.id) {
