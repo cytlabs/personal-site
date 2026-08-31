@@ -673,6 +673,21 @@ a {
   line-height: 1.7;
 }
 
+.markdown-panel pre.mermaid {
+  display: flex;
+  justify-content: center;
+  overflow-x: auto;
+  padding: 22px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink);
+}
+
+.markdown-panel pre.mermaid svg {
+  min-width: 720px;
+  height: auto;
+}
+
 .markdown-table-wrap {
   overflow-x: auto;
   margin: 26px 0 30px;

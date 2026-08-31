@@ -171,9 +171,16 @@ function siteHeader(prefix, active = "") {
     </header>`;
 }
 
-function pageShell({ title, description, prefix, body, script, active }) {
+function pageShell({ title, description, prefix, body, script, active, mermaid = false }) {
   const scriptTag = script
     ? `\n    <script src="${prefix}markdown-renderer.js"></script>\n    <script src="${script}"></script>`
+    : "";
+  const mermaidTag = mermaid
+    ? `\n    <script type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+      mermaid.initialize({ startOnLoad: false, securityLevel: "strict", theme: "neutral" });
+      await mermaid.run({ querySelector: ".mermaid" });
+    </script>`
     : "";
   return `<!doctype html>
 <html lang="zh-CN">
@@ -189,7 +196,7 @@ function pageShell({ title, description, prefix, body, script, active }) {
     ${body}
     <footer class="site-footer">
       <p>© 2026 夏目 · Powered by 夏目 &amp; AI · Built with HTML &amp; Node</p>
-    </footer>${scriptTag}
+    </footer>${scriptTag}${mermaidTag}
   </body>
 </html>
 `;
@@ -232,11 +239,13 @@ function renderBlogIndex(posts) {
 
 function renderArticle(post) {
   const tags = post.tags.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("");
+  const hasMermaid = /(?:^|\n)(?:`{3,}|~{3,})mermaid(?:\s|$)/i.test(post.body);
   return pageShell({
     title: `${post.title} | 夏目`,
     description: post.summary,
     prefix: "../../",
     script: "../../script.js",
+    mermaid: hasMermaid,
     active: "blog",
     body: `<main id="top" class="section blog-article">
       <article>

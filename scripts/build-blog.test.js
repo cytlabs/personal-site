@@ -208,10 +208,20 @@ test("buildBlog renders public article markdown without internal knowledge-base 
       "```js",
       "const value = \"<safe>\";",
       "```",
+      "",
+      "~~~mermaid",
+      "flowchart TD",
+      "  A[Input] --> B[Output]",
+      "~~~",
+      "",
+      "````markdown",
+      "```text",
+      "nested fence",
+      "```",
+      "````",
     ].join("\n"),
     "utf8"
   );
-
   buildBlog({ resourcesDir, siteDir });
 
   const articleHtml = fs.readFileSync(
@@ -248,7 +258,16 @@ test("buildBlog renders public article markdown without internal knowledge-base 
     articleHtml,
     /<pre><code class="language-js">const value = &quot;&lt;safe&gt;&quot;;\n<\/code><\/pre>/
   );
-  assert.doesNotMatch(articleHtml, /```/);
+  assert.match(
+    articleHtml,
+    /<pre class="mermaid">flowchart TD\n  A\[Input\] --&gt; B\[Output\]<\/pre>/
+  );
+  assert.match(articleHtml, /import mermaid from "https:\/\/cdn\.jsdelivr\.net\/npm\/mermaid@11/);
+  assert.match(
+    articleHtml,
+    /<pre><code class="language-markdown">```text\nnested fence\n```\n<\/code><\/pre>/
+  );
+  assert.doesNotMatch(articleHtml, /<p>```/);
 });
 
 test("buildBlog escapes hostile values in generated HTML", () => {

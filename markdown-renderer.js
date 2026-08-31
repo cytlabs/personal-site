@@ -78,8 +78,27 @@
     let orderedListOpen = false;
     let blockquoteOpen = false;
     let codeBlockOpen = false;
+    let codeBlockFence = "";
+    let codeBlockLanguage = "";
     let codeBlockClassName = "";
     let codeBlockLines = [];
+
+    const closeCodeBlock = () => {
+      if (codeBlockLanguage.toLowerCase() === "mermaid") {
+        html.push(`<pre class="mermaid">${codeBlockLines.map(escapeHtml).join("\n")}</pre>`);
+      } else {
+        html.push(
+          `<pre><code${codeBlockClassName}>${codeBlockLines
+            .map(escapeHtml)
+            .join("\n")}\n</code></pre>`
+        );
+      }
+      codeBlockOpen = false;
+      codeBlockFence = "";
+      codeBlockLanguage = "";
+      codeBlockClassName = "";
+      codeBlockLines = [];
+    };
 
     const closeUnorderedList = () => {
       if (unorderedListOpen) {
@@ -113,15 +132,13 @@
       const line = rawLine.trim();
 
       if (codeBlockOpen) {
-        if (line.startsWith("```")) {
-          html.push(
-            `<pre><code${codeBlockClassName}>${codeBlockLines
-              .map(escapeHtml)
-              .join("\n")}\n</code></pre>`
-          );
-          codeBlockOpen = false;
-          codeBlockClassName = "";
-          codeBlockLines = [];
+        const closingFenceMatch = line.match(/^(`{3,}|~{3,})\s*$/);
+        const closesCurrentFence =
+          closingFenceMatch &&
+          closingFenceMatch[1][0] === codeBlockFence[0] &&
+          closingFenceMatch[1].length >= codeBlockFence.length;
+        if (closesCurrentFence) {
+          closeCodeBlock();
         } else {
           codeBlockLines.push(rawLine);
         }
@@ -137,10 +154,14 @@
         continue;
       }
 
-      if (line.startsWith("```")) {
+      const codeFenceMatch = line.match(/^(`{3,}|~{3,})(.*)$/);
+      if (codeFenceMatch) {
         closeBlocks();
-        const language = line.slice(3).trim();
-        codeBlockClassName = language ? ` class="language-${escapeAttribute(language)}"` : "";
+        codeBlockFence = codeFenceMatch[1];
+        codeBlockLanguage = codeFenceMatch[2].trim();
+        codeBlockClassName = codeBlockLanguage
+          ? ` class="language-${escapeAttribute(codeBlockLanguage)}"`
+          : "";
         codeBlockLines = [];
         codeBlockOpen = true;
         continue;
@@ -231,11 +252,7 @@
     }
 
     if (codeBlockOpen) {
-      html.push(
-        `<pre><code${codeBlockClassName}>${codeBlockLines
-          .map(escapeHtml)
-          .join("\n")}\n</code></pre>`
-      );
+      closeCodeBlock();
     }
     closeBlocks();
     return html.join("\n");

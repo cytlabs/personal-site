@@ -164,19 +164,17 @@
 <p>产生岗位 → 编写JD → 发布或寻访 → 筛选简历 → 面试 → Offer → 入职</p>
 </blockquote>
 <p>一种可能的AI原生链路会向前和向后分别延伸：</p>
-<p>~~~mermaid</p>
-<p>flowchart TD</p>
-<p>A[企业业务目标] --&gt; B[诊断所缺能力]</p>
-<p>B --&gt; C{选择获得方式}</p>
-<p>C --&gt; D[招聘员工]</p>
-<p>C --&gt; E[AI或软件]</p>
-<p>C --&gt; F[外包或顾问]</p>
-<p>D --&gt; G[定义结果型岗位]</p>
-<p>G --&gt; H[发现与授权匹配]</p>
-<p>H --&gt; I[证据化评估与人工决策]</p>
-<p>I --&gt; J[入职及业务结果]</p>
-<p>J --&gt; B</p>
-<p>~~~</p>
+<pre class="mermaid">flowchart TD
+    A[企业业务目标] --&gt; B[诊断所缺能力]
+    B --&gt; C{选择获得方式}
+    C --&gt; D[招聘员工]
+    C --&gt; E[AI或软件]
+    C --&gt; F[外包或顾问]
+    D --&gt; G[定义结果型岗位]
+    G --&gt; H[发现与授权匹配]
+    H --&gt; I[证据化评估与人工决策]
+    I --&gt; J[入职及业务结果]
+    J --&gt; B</pre>
 <p>它与传统招聘的区别在于：</p>
 <ul>
 <li>起点从岗位名称变成业务目标；</li>
@@ -271,5 +269,10 @@
     </footer>
     <script src="../../markdown-renderer.js"></script>
     <script src="../../script.js"></script>
+    <script type="module">
+      import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+      mermaid.initialize({ startOnLoad: false, securityLevel: "strict", theme: "neutral" });
+      await mermaid.run({ querySelector: ".mermaid" });
+    </script>
   </body>
 </html>

@@ -230,7 +230,7 @@
 <p>当你修改方法论后，重新跑这些场景。如果 agent 又开始直接承诺全自动方案，说明 skill 退化了。</p>
 <h2>一个更像样的 FDE Skill 示例</h2>
 <p>下面是一个简化版 `fde-workflow-mapping`。它不是完整实现，但展示了一个阶段型 skill 应该具备的结构。</p>
-<pre><code class="language-`markdown">---
+<pre><code class="language-markdown">---
 name: fde-workflow-mapping
 description: Use when turning customer descriptions, notes, or interview records into a structured business workflow before pain analysis, AI opportunity assessment, or MVP scoping.
 ---
@@ -270,9 +270,10 @@ description: Use when turning customer descriptions, notes, or interview records
 
 ## 输出格式
 
-</code></pre>
-<p>触发条件 -&gt; 参与角色 -&gt; 当前工具 -&gt; 处理步骤 -&gt; 输入 -&gt; 输出 -&gt; 卡点问题</p>
-<pre><code>
+```text
+触发条件 -&gt; 参与角色 -&gt; 当前工具 -&gt; 处理步骤 -&gt; 输入 -&gt; 输出 -&gt; 卡点问题
+```
+
 ## 质量检查
 
 - 是否有清晰触发条件？
