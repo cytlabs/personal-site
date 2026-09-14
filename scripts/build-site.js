@@ -1,6 +1,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { buildBlog, resolveResourcesDir } = require("./build-blog");
+const { buildSeo } = require("./build-seo");
 
 const siteDir = path.resolve(__dirname, "..");
 const distDir = path.join(siteDir, "dist");
@@ -22,7 +23,7 @@ function copyIfExists(source, target) {
 }
 
 function buildSite() {
-  buildBlog({
+  const posts = buildBlog({
     resourcesDir: resolveResourcesDir(siteDir),
     siteDir,
   });
@@ -38,6 +39,7 @@ function buildSite() {
     copyIfExists(path.join(siteDir, directory), path.join(distDir, directory));
   }
 
+  buildSeo({ distDir, posts });
   console.log(`Built static site in ${path.relative(siteDir, distDir)}/`);
 }
 

@@ -1,0 +1,144 @@
+[
+  {
+    "slug": "ai-changes-work-itself",
+    "h1": 2,
+    "h2": 0,
+    "title": true,
+    "description": true,
+    "canonical": 1,
+    "jsonld": 1,
+    "external_article_links": [],
+    "related_article_links": []
+  },
+  {
+    "slug": "ai-native-process",
+    "h1": 2,
+    "h2": 10,
+    "title": true,
+    "description": true,
+    "canonical": 1,
+    "jsonld": 1,
+    "external_article_links": [],
+    "related_article_links": []
+  },
+  {
+    "slug": "ai-native-product-rewrites-interaction",
+    "h1": 2,
+    "h2": 9,
+    "title": true,
+    "description": true,
+    "canonical": 1,
+    "jsonld": 1,
+    "external_article_links": [],
+    "related_article_links": []
+  },
+  {
+    "slug": "ai-training-and-fde-delivery",
+    "h1": 2,
+    "h2": 5,
+    "title": true,
+    "description": true,
+    "canonical": 1,
+    "jsonld": 1,
+    "external_article_links": [],
+    "related_article_links": []
+  },
+  {
+    "slug": "ai-workflow-fde-lessons",
+    "h1": 2,
+    "h2": 11,
+    "title": true,
+    "description": true,
+    "canonical": 1,
+    "jsonld": 1,
+    "external_article_links": [],
+    "related_article_links": []
+  },
+  {
+    "slug": "designing-agent-environment-harness",
+    "h1": 2,
+    "h2": 9,
+    "title": true,
+    "description": true,
+    "canonical": 1,
+    "jsonld": 1,
+    "external_article_links": [
+      "https://learn.chatgpt.com/guides/best-practices",
+      "https://developers.openai.com/plugins/plan/tools",
+      "https://learn.chatgpt.com/docs/build-skills",
+      "https://learn.chatgpt.com/docs/app-server",
+      "https://learn.chatgpt.com/docs/sandboxing",
+      "https://langchain-ai.github.io/langgraph/index.html"
+    ],
+    "related_article_links": []
+  },
+  {
+    "slug": "do-not-let-means-replace-ends",
+    "h1": 2,
+    "h2": 6,
+    "title": true,
+    "description": true,
+    "canonical": 1,
+    "jsonld": 1,
+    "external_article_links": [],
+    "related_article_links": []
+  },
+  {
+    "slug": "fde-nine-grid-ai-project",
+    "h1": 2,
+    "h2": 8,
+    "title": true,
+    "description": true,
+    "canonical": 1,
+    "jsonld": 1,
+    "external_article_links": [],
+    "related_article_links": []
+  },
+  {
+    "slug": "how-ai-may-reshape-recruiting",
+    "h1": 2,
+    "h2": 9,
+    "title": true,
+    "description": true,
+    "canonical": 1,
+    "jsonld": 1,
+    "external_article_links": [],
+    "related_article_links": []
+  },
+  {
+    "slug": "product-manager-understand-business-process",
+    "h1": 2,
+    "h2": 9,
+    "title": true,
+    "description": true,
+    "canonical": 1,
+    "jsonld": 1,
+    "external_article_links": [],
+    "related_article_links": []
+  },
+  {
+    "slug": "skill-design-superpowers-fde-skills",
+    "h1": 2,
+    "h2": 10,
+    "title": true,
+    "description": true,
+    "canonical": 1,
+    "jsonld": 1,
+    "external_article_links": [
+      "https://github.com/obra/superpowers",
+      "https://github.com/obra/superpowers/tree/main/skills"
+    ],
+    "related_article_links": []
+  },
+  {
+    "slug": "when-ai-no-longer-needs-human-work",
+    "h1": 2,
+    "h2": 9,
+    "title": true,
+    "description": true,
+    "canonical": 1,
+    "jsonld": 1,
+    "external_article_links": [],
+    "related_article_links": []
+  }
+]
