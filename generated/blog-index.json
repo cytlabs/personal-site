@@ -1,5 +1,31 @@
 [
   {
+    "slug": "ai-memory-and-following-through",
+    "title": "AI 已经记住了我的要求，为什么还是没做到？",
+    "summary": "一次真实协作让我发现：要求被保存、被 AI 读取，以及真正影响它的行动，是三个不同的环节。检查记忆是否有效，最终还是要回到它做了什么。",
+    "category": "AI实践",
+    "tags": [
+      "数字分身",
+      "AI协作",
+      "个人实践"
+    ],
+    "published": "2026-09-15",
+    "url": "./ai-memory-and-following-through/"
+  },
+  {
+    "slug": "anthropic-economic-futures",
+    "title": "Anthropic：我们的未来前景会怎么样？",
+    "summary": "从 Anthropic 的三种经济情景出发，讨论 AI 对增长、工作与收入分配的不同影响，以及为何经济变富不代表每个人都会受益。",
+    "category": "AI思考",
+    "tags": [
+      "Anthropic",
+      "AI经济",
+      "未来工作"
+    ],
+    "published": "2026-09-15",
+    "url": "./anthropic-economic-futures/"
+  },
+  {
     "slug": "enterprise-and-personal-anc",
     "title": "企业 ANC 与个人 ANC：让 AI 围绕目标组织工作的同一套架构",
     "summary": "企业和个人面对的规模不同，但底层问题是一致的：怎样把目标、上下文、工作方法和可用能力组织起来，让 AI 能够理解该做什么，并持续推进。",
@@ -11,6 +37,19 @@
     ],
     "published": "2026-09-15",
     "url": "./enterprise-and-personal-anc/"
+  },
+  {
+    "slug": "personal-organizational-efficiency-ai-products",
+    "title": "个人提效、组织提效和 AI 产品，其实是三件不同的事",
+    "summary": "个人提效、组织提效和 AI 产品解决的是不同问题：增强个人能力、改变组织协作，以及重新设计问题的解决方式。",
+    "category": "AI实践",
+    "tags": [
+      "AI提效",
+      "组织协作",
+      "AI产品"
+    ],
+    "published": "2026-09-15",
+    "url": "./personal-organizational-efficiency-ai-products/"
   },
   {
     "slug": "ai-changes-work-itself",
