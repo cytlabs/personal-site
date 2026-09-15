@@ -1,5 +1,18 @@
 [
   {
+    "slug": "enterprise-and-personal-anc",
+    "title": "企业 ANC 与个人 ANC：让 AI 围绕目标组织工作的同一套架构",
+    "summary": "企业和个人面对的规模不同，但底层问题是一致的：怎样把目标、上下文、工作方法和可用能力组织起来，让 AI 能够理解该做什么，并持续推进。",
+    "category": "AI实践",
+    "tags": [
+      "ANC",
+      "数字分身",
+      "AI协作"
+    ],
+    "published": "2026-09-15",
+    "url": "./enterprise-and-personal-anc/"
+  },
+  {
     "slug": "ai-changes-work-itself",
     "title": "AI 改变的，可能不是效率，而是工作本身",
     "summary": "AI 带来的不只是效率提升。当执行成本和协作成本持续下降，岗位分工、工作流程以及思考与执行的边界，都值得被重新设计。",
