@@ -68,6 +68,8 @@ personal-site/
 - `index.html`、`about/index.html`、`cases/index.html` 是手写静态页面。
 - `markdown-renderer.js` 是前端和构建脚本共享的 Markdown 渲染器，避免两套渲染规则不一致。
 
+博客列表每页显示 6 篇，按发布日期倒序排列。第一页位于 `/blog/`，后续页位于 `/blog/page/2/` 等地址；分页在构建时生成，无需 JavaScript 即可翻页。每页篇数在 `scripts/blog-pagination.js` 的 `BLOG_PAGE_SIZE` 中调整，完整构建会为分页生成独立 canonical 和 sitemap 条目。
+
 ## 使用方式
 
 博客内容默认来自仓库根目录的 `posts/*.md`。只有 frontmatter 中包含 `publish: true` 的资源会被发布到网站。

@@ -1,5 +1,6 @@
 const fs = require("node:fs");
 const path = require("node:path");
+const { getBlogPages } = require("./blog-pagination");
 const { escapeAttribute, escapeHtml } = require("../markdown-renderer");
 
 function siteOrigin(value) {
@@ -22,7 +23,7 @@ function buildSeo({ distDir, posts, siteUrl = process.env.SITE_URL }) {
     return;
   }
   const pages = [
-    { route: '/blog/', title: '博客 | 夏目', description: '夏目的 AI 工作流、业务流程自动化和交付工程文章。' },
+    ...getBlogPages(posts),
     { route: '/about/', title: '夏目｜个人说明', description: '夏目的个人经历、能力方向、工作方式和联系方式。' },
     { route: '/cases/', title: '案例 | 夏目', description: '夏目的 AI 工作流、知识库、DevOps 和内部工具交付案例。' },
     ...posts.map(post => ({ route: `/blog/${post.slug}/`, title: `${post.title} | 夏目`, description: post.summary, post })),

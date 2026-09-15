@@ -1,5 +1,6 @@
 const fs = require("node:fs");
 const path = require("node:path");
+const { getBlogPages } = require("./blog-pagination");
 const {
   escapeAttribute,
   escapeHtml,
@@ -202,11 +203,35 @@ function pageShell({ title, description, prefix, body, script, active, mermaid =
 `;
 }
 
-function renderBlogIndex(posts) {
+function renderPagination(current, pages) {
+  if (pages.length <= 1) return "";
+  const href = (page) => `${current.prefix}${pages[page - 1].route.slice(1)}`;
+  const items = [];
+  let previous = 0;
+  for (const { page } of pages) {
+    if (page !== 1 && page !== pages.length && Math.abs(page - current.page) > 1) continue;
+    if (previous && page - previous > 1) {
+      items.push('<span class="pagination-gap" aria-hidden="true">…</span>');
+    }
+    items.push(page === current.page
+      ? `<span class="pagination-link" aria-current="page" aria-label="第 ${page} 页">${page}</span>`
+      : `<a class="pagination-link" href="${href(page)}" aria-label="第 ${page} 页">${page}</a>`);
+    previous = page;
+  }
+  return `<nav class="pagination" aria-label="博客分页">
+          ${current.page > 1 ? `<a class="pagination-link" href="${href(current.page - 1)}" rel="prev">上一页</a>` : '<span class="pagination-link" aria-disabled="true">上一页</span>'}
+          <div class="pagination-pages">${items.join("")}</div>
+          ${current.page < pages.length ? `<a class="pagination-link" href="${href(current.page + 1)}" rel="next">下一页</a>` : '<span class="pagination-link" aria-disabled="true">下一页</span>'}
+        </nav>`;
+}
+
+function renderBlogIndex(current, pages) {
+  const { posts, prefix, title, description } = current;
+  const articlePrefix = current.page === 1 ? "./" : "../../";
   const cards = posts
     .map(
       (post) => `<article class="blog-card">
-          <h2><a href="./${escapeAttribute(post.slug)}/">${escapeHtml(post.title)}</a></h2>
+          <h2><a href="${articlePrefix}${escapeAttribute(post.slug)}/">${escapeHtml(post.title)}</a></h2>
           <p>${escapeHtml(post.summary)}</p>
           <div class="post-meta">
             <time datetime="${escapeAttribute(post.published)}">${escapeHtml(post.published)}</time>
@@ -218,10 +243,10 @@ function renderBlogIndex(posts) {
     .join("\n        ");
 
   return pageShell({
-    title: "博客 | 夏目",
-    description: "夏目的 AI 工作流、业务流程自动化和交付工程文章。",
-    prefix: "../",
-    script: "../script.js",
+    title,
+    description,
+    prefix,
+    script: `${prefix}script.js`,
     active: "blog",
     body: `<main class="page-layout">
       <div class="content-column">
@@ -230,8 +255,9 @@ function renderBlogIndex(posts) {
           <p>记录 AI 工作流、FDE 交付、技术积累和项目复盘。</p>
         </section>
         <section class="post-list">
-          ${cards}
+          ${cards || '<p>暂无公开文章。</p>'}
         </section>
+        ${renderPagination(current, pages)}
       </div>
     </main>`,
   });
@@ -319,7 +345,12 @@ function buildBlog({ resourcesDir, siteDir }) {
     `${JSON.stringify(posts.map(blogIndexEntry), null, 2)}\n`,
     "utf8"
   );
-  fs.writeFileSync(path.join(blogDir, "index.html"), renderBlogIndex(posts), "utf8");
+  const pages = getBlogPages(posts);
+  for (const page of pages) {
+    const pageDir = path.join(siteDir, page.route.slice(1));
+    fs.mkdirSync(pageDir, { recursive: true });
+    fs.writeFileSync(path.join(pageDir, "index.html"), renderBlogIndex(page, pages), "utf8");
+  }
 
   for (const post of posts) {
     const postDir = path.join(blogDir, post.slug);
