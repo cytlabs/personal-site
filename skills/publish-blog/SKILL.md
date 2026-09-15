@@ -8,14 +8,14 @@ description: 操作夏目的 personal-site 博客项目，自动定位或克隆�
 ## 项目连接
 
 - 默认工作副本：`/root/code/personal-site`。
-- GitHub：`cyt1999/personal-site`；SSH 地址 `git@github.com:cyt1999/personal-site.git`，HTTPS 地址 `https://github.com/cyt1999/personal-site.git`。
+- GitHub：`cytlabs/personal-site`；SSH 地址 `git@github.com:cytlabs/personal-site.git`，HTTPS 地址 `https://github.com/cytlabs/personal-site.git`。
 - 正式博客：`https://www.xiamu.cc/blog/`；正式构建域名：`https://www.xiamu.cc`。
 - 当前生产分支为 `main`，推送后由已连接的 Vercel 自动构建。每次操作先核对远程、分支及项目配置，不能将默认分支自动等同生产分支。
 
 先检查默认路径；不存在时用当前环境已有的 GitHub 认证克隆：
 
 ```bash
-git clone git@github.com:cyt1999/personal-site.git /root/code/personal-site
+git clone git@github.com:cytlabs/personal-site.git /root/code/personal-site
 ```
 
 SSH 不可用时可用上述 HTTPS 地址。其他环境可选择有写权限的工作目录，并记录实际路径。目标路径已存在但不是该仓库时，不覆盖它，另选目录。身份认证使用工具环境已有配置，不索取或把 token 写入文章、仓库或命令参数。
