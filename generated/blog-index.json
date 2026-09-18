@@ -1,5 +1,18 @@
 [
   {
+    "slug": "outsource-capabilities-own-context",
+    "title": "能力可以外包，AI的上下文不行",
+    "summary": "AI 已经减少了分析和写作的劳动，但工作的连续性仍然由人维持。人既是业务判断者，也是 AI 的调度者、信息搬运者和结果检查者。",
+    "category": "AI实践",
+    "tags": [
+      "AI提效",
+      "上下文",
+      "人机协作"
+    ],
+    "published": "2026-09-18",
+    "url": "./outsource-capabilities-own-context/"
+  },
+  {
     "slug": "ai-memory-and-following-through",
     "title": "AI 已经记住了我的要求，为什么还是没做到？",
     "summary": "一次真实协作让我发现：要求被保存、被 AI 读取，以及真正影响它的行动，是三个不同的环节。检查记忆是否有效，最终还是要回到它做了什么。",
