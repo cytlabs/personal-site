@@ -190,7 +190,7 @@ function pageShell({ title, description, prefix, body, script, active, mermaid =
     <title>${escapeHtml(title)}</title>
     <meta name="description" content="${escapeAttribute(description)}">
     <link rel="stylesheet" href="${prefix}styles.css?v=product-site-3">
-    <link rel="stylesheet" href="${prefix}archive.css?v=1">
+    <link rel="stylesheet" href="${prefix}archive.css?v=1">\n    <link rel="stylesheet" href="${prefix}archive-v2.css?v=2">
   </head>
   <body class="archive-page">
     ${siteHeader(prefix, active)}
