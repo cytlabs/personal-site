@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Enterprise AI Practice — 夏目</title>
+  <meta name="description" content="重新思考当 AI 开始承担越来越多工作以后，企业应该怎样组织任务、上下文、流程和人的判断。">
+  <link rel="stylesheet" href="../../archive.css?v=1">
+</head>
+<body class="archive-page">
+  <header class="archive-header">
+    <div class="archive-shell archive-nav">
+      <a class="archive-brand" href="../../">Xia Mu</a>
+      <nav class="archive-links"><a href="../" aria-current="page">Projects</a><a href="../../blog/">Writing</a><a href="../../about/">About</a></nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="archive-shell project-hero">
+      <p class="kicker">Project 01 / Independent Practice</p>
+      <h1>Enterprise<br>AI Practice</h1>
+      <p class="project-subtitle">重新思考当 AI 开始承担越来越多工作以后，企业应该怎样组织任务、上下文、流程和人的判断。</p>
+      <div class="project-facts">
+        <div class="project-fact"><span class="meta-label">Year</span><strong>2026 — ongoing</strong></div>
+        <div class="project-fact"><span class="meta-label">Role</span><strong>Research / Product / Engineering</strong></div>
+        <div class="project-fact"><span class="meta-label">Focus</span><strong>FDE · Workflow · Organization</strong></div>
+        <div class="project-fact"><span class="meta-label">Status</span><strong>Practice, not a finished product</strong></div>
+      </div>
+    </section>
+
+    <section class="story-section">
+      <div class="archive-shell story-grid">
+        <div class="story-index">00 / The question</div>
+        <div class="story-body">
+          <h2>AI 已经很强，为什么工作没有同比例变快？</h2>
+          <p class="lede">我一开始关注的是：哪些任务可以交给 AI。后来发现，更大的问题是——即使 AI 已经完成了很多任务，人仍然在负责决定下一步、搬运上下文、检查结果、通知下一个人。</p>
+          <p>于是人从“执行者”变成了“AI 的调度器”。单点任务更快了，但业务仍然被人的注意力、记忆和响应速度串在一起。</p>
+
+          <div class="flow-compare">
+            <div class="flow-lane">
+              <div class="flow-label">Before AI</div>
+              <div class="flow-nodes"><span class="flow-node human">Human</span><span class="flow-arrow">→</span><span class="flow-node">Task</span><span class="flow-arrow">→</span><span class="flow-node human">Human</span><span class="flow-arrow">→</span><span class="flow-node">Task</span><span class="flow-arrow">→</span><span class="flow-node human">Human</span></div>
+            </div>
+            <div class="flow-lane">
+              <div class="flow-label">AI-assisted</div>
+              <div class="flow-nodes"><span class="flow-node human">Human</span><span class="flow-arrow">→</span><span class="flow-node ai">AI</span><span class="flow-arrow">→</span><span class="flow-node human">Human</span><span class="flow-arrow">→</span><span class="flow-node ai">AI</span><span class="flow-arrow">→</span><span class="flow-node human">Human</span></div>
+            </div>
+            <div class="flow-lane">
+              <div class="flow-label">What I want</div>
+              <div class="flow-nodes"><span class="flow-node">Event</span><span class="flow-arrow">→</span><span class="flow-node ai">AI drives work</span><span class="flow-arrow">→</span><span class="flow-node">State changes</span><span class="flow-arrow">→</span><span class="flow-node human">Human when needed</span><span class="flow-arrow">→</span><span class="flow-node ai">Continue</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section">
+      <div class="archive-shell story-grid">
+        <div class="story-index">01 / Decompose</div>
+        <div class="story-body">
+          <h2>不要先问“这个岗位能不能被 AI 替代”。</h2>
+          <p class="lede">岗位只是今天组织工作的容器。AI 真正接手的是一项项具体任务，而每项任务又有不同的输入、判断规则、风险、输出和责任。</p>
+          <p>所以我开始从公司最终交付往下拆，而不是从某个 AI 工具往上找使用场景。</p>
+          <div class="stack-diagram">
+            <div class="stack-step"><span>01</span><strong>目标与交付</strong></div>
+            <div class="stack-step"><span>02</span><strong>部门与流程</strong></div>
+            <div class="stack-step"><span>03</span><strong>岗位与职责</strong></div>
+            <div class="stack-step"><span>04</span><strong>具体任务</strong></div>
+            <div class="stack-step"><span>05</span><strong>AI / Human</strong></div>
+          </div>
+          <p>只有拆到任务层，才有意义判断：AI 可以独立完成什么、需要人确认什么、什么属于异常、什么需要授权，以及结果完成以后应该触发什么。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section">
+      <div class="archive-shell story-grid">
+        <div class="story-index">02 / The trunk</div>
+        <div class="story-body">
+          <h2>真正难的不是“叶子”，而是把叶子连起来的树干。</h2>
+          <p class="lede">一个会筛简历、写报告、查资料的 AI 很容易演示。但如果项目背景、当前状态、职责、规则和下一步仍然只存在人的脑子里，它就永远只能等待被调用。</p>
+
+          <div class="system-grid">
+            <div class="system-core">
+              <p class="core-title">Shared context makes isolated capabilities become a working system.</p>
+              <div class="core-items"><span>Company</span><span>Role</span><span>Project</span><span>State</span><span>Rules</span><span>History</span><span>Permissions</span></div>
+            </div>
+            <div class="system-side">
+              <article><h3>Events</h3><p>消息、提交、审批、状态变化，不再依赖人不断轮询。</p></article>
+              <article><h3>Tasks</h3><p>AI 知道自己负责什么，以及什么时候应该开始工作。</p></article>
+              <article><h3>Human decisions</h3><p>人集中处理判断、关系、授权、异常和最终责任。</p></article>
+            </div>
+          </div>
+          <p>这也是我现在理解的“从人调度 AI，到 AI 推动工作”的前提：不是让模型获得无限自主权，而是把原来依赖人记忆的业务关系显式化。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section">
+      <div class="archive-shell story-grid">
+        <div class="story-index">03 / Two fields</div>
+        <div class="story-body">
+          <h2>行业不同，底层问题却很像。</h2>
+          <p class="lede">我把这套想法放进两个真实业务类型里反复检查：招聘与达人营销。它们表面上一个找人、一个找达人，但共同依赖需求理解、筛选标准、候选判断、客户确认、状态推进与经验复用。</p>
+          <div class="case-grid">
+            <article class="case-card">
+              <span class="case-type">RECRUITING</span>
+              <h3>需求 → 候选 → 推荐 → 面试 → 入职</h3>
+              <p>重点不只是“AI 筛简历”，而是让需求、判断标准、候选记录与反馈持续属于同一个项目上下文。</p>
+            </article>
+            <article class="case-card">
+              <span class="case-type">INFLUENCER MARKETING</span>
+              <h3>需求 → 达人 → 审核 → 客户确认 → 合作推进</h3>
+              <p>重点也不只是“AI 找达人”，而是让项目经理、运营和客户之间的信息不再靠人工复制与催办来维持。</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section">
+      <div class="archive-shell story-grid">
+        <div class="story-index">04 / What I build</div>
+        <div class="story-body">
+          <h2>我做的不只是 Workflow 图。</h2>
+          <p class="lede">这项实践最后会落到一组真正可运行、可验证、可迭代的交付物上。</p>
+          <div class="build-list">
+            <div class="build-item"><span class="meta-label">Context</span><strong>业务对象与上下文</strong><p>公司、岗位、项目、人员、规则和状态如何被组织，并在任务发生时被正确读取。</p></div>
+            <div class="build-item"><span class="meta-label">Capabilities</span><strong>可复用的工作能力</strong><p>把需求整理、判断、搜索、审核、报告等动作做成可以持续改进的能力。</p></div>
+            <div class="build-item"><span class="meta-label">Orchestration</span><strong>事件与流程推进</strong><p>让消息、提交、人工反馈与状态变化真正决定下一步，而不是靠人不断提醒。</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section">
+      <div class="archive-shell story-grid">
+        <div class="story-index">05 / Reflection</div>
+        <div class="story-body">
+          <h2>这件事改变了我看 AI 落地的方式。</h2>
+          <div class="quote-block"><p>“最开始我在找更多可以被 AI 完成的任务。后来我开始寻找：这些任务为什么还必须由人来连接？”</p></div>
+          <p>单点能力会越来越便宜，也会越来越容易获得。更难、更长期的工作，是理解一个组织真实如何运转，把它的上下文、判断、状态和责任边界整理出来，再让 AI 真正进入其中。</p>
+          <p>这个项目还没有“完成”。它更像一个持续更新的方法：每进入一个新业务，我都会重新检查哪些判断仍然成立，哪些只是上一阶段的假设。</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="archive-footer">
+    <div class="archive-shell footer-grid">
+      <span>Enterprise AI Practice · 2026 — ongoing</span>
+      <div class="footer-links"><a href="../">All Projects</a><a href="https://github.com/cytlabs/enterprise-ai-practice">Source material ↗</a></div>
+    </div>
+  </footer>
+</body>
+</html>

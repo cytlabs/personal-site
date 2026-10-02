@@ -9,11 +9,13 @@ const distDir = path.join(siteDir, "dist");
 const files = [
   "index.html",
   "styles.css",
+  "archive.css",
+  "archive-v2.css",
   "script.js",
   "markdown-renderer.js",
 ];
 
-const directories = ["about", "assets", "blog", "cases", "generated"];
+const directories = ["about", "assets", "blog", "cases", "projects", "generated"];
 
 function copyIfExists(source, target) {
   if (!fs.existsSync(source)) {
