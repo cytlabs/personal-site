@@ -24,13 +24,15 @@ function buildSeo({ distDir, posts, siteUrl = process.env.SITE_URL }) {
   }
   const pages = [
     ...getBlogPages(posts),
-    { route: '/about/', title: '夏目｜个人说明', description: '夏目的个人经历、能力方向、工作方式和联系方式。' },
-    { route: '/cases/', title: '案例 | 夏目', description: '夏目的 AI 工作流、知识库、DevOps 和内部工具交付案例。' },
+    { route: '/', title: '夏目 — Work, Notes & Systems', description: '夏目做过的项目、正在研究的问题，以及关于 AI、工作与组织的公开记录。' },
+    { route: '/about/', title: 'About — 夏目', description: '关于夏目：从运维、开发到 AI 应用与企业现场，以及现在持续关注的问题。' },
+    { route: '/projects/', title: 'Projects — 夏目', description: '夏目做过、正在做以及持续研究的项目。' },
+    { route: '/projects/enterprise-ai-practice/', title: 'Enterprise AI Practice — 夏目', description: '重新思考当 AI 开始承担越来越多工作以后，企业应该怎样组织任务、上下文、流程和人的判断。' },
     ...posts.map(post => ({ route: `/blog/${post.slug}/`, title: `${post.title} | 夏目`, description: post.summary, post })),
   ];
   for (const page of pages) {
     const url = origin + page.route;
-    const file = path.join(distDir, page.route.slice(1), 'index.html');
+    const file = page.route === '/' ? path.join(distDir, 'index.html') : path.join(distDir, page.route.slice(1), 'index.html');
     let html = fs.readFileSync(file, 'utf8');
     const metadata = [
       `<link rel="canonical" href="${escapeAttribute(url)}">`,
@@ -56,7 +58,6 @@ function buildSeo({ distDir, posts, siteUrl = process.env.SITE_URL }) {
     fs.writeFileSync(file, html);
   }
   const rootFile = path.join(distDir, 'index.html');
-  fs.writeFileSync(rootFile, fs.readFileSync(rootFile, 'utf8').replace('href="./blog/"', `href="${escapeAttribute(origin)}/blog/"`));
   const urls = pages.map(page => `  <url><loc>${escapeHtml(origin + page.route)}</loc></url>`);
   fs.writeFileSync(path.join(distDir, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.join('\n')}\n</urlset>\n`);
   fs.writeFileSync(path.join(distDir, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${origin}/sitemap.xml\n`);
