@@ -153,17 +153,16 @@ function blogIndexEntry(post) {
 }
 
 function siteHeader(prefix, active = "") {
-  const showCasesNavigation = false;
   const links = [
-    ["博客", `${prefix}blog/`, "blog"],
-    ...(showCasesNavigation ? [["案例", `${prefix}cases/`, "cases"]] : []),
-    ["关于", `${prefix}about/`, "about"],
+    ["Projects", `${prefix}projects/`, "projects"],
+    ["Writing", `${prefix}blog/`, "blog"],
+    ["About", `${prefix}about/`, "about"],
   ];
 
-  return `<header class="site-header">
-      <div class="header-inner">
-        <a class="brand" href="${prefix}blog/" aria-label="返回博客">夏目 <span>AI Delivery Engineer</span></a>
-        <nav class="nav" aria-label="主导航">
+  return `<header class="archive-header">
+      <div class="archive-shell archive-nav">
+        <a class="archive-brand" href="${prefix}" aria-label="返回首页">Xia Mu</a>
+        <nav class="archive-links" aria-label="主导航">
           ${links
             .map(([label, href, key]) => `<a href="${href}"${active === key ? ' aria-current="page"' : ""}>${label}</a>`)
             .join("\n          ")}
@@ -191,12 +190,16 @@ function pageShell({ title, description, prefix, body, script, active, mermaid =
     <title>${escapeHtml(title)}</title>
     <meta name="description" content="${escapeAttribute(description)}">
     <link rel="stylesheet" href="${prefix}styles.css?v=product-site-3">
+    <link rel="stylesheet" href="${prefix}archive.css?v=1">
   </head>
-  <body>
+  <body class="archive-page">
     ${siteHeader(prefix, active)}
     ${body}
-    <footer class="site-footer">
-      <p>© 2026 夏目 · Powered by 夏目 &amp; AI · Built with HTML &amp; Node</p>
+    <footer class="archive-footer">
+      <div class="archive-shell footer-grid">
+        <span>© 2026 Xia Mu · An evolving public archive.</span>
+        <div class="footer-links"><a href="${prefix}projects/">Projects</a><a href="${prefix}about/">About</a></div>
+      </div>
     </footer>${scriptTag}${mermaidTag}
   </body>
 </html>
@@ -251,8 +254,9 @@ function renderBlogIndex(current, pages) {
     body: `<main class="page-layout">
       <div class="content-column">
         <section class="page-heading">
-          <h1>博客</h1>
-          <p>记录 AI 工作流、FDE 交付、技术积累和项目复盘。</p>
+          <p class="kicker">Writing / Notes</p>
+          <h1>Writing</h1>
+          <p>记录我在项目、产品和研究过程中逐渐想明白的事情。</p>
         </section>
         <section class="post-list">
           ${cards || '<p>暂无公开文章。</p>'}
