@@ -10,6 +10,7 @@ const files = [
   "index.html",
   "styles.css",
   "archive.css",
+  "archive-v2.css",
   "script.js",
   "markdown-renderer.js",
 ];
