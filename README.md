@@ -45,6 +45,8 @@ python3 -m http.server 4173 --directory dist
 
 新增案例来自 `cytlabs/enterprise-ai-practice` 的 `543b75b31218cbc0309b335863931b51ea7f886b`：猎头招聘交付与达人营销交付。两篇案例进入首页精选、案例列表、详情与房间工作台；正文附原始材料链接，保留阶段说明和效果数据口径，原有四个案例继续保留。
 
+新增 99MedPass 医疗服务、VOWSCENE 婚纱摄影与 Intent 个人 AI 三个自主项目，合计九个案例。首页展示两个企业实践和三个自主项目，案例列表、详情页、房间工作台与 sitemap 自动接入。三个项目各有独立 SVG 封面，详情注明当前阶段：官网与流程原型、品牌官网与产品设计、产品定义与架构设计。内容依据各项目当前仓库资料整理，不把原型、前端演示或规划写成已上线能力。医疗详情提供官网、手机原型与完整服务原型入口。
+
 维护位置：`site.config.mjs`（首页介绍）、`src/styles.css`（样式）、`src/main.js`（搜索及主题按钮）、`src/room*.js`（房间）、`content/room.json`（房间便签）。`npm run build:blog` 是兼容旧发布工具的生成步骤；完整预览与部署使用 `npm run build`。
 
 使用 Node.js 22 或更新版本：
