@@ -22,6 +22,34 @@ before(async () => {
 });
 after(() => fs.rmSync(output, { recursive: true, force: true }));
 
+test('case details contain accessible illustrations backed by published assets', () => {
+  for (const item of cases) {
+    const doc = documentAt(`cases/${item.slug}`);
+    const image = doc.querySelector('.prose .project-figure img');
+    assert.ok(image, `${item.slug}: missing illustration`);
+    assert.ok(image.getAttribute('alt').trim(), `${item.slug}: missing image description`);
+    assert.ok(fs.existsSync(path.join(output, image.getAttribute('src'))), `${item.slug}: missing image asset`);
+    assert.ok(image.closest('figure').querySelector('figcaption').textContent.trim());
+  }
+});
+
+test('case recency orders the listing, two home cards and room workbench consistently', () => {
+  const expected = ['99medpass', 'vowscene', 'intent', 'recruitment-delivery',
+    'creator-marketing-delivery', 'keysafe-password-manager', 'multi-cloud-management',
+    'enterprise-gitops-platform', 'kubernetes-platform'];
+  assert.deepEqual([...documentAt('cases').querySelectorAll('.case-card')].map(c => c.id), expected);
+  const home = documentAt('');
+  assert.deepEqual([...home.querySelectorAll('.case-card')].map(c => c.id), expected.slice(0, 2));
+  assert.ok([...home.querySelectorAll('a[href="/cases/"]')].some(a => a.textContent.includes('查看更多')));
+  const room = JSON.parse(documentAt('explore').querySelector('#room-content').textContent);
+  assert.deepEqual(room.zones[1].links.map(c => c.url), expected.map(slug => `/cases/${slug}/`));
+  const input = [{slug:'undated'}, {slug:'older', period:{start:'2023-01'}},
+    {slug:'completed', period:{start:'2022-01', end:'2024-05'}},
+    {slug:'same-month', period:{start:'2024-05', basis:'record'}}];
+  assert.deepEqual(buildModule.sortCases(input).map(c => c.slug), ['completed', 'same-month', 'older', 'undated']);
+  assert.equal(input[0].slug, 'undated');
+});
+
 test('every published article keeps its route, public prose, metadata and one page heading', () => {
   for (const post of posts) {
     const doc = documentAt(`blog/${post.slug}`);
