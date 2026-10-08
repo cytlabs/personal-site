@@ -310,7 +310,7 @@ function resolveResourcesDir(siteDir, explicitDir) {
   return path.join(siteDir, "posts");
 }
 
-function buildBlog({ resourcesDir, siteDir }) {
+function readPosts(resourcesDir) {
   if (!fs.existsSync(resourcesDir)) {
     throw new Error(
       `Blog resources directory does not exist: ${resourcesDir}. ` +
@@ -332,6 +332,12 @@ function buildBlog({ resourcesDir, siteDir }) {
     }
     seenSlugs.add(post.slug);
   }
+
+  return posts;
+}
+
+function buildBlog({ resourcesDir, siteDir }) {
+  const posts = readPosts(resourcesDir);
 
   const generatedDir = path.join(siteDir, "generated");
   const blogDir = path.join(siteDir, "blog");
@@ -363,6 +369,7 @@ function buildBlog({ resourcesDir, siteDir }) {
 
 module.exports = {
   buildBlog,
+  readPosts,
   extractFrontmatter,
   parseFrontmatter,
   parseMarkdownFile,

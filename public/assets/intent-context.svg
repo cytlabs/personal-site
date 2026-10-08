@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420">
+  <rect width="720" height="420" fill="#233c36"/>
+  <circle cx="360" cy="218" r="148" fill="none" stroke="#648071" stroke-dasharray="3 7"/>
+  <text x="40" y="44" font-family="monospace" font-size="11" letter-spacing="3" fill="#b7cbbb">INTENT / PERSONAL CONTEXT</text>
+  <g stroke="#6a8977" stroke-width="1.5"><path d="M360 174V107M295 200L175 140M295 238L175 284M360 262V322M425 200L545 140M425 238L545 284"/></g>
+  <rect x="285" y="173" width="150" height="90" rx="12" fill="#dce6c6"/>
+  <g font-family="sans-serif" text-anchor="middle" fill="#29483a"><text x="360" y="210" font-size="20">Intent</text><text x="360" y="238" font-size="11">理解上下文 · 持续跟进</text></g>
+  <g fill="#34544a" stroke="#739381"><rect x="304" y="77" width="112" height="48" rx="8"/><rect x="72" y="114" width="135" height="54" rx="8"/><rect x="72" y="259" width="135" height="54" rx="8"/><rect x="304" y="315" width="112" height="48" rx="8"/><rect x="513" y="114" width="135" height="54" rx="8"/><rect x="513" y="259" width="135" height="54" rx="8"/></g>
+  <g font-family="sans-serif" font-size="14" text-anchor="middle" fill="#e0e8ce"><text x="360" y="106">目标</text><text x="139" y="147">原始记录</text><text x="139" y="292">内容与成果</text><text x="360" y="345">行动记录</text><text x="580" y="147">项目</text><text x="580" y="292">任务</text></g>
+  <text x="40" y="391" font-family="sans-serif" font-size="11" fill="#b7cbbb">目标与取舍由用户决定，AI 负责理解、执行和跟进。</text>
+</svg>

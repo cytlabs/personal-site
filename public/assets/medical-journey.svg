@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420">
+  <rect width="720" height="420" fill="#284a40"/>
+  <circle cx="620" cy="80" r="165" fill="#31564a"/>
+  <g fill="none" stroke="#688c7c" opacity=".35"><path d="M0 340H720M0 365H720M0 390H720M80 320V420M240 320V420M400 320V420M560 320V420"/></g>
+  <text x="40" y="44" font-family="monospace" font-size="11" letter-spacing="3" fill="#b7cbbb">99MEDPASS / CARE JOURNEY</text>
+  <rect x="44" y="97" width="235" height="226" rx="12" fill="#e6ecd8"/>
+  <rect x="64" y="119" width="32" height="32" rx="8" fill="#385f50"/>
+  <path d="M80 127V143M72 135H88" stroke="#e6ecd8" stroke-width="3"/>
+  <g font-family="sans-serif" fill="#284a40"><text x="110" y="140" font-size="15">一次就医，一份项目档案</text><text x="65" y="189" font-size="12">需求与资料</text><text x="65" y="227" font-size="12">医院评估与方案</text><text x="65" y="265" font-size="12">预约与到访安排</text><text x="65" y="303" font-size="12">报告与后续跟进</text></g>
+  <g stroke="#b3c3ab"><path d="M65 200H256M65 238H256M65 276H256"/></g>
+  <path d="M279 211H325M325 153V270M325 153H366M325 270H366" fill="none" stroke="#93aa8c" stroke-width="2"/>
+  <g fill="#385a4c" stroke="#739381"><rect x="366" y="105" width="138" height="96" rx="10"/><rect x="524" y="105" width="152" height="96" rx="10"/><rect x="366" y="222" width="138" height="96" rx="10"/><rect x="524" y="222" width="152" height="96" rx="10"/></g>
+  <g text-anchor="middle" font-family="sans-serif" fill="#e4ecd9"><text x="435" y="148" font-size="16">患者与家属</text><text x="600" y="148" font-size="16">医院</text><text x="435" y="265" font-size="16">平台</text><text x="600" y="265" font-size="16">配套团队</text></g>
+  <g text-anchor="middle" font-family="sans-serif" font-size="10" fill="#b1c5b2"><text x="435" y="176">提供资料 · 确认安排</text><text x="600" y="176">评估 · 预约 · 报告</text><text x="435" y="293">协调交接 · 处理变化</text><text x="600" y="293">承接服务 · 反馈进度</text></g>
+  <text x="40" y="380" font-family="sans-serif" font-size="11" fill="#b7cbbb">让跨方交接有依据，让服务进度看得见。</text>
+</svg>

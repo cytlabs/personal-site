@@ -1,5 +1,4 @@
 {
   "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "redirects": [{ "source": "/", "destination": "/blog/", "permanent": true }]
+  "outputDirectory": "dist"
 }
