@@ -29,10 +29,17 @@ async function content(dir) {
     url: `/blog/${p.slug}/`,
   }));
   const cases = JSON.parse(await fs.readFile(path.join(root, 'content/case-studies.json'), 'utf8'));
-  return cases.map((c, i) => ({ ...c, featured: i + 1, url: `/cases/${c.slug}/`,
+  return sortCases(cases).map((c, i) => ({ ...c, featured: i + 1, url: `/cases/${c.slug}/`,
     body: c.html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
     status: c.status || '项目复盘', kind: c.kind || '交付实践',
   }));
+}
+
+export function sortCases(cases) {
+  // A completed project's end month or the latest recorded stage determines recency.
+  // Stable sorting preserves editorial order within the same month; undated cases go last.
+  const month = c => c.period?.end || c.period?.start || '';
+  return cases.toSorted((a, b) => month(b).localeCompare(month(a)));
 }
 
 function layout({ title, description = site.description, route = '/', active = '', body, room = false, article = null }) {
