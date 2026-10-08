@@ -37,6 +37,10 @@
         10,
         11
       ]
+    },
+    "period": {
+      "start": "2026-09",
+      "basis": "record"
     }
   },
   {
@@ -72,6 +76,10 @@
       "pages": [
         13
       ]
+    },
+    "period": {
+      "start": "2026-09",
+      "basis": "record"
     }
   },
   {
@@ -100,7 +108,11 @@
         "title": "交付报告与后续跟进",
         "text": "医院提供报告，平台向患者交付并转接后续问题；当前为流程原型。"
       }
-    ]
+    ],
+    "period": {
+      "start": "2026-10",
+      "basis": "record"
+    }
   },
   {
     "slug": "vowscene",
@@ -128,7 +140,11 @@
         "title": "在门店展示与销售",
         "text": "用样片、物料与套餐方案承接增值销售，并验证成交和交付成本。"
       }
-    ]
+    ],
+    "period": {
+      "start": "2026-10",
+      "basis": "record"
+    }
   },
   {
     "slug": "intent",
@@ -156,6 +172,142 @@
         "title": "按变化主动跟进",
         "text": "设计中由事件触发判断，值得介入时联系用户，并跟进回应；尚未实现。"
       }
+    ],
+    "period": {
+      "start": "2026-10",
+      "basis": "record"
+    }
+  },
+  {
+    "slug": "keysafe-password-manager",
+    "title": "KeySafe：去中心化密码管理工具",
+    "category": "产品实践 · Web3",
+    "description": "以全栈开发角色探索 Web2 与 Web3 的融合，围绕主密码、多重加密和双因子保护设计密码管理体验。",
+    "cover": "keysafe-product",
+    "status": "产品开发实践",
+    "kind": "简历项目经历",
+    "period": {
+      "start": "2024-12",
+      "basis": "project",
+      "note": "简历标注为“2024.12—至今”，未提供结束月份；此处保留起始时间，不据此推定当前仍在开发。"
+    },
+    "html": "<figure class=\"project-figure\"><img src=\"/assets/keysafe-product.svg\" alt=\"围绕密码管理与保护机制，探索 Web2 与 Web3 的产品融合。\" width=\"720\" height=\"420\"><figcaption>围绕密码管理与保护机制，探索 Web2 与 Web3 的产品融合。</figcaption></figure><section><h2>产品方向</h2><p>KeySafe 是一个去中心化密码管理工具，尝试将 Web3 能力与 Web2 产品体验结合。项目关注的核心是主密码机制、多重加密策略与双因子保护，并通过产品界面提供友好的使用体验。</p></section><section><h2>我的角色与技术构成</h2><p>我在项目中担任全栈开发工程师。简历列出的技术栈包括 Next.js（React）、TypeScript、IPFS、MetaMask、PostgreSQL 和 Ant Design，覆盖前端界面、数据管理与 Web3 集成等方向。</p></section><section><h2>产品设计关注点</h2><ul><li>主密码机制：围绕用户的核心访问凭据组织密码管理。</li><li>多重加密策略：把密码保护纳入产品核心能力。</li><li>双因子保护：在单一凭据之外增加保护机制。</li><li>Web2 与 Web3 融合：同时关注去中心化技术与用户体验。</li></ul><p>技术亮点依据个人简历整理。</p></section><section><h2>项目记录</h2><p>简历提供了项目演示地址与文档链接，未列出量化成果或完整功能验收记录。此处以产品方向、全栈角色和技术构成为主要案例内容。</p></section><section><h2>查看项目</h2><p><a href=\"https://keysafe-gamma.vercel.app/\" target=\"_blank\" rel=\"noopener noreferrer\">项目演示地址 ↗</a> · <a href=\"https://me8jpusxd9.feishu.cn/docx/ImR5d4zHuoMQrExgX7bctPOmnuc\" target=\"_blank\" rel=\"noopener noreferrer\">项目文档 ↗</a></p></section>",
+    "steps": [
+      {
+        "title": "明确密码管理方向",
+        "text": "围绕去中心化密码管理，探索 Web2 与 Web3 的融合。"
+      },
+      {
+        "title": "组织全栈技术",
+        "text": "采用 Next.js、TypeScript、PostgreSQL 等技术，连接产品界面与数据管理。"
+      },
+      {
+        "title": "关注保护机制",
+        "text": "项目技术亮点包括主密码、多重加密策略与双因子保护。"
+      },
+      {
+        "title": "形成项目演示",
+        "text": "简历提供了演示和文档地址；未列出量化结果与安全审计结论。"
+      }
+    ]
+  },
+  {
+    "slug": "multi-cloud-management",
+    "title": "多云资源管理平台",
+    "category": "工程实践 · 运维开发",
+    "description": "主导 Vue 与 Django 平台架构，统一多云资源、监控告警、生命周期与成本分析，接入 15+ 客户环境。",
+    "cover": "multi-cloud",
+    "status": "平台开发与客户接入",
+    "kind": "简历项目经历",
+    "period": {
+      "start": "2024-06",
+      "end": "2024-11",
+      "basis": "project"
+    },
+    "html": "<figure class=\"project-figure\"><img src=\"/assets/multi-cloud.svg\" alt=\"用统一资源模型连接不同云环境，集中处理资源、告警与成本。\" width=\"720\" height=\"420\"><figcaption>用统一资源模型连接不同云环境，集中处理资源、告警与成本。</figcaption></figure><section><h2>业务背景</h2><p>公司承接多个客户的私有化部署项目，客户使用不同云服务提供商。资源管理分散在不同平台，监控和日常运维也随环境拆开，团队需要一个统一的多云管理入口。</p></section><section><h2>我负责的工作</h2><ul><li>主导平台整体架构设计，采用 Vue 与 Django 的前后端分离架构。</li><li>设计统一多云资源管理模型，支持火山云、阿里云等云平台。</li><li>实现资源监控和告警系统，提供跨云环境的统一监控。</li><li>开发资源生命周期管理、成本分析与告警自动处理等运维模块。</li></ul></section><section><h2>把分散资源组织成共同模型</h2><p>平台先解决不同云环境的资源如何统一表达，再连接监控、告警与操作。生命周期管理覆盖日常资源维护，成本分析使资源使用情况可见，告警自动处理减少重复运维动作。</p><p>前端负责统一查看和操作，后端承接资源模型与管理逻辑。交付既包含平台开发，也包含客户环境接入。</p></section><section><h2>项目结果</h2><ul><li>成功接入 15+ 客户环境，管理超过 100 台云主机。</li><li>多云环境运维效率提升 200%，资源管理从分散转向统一。</li><li>实现资源成本可视化，帮助客户平均节省 20% 成本。</li><li>自动化运维能力使日常运维工作量减少 60%。</li></ul><p>成果数据来源：个人简历。</p></section>",
+    "steps": [
+      {
+        "title": "统一资源模型",
+        "text": "设计跨云资源管理模型，连接火山云、阿里云等平台。"
+      },
+      {
+        "title": "建设管理入口",
+        "text": "以 Vue 与 Django 实现前后端分离的资源管理平台。"
+      },
+      {
+        "title": "连接运维能力",
+        "text": "统一监控告警，开发生命周期管理、成本分析与告警自动处理。"
+      },
+      {
+        "title": "接入客户环境",
+        "text": "平台接入 15+ 客户环境，集中管理超过 100 台云主机。"
+      }
+    ]
+  },
+  {
+    "slug": "enterprise-gitops-platform",
+    "title": "企业级 GitOps 发布平台建设",
+    "category": "工程实践 · DevOps",
+    "description": "使用 GitLab Runner、Kustomize 与 ArgoCD 建设多环境发布平台，把配置管理、变更审核和应用部署连接起来。",
+    "cover": "gitops-platform",
+    "status": "发布平台建设",
+    "kind": "简历项目经历",
+    "period": {
+      "start": "2022-03",
+      "end": "2022-05",
+      "basis": "project"
+    },
+    "html": "<figure class=\"project-figure\"><img src=\"/assets/gitops-platform.svg\" alt=\"以 Git 管理配置，通过流水线和同步机制完成多环境发布。\" width=\"720\" height=\"420\"><figcaption>以 Git 管理配置，通过流水线和同步机制完成多环境发布。</figcaption></figure><section><h2>业务背景</h2><p>公司向云原生架构转型后，原有发布方式无法满足 Kubernetes 环境的部署需求。项目需要统一多环境发布流程，提高发布效率和稳定性，并减少配置差异及人工操作错误。</p></section><section><h2>我负责的工作</h2><ul><li>设计并实现 GitOps 发布架构，以 Git 统一管理基础设施和应用配置版本。</li><li>搭建 GitLab Runner、Kustomize 与 ArgoCD 自动化发布平台，统一多环境发布流程。</li><li>制定最佳实践和规范文档，设计配置模板与变更审核流程。</li><li>指导开发及运维团队使用工具，推动发布方法在团队内落地。</li></ul></section><section><h2>让发布成为团队流程</h2><p>平台建设将配置模板、变更审核、自动发布和回滚连在一起。Git 保留配置版本，Kustomize 管理环境差异，GitLab Runner 与 ArgoCD 组成发布链路；规范文档与培训让团队能够持续使用这套方法。</p></section><section><h2>项目结果</h2><ul><li>平均应用发布时间从 30 分钟缩短到 5 分钟，发布成功率提升至 99.9%。</li><li>通过统一配置管理与版本控制，配置错误降低 80%。</li><li>代码从提交到部署的周期缩短 70%。</li><li>自动发布与回滚减少了人工操作错误。</li></ul><p>成果数据来源：个人简历。</p></section><section><h2>相关方案说明</h2><p>网站同时保留 <a href=\"/cases/release-control/\">GitOps 发布控制台</a> 案例，用于解释配置事实源、发布审计与回滚的设计思路。本页记录简历项目的实施职责和结果。</p></section>",
+    "steps": [
+      {
+        "title": "配置纳入 Git",
+        "text": "统一管理基础设施与应用配置，保留变更版本。"
+      },
+      {
+        "title": "建立多环境模板",
+        "text": "用 Kustomize 整理环境差异，制定配置模板和审核规范。"
+      },
+      {
+        "title": "连接自动发布",
+        "text": "搭建 GitLab Runner 与 ArgoCD 发布链路，统一多环境流程。"
+      },
+      {
+        "title": "推动团队使用",
+        "text": "通过规范文档与培训，让开发及运维团队持续使用发布平台。"
+      }
+    ]
+  },
+  {
+    "slug": "kubernetes-platform",
+    "title": "企业级容器平台建设与应用迁移",
+    "category": "工程实践 · 云原生",
+    "description": "建设生产级 Kubernetes 平台、镜像流水线与统一可观测体系，推动 50+ 应用从虚拟机部署走向标准化容器部署。",
+    "cover": "container-platform",
+    "status": "平台建设与应用迁移",
+    "kind": "简历项目经历",
+    "period": {
+      "start": "2021-12",
+      "end": "2022-03",
+      "basis": "project"
+    },
+    "html": "<figure class=\"project-figure\"><img src=\"/assets/container-platform.svg\" alt=\"统一容器平台、镜像规范与可观测体系，支撑应用迁移。\" width=\"720\" height=\"420\"><figcaption>统一容器平台、镜像规范与可观测体系，支撑应用迁移。</figcaption></figure><section><h2>业务背景</h2><p>随着业务规模扩大，传统虚拟机部署带来资源利用率低、环境一致性差和运维成本高的问题。项目需要建立统一的容器平台，让应用部署拥有一致的基础环境，也让资源和运行状态能够统一管理。</p></section><section><h2>我负责的工作</h2><ul><li>设计并部署生产级 Kubernetes 集群，包含多可用区高可用架构与网络方案选型。</li><li>构建容器镜像流水线，规范基础镜像制作与应用容器化流程。</li><li>基于 ELK 和 Prometheus 建设统一的日志采集、监控与告警体系。</li><li>制定应用容器化改造规范，指导开发团队完成 50+ 应用的容器化改造。</li></ul></section><section><h2>从基础平台到应用迁移</h2><p>交付同时覆盖集群、镜像、可观测性与团队规范。集群提供统一运行环境，镜像规范减少环境差异，日志与监控帮助定位运行问题，改造规范则用于推进开发团队的应用迁移。</p><p>这段经历的关键是让平台真正承接已有业务：平台建设和应用迁移一起推进，开发与运维围绕共同规范协作。</p></section><section><h2>项目结果</h2><ul><li>资源利用率提升 40%，降低基础设施成本。</li><li>应用部署效率提升 300%，部署用时从小时级缩短到分钟级。</li><li>建立统一监控告警体系，故障平均响应时间缩短 50%。</li></ul><p>成果数据来源：个人简历。</p></section>",
+    "steps": [
+      {
+        "title": "建设运行平台",
+        "text": "设计并部署生产级 Kubernetes 集群，完成高可用与网络方案选型。"
+      },
+      {
+        "title": "规范应用镜像",
+        "text": "建设镜像流水线，规范基础镜像制作与容器化流程。"
+      },
+      {
+        "title": "连接日志与监控",
+        "text": "基于 ELK 与 Prometheus 建设统一日志、监控及告警体系。"
+      },
+      {
+        "title": "推进应用迁移",
+        "text": "制定改造规范并指导开发团队，完成 50+ 应用的容器化改造。"
+      }
     ]
   },
   {
@@ -182,7 +334,10 @@
         "title": "结果与复盘",
         "text": "第一版只覆盖“Brief 输入到项目启动摘要”这一段，不碰合同、付款和完整 CRM。这个取舍让 Demo 可以在一周内被业务人员试用，也暴露出最关键的问题：AI 不是替代负责人，而是先减少漏字段、重复整理和无效追问。"
       }
-    ]
+    ],
+    "period": {
+      "basis": "unknown"
+    }
   },
   {
     "slug": "support-copilot",
@@ -208,7 +363,10 @@
         "title": "结果与复盘",
         "text": "这类工具的核心不是一次回答正确，而是减少一线从“模糊问题”到“下一步动作”的时间。验收指标应该放在首响准备时间、重复问答次数、升级质量和 SOP 更新频率上。"
       }
-    ]
+    ],
+    "period": {
+      "basis": "unknown"
+    }
   },
   {
     "slug": "release-control",
@@ -234,7 +392,10 @@
         "title": "结果与复盘",
         "text": "GitOps 的价值不是“自动发布”四个字，而是让发布变成可讨论的流程资产。对于 AI 工具交付，这段经验也很关键：Demo 最终要进入团队流程，就必须有版本、回滚、监控和责任边界。"
       }
-    ]
+    ],
+    "period": {
+      "basis": "unknown"
+    }
   },
   {
     "slug": "reconciliation-assistant",
@@ -260,6 +421,9 @@
         "title": "结果与复盘",
         "text": "这类场景非常适合 AI 参与“解释”和“整理”，但不适合让 AI 直接做财务判断。第一版的价值应该是减少查漏项时间，而不是承诺完全自动对账。"
       }
-    ]
+    ],
+    "period": {
+      "basis": "unknown"
+    }
   }
 ]

@@ -200,3 +200,5 @@
 
 .project-figure{margin:0 0 32px}.project-figure img{display:block;width:100%;height:auto}.project-figure figcaption{font-size:12px;line-height:1.8;color:var(--muted);margin-top:12px}
 .article-kicker{flex-wrap:wrap}
+
+.case-period{display:block;color:var(--muted);font-size:11px;line-height:1.8;margin-top:10px;font-variant-numeric:tabular-nums}.article-header .case-period{font-size:13px;margin-top:20px}.article-header>p.case-time-note{font-size:12px;line-height:1.8;margin-top:8px;color:var(--muted)}
