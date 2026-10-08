@@ -31,7 +31,7 @@ async function content(dir) {
   const cases = JSON.parse(await fs.readFile(path.join(root, 'content/case-studies.json'), 'utf8'));
   return cases.map((c, i) => ({ ...c, featured: i + 1, url: `/cases/${c.slug}/`,
     body: c.html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
-    status: '项目复盘', kind: '交付实践',
+    status: c.status || '项目复盘', kind: c.kind || '交付实践',
   }));
 }
 
@@ -92,7 +92,7 @@ export function renderMarkdown(body, title = '') {
 
 function detail(p, list, type) {
   const blog = type==='blog';
-  const {html,toc} = p.html ? withToc(p.html.replace(/<h2>[\s\S]*?<\/h2>/, '')) : renderMarkdown(p.body, p.title);
+  const {html,toc} = p.html ? withToc(p.html.replace(/<h2>([\s\S]*?)<\/h2>/, (all, heading) => plainText(heading).trim() === p.title.trim() ? '' : all)) : renderMarkdown(p.body, p.title);
   const related = list.find(item => item.slug !== p.slug);
   return layout({title:p.title,description:p.description,route:p.url,active:blog?'/blog/':'/cases/',article:blog?p:null,body:`<div class="reading-progress" aria-hidden="true"></div><div class="page-shell detail-shell"><a class="back-link" href="${u(`/${type}/`)}">← ${blog?'全部文章':'全部案例'}</a><header class="article-header"><div class="article-kicker"><span>${esc(p.category)}</span>${p.date ? `<span> / </span><time datetime="${p.date}">${formatDate(p.date)}</time><span> / </span><span>约 ${p.minutes} 分钟</span>` : ''}</div><h1>${esc(p.title)}</h1><p>${esc(p.description)}</p></header><div class="article-layout"><article class="prose">${html}${html.includes('class="mermaid"') ? `<script type="module" src="${u('/assets/diagrams.js')}"></script>` : ''}<div class="article-end"><span>—</span><p>谢谢你读到这里。</p></div>${related?`<a class="next-article" href="${u(related.url)}"><small>${blog?'再读一篇':'另一个案例'}</small><strong>${esc(related.title)} <span aria-hidden="true">→</span></strong></a>`:''}</article><aside class="toc"><p>这一页里</p><nav aria-label="文章目录">${toc.map(t=>`<a href="#${t.id}">${t.text}</a>`).join('')}</nav><a class="toc-about" href="${u('/about/')}">${mark}<span>夏目<br><small>写下来，也做出来。</small></span></a></aside></div></div>`});
 }

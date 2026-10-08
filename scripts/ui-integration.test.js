@@ -12,6 +12,7 @@ let buildModule;
 const html = route => fs.readFileSync(path.join(output, route, 'index.html'), 'utf8');
 const documentAt = route => new JSDOM(html(route)).window.document;
 const clean = text => text.replace(/\s+/g, ' ').trim();
+const cases = JSON.parse(fs.readFileSync(path.join(root, 'content/case-studies.json')));
 const posts = readPosts(path.join(root, 'posts'));
 
 before(async () => {
@@ -139,7 +140,7 @@ test('room uses published content and all five experiences work without WebGL', 
   const errors=[]; window.addEventListener('error',event=>errors.push(event.error));
   const data = JSON.parse(doc.querySelector('#room-content').textContent);
   assert.equal(data.zones[0].links.length,posts.length);
-  assert.equal(data.zones[1].links.length,4);
+  assert.equal(data.zones[1].links.length,cases.length);
   assert.equal(data.journal[0].title,posts[0].title);
   assert.ok(data.journal[0].url.startsWith('/blog/'));
   window.eval(fs.readFileSync(path.join(root,'src/room-experiences.js'),'utf8').replace('export function','function'));
@@ -152,7 +153,8 @@ test('room uses published content and all five experiences work without WebGL', 
       assert.match(doc.querySelector('.experience-link').href,new RegExp(posts.at(-1).slug));
     }
     if(zone==='desk') {
-      doc.querySelector('[data-action="project"][data-index="3"]').click();
+      const reconciliation=data.zones[1].links.findIndex(p=>p.url==='/cases/reconciliation-assistant/');
+      doc.querySelector(`[data-action="project"][data-index="${reconciliation}"]`).click();
       doc.querySelector('[data-tab="sketch"]').click();
       doc.querySelector('[data-action="flow"]').click();
       assert.ok(doc.querySelector('.flow-feedback').textContent.includes('规则引擎'));

@@ -43,6 +43,8 @@ python3 -m http.server 4173 --directory dist
 - 3D 房间的书架、电脑和手记使用真实文章、案例与摘录；WebGL 不可用时仍能通过按钮浏览内容。房间脚本只在 `/explore/` 加载。
 - 保留原 Markdown 公开内容过滤、表格、代码块、Mermaid、BlogPosting、canonical 和 sitemap，增加 `/feed.xml`。Mermaid 沿用原站 CDN，加载失败显示原文。
 
+新增案例来自 `cytlabs/enterprise-ai-practice` 的 `543b75b31218cbc0309b335863931b51ea7f886b`：猎头招聘交付与达人营销交付。两篇案例进入首页精选、案例列表、详情与房间工作台；正文附原始材料链接，保留阶段说明和效果数据口径，原有四个案例继续保留。
+
 维护位置：`site.config.mjs`（首页介绍）、`src/styles.css`（样式）、`src/main.js`（搜索及主题按钮）、`src/room*.js`（房间）、`content/room.json`（房间便签）。`npm run build:blog` 是兼容旧发布工具的生成步骤；完整预览与部署使用 `npm run build`。
 
 使用 Node.js 22 或更新版本：
