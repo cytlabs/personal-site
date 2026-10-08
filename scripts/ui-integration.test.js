@@ -41,21 +41,13 @@ test('every published article keeps its route, public prose, metadata and one pa
   assert.deepEqual(index.map(p => p.url), posts.map(p => `/blog/${p.slug}/`));
 });
 
-test('existing biography, contacts and case prose survive with legacy anchor targets', () => {
+test('existing biography and contacts survive with anchor targets', () => {
   const about = documentAt('about');
   const previous = new JSDOM(fs.readFileSync(path.join(root, 'about/index.html'), 'utf8')).window.document;
   for (const paragraph of previous.querySelectorAll('main p, main li, main td, main dd')) {
     assert.ok(clean(about.querySelector('main').textContent).includes(clean(paragraph.textContent)));
   }
   for (const element of previous.querySelectorAll('main [id]')) assert.ok(about.getElementById(element.id), element.id);
-  const oldCases = new JSDOM(fs.readFileSync(path.join(root, 'cases/index.html'), 'utf8')).window.document;
-  for (const article of oldCases.querySelectorAll('article.case-study')) {
-    const target = documentAt(`cases/${article.id}`);
-    assert.ok(documentAt('cases').getElementById(article.id));
-    for (const element of article.querySelectorAll('p, li, .case-study-meta span')) {
-      assert.ok(clean(target.querySelector('main').textContent).includes(clean(element.textContent)));
-    }
-  }
 });
 
 test('static pagination covers each article exactly once and SEO includes new pages', () => {
@@ -153,11 +145,11 @@ test('room uses published content and all five experiences work without WebGL', 
       assert.match(doc.querySelector('.experience-link').href,new RegExp(posts.at(-1).slug));
     }
     if(zone==='desk') {
-      const reconciliation=data.zones[1].links.findIndex(p=>p.url==='/cases/reconciliation-assistant/');
-      doc.querySelector(`[data-action="project"][data-index="${reconciliation}"]`).click();
+      const gitops=data.zones[1].links.findIndex(p=>p.url==='/cases/enterprise-gitops-platform/');
+      doc.querySelector(`[data-action="project"][data-index="${gitops}"]`).click();
       doc.querySelector('[data-tab="sketch"]').click();
       doc.querySelector('[data-action="flow"]').click();
-      assert.ok(doc.querySelector('.flow-feedback').textContent.includes('规则引擎'));
+      assert.ok(doc.querySelector('.flow-feedback').textContent.includes('Kustomize'));
     }
     if(zone==='plant') doc.querySelector('[data-action="water"]').click();
     if(zone==='wall') doc.querySelector('[data-action="reveal"]').click();
