@@ -29,7 +29,7 @@ async function content(dir) {
     url: `/blog/${p.slug}/`,
   }));
   const cases = JSON.parse(await fs.readFile(path.join(root, 'content/case-studies.json'), 'utf8'));
-  return sortCases(cases).map((c, i) => ({ ...c, featured: i + 1, url: `/cases/${c.slug}/`,
+  return sortCases(cases).map(c => ({ ...c, url: `/cases/${c.slug}/`,
     body: c.html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
     status: c.status || '项目复盘', kind: c.kind || '交付实践',
   }));
@@ -40,6 +40,17 @@ export function sortCases(cases) {
   // Stable sorting preserves editorial order within the same month; undated cases go last.
   const month = c => c.period?.end || c.period?.start || '';
   return cases.toSorted((a, b) => month(b).localeCompare(month(a)));
+}
+
+export function selectFeaturedCases(cases, slugs = site.featuredCaseSlugs) {
+  if (!Array.isArray(slugs) || slugs.length !== 2 || new Set(slugs).size !== 2) {
+    throw new Error('featuredCaseSlugs must contain exactly two distinct case slugs');
+  }
+  return slugs.map(slug => {
+    const item = cases.find(c => c.slug === slug);
+    if (!item) throw new Error(`Unknown featured case slug: ${slug}`);
+    return item;
+  });
 }
 
 function layout({ title, description = site.description, route = '/', active = '', body, room = false, article = null }) {
@@ -68,7 +79,7 @@ function caseCard(c) {
 
 function home(posts, cases) {
   const selected = posts.filter(p => p.featured).sort((a, b) => a.featured - b.featured).slice(0, 3);
-  const projects = cases.filter(c => c.featured).sort((a, b) => a.featured - b.featured).slice(0, 2);
+  const projects = selectFeaturedCases(cases);
   const recent = posts.slice(0, 4).map(p => ({...p, type:'文章'}));
   return layout({active:'/',body:`<div class="page-shell"><section class="home-intro"><div><p class="eyebrow"><span class="status-dot"></span> 一个持续更新的个人角落</p><h1>${site.intro.split('\n').map(esc).join('<br>')}</h1><p class="intro-copy">${esc(site.bio)}</p><a class="text-link" href="${u('/about/')}">多了解我一点 ${internalArrow}</a></div><a class="room-invitation" href="${u('/explore/')}"><span class="invitation-label">A LITTLE DETOUR <span>↗</span></span>${roomIcon}<div><span class="room-invitation-title">来我的房间逛逛</span><p>换一种方式，认识这里的主人。</p></div><span class="invitation-tag">3D 探索 · 随意看看</span></a></section><div class="now-line"><span class="now-label">此刻</span><p>${esc(site.now)}</p><span class="now-decoration" aria-hidden="true">↳</span></div><section class="home-section">${heading('01','一些思考','/blog/','全部文章')}<div class="post-list">${selected.map((p,i) => postRow(p,i)).join('')}</div></section><section class="home-section">${heading('02','动手做过的事','/cases/','查看更多')}<div class="case-grid">${projects.map(caseCard).join('')}</div></section><section class="home-section updates-section">${heading('03','最近更新')}<div class="update-list">${recent.map(p => `<a href="${u(p.url)}"><time datetime="${p.date}">${formatDate(p.date)}</time><span class="update-type">${p.type}</span><span>${esc(p.title)}</span><span aria-hidden="true">↗</span></a>`).join('')}</div></section><section class="closing-note"><span aria-hidden="true">✳</span><p>想法还会变，故事还在继续。<br><small>谢谢你来这里坐一会儿。</small></p><a href="${u('/about/')}#contact">打个招呼 ${arrow}</a></section></div>`});
 }
