@@ -33,14 +33,11 @@ test('case details contain accessible illustrations backed by published assets',
   }
 });
 
-test('case recency orders the listing, two home cards and room workbench consistently', () => {
+test('case recency orders the full listing and room workbench independently of homepage selection', () => {
   const expected = ['99medpass', 'vowscene', 'intent', 'recruitment-delivery',
     'creator-marketing-delivery', 'keysafe-password-manager', 'multi-cloud-management',
     'enterprise-gitops-platform', 'kubernetes-platform'];
   assert.deepEqual([...documentAt('cases').querySelectorAll('.case-card')].map(c => c.id), expected);
-  const home = documentAt('');
-  assert.deepEqual([...home.querySelectorAll('.case-card')].map(c => c.id), expected.slice(0, 2));
-  assert.ok([...home.querySelectorAll('a[href="/cases/"]')].some(a => a.textContent.includes('查看更多')));
   const room = JSON.parse(documentAt('explore').querySelector('#room-content').textContent);
   assert.deepEqual(room.zones[1].links.map(c => c.url), expected.map(slug => `/cases/${slug}/`));
   const input = [{slug:'undated'}, {slug:'older', period:{start:'2023-01'}},
@@ -48,6 +45,36 @@ test('case recency orders the listing, two home cards and room workbench consist
     {slug:'same-month', period:{start:'2024-05', basis:'record'}}];
   assert.deepEqual(buildModule.sortCases(input).map(c => c.slug), ['completed', 'same-month', 'older', 'undated']);
   assert.equal(input[0].slug, 'undated');
+});
+
+test('homepage shows exactly two configured cases in order with original metadata and working detail links', async () => {
+  const { default: site } = await import('../site.config.mjs');
+  const home = documentAt('');
+  const cards = [...home.querySelectorAll('.case-card')];
+  assert.equal(cards.length, 2);
+  assert.deepEqual(cards.map(c => c.id), site.featuredCaseSlugs);
+  for (const card of cards) {
+    const item = cases.find(c => c.slug === card.id);
+    assert.equal(card.querySelector('h3').textContent, item.title);
+    assert.equal(card.querySelector('p').textContent, item.description);
+    assert.equal(card.querySelector('.case-meta span:last-child').textContent, item.status);
+    assert.equal(card.querySelector('a').getAttribute('href'), `/cases/${item.slug}/`);
+    assert.equal(documentAt(`cases/${item.slug}`).querySelector('h1').textContent, item.title);
+  }
+  assert.ok([...home.querySelectorAll('a[href="/cases/"]')].some(a => a.textContent.includes('查看更多')));
+});
+
+test('featured selection follows explicit configuration regardless of dates and rejects invalid configuration', () => {
+  const slugs = ['enterprise-gitops-platform', 'recruitment-delivery'];
+  const input = buildModule.sortCases(cases);
+  const originalOrder = input.map(c => c.slug);
+  assert.deepEqual(buildModule.selectFeaturedCases(input, slugs).map(c => c.slug), slugs);
+  assert.deepEqual(buildModule.selectFeaturedCases(input.toReversed(), slugs.toReversed()).map(c => c.slug), slugs.toReversed());
+  assert.deepEqual(input.map(c => c.slug), originalOrder);
+  for (const invalid of [null, [], [slugs[0]], [...slugs, 'intent'], [slugs[0], slugs[0]]]) {
+    assert.throws(() => buildModule.selectFeaturedCases(input, invalid), /exactly two distinct/);
+  }
+  assert.throws(() => buildModule.selectFeaturedCases(input, [slugs[0], 'missing-case']), /Unknown featured case slug: missing-case/);
 });
 
 test('every published article keeps its route, public prose, metadata and one page heading', () => {
