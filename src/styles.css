@@ -200,3 +200,8 @@
 .article-kicker{flex-wrap:wrap}
 
 .case-period{display:block;color:var(--muted);font-size:0.8125rem;line-height:1.8;margin-top:10px;font-variant-numeric:tabular-nums}.article-header .case-period{font-size:0.875rem;margin-top:20px}.article-header>p.case-time-note{font-size:0.875rem;line-height:1.8;margin-top:8px;color:var(--muted)}
+
+/* Keep the complete about sidebar in view, like the article table of contents. */
+@media(min-width:621px){
+ .about-aside{position:sticky;top:45px;align-self:start;max-height:calc(100vh - 90px);max-height:calc(100dvh - 90px);overflow-y:auto;scrollbar-width:thin}
+}
