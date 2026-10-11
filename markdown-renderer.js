@@ -33,14 +33,17 @@
     const text = publicMarkdownText(value);
     let linked = "";
     let lastIndex = 0;
-    const linkPattern = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)|(https?:\/\/[^\s<)\]]+)/g;
+    // Keep local destinations explicit; do not turn arbitrary schemes or
+    // protocol-relative URLs into links when adding support for site paths.
+    const linkPattern = /\[([^\]]+)\]\((https?:\/\/[^\s)]+|\/(?![\/\\])[^\s)\\]*|\.{1,2}\/[^\s)\\]*|#[^\s)\\]*)\)|(https?:\/\/[^\s<)\]]+)/g;
     const formatText = (content) =>
       escapeHtml(content).replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
 
     text.replace(linkPattern, (match, label, markdownUrl, bareUrl, index) => {
       const url = markdownUrl || bareUrl;
       linked += formatText(text.slice(lastIndex, index));
-      linked += `<a href="${escapeAttribute(url)}" target="_blank" rel="noreferrer">${label ? formatText(label) : escapeHtml(url)}</a>`;
+      const externalAttributes = /^https?:\/\//.test(url) ? ' target="_blank" rel="noreferrer"' : '';
+      linked += `<a href="${escapeAttribute(url)}"${externalAttributes}>${label ? formatText(label) : escapeHtml(url)}</a>`;
       lastIndex = index + match.length;
       return match;
     });

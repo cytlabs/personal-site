@@ -100,6 +100,7 @@ personal-site/
 - 新 UI 的唯一构建入口是 `scripts/build.mjs`，模板读取 `posts/*.md`、`content/about.html` 和 `content/case-studies.json`。
 - 根目录旧 HTML、`blog/` 及旧样式保留用于内容对照与兼容；部署和本地预览均使用 `dist/`，不要直接预览仓库根目录。
 - `markdown-renderer.js` 是前端和构建脚本共享的 Markdown 渲染器，避免两套渲染规则不一致。
+- Markdown 链接支持 `/blog/.../`、`./`、`../` 和 `#章节` 等站内地址，在当前标签页打开；HTTP(S) 外链沿用新标签页打开。其他协议不会转换为可点击链接。
 
 博客列表每页显示 6 篇，按发布日期倒序排列。第一页位于 `/blog/`，后续页位于 `/blog/page/2/` 等地址；分页在构建时生成，无需 JavaScript 即可翻页。每页篇数在 `scripts/blog-pagination.js` 的 `BLOG_PAGE_SIZE` 中调整，完整构建会为分页生成独立 canonical 和 sitemap 条目。
 
