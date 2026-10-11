@@ -66,6 +66,8 @@ npm run dev
 
 ## 文件结构
 
+个人工作环境的持续搭建记录见 [云工作环境维护手册](docs/operations/cloud-workspace.md)，配套[博客源稿](posts/cloud-workspace-from-phone.md)。记录已完成的服务器与无影隧道配置、实际故障、检查与回退方法，以及尚未执行的迁移和手机使用验收。源稿暂设 `publish: false`，不会进入站点列表；文档不包含真实地址、公钥或凭据。
+
 ```text
 personal-site/
   index.html
