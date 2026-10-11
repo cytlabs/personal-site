@@ -196,7 +196,7 @@ test('room uses published content and all five experiences work without WebGL', 
     doc.querySelector(`[data-zone="${zone}"]`).click();
     assert.equal(doc.querySelector('#room-panel').hidden,false);
     if(zone==='books') {
-      doc.querySelector('[data-action="book"][data-index="16"]').click();
+      doc.querySelector(`[data-action="book"][data-index="${posts.length - 1}"]`).click();
       assert.match(doc.querySelector('.experience-link').href,new RegExp(posts.at(-1).slug));
     }
     if(zone==='desk') {
