@@ -22,6 +22,17 @@ before(async () => {
 });
 after(() => fs.rmSync(output, { recursive: true, force: true }));
 
+test('phone workspace article renders its related article as a navigable link', () => {
+  const doc = documentAt('blog/cloud-workspace-from-phone');
+  const destination = '/blog/outsource-capabilities-own-context/';
+  const link = doc.querySelector(`.prose a[href="${destination}"]`);
+  assert.ok(link, 'related article must be an anchor, not literal Markdown');
+  assert.equal(link.textContent, '《能力可以外包，AI 的上下文不行》');
+  assert.equal(link.hasAttribute('target'), false);
+  assert.ok(fs.existsSync(path.join(output, destination, 'index.html')));
+  assert.ok(!doc.querySelector('.prose').textContent.includes(`](${destination})`));
+});
+
 test('case details contain accessible illustrations backed by published assets', () => {
   for (const item of cases) {
     const doc = documentAt(`cases/${item.slug}`);
