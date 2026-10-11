@@ -66,7 +66,7 @@ npm run dev
 
 ## 文件结构
 
-个人工作环境见 [架构与部署清单](docs/operations/cloud-workspace.md)，记录各台机器的服务、作用、关键配置与数据位置，以及当前连接和待迁移关系；该跨项目清单暂存于此，长期适合迁入私有基础设施仓库。[博客源稿](posts/cloud-workspace-from-phone.md)介绍整体工作方式，暂设 `publish: false`。清单随部署变化更新，不记录逐步操作流水账或凭据内容。
+个人工作环境的当前架构清单维护在 OpenViking 用户资源 `viking://~/resources/work-environment/architecture.md`；仓库中的 [架构与部署清单](docs/operations/cloud-workspace.md) 是注明日期的脱敏快照，记录服务、作用、配置与数据位置、连接及待迁移关系。[维护 Skill 副本](skills/maintain-work-environment/SKILL.md) 已安装到 OpenViking 当前用户的同名 Skill 中，用于查询和按已确认变化更新清单，不包含巡检或自动部署。客户端须接入同一用户并支持技能发现；微信端自动触发尚未验收。导出快照时同步更新日期，不独立维护第二份当前状态。[博客源稿](posts/cloud-workspace-from-phone.md) 介绍整体工作方式，暂设 `publish: false`。
 
 ```text
 personal-site/

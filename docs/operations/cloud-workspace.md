@@ -1,8 +1,10 @@
 # 个人工作环境：架构与部署清单
 
-更新：2026-10-11。用途：快速找到“服务在哪、负责什么、配置和数据在哪”，供日常维护及后续迁移使用。
+快照导出：2026-10-11；源清单更新：2026-10-11。用途：快速找到“服务在哪、负责什么、配置和数据在哪”，供离线参考及后续迁移使用。
 
-这份清单记录当前状态；[博客草稿](../../posts/cloud-workspace-from-phone.md)介绍工作方式。本文暂存 personal-site，长期适合迁到独立的私有基础设施仓库，统一维护跨项目部署。真实地址和凭据留在私有清单或原配置中，这里只记录位置。
+当前维护版是 OpenViking 用户资源 `viking://~/resources/work-environment/architecture.md`；本文为其脱敏快照，不独立维护第二份当前状态。初始资料来自 2026-10-11 的部署核对和用户提供的信息，计划与实际部署分开记录。配置只记录位置，不包含密码、Token、私钥或原始配置内容。
+
+查询和按已确认变化更新清单使用 `viking://~/skills/maintain-work-environment/SKILL.md`，仓库留有 [Skill 副本](../../skills/maintain-work-environment/SKILL.md)。先更新 OpenViking，再按需要导出快照并更新日期；[博客草稿](../../posts/cloud-workspace-from-phone.md)记录阶段性的工作方式。2026-10-11 已验证资源与 Skill 的检索和读取，以及清单定点编辑、回读；微信端自动触发尚未验收。不包含服务器巡检或定时监控。
 
 ## 机器与托管平台
 
@@ -110,7 +112,8 @@ OpenClaw 的 Codex 登录与 OpenViking 的登录是两份独立凭据。服务�
 | Intent 代码与产品部署说明 | `cytlabs/intent`；当前开发端 `/root/code/intent`；产品运行说明在该仓库 `docs/operations/` |
 | personal-site 网站和博客 | `cytlabs/personal-site`；当前开发端已有 `/root/code/personal-site` 副本，独立任务可能使用其他工作副本 |
 | 博客源稿 | personal-site 的 `posts/cloud-workspace-from-phone.md`，目前为草稿 |
-| 本架构清单 | personal-site 的 `docs/operations/cloud-workspace.md`，暂存于此 |
+| 本架构清单 | OpenViking 用户资源 `viking://~/resources/work-environment/architecture.md`；仓库文件是脱敏快照 |
+| 架构维护 Skill | `viking://~/skills/maintain-work-environment/SKILL.md`；2026-10-11 已安装并验证检索、读取。客户端需接入同一用户并支持技能发现；微信端自动触发尚未验收 |
 | OpenClaw 使用的项目 Skill | 原服务器 `/srv/openclaw/personal/skills/`；Intent 对应 Skill 随产品部署同步 |
 
 GitHub 保存可版本化的代码与文档；服务器数据库、OAuth、微信登录和 API key 单独保存，不能把代码仓库当成完整环境备份。
@@ -121,6 +124,6 @@ GitHub 保存可版本化的代码与文档；服务器数据库、OAuth、微�
 
 迁移时重点核对五项：**代码版本、持久数据、配置与凭据、外部依赖、后台服务和定时器**。微信消费者只保留一个正式实例；向量索引与向量模型保持匹配；新机接受写入后不能直接退回旧数据。
 
-以后每次迁移或新增服务，直接更新本文对应的机器、服务、路径和连接关系。只有验证过的部署才写进“当前”；计划位置保留待迁移标记，不再积累终端输出和操作流水账。
+以后每次迁移或新增服务，更新 OpenViking 清单对应的机器、服务、路径和连接关系，再按需要导出本文。只有验证过的部署才写进“当前”；计划位置保留待迁移标记，不再积累终端输出和操作流水账。
 
 手机使用方面：ChatGPT Linux 预览版支持这台无影的系统，但官方 Remote 文档列出的桌面主机仍是 Mac/Windows。手机直连这台 Linux 的 Codex 尚不能当成已支持；无影客户端访问桌面是独立入口。来源：[Linux 桌面端](https://learn.chatgpt.com/docs/linux/linux-app)、[Remote 连接](https://learn.chatgpt.com/docs/remote-connections)。
