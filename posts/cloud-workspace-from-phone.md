@@ -11,7 +11,7 @@ tags: [云工作环境, 无影云电脑, Codex, OpenClaw, OpenViking, 个人实�
 
 现在我有一台带公网 IP 的服务器，又买了一台 8 核、16 GB 内存的无影云电脑。云电脑运行 Ubuntu 24.04，没有公网 IP，我打算让它长期在线，逐渐成为日常工作环境。
 
-这套环境仍在搭建中。以下是 **2026 年 10 月 11 日**的架构记录，服务迁移尚未完成。
+这套环境仍在搭建中。以下是 **2026 年 10 月 11 日**的架构记录，助手、共享记忆和任务服务已迁入无影，日常桌面工具仍在继续配置。
 
 ## 手机是入口，云端负责执行和保存
 
@@ -29,39 +29,40 @@ tags: [云工作环境, 无影云电脑, Codex, OpenClaw, OpenViking, 个人实�
 
 | 位置 | 当前承担的工作 | 后续安排 |
 | --- | --- | --- |
-| 公网服务器 | Nginx、OpenClaw、Codex、OpenViking、Intent 及配套服务 | 保留公网 HTTPS 入口，逐项迁出部分后端 |
-| 无影云电脑 | 已确认系统与资源，已连接反向 SSH 隧道 | 安装桌面和开发工具，承接经过验证后迁入的服务 |
+| 公网服务器 | Nginx、公网 HTTPS、反向隧道接入和应用转发；另有其他项目数据库 | 继续提供固定访问入口 |
+| 无影云电脑 | OpenClaw、Codex、OpenViking、Intent、本机出站代理、后台反向 SSH 隧道 | 继续安装桌面和日常开发工具 |
 | GitHub / Vercel | 代码与文章版本管理 / 个人网站托管 | 继续沿用；个人网站没有部署在上述两台机器上 |
 
 公网服务器提供一个稳定的访问地址。无影提供更大的内存和完整桌面，适合承载日常开发环境。这样，换一台手机或临时借用电脑时，我仍然可以回到同一套工作资料和工具。
 
-无影没有公网 IP，所以由它主动向原服务器建立 SSH 反向隧道。后续原服务器收到网页请求，可以通过这条加密连接转发到无影。转发入口只监听服务器本机，公网访问继续经过 HTTPS 和业务鉴权。[OpenSSH 说明](https://man.openbsd.org/ssh#R)
+无影没有公网 IP，所以由它主动向原服务器建立 SSH 反向隧道。原服务器收到网页和共享记忆接口请求后，已经可以通过这条加密连接转发到无影。转发入口只监听服务器本机，公网访问继续经过 HTTPS 和业务鉴权。[OpenSSH 说明](https://man.openbsd.org/ssh#R)
 
 ## 工作环境里的几个核心服务
 
 | 服务 | 作用 | 当前部署位置 |
 | --- | --- | --- |
-| OpenClaw | 微信助手的运行宿主，组织模型、工具和会话 | 公网服务器 |
-| Codex | 执行开发和其他已授权工作 | 公网服务器的 OpenClaw 使用原生 Codex；当前开发端也有独立环境 |
-| OpenViking | 保存和检索共享记忆、知识资料与 Skill | 公网服务器 |
-| Intent | 管理原始输入、目标、项目、任务、资料和实际行动 | 公网服务器 |
+| OpenClaw | 微信助手的运行宿主，组织模型、工具和会话 | 无影云电脑 |
+| Codex | 执行开发和其他已授权工作 | 无影上的 OpenClaw 使用原生 Codex；当前开发端也有独立环境 |
+| OpenViking | 保存和检索共享记忆、知识资料与 Skill | 无影云电脑；HTTPS 入口留在公网服务器 |
+| Intent | 管理原始输入、目标、项目、任务、资料和实际行动 | 无影云电脑 |
 | Nginx | 统一承接网页及记忆接口的 HTTPS 访问 | 公网服务器 |
 
-当前关系如下。虚线表示已经建立的机器间隧道，应用流量还没有切过去：
+当前关系如下。助手和应用服务在无影运行，原有网页和记忆客户端仍通过相同的公网入口访问：
 
 ```mermaid
 flowchart LR
-    A[微信] --> B[公网服务器 OpenClaw]
-    B --> C[Codex 执行]
-    B --> D[Intent]
-    B --> E[OpenViking]
+    A[微信] --> B[无影 OpenClaw]
+    B --> C[无影 Codex 执行]
+    B --> D[无影 Intent]
+    B --> E[无影 OpenViking]
     F[网页 / 已授权客户端] --> G[公网服务器 HTTPS 入口]
-    G --> D
-    G --> E
-    H[无影云电脑] -. 主动建立 SSH 隧道 .-> S[公网服务器 SSH / 回环转发端口]
+    G --> R[公网服务器本机转发]
+    R -->|SSH 隧道| D
+    R -->|SSH 隧道| E
+    H[无影云电脑] -. 主动建立 SSH 隧道 .-> S[公网服务器 SSH]
 ```
 
-后续切换时，Nginx 保留在原服务器，后端服务逐项改为通过隧道访问无影。
+Nginx 保留在原服务器，通过隧道访问无影上的后端。无影另外安装了只监听本机的出站代理，供模型请求和需要代理的下载使用；反向隧道与出站代理负责不同方向的连接。
 
 ## 维护这套环境，需要知道东西放在哪里
 
@@ -71,11 +72,11 @@ flowchart LR
 
 | 内容 | 当前机器与位置 |
 | --- | --- |
-| OpenClaw 主配置与状态 | 公网服务器 `/var/lib/arbor/.openclaw/` |
-| 助手工作区与 Skill | 公网服务器 `/srv/openclaw/personal/` |
-| OpenViking 配置及持久化数据 | 公网服务器 `/srv/openviking/`；Compose 在 `/opt/openviking/compose.yaml` |
-| Intent 当前代码 | 公网服务器 `/opt/intent/current` |
-| Intent 配置、数据库和备份 | 公网服务器 `/etc/intent/` 与 `/var/lib/intent/` |
+| OpenClaw 主配置与状态 | 无影 `/var/lib/arbor/.openclaw/` |
+| 助手工作区与 Skill | 无影 `/srv/openclaw/personal/` |
+| OpenViking 配置及持久化数据 | 无影 `/srv/openviking/`；Compose 在 `/opt/openviking/compose.yaml` |
+| Intent 当前代码 | 无影 `/opt/intent/current` |
+| Intent 配置、数据库和备份 | 无影 `/etc/intent/` 与 `/var/lib/intent/` |
 | 无影连接凭据 | 无影 `/home/admin/.ssh/` |
 | 博客文章 | personal-site 仓库 `posts/` |
 
@@ -89,7 +90,7 @@ flowchart LR
 
 ## 下一步要完成什么
 
-隧道的认证、服务器回环监听和无影 SSH 握手已经验证。它目前还在前台终端中运行，接下来需要完成后台自启和恢复验证，再逐步迁移 OpenViking、OpenClaw，以及按需要迁移 Intent。
+隧道已经交给后台服务管理，配置了开机自启，并验证了接管后的重新连接。OpenClaw、OpenViking 和 Intent 已在无影运行，原服务器的对应旧实例和已迁后台任务已经停止。服务迁移后，仍需用实际微信对话和日常工作检查体验，并在合适的维护时间验证整机重启恢复。
 
 ChatGPT 桌面端也还没有安装。官方 Linux 预览版支持 Ubuntu 24.04 和 x64，但当前 Remote 文档列出的远程桌面主机仍是 Mac 和 Windows。因此，“在无影安装 Linux 客户端”与“手机 Codex 直接连接这台 Linux 主机”要分开看，后者不能写成已经可用。[Linux 安装说明](https://learn.chatgpt.com/docs/linux/linux-app)、[远程连接说明](https://learn.chatgpt.com/docs/remote-connections)
 
