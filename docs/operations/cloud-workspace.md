@@ -4,7 +4,7 @@
 
 当前维护版是 OpenViking 用户资源 `viking://~/resources/work-environment/architecture.md`；本文为其脱敏快照，不独立维护第二份当前状态。初始资料来自 2026-10-11 的部署核对和用户提供的信息，计划与实际部署分开记录。配置只记录位置，不包含密码、Token、私钥或原始配置内容。
 
-查询和按已确认变化更新清单使用 `viking://~/skills/maintain-work-environment/SKILL.md`，仓库留有 [Skill 副本](../../skills/maintain-work-environment/SKILL.md)。先更新 OpenViking，再按需要导出快照并更新日期；[博客草稿](../../posts/cloud-workspace-from-phone.md)记录阶段性的工作方式。2026-10-11 已验证资源与 Skill 的检索和读取，以及清单定点编辑、回读；微信端自动触发尚未验收。不包含服务器巡检或定时监控。
+查询和按已确认变化更新清单使用 `viking://~/skills/maintain-work-environment/SKILL.md`，仓库留有 [Skill 副本](../../skills/maintain-work-environment/SKILL.md)。先更新 OpenViking，再按需要导出快照并更新日期；[博客草稿](../../posts/cloud-workspace-from-phone.md)记录阶段性的工作方式。不包含服务器巡检或定时监控。
 
 ## 机器与托管平台
 
@@ -76,7 +76,7 @@ Digital Self 数据库本次仅确认容器和挂载归属，未检查业务数�
 | OpenViking 独立 Codex 登录 | 无影 `/srv/openviking/codex_auth.json` | 记忆整理所用 OAuth，由 OpenViking 自己刷新 |
 | OpenClaw 访问记忆的 key | 无影 `/var/lib/arbor/.openclaw/openviking-secrets/personal.key` | OpenClaw 通过 SecretRef 读取 |
 | Codex 客户端记忆连接 | 各客户端的 `~/.openviking/ovcli.conf` | 指向共享 OpenViking；安装新客户端时单独配置 |
-| 整理模型 | `openai-codex / gpt-6-luna`，推理强度 low | 摘要与记忆整理；无影迁移后经本机代理完成一次虚构短调用，返回 OK（约 2.45 秒） |
+| 整理模型 | `openai-codex / gpt-6-luna`，推理强度 low | 摘要与记忆整理，经无影本机代理访问模型 |
 | 向量模型 | `doubao-embedding-vision-251215`，1024 维，multimodal | 语义检索；保留现有模型与索引匹配 |
 
 OpenClaw 的 Codex 登录与 OpenViking 的登录是两份独立凭据。服务进程正常不代表模型账号有可用额度；迁移时同时检查模型登录和出站网络。不能让新旧实例同时维护同一份刷新凭据。
@@ -134,9 +134,7 @@ GitHub 保存可版本化的代码与文档；服务器数据库、OAuth、微�
 
 ## 后续迁移与维护规则
 
-隧道后台化、无影出站代理、OpenViking、OpenClaw 和 Intent 的服务迁移已完成，公网服务器保留 HTTPS 入口。ChatGPT 桌面端及日常开发仓库仍待安装和安排；微信真实收发、整机重启后的完整恢复按实际验收结果另行记录。
-
-本次已验证无影 OpenClaw Gateway 健康、微信渠道 configured / running；原 HTTPS 网页、API 登录与对象读取返回 200，无效凭据返回 401；Intent 数据库切换前 SHA256 一致、20 张表及 SQLite `quick_check` 通过，新机备份已生成且可通过 `quick_check`。Intent MCP 已用 arbor 账号及 Agent 凭据初始化，发现 22 个工具并完成 `capture_list` 只读查询；执行报告服务成功结束。GitHub 反馈凭据已随迁移保留，本轮未提交真实 Issue。渠道运行状态不等于已经完成真实微信收发验收；用户浏览器普通试用、整机重启和长时间运行仍待验证。
+OpenViking、OpenClaw 和 Intent 已迁至无影；公网服务器保留 HTTPS 入口，旧应用已停用。ChatGPT 桌面端及日常开发仓库仍待安装和安排。当前自动判断与自动通知未作为常驻能力启用。
 
 原服务器迁移前备份目录为 `/root/wuying-migration-20261011/`：OpenViking 一致性备份 `openviking-before.tar.gz`；停止旧服务后保存的 OpenClaw / Intent 一致性备份 `apps-before.tar`；Intent 助手独立凭据备份 `intent-agent-config.tar.gz`。原机停止服务后留下的应用数据和备份均是切换前恢复点，不包含无影接受的新写入。
 
