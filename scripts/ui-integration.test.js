@@ -34,15 +34,39 @@ test('phone workspace article renders its related article as a navigable link', 
   assert.ok(!doc.querySelector('.prose').textContent.includes(`](${destination})`));
 });
 
-test('case details contain accessible illustrations backed by published assets', () => {
+test('case details render image placeholders in the story without broken images or editorial requests', () => {
   for (const item of cases) {
     const doc = documentAt(`cases/${item.slug}`);
-    const image = doc.querySelector('.prose .project-figure img');
-    assert.ok(image, `${item.slug}: missing illustration`);
-    assert.ok(image.getAttribute('alt').trim(), `${item.slug}: missing image description`);
-    assert.ok(fs.existsSync(path.join(output, image.getAttribute('src'))), `${item.slug}: missing image asset`);
-    assert.ok(image.closest('figure').querySelector('figcaption').textContent.trim());
+    assert.deepEqual([...doc.querySelectorAll('[data-image-slot]')].map(e => e.dataset.imageSlot), item.imageSlots.map(s => s.id));
+    assert.equal(doc.querySelectorAll('.case-image-placeholder').length, item.imageSlots.length);
+    assert.equal(doc.querySelectorAll('.case-evidence img').length, 0);
+    assert.equal(doc.querySelectorAll('.case-brief dt').length, item.overview.length);
+    assert.ok(!doc.querySelector('.prose').innerHTML.includes('<!-- case-image:'));
+    for (const slot of item.imageSlots) {
+      const figure = doc.querySelector(`[data-image-slot="${slot.id}"]`);
+      assert.equal(figure.querySelector('figcaption').textContent, slot.caption);
+      assert.ok(figure.textContent.includes('图片待补充'));
+      assert.ok(figure.closest('section').querySelector('h2'));
+      assert.ok(!html(`cases/${item.slug}`).includes(slot.request));
+    }
   }
+});
+
+test('a supplied case image replaces its placeholder with an accessible local asset', () => {
+  const caseWithImage = structuredClone(cases[0]);
+  const slot = caseWithImage.imageSlots[0];
+  slot.src = `/assets/${caseWithImage.cover}.svg`;
+  slot.alt = 'Project evidence supplied by the owner';
+  const doc = new JSDOM(buildModule.renderCaseImages(caseWithImage)).window.document;
+  const figure = doc.querySelector(`[data-image-slot="${slot.id}"]`);
+  assert.equal(figure.querySelector('img').getAttribute('src'), slot.src);
+  assert.equal(figure.querySelector('img').getAttribute('alt'), slot.alt);
+  assert.equal(figure.querySelector('.case-image-placeholder'), null);
+  assert.equal(figure.querySelector('figcaption').textContent, slot.caption);
+  assert.ok(fs.existsSync(path.join(output, slot.src)));
+  slot.src = '../private.png';
+  assert.throws(() => buildModule.renderCaseImages(caseWithImage), /local \/assets\//);
+  assert.throws(() => buildModule.renderCaseImages({html:'<!-- case-image:missing -->',imageSlots:[]}), /missing case image slot/);
 });
 
 test('project start dates order the published listing and room workbench independently of homepage selection', () => {

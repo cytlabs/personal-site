@@ -110,11 +110,30 @@ export function renderMarkdown(body, title = '') {
   return withToc(html);
 }
 
+function caseBrief(p) {
+  if (!p.overview?.length) return '';
+  return `<dl class="case-brief">${p.overview.map(item => `<div><dt>${esc(item.label)}</dt><dd>${esc(item.value)}</dd></div>`).join('')}</dl>`;
+}
+
+export function renderCaseImages(p) {
+  return p.html.replace(/<!--\s*case-image:([a-z0-9-]+)\s*-->/g, (_, id) => {
+    const slot = p.imageSlots?.find(item => item.id === id);
+    if (!slot) throw new Error(`${p.slug}: missing case image slot ${id}`);
+    if (slot.src && (!slot.src.startsWith('/assets/') || slot.src.split('/').includes('..'))) {
+      throw new Error(`${p.slug}: case images must use a local /assets/ path`);
+    }
+    const visual = slot.src
+      ? `<img src="${u(esc(slot.src))}" alt="${esc(slot.alt || slot.caption)}" width="${slot.width || 1600}" height="${slot.height || 1000}" loading="lazy">`
+      : `<div class="case-image-placeholder"><span class="case-image-status">图片待补充</span><strong>${esc(slot.title)}</strong></div>`;
+    return `<figure class="case-evidence" data-image-slot="${esc(id)}">${visual}<figcaption>${esc(slot.caption)}</figcaption></figure>`;
+  });
+}
+
 function detail(p, list, type) {
   const blog = type==='blog';
-  const {html,toc} = p.html ? withToc(p.html.replace(/(src|href)="(\/(?:assets|cases)\/[^"]+)"/g, (_, attribute, url) => `${attribute}="${u(url)}"`).replace(/<h2>([\s\S]*?)<\/h2>/, (all, heading) => plainText(heading).trim() === p.title.trim() ? '' : all)) : renderMarkdown(p.body, p.title);
+  const {html,toc} = p.html ? withToc(renderCaseImages(p).replace(/(src|href)="(\/(?:assets|cases)\/[^"]+)"/g, (_, attribute, url) => `${attribute}="${u(url)}"`).replace(/<h2>([\s\S]*?)<\/h2>/, (all, heading) => plainText(heading).trim() === p.title.trim() ? '' : all)) : renderMarkdown(p.body, p.title);
   const related = list.find(item => item.slug !== p.slug);
-  return layout({title:p.title,description:p.description,route:p.url,active:blog?'/blog/':'/cases/',article:blog?p:null,body:`<div class="reading-progress" aria-hidden="true"></div><div class="page-shell detail-shell"><a class="back-link" href="${u(`/${type}/`)}">← ${blog?'全部文章':'全部案例'}</a><header class="article-header"><div class="article-kicker"><span>${esc(p.category)}</span>${!blog ? `<span> / </span><span>${esc(p.status)}</span>` : ''}${p.date ? `<span> / </span><time datetime="${p.date}">${formatDate(p.date)}</time><span> / </span><span>约 ${p.minutes} 分钟</span>` : ''}</div><h1>${esc(p.title)}</h1><p>${esc(p.description)}</p>${!blog ? casePeriod(p.period) : ''}</header><div class="article-layout"><article class="prose">${html}${html.includes('class="mermaid"') ? `<script type="module" src="${u('/assets/diagrams.js')}"></script>` : ''}<div class="article-end"><span>—</span><p>谢谢你读到这里。</p></div>${related?`<a class="next-article" href="${u(related.url)}"><small>${blog?'再读一篇':'另一个案例'}</small><strong>${esc(related.title)} <span aria-hidden="true">→</span></strong></a>`:''}</article><aside class="toc"><p>这一页里</p><nav aria-label="文章目录">${toc.map(t=>`<a href="#${t.id}">${t.text}</a>`).join('')}</nav><a class="toc-about" href="${u('/about/')}">${mark}<span>夏目<br><small>写下来，也做出来。</small></span></a></aside></div></div>`});
+  return layout({title:p.title,description:p.description,route:p.url,active:blog?'/blog/':'/cases/',article:blog?p:null,body:`<div class="reading-progress" aria-hidden="true"></div><div class="page-shell detail-shell"><a class="back-link" href="${u(`/${type}/`)}">← ${blog?'全部文章':'全部案例'}</a><header class="article-header"><div class="article-kicker"><span>${esc(p.category)}</span>${!blog ? `<span> / </span><span>${esc(p.status)}</span>` : ''}${p.date ? `<span> / </span><time datetime="${p.date}">${formatDate(p.date)}</time><span> / </span><span>约 ${p.minutes} 分钟</span>` : ''}</div><h1>${esc(p.title)}</h1><p>${esc(p.description)}</p>${!blog ? casePeriod(p.period) + caseBrief(p) : ''}</header><div class="article-layout"><article class="prose">${html}${html.includes('class="mermaid"') ? `<script type="module" src="${u('/assets/diagrams.js')}"></script>` : ''}<div class="article-end"><span>—</span><p>谢谢你读到这里。</p></div>${related?`<a class="next-article" href="${u(related.url)}"><small>${blog?'再读一篇':'另一个案例'}</small><strong>${esc(related.title)} <span aria-hidden="true">→</span></strong></a>`:''}</article><aside class="toc"><p>这一页里</p><nav aria-label="文章目录">${toc.map(t=>`<a href="#${t.id}">${t.text}</a>`).join('')}</nav><a class="toc-about" href="${u('/about/')}">${mark}<span>夏目<br><small>写下来，也做出来。</small></span></a></aside></div></div>`});
 }
 
 async function about() {
