@@ -172,6 +172,31 @@ test('maintained biography and contacts render with anchor targets', () => {
   for (const element of previous.querySelectorAll('[id]')) assert.ok(about.getElementById(element.id), element.id);
 });
 
+test('resume is discoverable through the footer and about contacts, with a working print action', () => {
+  const about = documentAt('about');
+  assert.equal(documentAt('').querySelector('.site-header nav a[href="/resume/"]'), null);
+  assert.ok(documentAt('').querySelector('.footer-links a[href="/resume/"]'));
+  assert.ok(about.querySelector('#contact a[href="/resume/"]'));
+  const dom = interactive('resume');
+  const doc = dom.window.document;
+  assert.equal(doc.querySelector('h1').textContent, '夏目');
+  assert.equal(doc.querySelector('#resume-education p').textContent, '本科');
+  assert.deepEqual([...doc.querySelectorAll('#resume-experience time')].map(t => t.dateTime),
+    ['2024-06', '2021-08', '2024-03', '2019-11', '2021-06']);
+  for (const link of doc.querySelectorAll('#resume-projects a')) {
+    assert.ok(cases.some(c => link.getAttribute('href') === `/cases/${c.slug}/`));
+  }
+  let printed = 0;
+  dom.window.print = () => printed++;
+  const button = doc.querySelector('[data-print-resume]');
+  assert.equal(button.hidden, true);
+  dom.window.eval(fs.readFileSync(path.join(root, 'src/main.js'), 'utf8'));
+  assert.equal(button.hidden, false);
+  button.click();
+  assert.equal(printed, 1);
+  dom.window.close();
+});
+
 test('static pagination covers each article exactly once and SEO includes new pages', () => {
   const links = [];
   for (let page = 1; page <= Math.ceil(posts.length / 6); page++) {
@@ -182,7 +207,7 @@ test('static pagination covers each article exactly once and SEO includes new pa
   }
   assert.deepEqual(links, posts.map(p => `/blog/${p.slug}/`));
   const sitemap = fs.readFileSync(path.join(output, 'sitemap.xml'), 'utf8');
-  for (const route of ['/', '/about/', '/cases/', '/explore/', '/blog/page/2/']) assert.ok(sitemap.includes(`<loc>https://example.com${route}</loc>`));
+  for (const route of ['/', '/about/', '/resume/', '/cases/', '/explore/', '/blog/page/2/']) assert.ok(sitemap.includes(`<loc>https://example.com${route}</loc>`));
   assert.equal((fs.readFileSync(path.join(output, 'feed.xml'), 'utf8').match(/<item>/g) || []).length, posts.length);
   assert.ok(!html('').includes('http-equiv="refresh"'));
 });
