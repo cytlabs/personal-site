@@ -11,12 +11,6 @@ themeToggle?.addEventListener('click', () => window.siteTheme.toggle());
 window.addEventListener('site-theme-change', updateThemeToggle);
 updateThemeToggle();
 
-const printResume = document.querySelector('[data-print-resume]');
-if (printResume) {
-  printResume.hidden = false;
-  printResume.addEventListener('click', () => window.print());
-}
-
 const filters = document.querySelector('[data-filters]');
 if (filters) {
   filters.hidden = false;

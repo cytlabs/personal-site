@@ -6,6 +6,8 @@ import seo from './build-seo.js';
 import markdown from '../markdown-renderer.js';
 import { build as bundle } from 'esbuild';
 import site from '../site.config.mjs';
+import { readResumeContent, resumeVersion } from './resume-content.mjs';
+import { generateResumePdf } from './resume-pdf.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 // Inline before styles so stored/system theme is applied before first paint.
@@ -139,20 +141,16 @@ function detail(p, list, type) {
 async function about() {
   const source = (await fs.readFile(path.join(root,'content/about.html'),'utf8')).replace(/href="(\/(?!\/)[^"]*)"/g, (_, href) => `href="${u(href)}"`);
   const {html,toc} = withToc(source);
-  return layout({title:'关于我',route:'/about/',active:'/about/',body:`<div class="page-shell about-shell"><header class="page-intro" id="top"><p class="eyebrow">A PERSON, STILL IN PROGRESS</p><h1>你好，我是${esc(site.name)}。</h1><p>企业 AI 落地（FDE） / Agent 开发 / 产品与运维</p></header><div class="about-layout"><article class="prose">${html}</article><aside class="about-aside"><div class="identity-card">${mark}<p>${esc(site.name)}<small>${esc(site.romanName)}</small></p><hr><span>理解业务，也亲手交付。</span><p class="identity-note">保持好奇。<br>让想法接触真实的世界。</p></div><nav class="about-toc" aria-label="页面目录">${toc.filter(t=>t.depth==='2').map(t=>`<a href="#${esc(t.id)}">${t.text}</a>`).join('')}</nav><a class="about-explore" href="${u('/explore/')}">${roomIcon}<strong>也可以，来房间里坐坐 ↗</strong></a></aside></div></div>`});
+  return layout({title:'关于我',route:'/about/',active:'/about/',body:`<div class="page-shell about-shell"><header class="page-intro" id="top"><p class="eyebrow">A PERSON, STILL IN PROGRESS</p><h1>你好，我是${esc(site.aboutName)}。</h1><p>企业 AI 落地（FDE） / Agent 开发 / 产品与运维</p></header><div class="about-layout"><article class="prose">${html}</article><aside class="about-aside"><div class="identity-card">${mark}<p>${esc(site.aboutName)}<small>YUTONG</small></p><hr><span>理解业务，也亲手交付。</span><p class="identity-note">保持好奇。<br>让想法接触真实的世界。</p></div><nav class="about-toc" aria-label="页面目录">${toc.filter(t=>t.depth==='2').map(t=>`<a href="#${esc(t.id)}">${t.text}</a>`).join('')}</nav><a class="about-explore" href="${u('/explore/')}">${roomIcon}<strong>也可以，来房间里坐坐 ↗</strong></a></aside></div></div>`});
 }
 
-async function resume(cases) {
-  const data = JSON.parse(await fs.readFile(path.join(root, 'content/resume.json'), 'utf8'));
+function resume(data) {
   const bullets = items => `<ul>${items.map(text => `<li>${esc(text)}</li>`).join('')}</ul>`;
   const time = date => `<time datetime="${esc(date)}">${esc(date.replaceAll('-', '.'))}</time>`;
   const projects = data.projects.map(entry => {
-    const project = cases.find(c => c.slug === entry.slug);
-    if (!project) throw new Error(`Resume references unknown or unpublished project: ${entry.slug}`);
-    const permalink = new URL(u(project.url), site.url || site.publicUrl).href;
-    return `<article class="resume-entry"><div class="resume-entry-heading"><h3><a href="${u(project.url)}">${esc(project.title)}</a></h3><span class="resume-date">项目时间 · ${time(project.period.start)}</span></div><p class="resume-role">${esc(project.overview.find(item => item.label === '我的责任')?.value || project.kind)}</p>${bullets(entry.bullets)}<a class="resume-case-link" href="${u(project.url)}">查看案例 ${internalArrow}</a><a class="resume-print-url" href="${esc(permalink)}">${esc(permalink)}</a></article>`;
+    return `<article class="resume-entry"><div class="resume-entry-heading"><h3><a href="${esc(entry.url)}">${esc(entry.title)}</a></h3><span class="resume-date">项目时间 · ${time(entry.start)}</span></div><p class="resume-role">${esc(entry.role)}</p>${bullets(entry.bullets)}<a class="resume-case-link" href="${esc(entry.url)}">查看案例 ${internalArrow}</a></article>`;
   }).join('');
-  return layout({title:`${data.name}的简历`,route:'/resume/',bodyClass:'resume-page',description:data.summary,body:`<div class="page-shell resume-shell"><div class="resume-toolbar"><a class="text-link" href="${u('/about/')}">← 关于我</a><button type="button" class="resume-print" data-print-resume hidden>打印 / 保存为 PDF</button></div><article class="resume-document"><header class="resume-header"><p class="eyebrow">经历与项目</p><h1>${esc(data.name)}<small class="resume-nickname">昵称：${esc(site.name)}</small></h1><p class="resume-summary">${esc(data.summary)}</p><div class="resume-contact"><a href="mailto:${esc(site.email)}">Email：${esc(site.email)}</a><span>微信：xiamudewx</span><a href="${esc(site.github)}">${esc(site.github.replace('https://', ''))}</a><span>学历：${esc(data.education)}</span></div></header><section class="resume-section" id="resume-experience"><h2>工作经历</h2>${data.experiences.map(entry => `<article class="resume-entry"><div class="resume-entry-heading"><h3>${esc(entry.title)}</h3><span class="resume-date">${time(entry.start)} — ${entry.end ? time(entry.end) : '至今'}</span></div>${entry.context ? `<p class="resume-role">${esc(entry.context)}</p>` : ''}${bullets(entry.bullets)}</article>`).join('')}</section><section class="resume-section" id="resume-projects"><div class="resume-section-heading"><h2>代表项目</h2><a class="resume-case-link" href="${u('/cases/')}">查看全部案例 ${internalArrow}</a></div>${projects}</section><section class="resume-section" id="resume-capabilities"><h2>能力与工具</h2><dl class="resume-capabilities">${data.capabilities.map(item => `<div><dt>${esc(item.label)}</dt><dd>${esc(item.text)}</dd></div>`).join('')}</dl></section></article></div>`});
+  return layout({title:`${data.name}的简历`,route:'/resume/',bodyClass:'resume-page',description:data.summary,body:`<div class="page-shell resume-shell"><div class="resume-toolbar"><a class="text-link" href="${u('/about/')}">← 关于我</a><a class="resume-download" href="${u('/assets/resume.pdf')}?v=${resumeVersion(data).slice(0, 12)}" download="${esc(data.name)}-简历.pdf" data-resume-version="${resumeVersion(data)}">下载简历 PDF</a></div><article class="resume-document"><header class="resume-header"><p class="eyebrow">经历与项目</p><h1>${esc(data.name)}</h1><p class="resume-summary">${esc(data.summary)}</p><div class="resume-contact"><a href="mailto:${esc(site.email)}">Email：${esc(site.email)}</a><span>微信：${esc(data.wechat)}</span><a href="${esc(site.github)}">${esc(site.github.replace('https://', ''))}</a><span>学历：${esc(data.education)}</span></div></header><section class="resume-section" id="resume-experience"><h2>工作经历</h2>${data.experiences.map(entry => `<article class="resume-entry"><div class="resume-entry-heading"><h3>${esc(entry.title)}</h3><span class="resume-date">${time(entry.start)} — ${entry.end ? time(entry.end) : '至今'}</span></div>${entry.context ? `<p class="resume-role">${esc(entry.context)}</p>` : ''}${bullets(entry.bullets)}</article>`).join('')}</section><section class="resume-section" id="resume-projects"><div class="resume-section-heading"><h2>代表项目</h2><a class="resume-case-link" href="${u('/cases/')}">查看全部案例 ${internalArrow}</a></div>${projects}</section><section class="resume-section" id="resume-capabilities"><h2>能力与工具</h2><dl class="resume-capabilities">${data.capabilities.map(item => `<div><dt>${esc(item.label)}</dt><dd>${esc(item.text)}</dd></div>`).join('')}</dl></section></article></div>`});
 }
 
 function plainText(html) {
@@ -180,8 +178,11 @@ export async function build({ outputDir = path.join(root, 'dist') } = {}) {
   await fs.mkdir(out,{recursive:true});
   await fs.cp(path.join(root,'public'),out,{recursive:true});
   const [posts,cases] = await Promise.all([content('posts'),content('cases')]);
+  const resumeData = await readResumeContent({ root, cases, origin: site.url || site.publicUrl, base });
+  // PDF failure blocks deployment; the webpage never ships with a stale document.
+  const pdfResult = await generateResumePdf(resumeData, path.join(out, 'assets/resume.pdf'));
   roomContent.journal = posts.slice(0,4).map(p=>({date:formatDate(p.date),title:p.title,text:publicExcerpts(p.body)[0] || p.description,note:p.description,url:u(p.url)}));
-  const pages = [ ['/',home(posts,cases)],...pagination.getBlogPages(posts).map(page=>[page.route,listing(page.posts,'blog',page,pagination.getBlogPages(posts))]),['/cases/',listing(cases,'cases')],['/about/',await about()],['/resume/',await resume(cases)],['/explore/',explore(posts,cases)],...posts.map(p=>[p.url,detail(p,posts,'blog')]),...cases.map(p=>[p.url,detail(p,cases,'cases')]) ];
+  const pages = [ ['/',home(posts,cases)],...pagination.getBlogPages(posts).map(page=>[page.route,listing(page.posts,'blog',page,pagination.getBlogPages(posts))]),['/cases/',listing(cases,'cases')],['/about/',await about()],['/resume/',resume(resumeData)],['/explore/',explore(posts,cases)],...posts.map(p=>[p.url,detail(p,posts,'blog')]),...cases.map(p=>[p.url,detail(p,cases,'cases')]) ];
   for(const [route,html] of pages) {const folder=path.join(out,route);await fs.mkdir(folder,{recursive:true});await fs.writeFile(path.join(folder,'index.html'),html);}
   await fs.writeFile(path.join(out,'404.html'),layout({title:'这一页不在这里',body:`<div class="page-shell not-found"><p class="eyebrow">404 · LOST & FOUND</p><h1>好像走到了一条小岔路。</h1><p>这篇内容可能已经搬家，或者链接有一点偏差。</p><a class="solid-link" href="${u('/')}">回到首页 →</a></div>`}));
   await bundle({entryPoints:[path.join(root,'src/main.js'),path.join(root,'src/room.js')],outdir:path.join(out,'assets'),bundle:true,minify:true,format:'esm',target:'es2022',legalComments:'linked',metafile:false});
@@ -197,6 +198,6 @@ export async function build({ outputDir = path.join(root, 'dist') } = {}) {
     await fs.writeFile(path.join(out,'feed.xml'),`<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>${esc(site.title)}</title><link>${esc(full('/'))}</link><description>${esc(site.description)}</description><language>zh-CN</language>${posts.map(p=>`<item><title>${esc(p.title)}</title><link>${esc(full(p.url))}</link><guid>${esc(full(p.url))}</guid><description>${esc(p.description)}</description><pubDate>${new Date(p.date+'T00:00:00+08:00').toUTCString()}</pubDate></item>`).join('')}</channel></rss>`);
   }
   await fs.writeFile(path.join(out,'robots.txt'),`User-agent: *\nAllow: /\n${site.url?`Sitemap: ${new URL(u('/sitemap.xml'),site.url).href}\n`:''}`);
-  console.log(`Built ${pages.length} pages + 404 (${posts.length} posts, ${cases.length} cases).`);
+  console.log(`Built ${pages.length} pages + 404 (${posts.length} posts, ${cases.length} cases); resume PDF: ${pdfResult.pages} pages.`);
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === import.meta.filename) await build();

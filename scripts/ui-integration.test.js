@@ -172,15 +172,17 @@ test('maintained biography and contacts render with anchor targets', () => {
   for (const element of previous.querySelectorAll('[id]')) assert.ok(about.getElementById(element.id), element.id);
 });
 
-test('resume is discoverable through the footer and about contacts, with a working print action', () => {
+test('resume is discoverable with a build-synchronized PDF download', () => {
   const about = documentAt('about');
   assert.equal(documentAt('').querySelector('.site-header nav a[href="/resume/"]'), null);
   assert.ok(documentAt('').querySelector('.footer-links a[href="/resume/"]'));
   assert.ok(about.querySelector('#contact a[href="/resume/"]'));
   const dom = interactive('resume');
   const doc = dom.window.document;
-  assert.equal(doc.querySelector('h1').firstChild.textContent, '陈雨桐');
-  assert.equal(doc.querySelector('.resume-nickname').textContent, '昵称：夏目');
+  assert.equal(doc.querySelector('h1').textContent, '陈雨桐');
+  assert.equal(doc.querySelector('.resume-nickname'), null);
+  assert.ok(about.querySelector('h1').textContent.includes('雨桐'));
+  assert.ok(about.querySelector('.identity-card').textContent.includes('雨桐'));
   assert.equal(doc.querySelector('.resume-contact a[href^="mailto:"]').textContent, 'Email：cytlabss@gmail.com');
   assert.equal(doc.querySelector('.resume-contact').lastElementChild.textContent, '学历：本科');
   assert.equal(doc.querySelector('#resume-education'), null);
@@ -196,25 +198,22 @@ test('resume is discoverable through the footer and about contacts, with a worki
   for (const link of doc.querySelectorAll('#resume-projects .resume-entry a')) {
     assert.ok(cases.some(c => new URL(link.getAttribute('href'), 'https://example.com').pathname === `/cases/${c.slug}/`));
   }
-  const css = new JSDOM(`<style>${fs.readFileSync(path.join(root, 'src/styles.css'), 'utf8')}</style>`);
-  const print = [...css.window.document.styleSheets[0].cssRules].find(r => r.conditionText === 'print');
-  assert.ok(print);
-  assert.ok(![...print.cssRules].some(r => r.selectorText?.includes('.resume-case-link') && r.style.display === 'none'));
-  assert.equal([...print.cssRules].find(r => r.selectorText === '.resume-print-url').style.display, 'block');
-  assert.equal(doc.querySelectorAll('.resume-print-url').length, 3);
-  for (const link of doc.querySelectorAll('.resume-print-url')) {
-    assert.ok(link.getAttribute('href').startsWith('https://example.com/cases/'));
-    assert.equal(link.textContent, link.getAttribute('href'));
+  assert.equal(doc.querySelector('[data-print-resume]'), null);
+  const download = doc.querySelector('.resume-download');
+  assert.equal(download.textContent, '下载简历 PDF');
+  assert.equal(new URL(download.getAttribute('href'), 'https://example.com').pathname, '/assets/resume.pdf');
+  assert.ok(download.getAttribute('href').endsWith(download.dataset.resumeVersion.slice(0, 12)));
+  assert.equal(download.getAttribute('download'), '陈雨桐-简历.pdf');
+  const pdf = fs.readFileSync(path.join(output, 'assets/resume.pdf'));
+  assert.ok(pdf.subarray(0, 5).equals(Buffer.from('%PDF-')));
+  const raw = pdf.toString('latin1');
+  assert.ok(raw.includes(`resume-source-sha256:${download.dataset.resumeVersion}`));
+  for (const slug of ['intent', 'recruitment-delivery', 'creator-marketing-delivery']) {
+    assert.ok(raw.includes(`/URI (https://example.com/cases/${slug}/)`));
   }
-  css.window.close();
-  let printed = 0;
-  dom.window.print = () => printed++;
-  const button = doc.querySelector('[data-print-resume]');
-  assert.equal(button.hidden, true);
-  dom.window.eval(fs.readFileSync(path.join(root, 'src/main.js'), 'utf8'));
-  assert.equal(button.hidden, false);
-  button.click();
-  assert.equal(printed, 1);
+  assert.ok(raw.includes('/URI (mailto:cytlabss@gmail.com)'));
+  assert.ok(raw.includes('/URI (https://github.com/cytlabs)'));
+  assert.ok(raw.includes('/FontFile2'));
   dom.window.close();
 });
 

@@ -1,0 +1,29 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import { createHash } from 'node:crypto';
+
+// Both the webpage and downloadable document receive this same resolved model.
+export async function readResumeContent({ root, cases, origin, base = '' }) {
+  const data = JSON.parse(await fs.readFile(path.join(root, 'content/resume.json'), 'utf8'));
+  const site = (await import(path.join(root, 'site.config.mjs'))).default;
+  const absolute = route => new URL(`${base}${route}`, origin).href;
+  const model = {
+    ...data,
+    email: site.email,
+    github: site.github,
+    wechat: 'xiamudewx',
+    allCasesUrl: absolute('/cases/'),
+    projects: data.projects.map(entry => {
+      const item = cases.find(c => c.slug === entry.slug && c.publish !== false);
+      if (!item) throw new Error(`Resume references unknown or unpublished project: ${entry.slug}`);
+      return {
+        ...entry, title: item.title, start: item.period.start,
+        role: item.overview.find(field => field.label === '我的责任')?.value || item.kind,
+        url: `${base}/cases/${item.slug}/`, publicUrl: absolute(`/cases/${item.slug}/`),
+      };
+    }),
+  };
+  return model;
+}
+
+export const resumeVersion = data => createHash('sha256').update(JSON.stringify(data)).digest('hex');
