@@ -49,7 +49,7 @@ export async function generateResumePdf(data, outputFile) {
           const previous = characters.pop();
           rows.push(characters.join('').trimEnd()); row = previous;
         } else {
-        rows.push(row.trimEnd()); row = '';
+          rows.push(row.trimEnd()); row = '';
         }
       }
       if (doc.getTextWidth(token) > available) {
@@ -72,8 +72,12 @@ export async function generateResumePdf(data, outputFile) {
   };
   const heading = (title, reserve = 35, link) => {
     currentSection = title;
-    ensure(reserve); y += 3;
-    doc.setDrawColor('#cbd5ce'); doc.setLineWidth(0.25); doc.line(left, y - 5, right, y - 5);
+    const previousPageCount = doc.getNumberOfPages();
+    ensure(reserve);
+    if (doc.getNumberOfPages() === previousPageCount) {
+      y += 3;
+      doc.setDrawColor('#cbd5ce'); doc.setLineWidth(0.25); doc.line(left, y - 5, right, y - 5);
+    }
     style(13, ink); doc.text(title, left, y);
     if (link) {
       style(9, green); const label = '查看全部案例 →';
@@ -81,12 +85,17 @@ export async function generateResumePdf(data, outputFile) {
     }
     y += 9;
   };
-  const entry = (title, date, bullets, { role, url, project = false } = {}) => {
-    const titleRows = lines(title, width - 64, 11);
+  const entryHeight = (title, bullets, { role, url } = {}) => {
     const bodyHeight = bullets.reduce((sum, text) => sum + lines(text, width - 4).length * 5.3 + 1.4, 0);
-    const height = titleRows.length * 5.7 + bodyHeight + (role ? 5.2 : 0) + (project ? 6.5 : 0) + 6;
+    return lines(title, width - 64, 11).length * 5.7 + bodyHeight +
+      (role ? lines(role, width, 9).length * 5.2 : 0) +
+      (url ? lines(url, width - 4, 8.5).length * 4.5 + 2 : 0) + 6;
+  };
+  const entry = (title, date, bullets, { role, url } = {}) => {
+    const titleRows = lines(title, width - 64, 11);
+    const height = entryHeight(title, bullets, { role, url });
     // Keep an ordinary entry together; longer user content can flow over pages.
-    ensure(Math.min(height, bottom - 21));
+    ensure(Math.min(height, bottom - 29));
     style(11);
     for (const [index, row] of titleRows.entries()) {
       if (url) doc.textWithLink(row, left, y, { url }); else doc.text(row, left, y);
@@ -99,37 +108,72 @@ export async function generateResumePdf(data, outputFile) {
       paragraph(text, { indent: 4 }); y += 1.4;
     }
     if (url) {
-      ensure(6.5); style(8.5, green);
-      doc.textWithLink(url, left + 4, y, { url }); y += 6.5;
+      for (const row of lines(url, width - 4, 8.5)) {
+        ensure(4.5); style(8.5, green);
+        doc.textWithLink(row, left + 4, y, { url }); y += 4.5;
+      }
+      y += 2;
     }
     y += 6;
   };
 
-  style(25); doc.text(data.name, left, y); y += 11;
-  paragraph(data.summary); y += 3;
-  for (const { text, url } of [
+  y = 24;
+  style(25); doc.text(data.name, 105, y, { align: 'center' }); y += 10;
+  const contacts = [
     { text: `Email：${data.email}`, url: `mailto:${data.email}` },
     { text: `微信：${data.wechat}` }, { text: data.github.replace('https://', ''), url: data.github },
     { text: `学历：${data.education}` },
-  ]) {
-    style(9.5, muted);
-    if (url) doc.textWithLink(text, left, y, { url }); else doc.text(text, left, y);
-    y += 5;
+  ];
+  style(9.5, muted);
+  const contactRows = [[]];
+  const contactGap = 9;
+  let rowWidth = 0;
+  for (const item of contacts) {
+    const itemWidth = doc.getTextWidth(item.text);
+    if (itemWidth > width) throw new Error('Resume contact information exceeds PDF width');
+    if (rowWidth && rowWidth + contactGap + itemWidth > width) {
+      contactRows.push([]); rowWidth = 0;
+    }
+    contactRows.at(-1).push({ ...item, width: itemWidth });
+    rowWidth += (rowWidth ? contactGap : 0) + itemWidth;
   }
-  y += 5;
-  heading('工作经历', 55);
-  for (const item of data.experiences) {
-    entry(item.title, `${item.start.replaceAll('-', '.')} — ${item.end?.replaceAll('-', '.') || '至今'}`, item.bullets);
+  for (const row of contactRows) {
+    const total = row.reduce((sum, item) => sum + item.width, 0) + (row.length - 1) * contactGap;
+    let x = 105 - total / 2;
+    for (const [index, item] of row.entries()) {
+      if (index) { doc.setDrawColor('#cbd5ce'); doc.setLineWidth(0.2); doc.line(x - contactGap / 2, y - 3, x - contactGap / 2, y + 0.5); }
+      if (item.url) doc.textWithLink(item.text, x, y, { url: item.url }); else doc.text(item.text, x, y);
+      x += item.width + contactGap;
+    }
+    y += 6;
   }
-  heading('代表项目', 55, data.allCasesUrl);
-  for (const item of data.projects) {
-    entry(item.title, `项目时间 · ${item.start.replaceAll('-', '.')}`, item.bullets,
-      { role: item.role, url: item.publicUrl, project: true });
-  }
-  heading('能力与工具', 40);
-  for (const item of data.capabilities) {
-    ensure(18); style(10.5); doc.text(item.label, left, y); y += 5.5;
-    paragraph(item.text, { size: 10, color: muted, gap: 5.2 }); y += 3;
+  doc.setDrawColor('#cbd5ce'); doc.line(left, y + 1, right, y + 1);
+  y += 10;
+  paragraph(data.summary); y += 7;
+
+  for (const section of data.sections) {
+    if (section.id === 'capabilities') {
+      const firstHeight = lines(data.capabilities[0].text, width - 37, 10).length * 5.2 + 3;
+      heading(section.title, 12 + firstHeight);
+      for (const item of data.capabilities) {
+        const height = lines(item.text, width - 37, 10).length * 5.2 + 3;
+        ensure(height); style(10.5); doc.text(item.label, left, y);
+        paragraph(item.text, { indent: 37, size: 10, color: muted, gap: 5.2 }); y += 3;
+      }
+    } else if (section.id === 'experience') {
+      const first = data.experiences[0];
+      heading(section.title, 12 + entryHeight(first.title, first.bullets));
+      for (const item of data.experiences) {
+        entry(item.title, `${item.start.replaceAll('-', '.')} — ${item.end?.replaceAll('-', '.') || '至今'}`, item.bullets);
+      }
+    } else if (section.id === 'projects') {
+      const first = data.projects[0];
+      heading(section.title, 12 + entryHeight(first.title, first.bullets, { role: first.role, url: first.publicUrl }), data.allCasesUrl);
+      for (const item of data.projects) {
+        entry(item.title, `项目时间 · ${item.start.replaceAll('-', '.')}`, item.bullets,
+          { role: item.role, url: item.publicUrl });
+      }
+    } else throw new Error(`Unknown resume section: ${section.id}`);
   }
   const count = doc.getNumberOfPages();
   for (let page = 1; page <= count; page++) {

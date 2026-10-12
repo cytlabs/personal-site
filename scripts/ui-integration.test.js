@@ -187,6 +187,10 @@ test('resume is discoverable with a build-synchronized PDF download', () => {
   assert.equal(doc.querySelector('.resume-contact').lastElementChild.textContent, '学历：本科');
   assert.equal(doc.querySelector('#resume-education'), null);
   assert.equal(doc.querySelector('#resume-collaboration'), null);
+  assert.deepEqual([...doc.querySelectorAll('.resume-section h2')].map(e => e.textContent),
+    ['专业能力', '工作经历', '项目经历']);
+  assert.equal(doc.querySelector('.resume-header').firstElementChild.tagName, 'H1');
+  assert.ok(doc.querySelector('h1').nextElementSibling.classList.contains('resume-contact'));
   assert.deepEqual([...doc.querySelectorAll('#resume-experience time')].map(t => t.dateTime),
     ['2024-06', '2021-08', '2024-03', '2019-11', '2021-06']);
   assert.equal(doc.querySelector('#resume-experience .resume-role'), null);

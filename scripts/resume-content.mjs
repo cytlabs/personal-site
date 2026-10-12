@@ -12,6 +12,11 @@ export async function readResumeContent({ root, cases, origin, base = '' }) {
     email: site.email,
     github: site.github,
     wechat: 'xiamudewx',
+    sections: [
+      { id: 'capabilities', title: '专业能力' },
+      { id: 'experience', title: '工作经历' },
+      { id: 'projects', title: '项目经历' },
+    ],
     allCasesUrl: absolute('/cases/'),
     projects: data.projects.map(entry => {
       const item = cases.find(c => c.slug === entry.slug && c.publish !== false);

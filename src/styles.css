@@ -250,10 +250,11 @@
 .resume-download{border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:11px 17px;border-radius:4px;font-size:.9375rem}
 .resume-download:hover{border-color:var(--green)}
 .resume-header{padding-bottom:30px}
-.resume-header .eyebrow{margin-bottom:12px}
-.resume-header h1{font-size:42px;letter-spacing:0;margin-bottom:18px}
-.resume-summary{font-size:1.0625rem;line-height:1.95;margin-bottom:20px;max-width:760px}
-.resume-contact{display:flex;gap:12px 26px;flex-wrap:wrap;font-size:.9375rem;color:var(--muted);line-height:1.8}
+.resume-header h1{font-size:42px;letter-spacing:0;margin-bottom:18px;text-align:center}
+.resume-summary{font-size:1.0625rem;line-height:1.95;margin:24px auto 0;max-width:760px}
+.resume-contact{display:flex;justify-content:center;gap:10px 0;flex-wrap:wrap;font-size:.9375rem;color:var(--muted);line-height:1.8;padding-bottom:25px;border-bottom:1px solid var(--line);text-align:center}
+.resume-contact>*{padding:0 15px;border-left:1px solid var(--line);white-space:nowrap}
+.resume-contact>:first-child{border-left:0}
 .resume-contact a:hover,.resume-entry a:hover{color:var(--green);text-decoration:underline;text-underline-offset:4px}
 .resume-section{border-top:1px solid var(--line);padding-top:25px;margin-bottom:34px}
 .resume-section h2{font-size:1.375rem;font-weight:600;margin-bottom:24px;letter-spacing:.5px}
@@ -281,6 +282,8 @@
  .resume-toolbar .text-link,.resume-download{font-size:.875rem}
  .resume-download{padding:10px 12px}
  .resume-header h1{font-size:34px}
+ .resume-contact{gap:9px 16px}
+ .resume-contact>*{padding:0;border-left:0}
  .resume-entry-heading{display:block}
  .resume-date{display:block;margin-bottom:8px}
  .resume-section h2{font-size:1.25rem}
