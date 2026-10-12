@@ -29,16 +29,15 @@ async function content(dir) {
     url: `/blog/${p.slug}/`,
   }));
   const cases = JSON.parse(await fs.readFile(path.join(root, 'content/case-studies.json'), 'utf8'));
-  return sortCases(cases).map(c => ({ ...c, url: `/cases/${c.slug}/`,
+  return sortCases(cases.filter(c => c.publish !== false)).map(c => ({ ...c, url: `/cases/${c.slug}/`,
     body: c.html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
     status: c.status || '项目复盘', kind: c.kind || '交付实践',
   }));
 }
 
 export function sortCases(cases) {
-  // A completed project's end month or the latest recorded stage determines recency.
-  // Stable sorting preserves editorial order within the same month; undated cases go last.
-  const month = c => c.period?.end || c.period?.start || '';
+  // Sort by project start date; preserve editorial order for ties and put undated cases last.
+  const month = c => c.period?.start || '';
   return cases.toSorted((a, b) => month(b).localeCompare(month(a)));
 }
 
@@ -48,7 +47,7 @@ export function selectFeaturedCases(cases, slugs = site.featuredCaseSlugs) {
   }
   return slugs.map(slug => {
     const item = cases.find(c => c.slug === slug);
-    if (!item) throw new Error(`Unknown featured case slug: ${slug}`);
+    if (!item || item.publish === false) throw new Error(`Unknown or unpublished featured case slug: ${slug}`);
     return item;
   });
 }
@@ -67,11 +66,8 @@ function postRow(p, index, search = false) {
   return `<article class="post-row" ${search ? `data-entry data-category="${esc(p.category)}" data-search="${esc(p.title + ' ' + p.description + ' ' + p.category)}"` : ''}><span class="row-index" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span><a class="post-title" href="${u(p.url)}"><h3>${esc(p.title)}</h3><p>${esc(p.description)}</p></a><div class="post-meta"><span>${esc(p.category)}</span><time datetime="${p.date}">${formatDate(p.date)}</time></div><span class="row-arrow" aria-hidden="true">↗</span></article>`;
 }
 function casePeriod(period) {
-  if (!period?.start) return '<span class="case-period">时间待补充</span>';
-  const month = date => `<time datetime="${esc(date)}">${esc(formatDate(date))}</time>`;
-  const label = period.basis === 'record' ? '阶段记录' : '项目时间';
-  const range = period.end ? `${month(period.start)} — ${month(period.end)}` : period.basis === 'record' ? month(period.start) : `${month(period.start)} 起`;
-  return `<span class="case-period">${label} · ${range}</span>`;
+  const start = period?.start ? `<time datetime="${esc(period.start)}">${esc(formatDate(period.start))}</time>` : '待补充';
+  return `<span class="case-period">项目时间 · ${start}</span>`;
 }
 function caseCard(c) {
   return `<article class="case-card" id="${esc(c.slug)}"><a href="${u(c.url)}"><div class="case-cover ${esc(c.cover)}"><img src="${u(`/assets/${c.cover}.svg`)}" alt="" width="720" height="420" loading="lazy"><span class="cover-arrow" aria-hidden="true">↗</span></div><div class="case-meta"><span>${esc(c.category)}</span><span>${esc(c.status)}</span></div>${casePeriod(c.period)}<h3>${esc(c.title)}</h3><p>${esc(c.description)}</p></a></article>`;
@@ -118,7 +114,7 @@ function detail(p, list, type) {
   const blog = type==='blog';
   const {html,toc} = p.html ? withToc(p.html.replace(/(src|href)="(\/(?:assets|cases)\/[^"]+)"/g, (_, attribute, url) => `${attribute}="${u(url)}"`).replace(/<h2>([\s\S]*?)<\/h2>/, (all, heading) => plainText(heading).trim() === p.title.trim() ? '' : all)) : renderMarkdown(p.body, p.title);
   const related = list.find(item => item.slug !== p.slug);
-  return layout({title:p.title,description:p.description,route:p.url,active:blog?'/blog/':'/cases/',article:blog?p:null,body:`<div class="reading-progress" aria-hidden="true"></div><div class="page-shell detail-shell"><a class="back-link" href="${u(`/${type}/`)}">← ${blog?'全部文章':'全部案例'}</a><header class="article-header"><div class="article-kicker"><span>${esc(p.category)}</span>${!blog ? `<span> / </span><span>${esc(p.status)}</span>` : ''}${p.date ? `<span> / </span><time datetime="${p.date}">${formatDate(p.date)}</time><span> / </span><span>约 ${p.minutes} 分钟</span>` : ''}</div><h1>${esc(p.title)}</h1><p>${esc(p.description)}</p>${!blog ? `${casePeriod(p.period)}${p.period?.note ? `<p class="case-time-note">${esc(p.period.note)}</p>` : p.period?.basis === 'record' ? '<p class="case-time-note">时间为已有材料记录的阶段月份，项目完整起止时间尚未记录。</p>' : p.period?.basis === 'unknown' ? '<p class="case-time-note">原案例未提供项目起止时间，待补充。</p>' : ''}` : ''}</header><div class="article-layout"><article class="prose">${html}${html.includes('class="mermaid"') ? `<script type="module" src="${u('/assets/diagrams.js')}"></script>` : ''}<div class="article-end"><span>—</span><p>谢谢你读到这里。</p></div>${related?`<a class="next-article" href="${u(related.url)}"><small>${blog?'再读一篇':'另一个案例'}</small><strong>${esc(related.title)} <span aria-hidden="true">→</span></strong></a>`:''}</article><aside class="toc"><p>这一页里</p><nav aria-label="文章目录">${toc.map(t=>`<a href="#${t.id}">${t.text}</a>`).join('')}</nav><a class="toc-about" href="${u('/about/')}">${mark}<span>夏目<br><small>写下来，也做出来。</small></span></a></aside></div></div>`});
+  return layout({title:p.title,description:p.description,route:p.url,active:blog?'/blog/':'/cases/',article:blog?p:null,body:`<div class="reading-progress" aria-hidden="true"></div><div class="page-shell detail-shell"><a class="back-link" href="${u(`/${type}/`)}">← ${blog?'全部文章':'全部案例'}</a><header class="article-header"><div class="article-kicker"><span>${esc(p.category)}</span>${!blog ? `<span> / </span><span>${esc(p.status)}</span>` : ''}${p.date ? `<span> / </span><time datetime="${p.date}">${formatDate(p.date)}</time><span> / </span><span>约 ${p.minutes} 分钟</span>` : ''}</div><h1>${esc(p.title)}</h1><p>${esc(p.description)}</p>${!blog ? casePeriod(p.period) : ''}</header><div class="article-layout"><article class="prose">${html}${html.includes('class="mermaid"') ? `<script type="module" src="${u('/assets/diagrams.js')}"></script>` : ''}<div class="article-end"><span>—</span><p>谢谢你读到这里。</p></div>${related?`<a class="next-article" href="${u(related.url)}"><small>${blog?'再读一篇':'另一个案例'}</small><strong>${esc(related.title)} <span aria-hidden="true">→</span></strong></a>`:''}</article><aside class="toc"><p>这一页里</p><nav aria-label="文章目录">${toc.map(t=>`<a href="#${t.id}">${t.text}</a>`).join('')}</nav><a class="toc-about" href="${u('/about/')}">${mark}<span>夏目<br><small>写下来，也做出来。</small></span></a></aside></div></div>`});
 }
 
 async function about() {

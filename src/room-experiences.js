@@ -12,7 +12,7 @@ export function createExperiences({panel, tooltip, buttons, data}) {
   const action=(type,extra={})=>window.dispatchEvent(new CustomEvent('room-action',{detail:{type,...extra}}));
   const button=(label,act,extra='')=>`<button type="button" data-action="${act}" ${extra}>${label}</button>`;
   const link=(item,label)=>`<a class="experience-link" href="${esc(item.url)}">${label} <span aria-hidden="true">↗</span></a>`;
-  const periodLabel=period=>!period?.start?'时间待补充':`${period.basis==='record'?'阶段记录':'项目时间'} · ${period.start.replaceAll('-','.')} ${period.end?'— '+period.end.replaceAll('-','.') : period.basis==='record'?'':'起'}`;
+  const periodLabel=period=>`项目时间 · ${period?.start ? period.start.replaceAll('-','.') : '待补充'}`;
   const pager=(index,total,prev,next)=>`<div class="experience-pager">${button('← 上一页',prev,index===0?'disabled':'')}<span aria-live="polite">${index+1} / ${total}</span>${button('下一页 →',next,index===total-1?'disabled':'')}</div>`;
   function mark(id){visited.add(id);document.querySelector('#room-discovery-count').textContent=visited.size;buttons.forEach(b=>b.classList.toggle('discovered',visited.has(b.dataset.zone)));}
   function render(focusAction){

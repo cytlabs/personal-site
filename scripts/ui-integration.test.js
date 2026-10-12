@@ -12,7 +12,8 @@ let buildModule;
 const html = route => fs.readFileSync(path.join(output, route, 'index.html'), 'utf8');
 const documentAt = route => new JSDOM(html(route)).window.document;
 const clean = text => text.replace(/\s+/g, ' ').trim();
-const cases = JSON.parse(fs.readFileSync(path.join(root, 'content/case-studies.json')));
+const allCases = JSON.parse(fs.readFileSync(path.join(root, 'content/case-studies.json')));
+const cases = allCases.filter(c => c.publish !== false);
 const posts = readPosts(path.join(root, 'posts'));
 
 before(async () => {
@@ -44,8 +45,8 @@ test('case details contain accessible illustrations backed by published assets',
   }
 });
 
-test('case recency orders the full listing and room workbench independently of homepage selection', () => {
-  const expected = ['99medpass', 'vowscene', 'intent', 'recruitment-delivery',
+test('project start dates order the published listing and room workbench independently of homepage selection', () => {
+  const expected = ['intent', 'recruitment-delivery',
     'creator-marketing-delivery', 'keysafe-password-manager', 'multi-cloud-management',
     'enterprise-gitops-platform', 'kubernetes-platform'];
   assert.deepEqual([...documentAt('cases').querySelectorAll('.case-card')].map(c => c.id), expected);
@@ -54,8 +55,39 @@ test('case recency orders the full listing and room workbench independently of h
   const input = [{slug:'undated'}, {slug:'older', period:{start:'2023-01'}},
     {slug:'completed', period:{start:'2022-01', end:'2024-05'}},
     {slug:'same-month', period:{start:'2024-05', basis:'record'}}];
-  assert.deepEqual(buildModule.sortCases(input).map(c => c.slug), ['completed', 'same-month', 'older', 'undated']);
+  assert.deepEqual(buildModule.sortCases(input).map(c => c.slug), ['same-month', 'older', 'completed', 'undated']);
   assert.equal(input[0].slug, 'undated');
+});
+
+test('hidden projects retain source content without public pages, links or room data', () => {
+  const sitemap = fs.readFileSync(path.join(output, 'sitemap.xml'), 'utf8');
+  const publicPages = [html(''), html('cases'), html('explore'), ...cases.map(c => html(`cases/${c.slug}`))];
+  for (const slug of ['99medpass', 'vowscene']) {
+    const source = allCases.find(c => c.slug === slug);
+    assert.equal(source.publish, false);
+    assert.ok(source.html && source.steps.length);
+    assert.equal(fs.existsSync(path.join(output, 'cases', slug, 'index.html')), false);
+    assert.ok(!sitemap.includes(`/cases/${slug}/`));
+    for (const page of publicPages) {
+      assert.ok(!page.includes(`/cases/${slug}/`));
+      assert.ok(!page.includes(source.title));
+    }
+    assert.throws(() => buildModule.selectFeaturedCases(allCases, [slug, 'recruitment-delivery']), /unpublished/);
+  }
+});
+
+test('case cards and details display only a project start date with one consistent label', () => {
+  const listing = documentAt('cases');
+  for (const item of cases) {
+    const expected = `项目时间 · ${item.period.start.replaceAll('-', '.')}`;
+    const card = listing.getElementById(item.slug);
+    const detail = documentAt(`cases/${item.slug}`);
+    assert.equal(card.querySelector('.case-period').textContent, expected);
+    assert.equal(card.querySelectorAll('.case-period time').length, 1);
+    assert.equal(detail.querySelector('.article-header .case-period').textContent, expected);
+    assert.equal(detail.querySelectorAll('.case-time-note').length, 0);
+    assert.equal(card.querySelector('time').getAttribute('datetime'), item.period.start);
+  }
 });
 
 test('homepage shows exactly two configured cases in order with original metadata and working detail links', async () => {
@@ -85,7 +117,7 @@ test('featured selection follows explicit configuration regardless of dates and 
   for (const invalid of [null, [], [slugs[0]], [...slugs, 'intent'], [slugs[0], slugs[0]]]) {
     assert.throws(() => buildModule.selectFeaturedCases(input, invalid), /exactly two distinct/);
   }
-  assert.throws(() => buildModule.selectFeaturedCases(input, [slugs[0], 'missing-case']), /Unknown featured case slug: missing-case/);
+  assert.throws(() => buildModule.selectFeaturedCases(input, [slugs[0], 'missing-case']), /Unknown or unpublished featured case slug: missing-case/);
 });
 
 test('every published article keeps its route, public prose, metadata and one page heading', () => {
@@ -211,6 +243,8 @@ test('room uses published content and all five experiences work without WebGL', 
       assert.match(doc.querySelector('.experience-link').href,new RegExp(posts.at(-1).slug));
     }
     if(zone==='desk') {
+      const firstProject = data.zones[1].links[0];
+      assert.equal(doc.querySelector('.desktop-note').textContent, `项目时间 · ${firstProject.period.start.replaceAll('-', '.')}`);
       const gitops=data.zones[1].links.findIndex(p=>p.url==='/cases/enterprise-gitops-platform/');
       doc.querySelector(`[data-action="project"][data-index="${gitops}"]`).click();
       doc.querySelector('[data-tab="sketch"]').click();
