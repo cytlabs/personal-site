@@ -222,3 +222,24 @@
  .case-brief dt{margin-bottom:4px}
  .case-image-placeholder{min-height:170px;padding:24px 18px}
 }
+
+/* The GitOps sample connects the problem, contribution and delivery evidence. */
+.case-sample .case-problem-points{margin:24px 0 28px;border-left:2px solid var(--green);padding-left:20px}
+.case-problem-points>div{margin:0 0 18px}
+.case-problem-points dt{font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:4px}
+.case-problem-points dd{margin:0;font-size:1rem;line-height:1.85;color:var(--muted)}
+.case-sample .case-results{display:table;margin:0;line-height:1.8}
+.case-sample .case-results th,.case-sample .case-results td{min-width:0;padding:12px}
+.case-sample .case-results td:nth-child(2){font-weight:600;color:var(--ink)}
+.case-deliverable{margin:28px 0 36px}
+.prose .case-sample .case-flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;list-style:none;margin:24px 0 14px;padding:0}
+.prose .case-sample .case-flow li{margin:0;padding:14px 0;border-top:2px solid var(--line);min-width:0}
+.case-flow strong{display:block;font-size:.9375rem;line-height:1.7;margin-bottom:5px}
+.case-flow span{display:block;font-size:.8125rem;line-height:1.7;color:var(--muted);overflow-wrap:anywhere}
+@media(max-width:620px){
+ .case-sample .case-results th,.case-sample .case-results td{padding:10px 8px}
+ .case-sample .case-results td:first-child{min-width:90px}
+ .prose .case-sample .case-flow{grid-template-columns:1fr;gap:0}
+ .prose .case-sample .case-flow li{display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px;padding:12px 0;border-top-width:1px}
+ .case-flow strong{margin-bottom:0}
+}
