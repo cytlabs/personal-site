@@ -180,10 +180,14 @@ test('resume is discoverable through the footer and about contacts, with a worki
   const dom = interactive('resume');
   const doc = dom.window.document;
   assert.equal(doc.querySelector('h1').textContent, '夏目');
-  assert.equal(doc.querySelector('#resume-education p').textContent, '本科');
+  assert.equal(doc.querySelector('.resume-contact').lastElementChild.textContent, '本科');
+  assert.equal(doc.querySelector('#resume-education'), null);
+  assert.equal(doc.querySelector('#resume-collaboration'), null);
   assert.deepEqual([...doc.querySelectorAll('#resume-experience time')].map(t => t.dateTime),
     ['2024-06', '2021-08', '2024-03', '2019-11', '2021-06']);
-  for (const link of doc.querySelectorAll('#resume-projects a')) {
+  assert.equal(doc.querySelectorAll('#resume-projects .resume-entry').length, 3);
+  assert.ok(doc.querySelector('#resume-projects > a[href="/cases/"]'));
+  for (const link of doc.querySelectorAll('#resume-projects .resume-entry a')) {
     assert.ok(cases.some(c => link.getAttribute('href') === `/cases/${c.slug}/`));
   }
   let printed = 0;
