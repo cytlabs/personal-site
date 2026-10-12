@@ -9,8 +9,6 @@ export default {
   now: '关注 AI 应用与企业工作流，寻找值得一起做的事。',
   github: 'https://github.com/cytlabs',
   email: 'cytlabss@gmail.com',
-  // Stable public origin for addresses printed on the resume, including preview builds.
-  publicUrl: 'https://www.xiamu.cc',
   // Exactly two existing case slugs, in homepage display order; independent of recency.
   featuredCaseSlugs: ['enterprise-gitops-platform', 'recruitment-delivery'],
   url: process.env.SITE_URL || '',

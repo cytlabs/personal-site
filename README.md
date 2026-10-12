@@ -186,8 +186,6 @@ npm i -g vercel
 vercel --prod
 ```
 
-## 简历与 PDF
+## 网页简历
 
-简历内容维护在 `content/resume.json`，项目名称、职责和时间来自 `content/case-studies.json`。`npm run build` 会先解析同一份内容模型，同时生成 `/resume/` 和 `/assets/resume.pdf`，无需手工更新 PDF。
-
-PDF 生成是构建必需步骤；缺少字体、出现不支持的字符或生成失败时，构建会报错并停止。下载链接带内容版本，简历变化后会更新，避免浏览器沿用旧文件。PDF 使用嵌入中文字体与链接注释，生成器及字体来源、许可证见 `vendor/README.md`。
+简历内容维护在 `content/resume.json`，项目名称、职责和时间来自 `content/case-studies.json`。`npm run build` 会生成 `/resume/`，页脚及关于页的联系区域提供入口。

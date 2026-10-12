@@ -6,8 +6,7 @@ import seo from './build-seo.js';
 import markdown from '../markdown-renderer.js';
 import { build as bundle } from 'esbuild';
 import site from '../site.config.mjs';
-import { readResumeContent, resumeVersion } from './resume-content.mjs';
-import { generateResumePdf } from './resume-pdf.mjs';
+import { readResumeContent } from './resume-content.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 // Inline before styles so stored/system theme is applied before first paint.
@@ -148,7 +147,7 @@ function resume(data) {
   const bullets = items => `<ul>${items.map(text => `<li>${esc(text)}</li>`).join('')}</ul>`;
   const time = date => `<time datetime="${esc(date)}">${esc(date.replaceAll('-', '.'))}</time>`;
   const projects = data.projects.map(entry => {
-    return `<article class="resume-entry"><div class="resume-entry-heading"><h3><a href="${esc(entry.url)}">${esc(entry.title)}</a></h3><span class="resume-date">项目时间 · ${time(entry.start)}</span></div><p class="resume-role">${esc(entry.role)}</p>${bullets(entry.bullets)}<a class="resume-case-link" href="${esc(entry.url)}">查看案例 ${internalArrow}</a></article>`;
+    return `<article class="resume-entry"><div class="resume-entry-heading"><h3><a href="${esc(entry.url)}">${esc(entry.title)}</a></h3><span class="resume-date">项目时间 · ${time(entry.start)}</span></div><p class="resume-role">${esc(entry.role)}</p>${bullets(entry.bullets)}<a class="resume-case-link" href="${esc(entry.url)}">查看详情 ${internalArrow}</a></article>`;
   }).join('');
   const sectionBodies = {
     capabilities: `<dl class="resume-capabilities">${data.capabilities.map(item => `<div><dt>${esc(item.label)}</dt><dd>${esc(item.text)}</dd></div>`).join('')}</dl>`,
@@ -156,7 +155,7 @@ function resume(data) {
     projects,
   };
   const sections = data.sections.map(section => `<section class="resume-section" id="resume-${esc(section.id)}"><div class="resume-section-heading"><h2>${esc(section.title)}</h2>${section.id === 'projects' ? `<a class="resume-case-link" href="${u('/cases/')}">查看全部案例 ${internalArrow}</a>` : ''}</div>${sectionBodies[section.id]}</section>`).join('');
-  return layout({title:`${data.name}的简历`,route:'/resume/',bodyClass:'resume-page',description:data.summary,body:`<div class="page-shell resume-shell"><div class="resume-toolbar"><a class="text-link" href="${u('/about/')}">← 关于我</a><a class="resume-download" href="${u('/assets/resume.pdf')}?v=${resumeVersion(data).slice(0, 12)}" download="${esc(data.name)}-简历.pdf" data-resume-version="${resumeVersion(data)}">下载简历 PDF</a></div><article class="resume-document"><header class="resume-header"><h1>${esc(data.name)}</h1><div class="resume-contact"><a href="mailto:${esc(data.email)}">Email：${esc(data.email)}</a><span>微信：${esc(data.wechat)}</span><a href="${esc(data.github)}">${esc(data.github.replace('https://', ''))}</a><span>学历：${esc(data.education)}</span></div><p class="resume-summary">${esc(data.summary)}</p></header>${sections}</article></div>`});
+  return layout({title:`${data.name}的简历`,route:'/resume/',bodyClass:'resume-page',description:`${data.name}的简历：${data.sections.map(section => section.title).join('、')}。`,body:`<div class="page-shell resume-shell"><div class="resume-toolbar"><a class="text-link" href="${u('/about/')}">← 关于我</a></div><article class="resume-document"><header class="resume-header"><h1>${esc(data.name)}</h1><div class="resume-contact"><a href="mailto:${esc(data.email)}">Email：${esc(data.email)}</a><span>微信：${esc(data.wechat)}</span><a href="${esc(data.github)}">${esc(data.github.replace('https://', ''))}</a><span>学历：${esc(data.education)}</span><span>工作年限：${esc(data.workYears)}</span></div></header>${sections}</article></div>`});
 }
 
 function plainText(html) {
@@ -184,9 +183,7 @@ export async function build({ outputDir = path.join(root, 'dist') } = {}) {
   await fs.mkdir(out,{recursive:true});
   await fs.cp(path.join(root,'public'),out,{recursive:true});
   const [posts,cases] = await Promise.all([content('posts'),content('cases')]);
-  const resumeData = await readResumeContent({ root, cases, origin: site.url || site.publicUrl, base });
-  // PDF failure blocks deployment; the webpage never ships with a stale document.
-  const pdfResult = await generateResumePdf(resumeData, path.join(out, 'assets/resume.pdf'));
+  const resumeData = await readResumeContent({ root, cases, base });
   roomContent.journal = posts.slice(0,4).map(p=>({date:formatDate(p.date),title:p.title,text:publicExcerpts(p.body)[0] || p.description,note:p.description,url:u(p.url)}));
   const pages = [ ['/',home(posts,cases)],...pagination.getBlogPages(posts).map(page=>[page.route,listing(page.posts,'blog',page,pagination.getBlogPages(posts))]),['/cases/',listing(cases,'cases')],['/about/',await about()],['/resume/',resume(resumeData)],['/explore/',explore(posts,cases)],...posts.map(p=>[p.url,detail(p,posts,'blog')]),...cases.map(p=>[p.url,detail(p,cases,'cases')]) ];
   for(const [route,html] of pages) {const folder=path.join(out,route);await fs.mkdir(folder,{recursive:true});await fs.writeFile(path.join(folder,'index.html'),html);}
@@ -204,6 +201,6 @@ export async function build({ outputDir = path.join(root, 'dist') } = {}) {
     await fs.writeFile(path.join(out,'feed.xml'),`<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>${esc(site.title)}</title><link>${esc(full('/'))}</link><description>${esc(site.description)}</description><language>zh-CN</language>${posts.map(p=>`<item><title>${esc(p.title)}</title><link>${esc(full(p.url))}</link><guid>${esc(full(p.url))}</guid><description>${esc(p.description)}</description><pubDate>${new Date(p.date+'T00:00:00+08:00').toUTCString()}</pubDate></item>`).join('')}</channel></rss>`);
   }
   await fs.writeFile(path.join(out,'robots.txt'),`User-agent: *\nAllow: /\n${site.url?`Sitemap: ${new URL(u('/sitemap.xml'),site.url).href}\n`:''}`);
-  console.log(`Built ${pages.length} pages + 404 (${posts.length} posts, ${cases.length} cases); resume PDF: ${pdfResult.pages} pages.`);
+  console.log(`Built ${pages.length} pages + 404 (${posts.length} posts, ${cases.length} cases).`);
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === import.meta.filename) await build();

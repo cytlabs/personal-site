@@ -172,7 +172,7 @@ test('maintained biography and contacts render with anchor targets', () => {
   for (const element of previous.querySelectorAll('[id]')) assert.ok(about.getElementById(element.id), element.id);
 });
 
-test('resume is discoverable with a build-synchronized PDF download', () => {
+test('web resume includes current personal details and concise experience titles', () => {
   const about = documentAt('about');
   assert.equal(documentAt('').querySelector('.site-header nav a[href="/resume/"]'), null);
   assert.ok(documentAt('').querySelector('.footer-links a[href="/resume/"]'));
@@ -184,7 +184,9 @@ test('resume is discoverable with a build-synchronized PDF download', () => {
   assert.ok(about.querySelector('h1').textContent.includes('雨桐'));
   assert.ok(about.querySelector('.identity-card').textContent.includes('雨桐'));
   assert.equal(doc.querySelector('.resume-contact a[href^="mailto:"]').textContent, 'Email：cytlabss@gmail.com');
-  assert.equal(doc.querySelector('.resume-contact').lastElementChild.textContent, '学历：本科');
+  assert.equal(doc.querySelector('.resume-contact').children[3].textContent, '学历：本科');
+  assert.equal(doc.querySelector('.resume-contact').lastElementChild.textContent, '工作年限：近 7 年');
+  assert.equal(doc.querySelector('.resume-summary'), null);
   assert.equal(doc.querySelector('#resume-education'), null);
   assert.equal(doc.querySelector('#resume-collaboration'), null);
   assert.deepEqual([...doc.querySelectorAll('.resume-section h2')].map(e => e.textContent),
@@ -194,6 +196,8 @@ test('resume is discoverable with a build-synchronized PDF download', () => {
   assert.deepEqual([...doc.querySelectorAll('#resume-experience time')].map(t => t.dateTime),
     ['2024-06', '2021-08', '2024-03', '2019-11', '2021-06']);
   assert.equal(doc.querySelector('#resume-experience .resume-role'), null);
+  assert.deepEqual([...doc.querySelectorAll('#resume-experience h3')].map(e => e.textContent),
+    ['全栈开发', 'DevOps', '基础运维']);
   assert.equal(doc.querySelectorAll('#resume-projects .resume-entry').length, 3);
   const section = doc.querySelector('#resume-projects');
   assert.ok(section.firstElementChild.querySelector('a[href="/cases/"]'));
@@ -203,21 +207,9 @@ test('resume is discoverable with a build-synchronized PDF download', () => {
     assert.ok(cases.some(c => new URL(link.getAttribute('href'), 'https://example.com').pathname === `/cases/${c.slug}/`));
   }
   assert.equal(doc.querySelector('[data-print-resume]'), null);
-  const download = doc.querySelector('.resume-download');
-  assert.equal(download.textContent, '下载简历 PDF');
-  assert.equal(new URL(download.getAttribute('href'), 'https://example.com').pathname, '/assets/resume.pdf');
-  assert.ok(download.getAttribute('href').endsWith(download.dataset.resumeVersion.slice(0, 12)));
-  assert.equal(download.getAttribute('download'), '陈雨桐-简历.pdf');
-  const pdf = fs.readFileSync(path.join(output, 'assets/resume.pdf'));
-  assert.ok(pdf.subarray(0, 5).equals(Buffer.from('%PDF-')));
-  const raw = pdf.toString('latin1');
-  assert.ok(raw.includes(`resume-source-sha256:${download.dataset.resumeVersion}`));
-  for (const slug of ['intent', 'recruitment-delivery', 'creator-marketing-delivery']) {
-    assert.ok(raw.includes(`/URI (https://example.com/cases/${slug}/)`));
-  }
-  assert.ok(raw.includes('/URI (mailto:cytlabss@gmail.com)'));
-  assert.ok(raw.includes('/URI (https://github.com/cytlabs)'));
-  assert.ok(raw.includes('/FontFile2'));
+  assert.equal(doc.querySelector('.resume-download'), null);
+  assert.equal(fs.existsSync(path.join(output, 'assets/resume.pdf')), false);
+  for (const link of section.querySelectorAll('.resume-entry > a')) assert.equal(clean(link.textContent), '查看详情 →');
   dom.window.close();
 });
 
