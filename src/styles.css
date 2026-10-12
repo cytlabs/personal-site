@@ -265,6 +265,7 @@
 .resume-entry h3{font-size:1.0625rem;font-weight:600;line-height:1.8;margin-bottom:6px;min-width:0}
 .resume-date{font-size:.875rem;color:var(--muted);white-space:nowrap;flex-shrink:0}
 .resume-role{font-size:.875rem;color:var(--muted);margin-bottom:8px;line-height:1.8}
+.resume-project-description{font-size:1rem;line-height:1.9;margin:6px 0 10px}
 .resume-entry ul{padding-left:1.3em;margin:9px 0 0;font-size:1rem;line-height:1.9}
 .resume-entry li{padding-left:3px;margin-bottom:7px}
 .resume-case-link{display:inline-flex;align-items:center;gap:10px;font-size:.875rem;color:var(--green);margin-top:10px}

@@ -147,7 +147,7 @@ function resume(data) {
   const bullets = items => `<ul>${items.map(text => `<li>${esc(text)}</li>`).join('')}</ul>`;
   const time = date => `<time datetime="${esc(date)}">${esc(date.replaceAll('-', '.'))}</time>`;
   const projects = data.projects.map(entry => {
-    return `<article class="resume-entry"><div class="resume-entry-heading"><h3><a href="${esc(entry.url)}">${esc(entry.title)}</a></h3><span class="resume-date">项目时间 · ${time(entry.start)}</span></div><p class="resume-role">${esc(entry.role)}</p>${bullets(entry.bullets)}<a class="resume-case-link" href="${esc(entry.url)}">查看详情 ${internalArrow}</a></article>`;
+    return `<article class="resume-entry"><div class="resume-entry-heading"><h3><a href="${esc(entry.url)}">${esc(entry.title)}</a></h3><span class="resume-date">项目时间 · ${time(entry.start)}</span></div><p class="resume-project-description">${esc(entry.description)}</p><p class="resume-role">我的职责：${esc(entry.role)}</p>${bullets(entry.bullets)}<a class="resume-case-link" href="${esc(entry.url)}">查看详情 ${internalArrow}</a></article>`;
   }).join('');
   const sectionBodies = {
     capabilities: `<dl class="resume-capabilities">${data.capabilities.map(item => `<div><dt>${esc(item.label)}</dt><dd>${esc(item.text)}</dd></div>`).join('')}</dl>`,

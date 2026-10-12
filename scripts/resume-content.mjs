@@ -20,7 +20,7 @@ export async function readResumeContent({ root, cases, base = '' }) {
       if (!item) throw new Error(`Resume references unknown or unpublished project: ${entry.slug}`);
       return {
         ...entry, title: item.title, start: item.period.start,
-        role: item.overview.find(field => field.label === '我的责任')?.value || item.kind,
+        role: entry.role || item.overview.find(field => field.label === '我的责任')?.value || item.kind,
         url: `${base}/cases/${item.slug}/`,
       };
     }),

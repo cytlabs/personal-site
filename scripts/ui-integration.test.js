@@ -185,7 +185,7 @@ test('web resume includes current personal details and concise experience titles
   assert.ok(about.querySelector('.identity-card').textContent.includes('雨桐'));
   assert.equal(doc.querySelector('.resume-contact a[href^="mailto:"]').textContent, 'Email：cytlabss@gmail.com');
   assert.equal(doc.querySelector('.resume-contact').children[3].textContent, '学历：本科');
-  assert.equal(doc.querySelector('.resume-contact').lastElementChild.textContent, '工作年限：近 7 年');
+  assert.equal(doc.querySelector('.resume-contact').lastElementChild.textContent, '工作年限：7年');
   assert.equal(doc.querySelector('.resume-summary'), null);
   assert.equal(doc.querySelector('#resume-education'), null);
   assert.equal(doc.querySelector('#resume-collaboration'), null);
