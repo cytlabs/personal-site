@@ -252,11 +252,16 @@
 .resume-header{padding-bottom:30px}
 .resume-header .eyebrow{margin-bottom:12px}
 .resume-header h1{font-size:42px;letter-spacing:0;margin-bottom:18px}
+.resume-nickname{display:block;font-size:.875rem;line-height:1.8;font-weight:400;color:var(--muted);margin-top:6px}
 .resume-summary{font-size:1.0625rem;line-height:1.95;margin-bottom:20px;max-width:760px}
 .resume-contact{display:flex;gap:12px 26px;flex-wrap:wrap;font-size:.9375rem;color:var(--muted);line-height:1.8}
 .resume-contact a:hover,.resume-entry a:hover{color:var(--green);text-decoration:underline;text-underline-offset:4px}
 .resume-section{border-top:1px solid var(--line);padding-top:25px;margin-bottom:34px}
 .resume-section h2{font-size:1.375rem;font-weight:600;margin-bottom:24px;letter-spacing:.5px}
+.resume-section-heading{display:flex;justify-content:space-between;align-items:baseline;gap:12px 20px;flex-wrap:wrap;margin-bottom:24px}
+.resume-section-heading h2{margin-bottom:0}
+.resume-section-heading .resume-case-link{margin-top:0;white-space:nowrap}
+.resume-print-url{display:none}
 .resume-entry{margin-bottom:28px}
 .resume-entry:last-child{margin-bottom:0}
 .resume-entry-heading{display:flex;justify-content:space-between;align-items:baseline;gap:10px 24px}
@@ -287,17 +292,22 @@
  @page{size:A4;margin:15mm}
  html:has(.resume-page){color-scheme:light;scroll-behavior:auto}
  .resume-page{background:#fff!important;color:#222!important;font-size:10.5pt}
- .resume-page .site-header,.resume-page .site-footer,.resume-page .skip-link,.resume-toolbar,.resume-case-link{display:none!important}
+ .resume-page .site-header,.resume-page .site-footer,.resume-page .skip-link,.resume-toolbar{display:none!important}
  .resume-page .resume-shell{max-width:none;margin:0;padding:0}
  .resume-page h1,.resume-page h2,.resume-page h3,.resume-page a,.resume-capabilities dt{color:#111!important}
  .resume-header{padding-bottom:14pt}
  .resume-header .eyebrow{font-size:8.5pt;color:#555!important;margin-bottom:5pt}
  .resume-header h1{font-size:24pt;margin-bottom:9pt}
+ .resume-nickname{font-size:9pt;color:#555!important;margin-top:3pt}
  .resume-summary,.resume-entry ul,.resume-capabilities>div,.resume-section>p{font-size:10.5pt;line-height:1.65}
  .resume-summary{margin-bottom:10pt}
  .resume-contact{font-size:9pt;color:#444!important;gap:5pt 16pt}
  .resume-section{border-color:#bbb;padding-top:12pt;margin-bottom:16pt}
  .resume-section h2{font-size:13pt;margin-bottom:12pt;break-after:avoid}
+ .resume-section-heading{margin-bottom:12pt;break-after:avoid}
+ .resume-section-heading h2{margin-bottom:0}
+ .resume-case-link{font-size:9pt;margin-top:4pt}
+ .resume-print-url{display:block;font-size:8.5pt;line-height:1.5;margin-top:3pt;overflow-wrap:anywhere}
  .resume-entry{margin-bottom:14pt;break-inside:avoid}
  .resume-entry-heading{display:flex;break-after:avoid}
  .resume-entry h3{font-size:11pt;margin-bottom:3pt}

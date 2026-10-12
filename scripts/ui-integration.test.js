@@ -179,17 +179,34 @@ test('resume is discoverable through the footer and about contacts, with a worki
   assert.ok(about.querySelector('#contact a[href="/resume/"]'));
   const dom = interactive('resume');
   const doc = dom.window.document;
-  assert.equal(doc.querySelector('h1').textContent, '夏目');
-  assert.equal(doc.querySelector('.resume-contact').lastElementChild.textContent, '本科');
+  assert.equal(doc.querySelector('h1').firstChild.textContent, '陈雨桐');
+  assert.equal(doc.querySelector('.resume-nickname').textContent, '昵称：夏目');
+  assert.equal(doc.querySelector('.resume-contact a[href^="mailto:"]').textContent, 'Email：cytlabss@gmail.com');
+  assert.equal(doc.querySelector('.resume-contact').lastElementChild.textContent, '学历：本科');
   assert.equal(doc.querySelector('#resume-education'), null);
   assert.equal(doc.querySelector('#resume-collaboration'), null);
   assert.deepEqual([...doc.querySelectorAll('#resume-experience time')].map(t => t.dateTime),
     ['2024-06', '2021-08', '2024-03', '2019-11', '2021-06']);
+  assert.equal(doc.querySelector('#resume-experience .resume-role'), null);
   assert.equal(doc.querySelectorAll('#resume-projects .resume-entry').length, 3);
-  assert.ok(doc.querySelector('#resume-projects > a[href="/cases/"]'));
+  const section = doc.querySelector('#resume-projects');
+  assert.ok(section.firstElementChild.querySelector('a[href="/cases/"]'));
+  assert.deepEqual([...section.querySelectorAll('.resume-date time')].map(t => t.dateTime),
+    ['2026-10', '2026-09', '2026-07']);
   for (const link of doc.querySelectorAll('#resume-projects .resume-entry a')) {
-    assert.ok(cases.some(c => link.getAttribute('href') === `/cases/${c.slug}/`));
+    assert.ok(cases.some(c => new URL(link.getAttribute('href'), 'https://example.com').pathname === `/cases/${c.slug}/`));
   }
+  const css = new JSDOM(`<style>${fs.readFileSync(path.join(root, 'src/styles.css'), 'utf8')}</style>`);
+  const print = [...css.window.document.styleSheets[0].cssRules].find(r => r.conditionText === 'print');
+  assert.ok(print);
+  assert.ok(![...print.cssRules].some(r => r.selectorText?.includes('.resume-case-link') && r.style.display === 'none'));
+  assert.equal([...print.cssRules].find(r => r.selectorText === '.resume-print-url').style.display, 'block');
+  assert.equal(doc.querySelectorAll('.resume-print-url').length, 3);
+  for (const link of doc.querySelectorAll('.resume-print-url')) {
+    assert.ok(link.getAttribute('href').startsWith('https://example.com/cases/'));
+    assert.equal(link.textContent, link.getAttribute('href'));
+  }
+  css.window.close();
   let printed = 0;
   dom.window.print = () => printed++;
   const button = doc.querySelector('[data-print-resume]');
