@@ -1,5 +1,6 @@
 export default {
   name: '夏目',
+  aboutName: '雨桐',
   romanName: 'XIAMU',
   title: '夏目的个人网站',
   description: '写下思考，记录实践，也留一点地方给生活。这里是夏目的文章、项目与个人介绍。',

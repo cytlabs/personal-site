@@ -6,6 +6,7 @@ import seo from './build-seo.js';
 import markdown from '../markdown-renderer.js';
 import { build as bundle } from 'esbuild';
 import site from '../site.config.mjs';
+import { readResumeContent } from './resume-content.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 // Inline before styles so stored/system theme is applied before first paint.
@@ -29,16 +30,15 @@ async function content(dir) {
     url: `/blog/${p.slug}/`,
   }));
   const cases = JSON.parse(await fs.readFile(path.join(root, 'content/case-studies.json'), 'utf8'));
-  return sortCases(cases).map(c => ({ ...c, url: `/cases/${c.slug}/`,
+  return sortCases(cases.filter(c => c.publish !== false)).map(c => ({ ...c, url: `/cases/${c.slug}/`,
     body: c.html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
     status: c.status || '项目复盘', kind: c.kind || '交付实践',
   }));
 }
 
 export function sortCases(cases) {
-  // A completed project's end month or the latest recorded stage determines recency.
-  // Stable sorting preserves editorial order within the same month; undated cases go last.
-  const month = c => c.period?.end || c.period?.start || '';
+  // Sort by project start date; preserve editorial order for ties and put undated cases last.
+  const month = c => c.period?.start || '';
   return cases.toSorted((a, b) => month(b).localeCompare(month(a)));
 }
 
@@ -48,30 +48,27 @@ export function selectFeaturedCases(cases, slugs = site.featuredCaseSlugs) {
   }
   return slugs.map(slug => {
     const item = cases.find(c => c.slug === slug);
-    if (!item) throw new Error(`Unknown featured case slug: ${slug}`);
+    if (!item || item.publish === false) throw new Error(`Unknown or unpublished featured case slug: ${slug}`);
     return item;
   });
 }
 
-function layout({ title, description = site.description, route = '/', active = '', body, room = false, article = null }) {
+function layout({ title, description = site.description, route = '/', active = '', body, room = false, article = null, bodyClass = '' }) {
   const canonical = site.url ? new URL(u(route), site.url).href : '';
   return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><title>${esc(title ? `${title} · ${site.name}` : site.title)}</title><meta name="description" content="${esc(description)}"><meta property="og:type" content="${article ? 'article' : 'website'}"><meta property="og:locale" content="zh_CN"><meta name="twitter:card" content="summary"><meta property="og:title" content="${esc(title || site.title)}"><meta property="og:description" content="${esc(description)}">${canonical ? `<link rel="canonical" href="${esc(canonical)}"><meta property="og:url" content="${esc(canonical)}"><link rel="alternate" type="application/rss+xml" title="${esc(site.name)}的文章" href="${u('/feed.xml')}">` : ''}${article && canonical ? `<script type="application/ld+json">${JSON.stringify({
     '@context':'https://schema.org', '@type':'BlogPosting', headline:article.title,
     description:article.description, datePublished:article.date, inLanguage:'zh-CN',
     mainEntityOfPage:canonical, url:canonical, keywords:article.tags,
     author:{'@type':'Person',name:site.name,url:new URL(u('/about/'),site.url).href}
-  }).replace(/</g,'\\u003c')}</script>` : ''}<meta name="theme-color" content="#e9eee5"><script>${themeScript}</script><link rel="icon" href="${u('/assets/favicon.svg')}" type="image/svg+xml"><link rel="stylesheet" href="${u('/assets/styles.css')}"><script type="module" src="${u('/assets/main.js')}"></script></head><body class="${room ? 'room-page' : ''}"><a class="skip-link" href="#main">跳到主要内容</a><header class="site-header"><a class="brand" href="${u('/')}" aria-label="${esc(site.name)}，首页">${mark}<span>${esc(site.name)}<small>${esc(site.romanName)}</small></span></a><nav aria-label="主导航">${[['/', '首页'], ['/blog/', '文章'], ['/cases/', '案例'], ['/about/', '关于']].map(([href, text]) => `<a href="${u(href)}" ${active === href ? 'aria-current="page"' : ''}>${text}</a>`).join('')}</nav><a class="header-explore" href="${u('/explore/')}" ${room ? 'aria-current="page"' : ''}>探索 <span aria-hidden="true">✳</span></a><button type="button" class="theme-toggle" data-theme-toggle aria-label="深色模式" aria-pressed="false" title="切换到夜晚" hidden><svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14A8.6 8.6 0 0 1 10 3.5 8.7 8.7 0 1 0 20.5 14Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button></header><main id="main" ${room ? 'class="explore-main"' : ''}>${body}</main>${room ? '' : `<footer class="site-footer"><div>${mark}<span>© ${new Date().getFullYear()} ${esc(site.name)}<small>保持好奇，慢慢生长。</small></span></div><div class="footer-links"><a href="${u('/about/')}#contact">联系我 ${arrow}</a>${site.url ? `<a href="${u('/feed.xml')}">RSS ${arrow}</a>` : ''}<a href="${u('/explore/')}">去房间逛逛 ${arrow}</a></div></footer>`}</body></html>`;
+  }).replace(/</g,'\\u003c')}</script>` : ''}<meta name="theme-color" content="#e9eee5"><script>${themeScript}</script><link rel="icon" href="${u('/assets/favicon.svg')}" type="image/svg+xml"><link rel="stylesheet" href="${u('/assets/styles.css')}"><script type="module" src="${u('/assets/main.js')}"></script></head><body class="${room ? 'room-page' : esc(bodyClass)}"><a class="skip-link" href="#main">跳到主要内容</a><header class="site-header"><a class="brand" href="${u('/')}" aria-label="${esc(site.name)}，首页">${mark}<span>${esc(site.name)}<small>${esc(site.romanName)}</small></span></a><nav aria-label="主导航">${[['/', '首页'], ['/blog/', '文章'], ['/cases/', '案例'], ['/about/', '关于']].map(([href, text]) => `<a href="${u(href)}" ${active === href ? 'aria-current="page"' : ''}>${text}</a>`).join('')}</nav><a class="header-explore" href="${u('/explore/')}" ${room ? 'aria-current="page"' : ''}>探索 <span aria-hidden="true">✳</span></a><button type="button" class="theme-toggle" data-theme-toggle aria-label="深色模式" aria-pressed="false" title="切换到夜晚" hidden><svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14A8.6 8.6 0 0 1 10 3.5 8.7 8.7 0 1 0 20.5 14Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button></header><main id="main" ${room ? 'class="explore-main"' : ''}>${body}</main>${room ? '' : `<footer class="site-footer"><div>${mark}<span>© ${new Date().getFullYear()} ${esc(site.name)}<small>保持好奇，慢慢生长。</small></span></div><div class="footer-links"><a href="${u('/about/')}#contact">联系我 ${arrow}</a><a href="${u('/resume/')}">简历 ${arrow}</a>${site.url ? `<a href="${u('/feed.xml')}">RSS ${arrow}</a>` : ''}<a href="${u('/explore/')}">去房间逛逛 ${arrow}</a></div></footer>`}</body></html>`;
 }
 
 function postRow(p, index, search = false) {
   return `<article class="post-row" ${search ? `data-entry data-category="${esc(p.category)}" data-search="${esc(p.title + ' ' + p.description + ' ' + p.category)}"` : ''}><span class="row-index" aria-hidden="true">${String(index + 1).padStart(2, '0')}</span><a class="post-title" href="${u(p.url)}"><h3>${esc(p.title)}</h3><p>${esc(p.description)}</p></a><div class="post-meta"><span>${esc(p.category)}</span><time datetime="${p.date}">${formatDate(p.date)}</time></div><span class="row-arrow" aria-hidden="true">↗</span></article>`;
 }
 function casePeriod(period) {
-  if (!period?.start) return '<span class="case-period">时间待补充</span>';
-  const month = date => `<time datetime="${esc(date)}">${esc(formatDate(date))}</time>`;
-  const label = period.basis === 'record' ? '阶段记录' : '项目时间';
-  const range = period.end ? `${month(period.start)} — ${month(period.end)}` : period.basis === 'record' ? month(period.start) : `${month(period.start)} 起`;
-  return `<span class="case-period">${label} · ${range}</span>`;
+  const start = period?.start ? `<time datetime="${esc(period.start)}">${esc(formatDate(period.start))}</time>` : '待补充';
+  return `<span class="case-period">项目时间 · ${start}</span>`;
 }
 function caseCard(c) {
   return `<article class="case-card" id="${esc(c.slug)}"><a href="${u(c.url)}"><div class="case-cover ${esc(c.cover)}"><img src="${u(`/assets/${c.cover}.svg`)}" alt="" width="720" height="420" loading="lazy"><span class="cover-arrow" aria-hidden="true">↗</span></div><div class="case-meta"><span>${esc(c.category)}</span><span>${esc(c.status)}</span></div>${casePeriod(c.period)}<h3>${esc(c.title)}</h3><p>${esc(c.description)}</p></a></article>`;
@@ -80,8 +77,7 @@ function caseCard(c) {
 function home(posts, cases) {
   const selected = posts.filter(p => p.featured).sort((a, b) => a.featured - b.featured).slice(0, 3);
   const projects = selectFeaturedCases(cases);
-  const recent = posts.slice(0, 4).map(p => ({...p, type:'文章'}));
-  return layout({active:'/',body:`<div class="page-shell"><section class="home-intro"><div><p class="eyebrow"><span class="status-dot"></span> 一个持续更新的个人角落</p><h1>${site.intro.split('\n').map(esc).join('<br>')}</h1><p class="intro-copy">${esc(site.bio)}</p><a class="text-link" href="${u('/about/')}">多了解我一点 ${internalArrow}</a></div><a class="room-invitation" href="${u('/explore/')}"><span class="invitation-label">A LITTLE DETOUR <span>↗</span></span>${roomIcon}<div><span class="room-invitation-title">来我的房间逛逛</span><p>换一种方式，认识这里的主人。</p></div><span class="invitation-tag">3D 探索 · 随意看看</span></a></section><div class="now-line"><span class="now-label">此刻</span><p>${esc(site.now)}</p><span class="now-decoration" aria-hidden="true">↳</span></div><section class="home-section">${heading('01','一些思考','/blog/','全部文章')}<div class="post-list">${selected.map((p,i) => postRow(p,i)).join('')}</div></section><section class="home-section">${heading('02','动手做过的事','/cases/','查看更多')}<div class="case-grid">${projects.map(caseCard).join('')}</div></section><section class="home-section updates-section">${heading('03','最近更新')}<div class="update-list">${recent.map(p => `<a href="${u(p.url)}"><time datetime="${p.date}">${formatDate(p.date)}</time><span class="update-type">${p.type}</span><span>${esc(p.title)}</span><span aria-hidden="true">↗</span></a>`).join('')}</div></section><section class="closing-note"><span aria-hidden="true">✳</span><p>想法还会变，故事还在继续。<br><small>谢谢你来这里坐一会儿。</small></p><a href="${u('/about/')}#contact">打个招呼 ${arrow}</a></section></div>`});
+  return layout({active:'/',body:`<div class="page-shell"><section class="home-intro"><div><p class="eyebrow"><span class="status-dot"></span> 一个持续更新的个人角落</p><h1>${site.intro.split('\n').map(esc).join('<br>')}</h1><p class="intro-copy">${esc(site.bio)}</p><a class="text-link" href="${u('/about/')}">多了解我一点 ${internalArrow}</a></div><a class="room-invitation" href="${u('/explore/')}"><span class="invitation-label">A LITTLE DETOUR <span>↗</span></span>${roomIcon}<div><span class="room-invitation-title">来我的房间逛逛</span><p>换一种方式，认识这里的主人。</p></div><span class="invitation-tag">3D 探索 · 随意看看</span></a></section><div class="now-line"><span class="now-label">此刻</span><p>${esc(site.now)}</p><span class="now-decoration" aria-hidden="true">↳</span></div><section class="home-section">${heading('01','一些思考','/blog/','全部文章')}<div class="post-list">${selected.map((p,i) => postRow(p,i)).join('')}</div></section><section class="home-section">${heading('02','动手做过的事','/cases/','查看更多')}<div class="case-grid">${projects.map(caseCard).join('')}</div></section><section class="closing-note"><span aria-hidden="true">✳</span><p>想法还会变，故事还在继续。<br><small>谢谢你来这里坐一会儿。</small></p><a href="${u('/about/')}#contact">打个招呼 ${arrow}</a></section></div>`});
 }
 
 function listing(items, type, current = null, pages = []) {
@@ -115,16 +111,51 @@ export function renderMarkdown(body, title = '') {
   return withToc(html);
 }
 
+function caseBrief(p) {
+  if (!p.overview?.length) return '';
+  return `<dl class="case-brief">${p.overview.map(item => `<div><dt>${esc(item.label)}</dt><dd>${esc(item.value)}</dd></div>`).join('')}</dl>`;
+}
+
+export function renderCaseImages(p) {
+  return p.html.replace(/<!--\s*case-image:([a-z0-9-]+)\s*-->/g, (_, id) => {
+    const slot = p.imageSlots?.find(item => item.id === id);
+    if (!slot) throw new Error(`${p.slug}: missing case image slot ${id}`);
+    if (slot.src && (!slot.src.startsWith('/assets/') || slot.src.split('/').includes('..'))) {
+      throw new Error(`${p.slug}: case images must use a local /assets/ path`);
+    }
+    const visual = slot.src
+      ? `<img src="${u(esc(slot.src))}" alt="${esc(slot.alt || slot.caption)}" width="${slot.width || 1600}" height="${slot.height || 1000}" loading="lazy">`
+      : `<div class="case-image-placeholder"><span class="case-image-status">图片待补充</span><strong>${esc(slot.title)}</strong></div>`;
+    return `<figure class="case-evidence" data-image-slot="${esc(id)}">${visual}<figcaption>${esc(slot.caption)}</figcaption></figure>`;
+  });
+}
+
 function detail(p, list, type) {
   const blog = type==='blog';
-  const {html,toc} = p.html ? withToc(p.html.replace(/(src|href)="(\/(?:assets|cases)\/[^"]+)"/g, (_, attribute, url) => `${attribute}="${u(url)}"`).replace(/<h2>([\s\S]*?)<\/h2>/, (all, heading) => plainText(heading).trim() === p.title.trim() ? '' : all)) : renderMarkdown(p.body, p.title);
+  const {html,toc} = p.html ? withToc(renderCaseImages(p).replace(/(src|href)="(\/(?:assets|cases)\/[^"]+)"/g, (_, attribute, url) => `${attribute}="${u(url)}"`).replace(/<h2>([\s\S]*?)<\/h2>/, (all, heading) => plainText(heading).trim() === p.title.trim() ? '' : all)) : renderMarkdown(p.body, p.title);
   const related = list.find(item => item.slug !== p.slug);
-  return layout({title:p.title,description:p.description,route:p.url,active:blog?'/blog/':'/cases/',article:blog?p:null,body:`<div class="reading-progress" aria-hidden="true"></div><div class="page-shell detail-shell"><a class="back-link" href="${u(`/${type}/`)}">← ${blog?'全部文章':'全部案例'}</a><header class="article-header"><div class="article-kicker"><span>${esc(p.category)}</span>${!blog ? `<span> / </span><span>${esc(p.status)}</span>` : ''}${p.date ? `<span> / </span><time datetime="${p.date}">${formatDate(p.date)}</time><span> / </span><span>约 ${p.minutes} 分钟</span>` : ''}</div><h1>${esc(p.title)}</h1><p>${esc(p.description)}</p>${!blog ? `${casePeriod(p.period)}${p.period?.note ? `<p class="case-time-note">${esc(p.period.note)}</p>` : p.period?.basis === 'record' ? '<p class="case-time-note">时间为已有材料记录的阶段月份，项目完整起止时间尚未记录。</p>' : p.period?.basis === 'unknown' ? '<p class="case-time-note">原案例未提供项目起止时间，待补充。</p>' : ''}` : ''}</header><div class="article-layout"><article class="prose">${html}${html.includes('class="mermaid"') ? `<script type="module" src="${u('/assets/diagrams.js')}"></script>` : ''}<div class="article-end"><span>—</span><p>谢谢你读到这里。</p></div>${related?`<a class="next-article" href="${u(related.url)}"><small>${blog?'再读一篇':'另一个案例'}</small><strong>${esc(related.title)} <span aria-hidden="true">→</span></strong></a>`:''}</article><aside class="toc"><p>这一页里</p><nav aria-label="文章目录">${toc.map(t=>`<a href="#${t.id}">${t.text}</a>`).join('')}</nav><a class="toc-about" href="${u('/about/')}">${mark}<span>夏目<br><small>写下来，也做出来。</small></span></a></aside></div></div>`});
+  return layout({title:p.title,description:p.description,route:p.url,active:blog?'/blog/':'/cases/',article:blog?p:null,body:`<div class="reading-progress" aria-hidden="true"></div><div class="page-shell detail-shell"><a class="back-link" href="${u(`/${type}/`)}">← ${blog?'全部文章':'全部案例'}</a><header class="article-header"><div class="article-kicker"><span>${esc(p.category)}</span>${!blog ? `<span> / </span><span>${esc(p.status)}</span>` : ''}${p.date ? `<span> / </span><time datetime="${p.date}">${formatDate(p.date)}</time><span> / </span><span>约 ${p.minutes} 分钟</span>` : ''}</div><h1>${esc(p.title)}</h1><p>${esc(p.description)}</p>${!blog ? casePeriod(p.period) + caseBrief(p) : ''}</header><div class="article-layout"><article class="prose">${html}${html.includes('class="mermaid"') ? `<script type="module" src="${u('/assets/diagrams.js')}"></script>` : ''}<div class="article-end"><span>—</span><p>谢谢你读到这里。</p></div>${related?`<a class="next-article" href="${u(related.url)}"><small>${blog?'再读一篇':'另一个案例'}</small><strong>${esc(related.title)} <span aria-hidden="true">→</span></strong></a>`:''}</article><aside class="toc"><p>这一页里</p><nav aria-label="文章目录">${toc.map(t=>`<a href="#${t.id}">${t.text}</a>`).join('')}</nav><a class="toc-about" href="${u('/about/')}">${mark}<span>夏目<br><small>写下来，也做出来。</small></span></a></aside></div></div>`});
 }
 
 async function about() {
-  const {html,toc} = withToc(await fs.readFile(path.join(root,'content/about.html'),'utf8'));
-  return layout({title:'关于我',route:'/about/',active:'/about/',body:`<div class="page-shell about-shell"><header class="page-intro" id="top"><p class="eyebrow">A PERSON, STILL IN PROGRESS</p><h1>你好，我是${esc(site.name)}。</h1><p>AI 应用 / Agent / Skills / 企业 AI 落地</p></header><div class="about-layout"><article class="prose">${html}</article><aside class="about-aside"><div class="identity-card">${mark}<p>${esc(site.name)}<small>${esc(site.romanName)}</small></p><hr><span>理解业务，也亲手交付。</span><p class="identity-note">保持好奇。<br>让想法接触真实的世界。</p></div><nav class="about-toc" aria-label="页面目录">${toc.filter(t=>t.depth==='2').map(t=>`<a href="#${esc(t.id)}">${t.text}</a>`).join('')}</nav><a class="about-explore" href="${u('/explore/')}">${roomIcon}<strong>也可以，来房间里坐坐 ↗</strong></a></aside></div></div>`});
+  const source = (await fs.readFile(path.join(root,'content/about.html'),'utf8')).replace(/href="(\/(?!\/)[^"]*)"/g, (_, href) => `href="${u(href)}"`);
+  const {html,toc} = withToc(source);
+  return layout({title:'关于我',route:'/about/',active:'/about/',body:`<div class="page-shell about-shell"><header class="page-intro" id="top"><p class="eyebrow">A PERSON, STILL IN PROGRESS</p><h1>你好，我是${esc(site.aboutName)}。</h1><p>企业 AI 落地（FDE） / Agent 开发 / 产品与运维</p></header><div class="about-layout"><article class="prose">${html}</article><aside class="about-aside"><div class="identity-card">${mark}<p>${esc(site.aboutName)}<small>YUTONG</small></p><hr><span>理解业务，也亲手交付。</span><p class="identity-note">保持好奇。<br>让想法接触真实的世界。</p></div><nav class="about-toc" aria-label="页面目录">${toc.filter(t=>t.depth==='2').map(t=>`<a href="#${esc(t.id)}">${t.text}</a>`).join('')}</nav><a class="about-explore" href="${u('/explore/')}">${roomIcon}<strong>也可以，来房间里坐坐 ↗</strong></a></aside></div></div>`});
+}
+
+function resume(data) {
+  const bullets = items => `<ul>${items.map(text => `<li>${esc(text)}</li>`).join('')}</ul>`;
+  const time = date => `<time datetime="${esc(date)}">${esc(date.replaceAll('-', '.'))}</time>`;
+  const projects = data.projects.map(entry => {
+    return `<article class="resume-entry"><div class="resume-entry-heading"><h3><a href="${esc(entry.url)}">${esc(entry.title)}</a></h3><span class="resume-date">项目时间 · ${time(entry.start)}</span></div><p class="resume-project-description">${esc(entry.description)}</p><p class="resume-role">我的职责：${esc(entry.role)}</p>${bullets(entry.bullets)}<a class="resume-case-link" href="${esc(entry.url)}">查看详情 ${internalArrow}</a></article>`;
+  }).join('');
+  const sectionBodies = {
+    capabilities: `<dl class="resume-capabilities">${data.capabilities.map(item => `<div><dt>${esc(item.label)}</dt><dd>${esc(item.text)}</dd></div>`).join('')}</dl>`,
+    experience: data.experiences.map(entry => `<article class="resume-entry"><div class="resume-entry-heading"><h3>${esc(entry.title)}</h3><span class="resume-date">${time(entry.start)} — ${entry.end ? time(entry.end) : '至今'}</span></div>${bullets(entry.bullets)}</article>`).join(''),
+    projects,
+  };
+  const sections = data.sections.map(section => `<section class="resume-section" id="resume-${esc(section.id)}"><div class="resume-section-heading"><h2>${esc(section.title)}</h2>${section.id === 'projects' ? `<a class="resume-case-link" href="${u('/cases/')}">查看全部案例 ${internalArrow}</a>` : ''}</div>${sectionBodies[section.id]}</section>`).join('');
+  return layout({title:`${data.name}的简历`,route:'/resume/',bodyClass:'resume-page',description:`${data.name}的简历：${data.sections.map(section => section.title).join('、')}。`,body:`<div class="page-shell resume-shell"><div class="resume-toolbar"><a class="text-link" href="${u('/about/')}">← 关于我</a><div class="resume-actions"><button type="button" class="resume-action resume-print" data-print-resume hidden><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 8V3h10v5M7 17H4V8h16v9h-3"/><path d="M7 14h10v7H7z"/><path d="M17 11h.01"/></svg><span>打印简历</span></button><button type="button" class="resume-action" data-export-resume-image hidden><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>导出图片</span></button></div></div><p class="resume-export-status" data-resume-export-status role="status" aria-live="polite" hidden></p><article class="resume-document"><header class="resume-header"><h1>${esc(data.name)}</h1><div class="resume-contact"><a href="mailto:${esc(data.email)}">Email：${esc(data.email)}</a><span>微信：${esc(data.wechat)}</span><a href="${esc(data.github)}">${esc(data.github.replace('https://', ''))}</a><span>学历：${esc(data.education)}</span><span>工作年限：${esc(data.workYears)}</span></div></header>${sections}</article></div><script type="module" src="${u('/assets/resume-image.js')}"></script>`});
 }
 
 function plainText(html) {
@@ -152,11 +183,14 @@ export async function build({ outputDir = path.join(root, 'dist') } = {}) {
   await fs.mkdir(out,{recursive:true});
   await fs.cp(path.join(root,'public'),out,{recursive:true});
   const [posts,cases] = await Promise.all([content('posts'),content('cases')]);
+  const resumeData = await readResumeContent({ root, cases, base });
   roomContent.journal = posts.slice(0,4).map(p=>({date:formatDate(p.date),title:p.title,text:publicExcerpts(p.body)[0] || p.description,note:p.description,url:u(p.url)}));
-  const pages = [ ['/',home(posts,cases)],...pagination.getBlogPages(posts).map(page=>[page.route,listing(page.posts,'blog',page,pagination.getBlogPages(posts))]),['/cases/',listing(cases,'cases')],['/about/',await about()],['/explore/',explore(posts,cases)],...posts.map(p=>[p.url,detail(p,posts,'blog')]),...cases.map(p=>[p.url,detail(p,cases,'cases')]) ];
+  const pages = [ ['/',home(posts,cases)],...pagination.getBlogPages(posts).map(page=>[page.route,listing(page.posts,'blog',page,pagination.getBlogPages(posts))]),['/cases/',listing(cases,'cases')],['/about/',await about()],['/resume/',resume(resumeData)],['/explore/',explore(posts,cases)],...posts.map(p=>[p.url,detail(p,posts,'blog')]),...cases.map(p=>[p.url,detail(p,cases,'cases')]) ];
   for(const [route,html] of pages) {const folder=path.join(out,route);await fs.mkdir(folder,{recursive:true});await fs.writeFile(path.join(folder,'index.html'),html);}
   await fs.writeFile(path.join(out,'404.html'),layout({title:'这一页不在这里',body:`<div class="page-shell not-found"><p class="eyebrow">404 · LOST & FOUND</p><h1>好像走到了一条小岔路。</h1><p>这篇内容可能已经搬家，或者链接有一点偏差。</p><a class="solid-link" href="${u('/')}">回到首页 →</a></div>`}));
-  await bundle({entryPoints:[path.join(root,'src/main.js'),path.join(root,'src/room.js')],outdir:path.join(out,'assets'),bundle:true,minify:true,format:'esm',target:'es2022',legalComments:'linked',metafile:false});
+  await bundle({entryPoints:[path.join(root,'src/main.js'),path.join(root,'src/room.js'),path.join(root,'src/resume-image.js')],outdir:path.join(out,'assets'),bundle:true,minify:true,format:'esm',target:'es2022',legalComments:'linked',metafile:false});
+  await fs.copyFile(path.join(root,'src/vendor/html2canvas-1.4.1.min.js'),path.join(out,'assets/html2canvas-1.4.1.min.js'));
+  await fs.copyFile(path.join(root,'src/vendor/html2canvas-LICENSE.txt'),path.join(out,'assets/html2canvas-LICENSE.txt'));
   await fs.copyFile(path.join(root,'src/diagrams.js'),path.join(out,'assets/diagrams.js'));
   await fs.writeFile(path.join(out,'assets/search-index.json'), JSON.stringify(posts.map(p=>({title:p.title,description:p.description,category:p.category,date:p.date,url:u(p.url),tags:p.tags}))));
   await fs.mkdir(path.join(out,'generated'),{recursive:true});

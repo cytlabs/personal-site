@@ -1,5 +1,5 @@
 ---
-publish: true
+publish: false
 slug: ai-memory-and-following-through
 title: AI 已经记住了我的要求，为什么还是没做到？
 summary: 一次真实协作让我发现：要求被保存、被 AI 读取，以及真正影响它的行动，是三个不同的环节。检查记忆是否有效，最终还是要回到它做了什么。

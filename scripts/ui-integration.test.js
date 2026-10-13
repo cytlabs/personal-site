@@ -12,7 +12,8 @@ let buildModule;
 const html = route => fs.readFileSync(path.join(output, route, 'index.html'), 'utf8');
 const documentAt = route => new JSDOM(html(route)).window.document;
 const clean = text => text.replace(/\s+/g, ' ').trim();
-const cases = JSON.parse(fs.readFileSync(path.join(root, 'content/case-studies.json')));
+const allCases = JSON.parse(fs.readFileSync(path.join(root, 'content/case-studies.json')));
+const cases = allCases.filter(c => c.publish !== false);
 const posts = readPosts(path.join(root, 'posts'));
 
 before(async () => {
@@ -33,19 +34,43 @@ test('phone workspace article renders its related article as a navigable link', 
   assert.ok(!doc.querySelector('.prose').textContent.includes(`](${destination})`));
 });
 
-test('case details contain accessible illustrations backed by published assets', () => {
+test('case details render image placeholders in the story without broken images or editorial requests', () => {
   for (const item of cases) {
     const doc = documentAt(`cases/${item.slug}`);
-    const image = doc.querySelector('.prose .project-figure img');
-    assert.ok(image, `${item.slug}: missing illustration`);
-    assert.ok(image.getAttribute('alt').trim(), `${item.slug}: missing image description`);
-    assert.ok(fs.existsSync(path.join(output, image.getAttribute('src'))), `${item.slug}: missing image asset`);
-    assert.ok(image.closest('figure').querySelector('figcaption').textContent.trim());
+    assert.deepEqual([...doc.querySelectorAll('[data-image-slot]')].map(e => e.dataset.imageSlot), item.imageSlots.map(s => s.id));
+    assert.equal(doc.querySelectorAll('.case-image-placeholder').length, item.imageSlots.length);
+    assert.equal(doc.querySelectorAll('.case-evidence img').length, 0);
+    assert.equal(doc.querySelectorAll('.case-brief dt').length, item.overview.length);
+    assert.ok(!doc.querySelector('.prose').innerHTML.includes('<!-- case-image:'));
+    for (const slot of item.imageSlots) {
+      const figure = doc.querySelector(`[data-image-slot="${slot.id}"]`);
+      assert.equal(figure.querySelector('figcaption').textContent, slot.caption);
+      assert.ok(figure.textContent.includes('图片待补充'));
+      assert.ok(figure.closest('section').querySelector('h2'));
+      assert.ok(!html(`cases/${item.slug}`).includes(slot.request));
+    }
   }
 });
 
-test('case recency orders the full listing and room workbench independently of homepage selection', () => {
-  const expected = ['99medpass', 'vowscene', 'intent', 'recruitment-delivery',
+test('a supplied case image replaces its placeholder with an accessible local asset', () => {
+  const caseWithImage = structuredClone(cases[0]);
+  const slot = caseWithImage.imageSlots[0];
+  slot.src = `/assets/${caseWithImage.cover}.svg`;
+  slot.alt = 'Project evidence supplied by the owner';
+  const doc = new JSDOM(buildModule.renderCaseImages(caseWithImage)).window.document;
+  const figure = doc.querySelector(`[data-image-slot="${slot.id}"]`);
+  assert.equal(figure.querySelector('img').getAttribute('src'), slot.src);
+  assert.equal(figure.querySelector('img').getAttribute('alt'), slot.alt);
+  assert.equal(figure.querySelector('.case-image-placeholder'), null);
+  assert.equal(figure.querySelector('figcaption').textContent, slot.caption);
+  assert.ok(fs.existsSync(path.join(output, slot.src)));
+  slot.src = '../private.png';
+  assert.throws(() => buildModule.renderCaseImages(caseWithImage), /local \/assets\//);
+  assert.throws(() => buildModule.renderCaseImages({html:'<!-- case-image:missing -->',imageSlots:[]}), /missing case image slot/);
+});
+
+test('project start dates order the published listing and room workbench independently of homepage selection', () => {
+  const expected = ['intent', 'recruitment-delivery',
     'creator-marketing-delivery', 'keysafe-password-manager', 'multi-cloud-management',
     'enterprise-gitops-platform', 'kubernetes-platform'];
   assert.deepEqual([...documentAt('cases').querySelectorAll('.case-card')].map(c => c.id), expected);
@@ -54,8 +79,39 @@ test('case recency orders the full listing and room workbench independently of h
   const input = [{slug:'undated'}, {slug:'older', period:{start:'2023-01'}},
     {slug:'completed', period:{start:'2022-01', end:'2024-05'}},
     {slug:'same-month', period:{start:'2024-05', basis:'record'}}];
-  assert.deepEqual(buildModule.sortCases(input).map(c => c.slug), ['completed', 'same-month', 'older', 'undated']);
+  assert.deepEqual(buildModule.sortCases(input).map(c => c.slug), ['same-month', 'older', 'completed', 'undated']);
   assert.equal(input[0].slug, 'undated');
+});
+
+test('hidden projects retain source content without public pages, links or room data', () => {
+  const sitemap = fs.readFileSync(path.join(output, 'sitemap.xml'), 'utf8');
+  const publicPages = [html(''), html('cases'), html('explore'), ...cases.map(c => html(`cases/${c.slug}`))];
+  for (const slug of ['99medpass', 'vowscene']) {
+    const source = allCases.find(c => c.slug === slug);
+    assert.equal(source.publish, false);
+    assert.ok(source.html && source.steps.length);
+    assert.equal(fs.existsSync(path.join(output, 'cases', slug, 'index.html')), false);
+    assert.ok(!sitemap.includes(`/cases/${slug}/`));
+    for (const page of publicPages) {
+      assert.ok(!page.includes(`/cases/${slug}/`));
+      assert.ok(!page.includes(source.title));
+    }
+    assert.throws(() => buildModule.selectFeaturedCases(allCases, [slug, 'recruitment-delivery']), /unpublished/);
+  }
+});
+
+test('case cards and details display only a project start date with one consistent label', () => {
+  const listing = documentAt('cases');
+  for (const item of cases) {
+    const expected = `项目时间 · ${item.period.start.replaceAll('-', '.')}`;
+    const card = listing.getElementById(item.slug);
+    const detail = documentAt(`cases/${item.slug}`);
+    assert.equal(card.querySelector('.case-period').textContent, expected);
+    assert.equal(card.querySelectorAll('.case-period time').length, 1);
+    assert.equal(detail.querySelector('.article-header .case-period').textContent, expected);
+    assert.equal(detail.querySelectorAll('.case-time-note').length, 0);
+    assert.equal(card.querySelector('time').getAttribute('datetime'), item.period.start);
+  }
 });
 
 test('homepage shows exactly two configured cases in order with original metadata and working detail links', async () => {
@@ -85,7 +141,7 @@ test('featured selection follows explicit configuration regardless of dates and 
   for (const invalid of [null, [], [slugs[0]], [...slugs, 'intent'], [slugs[0], slugs[0]]]) {
     assert.throws(() => buildModule.selectFeaturedCases(input, invalid), /exactly two distinct/);
   }
-  assert.throws(() => buildModule.selectFeaturedCases(input, [slugs[0], 'missing-case']), /Unknown featured case slug: missing-case/);
+  assert.throws(() => buildModule.selectFeaturedCases(input, [slugs[0], 'missing-case']), /Unknown or unpublished featured case slug: missing-case/);
 });
 
 test('every published article keeps its route, public prose, metadata and one page heading', () => {
@@ -107,13 +163,159 @@ test('every published article keeps its route, public prose, metadata and one pa
   assert.deepEqual(index.map(p => p.url), posts.map(p => `/blog/${p.slug}/`));
 });
 
-test('existing biography and contacts survive with anchor targets', () => {
+test('maintained biography and contacts render with anchor targets', () => {
   const about = documentAt('about');
-  const previous = new JSDOM(fs.readFileSync(path.join(root, 'about/index.html'), 'utf8')).window.document;
-  for (const paragraph of previous.querySelectorAll('main p, main li, main td, main dd')) {
+  const previous = new JSDOM(fs.readFileSync(path.join(root, 'content/about.html'), 'utf8')).window.document;
+  for (const paragraph of previous.querySelectorAll('p, li, td, dd')) {
     assert.ok(clean(about.querySelector('main').textContent).includes(clean(paragraph.textContent)));
   }
-  for (const element of previous.querySelectorAll('main [id]')) assert.ok(about.getElementById(element.id), element.id);
+  for (const element of previous.querySelectorAll('[id]')) assert.ok(about.getElementById(element.id), element.id);
+});
+
+test('web resume includes current personal details and concise experience titles', () => {
+  const about = documentAt('about');
+  assert.equal(documentAt('').querySelector('.site-header nav a[href="/resume/"]'), null);
+  assert.ok(documentAt('').querySelector('.footer-links a[href="/resume/"]'));
+  assert.ok(about.querySelector('#contact a[href="/resume/"]'));
+  const dom = interactive('resume');
+  const doc = dom.window.document;
+  assert.equal(doc.querySelector('h1').textContent, '陈雨桐');
+  assert.equal(doc.querySelector('.resume-nickname'), null);
+  assert.ok(about.querySelector('h1').textContent.includes('雨桐'));
+  assert.ok(about.querySelector('.identity-card').textContent.includes('雨桐'));
+  assert.equal(doc.querySelector('.resume-contact a[href^="mailto:"]').textContent, 'Email：cytlabss@gmail.com');
+  assert.equal(doc.querySelector('.resume-contact').children[3].textContent, '学历：本科');
+  assert.equal(doc.querySelector('.resume-contact').lastElementChild.textContent, '工作年限：7年');
+  assert.equal(doc.querySelector('.resume-summary'), null);
+  assert.equal(doc.querySelector('#resume-education'), null);
+  assert.equal(doc.querySelector('#resume-collaboration'), null);
+  assert.deepEqual([...doc.querySelectorAll('.resume-section h2')].map(e => e.textContent),
+    ['专业能力', '工作经历', '项目经历']);
+  assert.equal(doc.querySelector('.resume-header').firstElementChild.tagName, 'H1');
+  assert.ok(doc.querySelector('h1').nextElementSibling.classList.contains('resume-contact'));
+  assert.deepEqual([...doc.querySelectorAll('#resume-experience time')].map(t => t.dateTime),
+    ['2024-06', '2021-08', '2024-03', '2019-11', '2021-06']);
+  assert.equal(doc.querySelector('#resume-experience .resume-role'), null);
+  assert.deepEqual([...doc.querySelectorAll('#resume-experience h3')].map(e => e.textContent),
+    ['全栈开发', 'DevOps', '基础运维']);
+  assert.equal(doc.querySelectorAll('#resume-projects .resume-entry').length, 3);
+  const section = doc.querySelector('#resume-projects');
+  assert.ok(section.firstElementChild.querySelector('a[href="/cases/"]'));
+  assert.deepEqual([...section.querySelectorAll('.resume-date time')].map(t => t.dateTime),
+    ['2026-10', '2026-09', '2026-07']);
+  for (const link of doc.querySelectorAll('#resume-projects .resume-entry a')) {
+    assert.ok(cases.some(c => new URL(link.getAttribute('href'), 'https://example.com').pathname === `/cases/${c.slug}/`));
+  }
+  const printButton = doc.querySelector('[data-print-resume]');
+  assert.equal(printButton.textContent, '打印简历');
+  assert.equal(printButton.querySelector('svg').getAttribute('aria-hidden'), 'true');
+  assert.equal(printButton.hidden, true);
+  let printed = 0;
+  dom.window.print = () => printed++;
+  dom.window.eval(fs.readFileSync(path.join(root, 'src/main.js'), 'utf8'));
+  assert.equal(printButton.hidden, false);
+  printButton.click();
+  assert.equal(printed, 1);
+  const printStyles = new JSDOM(`<style>${fs.readFileSync(path.join(root, 'src/styles.css'), 'utf8')}</style>`);
+  const media = [...printStyles.window.document.styleSheets[0].cssRules].find(rule => rule.conditionText === 'print');
+  assert.ok(media);
+  for (const selector of ['.site-header', '.site-footer', '.resume-toolbar', '.resume-case-link', '.resume-export-status']) {
+    assert.ok([...media.cssRules].some(rule => rule.selectorText?.includes(selector) && rule.style.display === 'none'));
+  }
+  assert.ok(![...media.cssRules].some(rule => rule.selectorText?.includes('.resume-header') && rule.style?.display === 'none'));
+  printStyles.window.close();
+  assert.equal(doc.querySelector('.resume-download'), null);
+  assert.equal(fs.existsSync(path.join(output, 'assets/resume.pdf')), false);
+  for (const link of section.querySelectorAll('.resume-entry > a')) assert.equal(clean(link.textContent), '查看详情 →');
+  dom.window.close();
+});
+
+test('resume image exports current content without controls or changing the live theme', async () => {
+  const { initializeResumeImageExport } = await import('../src/resume-image.js');
+  const dom = new JSDOM(html('resume'));
+  const doc = dom.window.document;
+  doc.documentElement.dataset.theme = 'dark';
+  doc.querySelector('.resume-entry li').textContent = '修改后最新的简历内容';
+  const resume = doc.querySelector('.resume-document');
+  const original = resume.outerHTML;
+  const button = doc.querySelector('[data-export-resume-image]');
+  assert.equal(button.hidden, true);
+  assert.equal(doc.querySelector('script[src="/assets/resume-image.js"]').type, 'module');
+  assert.ok(fs.existsSync(path.join(output, 'assets/html2canvas-1.4.1.min.js')));
+  assert.ok(!html('').includes('/assets/resume-image.js'));
+  let calls = 0;
+  let saved;
+  const blob = new Blob(['png test payload'], { type: 'image/png' });
+  const exportImage = initializeResumeImageExport(doc, {
+    renderer: async () => async (element, options) => {
+      calls++;
+      assert.equal(element, resume);
+      assert.equal(options.windowWidth, 960);
+      assert.equal(options.scrollY, 0);
+      assert.equal(options.backgroundColor, '#ffffff');
+      assert.ok(options.ignoreElements(doc.querySelector('.resume-case-link')));
+      assert.ok(!options.ignoreElements(doc.querySelector('h1')));
+      const clone = new JSDOM(html('resume'));
+      const sheet = clone.window.document.querySelector('.resume-document');
+      sheet.replaceWith(element.cloneNode(true));
+      const current = clone.window.document.querySelector('.resume-document');
+      current.getBoundingClientRect = () => ({ width: 880, height: 2500 });
+      await options.onclone(clone.window.document, current);
+      assert.equal(clone.window.document.documentElement.dataset.theme, 'light');
+      assert.equal(clone.window.document.body.children.length, 1);
+      assert.equal(clone.window.document.querySelector('.site-header'), null);
+      assert.equal(current.querySelector('.resume-case-link'), null);
+      assert.ok(current.textContent.includes('修改后最新的简历内容'));
+      assert.equal(current.querySelectorAll('.resume-section').length, 3);
+      assert.equal(current.querySelectorAll('.resume-entry').length, 6);
+      assert.ok(current.classList.contains('resume-image-sheet'));
+      assert.ok(options.scale > 1 && options.scale <= 2);
+      assert.ok(880 * 2500 * options.scale ** 2 <= 5_000_001);
+      clone.window.close();
+      return { toBlob(callback, type) { assert.equal(type, 'image/png'); callback(blob); } };
+    },
+    save: async (image, filename) => { saved = { image, filename }; },
+  });
+  assert.equal(button.hidden, false);
+  const pending = exportImage();
+  assert.equal(button.disabled, true);
+  await exportImage();
+  await pending;
+  assert.equal(calls, 1);
+  assert.equal(saved.image, blob);
+  assert.equal(saved.filename, '陈雨桐-简历.png');
+  assert.equal(button.disabled, false);
+  assert.equal(button.textContent, '导出图片');
+  assert.equal(doc.documentElement.dataset.theme, 'dark');
+  assert.equal(resume.outerHTML, original);
+  assert.ok(doc.querySelector('[data-resume-export-status]').textContent.includes('图片已生成'));
+  dom.window.close();
+});
+
+test('failed resume image exports allow retry and remove rendering frames', async () => {
+  const { initializeResumeImageExport, renderResumeImage } = await import('../src/resume-image.js');
+  const dom = new JSDOM(html('resume'));
+  const doc = dom.window.document;
+  let attempts = 0;
+  const exportImage = initializeResumeImageExport(doc, {
+    renderer: async () => { attempts++; throw new Error('Offline'); },
+    save: () => assert.fail('Failed export must not download'),
+  });
+  await exportImage();
+  assert.ok(doc.querySelector('[data-resume-export-status]').textContent.includes('请重试'));
+  assert.equal(doc.querySelector('[data-export-resume-image]').disabled, false);
+  assert.equal(doc.querySelector('[data-export-resume-image]').hasAttribute('aria-busy'), false);
+  await exportImage();
+  assert.equal(attempts, 2);
+  await assert.rejects(renderResumeImage(doc.querySelector('.resume-document'), async () => {
+    const frame = doc.createElement('iframe');
+    frame.className = 'html2canvas-container';
+    doc.body.append(frame);
+    return { toBlob(callback) { callback(null); } };
+  }), /Image encoding failed/);
+  assert.equal(doc.querySelector('.html2canvas-container'), null);
+  assert.ok(doc.querySelector('.resume-document'));
+  dom.window.close();
 });
 
 test('static pagination covers each article exactly once and SEO includes new pages', () => {
@@ -126,7 +328,7 @@ test('static pagination covers each article exactly once and SEO includes new pa
   }
   assert.deepEqual(links, posts.map(p => `/blog/${p.slug}/`));
   const sitemap = fs.readFileSync(path.join(output, 'sitemap.xml'), 'utf8');
-  for (const route of ['/', '/about/', '/cases/', '/explore/', '/blog/page/2/']) assert.ok(sitemap.includes(`<loc>https://example.com${route}</loc>`));
+  for (const route of ['/', '/about/', '/resume/', '/cases/', '/explore/', '/blog/page/2/']) assert.ok(sitemap.includes(`<loc>https://example.com${route}</loc>`));
   assert.equal((fs.readFileSync(path.join(output, 'feed.xml'), 'utf8').match(/<item>/g) || []).length, posts.length);
   assert.ok(!html('').includes('http-equiv="refresh"'));
 });
@@ -211,6 +413,8 @@ test('room uses published content and all five experiences work without WebGL', 
       assert.match(doc.querySelector('.experience-link').href,new RegExp(posts.at(-1).slug));
     }
     if(zone==='desk') {
+      const firstProject = data.zones[1].links[0];
+      assert.equal(doc.querySelector('.desktop-note').textContent, `项目时间 · ${firstProject.period.start.replaceAll('-', '.')}`);
       const gitops=data.zones[1].links.findIndex(p=>p.url==='/cases/enterprise-gitops-platform/');
       doc.querySelector(`[data-action="project"][data-index="${gitops}"]`).click();
       doc.querySelector('[data-tab="sketch"]').click();
