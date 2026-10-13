@@ -219,7 +219,7 @@ test('web resume includes current personal details and concise experience titles
   const printStyles = new JSDOM(`<style>${fs.readFileSync(path.join(root, 'src/styles.css'), 'utf8')}</style>`);
   const media = [...printStyles.window.document.styleSheets[0].cssRules].find(rule => rule.conditionText === 'print');
   assert.ok(media);
-  for (const selector of ['.site-header', '.site-footer', '.resume-toolbar', '.resume-case-link']) {
+  for (const selector of ['.site-header', '.site-footer', '.resume-toolbar', '.resume-case-link', '.resume-export-status']) {
     assert.ok([...media.cssRules].some(rule => rule.selectorText?.includes(selector) && rule.style.display === 'none'));
   }
   assert.ok(![...media.cssRules].some(rule => rule.selectorText?.includes('.resume-header') && rule.style?.display === 'none'));
@@ -227,6 +227,94 @@ test('web resume includes current personal details and concise experience titles
   assert.equal(doc.querySelector('.resume-download'), null);
   assert.equal(fs.existsSync(path.join(output, 'assets/resume.pdf')), false);
   for (const link of section.querySelectorAll('.resume-entry > a')) assert.equal(clean(link.textContent), '查看详情 →');
+  dom.window.close();
+});
+
+test('resume image exports current content without controls or changing the live theme', async () => {
+  const { initializeResumeImageExport } = await import('../src/resume-image.js');
+  const dom = new JSDOM(html('resume'));
+  const doc = dom.window.document;
+  doc.documentElement.dataset.theme = 'dark';
+  doc.querySelector('.resume-entry li').textContent = '修改后最新的简历内容';
+  const resume = doc.querySelector('.resume-document');
+  const original = resume.outerHTML;
+  const button = doc.querySelector('[data-export-resume-image]');
+  assert.equal(button.hidden, true);
+  assert.equal(doc.querySelector('script[src="/assets/resume-image.js"]').type, 'module');
+  assert.ok(fs.existsSync(path.join(output, 'assets/html2canvas-1.4.1.min.js')));
+  assert.ok(!html('').includes('/assets/resume-image.js'));
+  let calls = 0;
+  let saved;
+  const blob = new Blob(['png test payload'], { type: 'image/png' });
+  const exportImage = initializeResumeImageExport(doc, {
+    renderer: async () => async (element, options) => {
+      calls++;
+      assert.equal(element, resume);
+      assert.equal(options.windowWidth, 960);
+      assert.equal(options.scrollY, 0);
+      assert.equal(options.backgroundColor, '#ffffff');
+      assert.ok(options.ignoreElements(doc.querySelector('.resume-case-link')));
+      assert.ok(!options.ignoreElements(doc.querySelector('h1')));
+      const clone = new JSDOM(html('resume'));
+      const sheet = clone.window.document.querySelector('.resume-document');
+      sheet.replaceWith(element.cloneNode(true));
+      const current = clone.window.document.querySelector('.resume-document');
+      current.getBoundingClientRect = () => ({ width: 880, height: 2500 });
+      await options.onclone(clone.window.document, current);
+      assert.equal(clone.window.document.documentElement.dataset.theme, 'light');
+      assert.equal(clone.window.document.body.children.length, 1);
+      assert.equal(clone.window.document.querySelector('.site-header'), null);
+      assert.equal(current.querySelector('.resume-case-link'), null);
+      assert.ok(current.textContent.includes('修改后最新的简历内容'));
+      assert.equal(current.querySelectorAll('.resume-section').length, 3);
+      assert.equal(current.querySelectorAll('.resume-entry').length, 6);
+      assert.ok(current.classList.contains('resume-image-sheet'));
+      assert.ok(options.scale > 1 && options.scale <= 2);
+      assert.ok(880 * 2500 * options.scale ** 2 <= 5_000_001);
+      clone.window.close();
+      return { toBlob(callback, type) { assert.equal(type, 'image/png'); callback(blob); } };
+    },
+    save: async (image, filename) => { saved = { image, filename }; },
+  });
+  assert.equal(button.hidden, false);
+  const pending = exportImage();
+  assert.equal(button.disabled, true);
+  await exportImage();
+  await pending;
+  assert.equal(calls, 1);
+  assert.equal(saved.image, blob);
+  assert.equal(saved.filename, '陈雨桐-简历.png');
+  assert.equal(button.disabled, false);
+  assert.equal(button.textContent, '导出图片');
+  assert.equal(doc.documentElement.dataset.theme, 'dark');
+  assert.equal(resume.outerHTML, original);
+  assert.ok(doc.querySelector('[data-resume-export-status]').textContent.includes('图片已生成'));
+  dom.window.close();
+});
+
+test('failed resume image exports allow retry and remove rendering frames', async () => {
+  const { initializeResumeImageExport, renderResumeImage } = await import('../src/resume-image.js');
+  const dom = new JSDOM(html('resume'));
+  const doc = dom.window.document;
+  let attempts = 0;
+  const exportImage = initializeResumeImageExport(doc, {
+    renderer: async () => { attempts++; throw new Error('Offline'); },
+    save: () => assert.fail('Failed export must not download'),
+  });
+  await exportImage();
+  assert.ok(doc.querySelector('[data-resume-export-status]').textContent.includes('请重试'));
+  assert.equal(doc.querySelector('[data-export-resume-image]').disabled, false);
+  assert.equal(doc.querySelector('[data-export-resume-image]').hasAttribute('aria-busy'), false);
+  await exportImage();
+  assert.equal(attempts, 2);
+  await assert.rejects(renderResumeImage(doc.querySelector('.resume-document'), async () => {
+    const frame = doc.createElement('iframe');
+    frame.className = 'html2canvas-container';
+    doc.body.append(frame);
+    return { toBlob(callback) { callback(null); } };
+  }), /Image encoding failed/);
+  assert.equal(doc.querySelector('.html2canvas-container'), null);
+  assert.ok(doc.querySelector('.resume-document'));
   dom.window.close();
 });
 

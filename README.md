@@ -191,3 +191,5 @@ vercel --prod
 简历内容维护在 `content/resume.json`，项目名称、职责和时间来自 `content/case-studies.json`。`npm run build` 会生成 `/resume/`，页脚及关于页的联系区域提供入口。
 
 简历页的“打印简历”调用浏览器打印。选择“另存为 PDF”可保存文件，网站导航、页脚及工具栏会隐藏；浏览器自己的日期、网址等页眉页脚可在打印面板中关闭。
+
+简历页的“导出图片”将当前简历正文生成一张白底 PNG 长图，隐藏案例操作链接。使用本地 html2canvas 1.4.1（仅点击导出时加载，MIT 许可证在 `src/vendor/html2canvas-LICENSE.txt`），图片不上传服务器。修改简历后导出即可获取最新内容，无需维护静态图片。
