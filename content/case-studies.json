@@ -58,17 +58,23 @@
     "imageSlots": [
       {
         "id": "recruitment-workflow",
-        "title": "招聘工作流与实际角色分工",
-        "caption": "展示需求、顾问提交、负责人审核与客户反馈之间的交接。",
+        "title": "招聘工作流与角色交接示意",
+        "caption": "依据案例分工重绘的流程示意：需求确认、顾问提交、负责人审核与客户反馈相互衔接。",
         "request": "提供原招聘负责人工作流图或实际交付流程图；保留关键角色、资料输入和审核节点，用于证明流程梳理的范围。",
-        "src": null
+        "src": "/assets/cases/recruitment-workflow.webp",
+        "width": 2160,
+        "height": 1800,
+        "alt": "依据案例分工重绘的流程示意：需求确认、顾问提交、负责人审核与客户反馈相互衔接。"
       },
       {
         "id": "recruitment-evaluation",
-        "title": "同一岗位的找人标准与评估样例",
-        "caption": "对照找人说明书、候选人分析与人工审核意见，说明判断依据如何传递。",
+        "title": "找人标准与人工修正示例",
+        "caption": "示例岗位与候选材料：对照共同标准、AI 辅助分析和负责人的人工修正，展示判断依据如何传递。",
         "request": "提供同一岗位的找人说明书、候选人评估和一条人工修正或反馈；保留标准与判断理由的对应关系，客户和人物可使用化名。",
-        "src": null
+        "src": "/assets/cases/recruitment-evaluation.webp",
+        "width": 2160,
+        "height": 1800,
+        "alt": "示例岗位与候选材料：对照共同标准、AI 辅助分析和负责人的人工修正，展示判断依据如何传递。"
       }
     ]
   },
@@ -126,17 +132,23 @@
     "imageSlots": [
       {
         "id": "creator-brief",
-        "title": "一份 Brief 怎样成为寻找说明书",
-        "caption": "对照已确认的客户要求与运营执行标准，展示需求澄清的交付物。",
+        "title": "从 Brief 到寻找说明书的示例",
+        "caption": "使用示例 Brief 和寻找条件，说明需求怎样经核对成为寻找与审核的共同依据。",
         "request": "提供同一项目的客户 Brief 与确认后的达人寻找说明书；保留目标市场、画像、内容要求、限制与确认状态的对应关系。",
-        "src": null
+        "src": "/assets/cases/creator-brief.webp",
+        "width": 2160,
+        "height": 1800,
+        "alt": "使用示例 Brief 和寻找条件，说明需求怎样经核对成为寻找与审核的共同依据。"
       },
       {
         "id": "creator-review",
-        "title": "一次候选提交、审核与名单更新",
-        "caption": "展示候选证据、通过或拒绝原因，以及审核后的名单状态。",
+        "title": "候选审核与名单反馈示例",
+        "caption": "使用示例候选说明通过建议、退回原因和补充资料如何关联名单；对客名单仍由业务人员确认。",
         "request": "提供同一批候选的提交、Agent 审核与名单更新截图；最好包含通过与未通过样例及原因，演示材料请标明演示范围。",
-        "src": null
+        "src": "/assets/cases/creator-review.webp",
+        "width": 2160,
+        "height": 1800,
+        "alt": "使用示例候选说明通过建议、退回原因和补充资料如何关联名单；对客名单仍由业务人员确认。"
       }
     ]
   },
@@ -253,17 +265,23 @@
     "imageSlots": [
       {
         "id": "intent-workspace",
-        "title": "一个真实项目在工作空间中的组织",
-        "caption": "展示项目、关联任务、资料与今日安排怎样围绕同一件事组织。",
+        "title": "围绕项目的工作空间组织示意",
+        "caption": "工作空间组织示意：示例项目关联任务、资料和当前安排；并非实际产品界面截图。",
         "request": "提供 Intent 工作空间与一个项目详情截图，保留项目、任务、资料和安排的关联；用示例内容替换私人记录。",
-        "src": null
+        "src": "/assets/cases/intent-workspace.webp",
+        "width": 2160,
+        "height": 1800,
+        "alt": "工作空间组织示意：示例项目关联任务、资料和当前安排；并非实际产品界面截图。"
       },
       {
         "id": "intent-report",
-        "title": "同一条输入从记录到确认结果",
-        "caption": "对照来源原文、AI 整理建议与确认后的对象，展示连续性。",
+        "title": "从原始输入到确认结果的示意",
+        "caption": "用示例输入串联来源保留、AI 整理建议和用户确认后的任务；并非真实微信往返记录。",
         "request": "提供同一条示例记录的微信输入或日报、网页整理报告及确认后的任务或项目；实际使用与隔离演示请区分，能看清来源与结果即可。",
-        "src": null
+        "src": "/assets/cases/intent-report.webp",
+        "width": 2160,
+        "height": 1800,
+        "alt": "用示例输入串联来源保留、AI 整理建议和用户确认后的任务；并非真实微信往返记录。"
       }
     ]
   },
@@ -314,17 +332,23 @@
     "imageSlots": [
       {
         "id": "keysafe-vault",
-        "title": "使用示例条目完成一次密码管理操作",
-        "caption": "展示条目列表、详情或编辑界面，以及操作与数据的对应关系。",
+        "title": "密码条目管理界面示意",
+        "caption": "用示例账号与条目展示列表、编辑字段和保存操作的关系；并非实际产品截图。",
         "request": "提供 KeySafe 中同一示例条目的列表、详情或编辑截图；使用示例账号和条目，展示一次完整操作，不提供真实密码。",
-        "src": null
+        "src": "/assets/cases/keysafe-vault.webp",
+        "width": 2160,
+        "height": 1800,
+        "alt": "用示例账号与条目展示列表、编辑字段和保存操作的关系；并非实际产品截图。"
       },
       {
         "id": "keysafe-access",
-        "title": "访问保护在产品中的交互位置",
-        "caption": "展示主密码、钱包连接或额外验证怎样出现在用户操作中。",
+        "title": "访问保护的交互位置示意",
+        "caption": "访问保护交互示意：依据案例设计内容绘制主密码、钱包连接与附加验证的位置；不作为安全审计或功能验收证明。",
         "request": "提供已有的解锁、主密码、钱包连接或双因子界面；优先选择与同一操作对应的连续截图，只有设计稿时请注明。",
-        "src": null
+        "src": "/assets/cases/keysafe-access.webp",
+        "width": 2160,
+        "height": 1800,
+        "alt": "访问保护交互示意：依据案例设计内容绘制主密码、钱包连接与附加验证的位置；不作为安全审计或功能验收证明。"
       }
     ]
   },
@@ -339,7 +363,7 @@
     "period": {
       "start": "2024-06"
     },
-    "html": "<div class=\"case-sample\"><section><h2>要解决的问题，为什么值得投入</h2><p>公司承接多个客户的私有化部署项目，客户使用不同的云服务提供商。资源查看、监控和操作分散在多个平台，团队需要跨环境寻找资源并汇总运行情况。</p><dl class=\"case-problem-points\"><div><dt>资源可见性</dt><dd>客户环境与云平台不同，资源信息需要有共同的查看和管理入口。</dd></div><div><dt>运维衔接</dt><dd>状态、告警和维护动作分散，处理问题时需要重新找到对应资源。</dd></div><div><dt>成本管理</dt><dd>不同环境的资源使用与成本需要汇总，才能支持优化判断。</dd></div></dl><p>这个问题同时影响运维投入、故障处理和资源成本。项目从统一资源模型出发，将后续监控、操作和成本分析连接到同一套对象。</p></section><section><h2>结果记录</h2><div class=\"markdown-table-wrap\"><table class=\"case-results\"><thead><tr><th>衡量项</th><th>简历记录</th><th>对应的价值</th></tr></thead><tbody><tr><td>环境接入</td><td>15+ 客户环境、超过 100 台云主机</td><td>让统一入口实际承接客户资源</td></tr><tr><td>运维效率</td><td>提升 200%</td><td>改善跨云环境的管理与操作效率</td></tr><tr><td>资源成本</td><td>客户平均节省 20%</td><td>使资源使用与优化效果可见</td></tr><tr><td>日常运维工作量</td><td>减少 60%</td><td>减少重复维护投入</td></tr></tbody></table></div><p class=\"case-source-note\">上述数据来自个人简历记录。统计周期、样本范围和各项指标的计算口径尚待补充，实际管理与运维材料的位置保留在下方。</p></section><section><h2>我的工作范围</h2><ul><li>主导平台整体架构设计，采用 Vue 与 Django 的前后端分离架构。</li><li>设计统一多云资源管理模型，对接火山云、阿里云等环境。</li><li>实现资源监控告警、生命周期管理、成本分析和告警自动处理模块。</li><li>完成客户环境接入，让平台承接真实资源和日常维护。</li></ul><p>交付包含平台开发与环境接入。共同资源模型为后续管理模块提供一致的关联依据。</p></section><section><h2>交付物与关键做法</h2><div class=\"case-deliverable\"><h3>跨云资源的共同模型与管理入口</h3><p>不同云环境的资源先纳入统一模型。Vue 前端提供集中查看与操作，Django 后端承接资源对象和管理逻辑，资源按环境和归属组织起来。</p><!-- case-image:multicloud-resources --></div><div class=\"case-deliverable\"><h3>围绕资源连接的运维能力</h3><p>资源状态、告警、生命周期和成本信息围绕共同对象开展。统一监控帮助发现问题，维护与告警自动处理承接后续动作，成本分析用于查看资源投入。</p><!-- case-image:multicloud-operations --></div><div class=\"case-deliverable\"><h3>能够承接客户环境的接入工作</h3><p>平台接入客户实际使用的云环境，并集中管理资源。交付范围因此包括不同环境的连接与持续使用基础，成果需要在真实运维过程中观察。</p></div></section><section><h2>这个案例能够说明的能力</h2><p>能够把跨平台的资源管理需求转成共同模型，完成前后端开发，并连接监控、自动化操作与客户环境接入。</p><p>适用于资源分散在多个云环境、需要统一运维和成本视图的团队。类似交付还需核对接入范围、操作权限、日常维护方式与指标口径。</p></section></div>",
+    "html": "<div class=\"case-sample\"><section><h2>要解决的问题，为什么值得投入</h2><p>公司承接多个客户的私有化部署项目，客户使用不同的云服务提供商。资源查看、监控和操作分散在多个平台，团队需要跨环境寻找资源并汇总运行情况。</p><dl class=\"case-problem-points\"><div><dt>资源可见性</dt><dd>客户环境与云平台不同，资源信息需要有共同的查看和管理入口。</dd></div><div><dt>运维衔接</dt><dd>状态、告警和维护动作分散，处理问题时需要重新找到对应资源。</dd></div><div><dt>成本管理</dt><dd>不同环境的资源使用与成本需要汇总，才能支持优化判断。</dd></div></dl><p>这个问题同时影响运维投入、故障处理和资源成本。项目从统一资源模型出发，将后续监控、操作和成本分析连接到同一套对象。</p></section><section><h2>结果记录</h2><div class=\"markdown-table-wrap\"><table class=\"case-results\"><thead><tr><th>衡量项</th><th>简历记录</th><th>对应的价值</th></tr></thead><tbody><tr><td>环境接入</td><td>15+ 客户环境、超过 100 台云主机</td><td>让统一入口实际承接客户资源</td></tr><tr><td>运维效率</td><td>提升 200%</td><td>改善跨云环境的管理与操作效率</td></tr><tr><td>资源成本</td><td>客户平均节省 20%</td><td>使资源使用与优化效果可见</td></tr><tr><td>日常运维工作量</td><td>减少 60%</td><td>减少重复维护投入</td></tr></tbody></table></div><p class=\"case-source-note\">上述数据来自个人简历记录。统计周期、样本范围和各项指标的计算口径尚待补充，下方用资源管理与运维关联示意说明方案。</p></section><section><h2>我的工作范围</h2><ul><li>主导平台整体架构设计，采用 Vue 与 Django 的前后端分离架构。</li><li>设计统一多云资源管理模型，对接火山云、阿里云等环境。</li><li>实现资源监控告警、生命周期管理、成本分析和告警自动处理模块。</li><li>完成客户环境接入，让平台承接真实资源和日常维护。</li></ul><p>交付包含平台开发与环境接入。共同资源模型为后续管理模块提供一致的关联依据。</p></section><section><h2>交付物与关键做法</h2><div class=\"case-deliverable\"><h3>跨云资源的共同模型与管理入口</h3><p>不同云环境的资源先纳入统一模型。Vue 前端提供集中查看与操作，Django 后端承接资源对象和管理逻辑，资源按环境和归属组织起来。</p><!-- case-image:multicloud-resources --></div><div class=\"case-deliverable\"><h3>围绕资源连接的运维能力</h3><p>资源状态、告警、生命周期和成本信息围绕共同对象开展。统一监控帮助发现问题，维护与告警自动处理承接后续动作，成本分析用于查看资源投入。</p><!-- case-image:multicloud-operations --></div><div class=\"case-deliverable\"><h3>能够承接客户环境的接入工作</h3><p>平台接入客户实际使用的云环境，并集中管理资源。交付范围因此包括不同环境的连接与持续使用基础，成果需要在真实运维过程中观察。</p></div></section><section><h2>这个案例能够说明的能力</h2><p>能够把跨平台的资源管理需求转成共同模型，完成前后端开发，并连接监控、自动化操作与客户环境接入。</p><p>适用于资源分散在多个云环境、需要统一运维和成本视图的团队。类似交付还需核对接入范围、操作权限、日常维护方式与指标口径。</p></section></div>",
     "steps": [
       {
         "title": "统一资源模型",
@@ -375,17 +399,23 @@
     "imageSlots": [
       {
         "id": "multicloud-resources",
-        "title": "不同云资源进入同一个管理入口",
-        "caption": "展示资源归属、云平台、环境、运行状态及管理操作。",
+        "title": "跨云资源管理入口示意",
+        "caption": "用示例资源展示云平台、客户环境和运行状态怎样进入共同管理入口。",
         "request": "提供同一列表中跨云资源或资源详情截图；保留云平台、环境、状态与操作字段，客户和主机名称可使用化名。",
-        "src": null
+        "src": "/assets/cases/multicloud-resources.webp",
+        "width": 2160,
+        "height": 1800,
+        "alt": "用示例资源展示云平台、客户环境和运行状态怎样进入共同管理入口。"
       },
       {
         "id": "multicloud-operations",
-        "title": "同一资源的监控、告警或成本记录",
-        "caption": "把运行信息与资源归属对照，说明平台如何支持运维判断。",
+        "title": "同一资源的运维关联示意",
+        "caption": "用示例资源连接监控告警、维护动作与成本归集；不对应实际运行或账单记录。",
         "request": "提供与资源列表对应的监控告警、处理记录或成本视图；若有成本或工作量前后统计，也可附原始报表说明指标口径。",
-        "src": null
+        "src": "/assets/cases/multicloud-operations.webp",
+        "width": 2160,
+        "height": 1800,
+        "alt": "用示例资源连接监控告警、维护动作与成本归集；不对应实际运行或账单记录。"
       }
     ]
   },
@@ -400,7 +430,7 @@
     "period": {
       "start": "2022-12"
     },
-    "html": "<div class=\"case-sample\"><section><h2>要解决的问题，为什么值得投入</h2><p>公司向云原生架构转型后，原有发布方式无法满足 Kubernetes 环境的部署需求。应用需要在不同环境中发布，配置版本、环境差异和人工操作都影响交付。</p><dl class=\"case-problem-points\"><div><dt>发布效率</dt><dd>原流程平均一次应用发布需要 30 分钟，发布周期是直接需要改善的指标。</dd></div><div><dt>环境一致性</dt><dd>不同环境的配置需要统一组织和管理，减少配置差异带来的错误。</dd></div><div><dt>变更可靠性</dt><dd>发布过程需要留下版本与审核依据，并能够追踪部署状态和执行回滚。</dd></div></dl><p>项目的价值在于让应用变更更快、更稳定地进入运行环境，同时减少配置错误和人工操作风险。这决定了交付需要覆盖整条发布流程。</p></section><section><h2>结果记录</h2><div class=\"markdown-table-wrap\"><table class=\"case-results\"><thead><tr><th>衡量项</th><th>简历记录</th><th>对应的价值</th></tr></thead><tbody><tr><td>平均应用发布时间</td><td>30 分钟 → 5 分钟</td><td>减少一次发布所需的等待与操作时间</td></tr><tr><td>发布成功率</td><td>提升至 99.9%</td><td>提高发布过程的稳定性</td></tr><tr><td>配置错误</td><td>降低 80%</td><td>减少环境配置差异带来的错误</td></tr><tr><td>代码提交到部署的周期</td><td>缩短 70%</td><td>加快变更进入运行环境的速度</td></tr></tbody></table></div><p class=\"case-source-note\">上述数据来自个人简历中的项目记录。统计周期、样本范围和计算口径尚待补充；下方保留实际发布与配置材料的位置。</p></section><section><h2>我的工作范围</h2><ul><li>设计并实现 GitOps 发布架构，用 Git 管理基础设施与应用配置版本。</li><li>搭建 GitLab Runner、Kustomize 与 ArgoCD 组成的多环境发布平台。</li><li>制定配置模板、变更审核流程和最佳实践文档。</li><li>指导开发及运维团队使用工具，把发布规范落到团队协作中。</li></ul><p>我的交付覆盖方案、工具链和使用方法。开发与运维团队共同使用配置模板、审核规则与发布平台，才能让这套流程持续服务于日常交付。</p></section><section><h2>交付物与关键做法</h2><div class=\"case-deliverable\"><h3>一条能够追溯变更的发布链路</h3><p>将配置纳入 Git，保留变更版本和审核依据；通过 GitLab Runner 执行流水线，再由 ArgoCD 衔接应用同步与部署。发布过程围绕同一份配置版本推进，问题定位和回滚也有对应的版本依据。</p><ol class=\"case-flow\" aria-label=\"发布链路示意\"><li><strong>配置入库</strong><span>Git 配置版本</span></li><li><strong>变更审核</strong><span>模板与审核规范</span></li><li><strong>流水线执行</strong><span>GitLab Runner</span></li><li><strong>应用同步</strong><span>ArgoCD</span></li><li><strong>应用部署</strong><span>Kubernetes</span></li></ol><p class=\"case-source-note\">上方为链路关系示意，实际运行截图留在下方。</p><!-- case-image:gitops-delivery --></div><div class=\"case-deliverable\"><h3>一套管理环境差异的配置模板</h3><p>用 Kustomize 组织多环境配置差异，并制定模板与变更审核规范。共同配置和环境差异进入版本管理，修改经过审核，再通过统一流程部署。</p><p>这项交付连接了两个问题：配置怎样保持一致，以及必要的环境差异怎样被明确表达和核对。</p><!-- case-image:gitops-environments --></div><div class=\"case-deliverable\"><h3>团队能够继续使用的规范与文档</h3><p>制定最佳实践和规范文档，指导开发与运维团队采用共同流程。工具链、配置模板、审核规则和回滚方式一起交付，让后续变更能够继续按同一套方法处理。</p></div></section><section><h2>这个案例能够说明的能力</h2><p>在 Kubernetes 多环境部署场景中，我能够把发布效率、配置一致性和变更可靠性的要求，落实为配置管理、自动发布、审核与回滚的工程方案，并推动团队使用。</p><p>如果团队正面临多环境发布流程需要统一、配置容易出错或部署周期较长的问题，这个项目可以作为评估类似交付能力的参考。具体方案仍需要结合应用形态、现有工具和团队协作方式确定。</p></section></div>",
+    "html": "<div class=\"case-sample\"><section><h2>要解决的问题，为什么值得投入</h2><p>公司向云原生架构转型后，原有发布方式无法满足 Kubernetes 环境的部署需求。应用需要在不同环境中发布，配置版本、环境差异和人工操作都影响交付。</p><dl class=\"case-problem-points\"><div><dt>发布效率</dt><dd>原流程平均一次应用发布需要 30 分钟，发布周期是直接需要改善的指标。</dd></div><div><dt>环境一致性</dt><dd>不同环境的配置需要统一组织和管理，减少配置差异带来的错误。</dd></div><div><dt>变更可靠性</dt><dd>发布过程需要留下版本与审核依据，并能够追踪部署状态和执行回滚。</dd></div></dl><p>项目的价值在于让应用变更更快、更稳定地进入运行环境，同时减少配置错误和人工操作风险。这决定了交付需要覆盖整条发布流程。</p></section><section><h2>结果记录</h2><div class=\"markdown-table-wrap\"><table class=\"case-results\"><thead><tr><th>衡量项</th><th>简历记录</th><th>对应的价值</th></tr></thead><tbody><tr><td>平均应用发布时间</td><td>30 分钟 → 5 分钟</td><td>减少一次发布所需的等待与操作时间</td></tr><tr><td>发布成功率</td><td>提升至 99.9%</td><td>提高发布过程的稳定性</td></tr><tr><td>配置错误</td><td>降低 80%</td><td>减少环境配置差异带来的错误</td></tr><tr><td>代码提交到部署的周期</td><td>缩短 70%</td><td>加快变更进入运行环境的速度</td></tr></tbody></table></div><p class=\"case-source-note\">上述数据来自个人简历中的项目记录。统计周期、样本范围和计算口径尚待补充；下方用发布链路与配置示意说明方案。</p></section><section><h2>我的工作范围</h2><ul><li>设计并实现 GitOps 发布架构，用 Git 管理基础设施与应用配置版本。</li><li>搭建 GitLab Runner、Kustomize 与 ArgoCD 组成的多环境发布平台。</li><li>制定配置模板、变更审核流程和最佳实践文档。</li><li>指导开发及运维团队使用工具，把发布规范落到团队协作中。</li></ul><p>我的交付覆盖方案、工具链和使用方法。开发与运维团队共同使用配置模板、审核规则与发布平台，才能让这套流程持续服务于日常交付。</p></section><section><h2>交付物与关键做法</h2><div class=\"case-deliverable\"><h3>一条能够追溯变更的发布链路</h3><p>将配置纳入 Git，保留变更版本和审核依据；通过 GitLab Runner 执行流水线，再由 ArgoCD 衔接应用同步与部署。发布过程围绕同一份配置版本推进，问题定位和回滚也有对应的版本依据。</p><ol class=\"case-flow\" aria-label=\"发布链路示意\"><li><strong>配置入库</strong><span>Git 配置版本</span></li><li><strong>变更审核</strong><span>模板与审核规范</span></li><li><strong>流水线执行</strong><span>GitLab Runner</span></li><li><strong>应用同步</strong><span>ArgoCD</span></li><li><strong>应用部署</strong><span>Kubernetes</span></li></ol><p class=\"case-source-note\">上方与下方均为链路关系示意，实际运行材料可继续补充。</p><!-- case-image:gitops-delivery --></div><div class=\"case-deliverable\"><h3>一套管理环境差异的配置模板</h3><p>用 Kustomize 组织多环境配置差异，并制定模板与变更审核规范。共同配置和环境差异进入版本管理，修改经过审核，再通过统一流程部署。</p><p>这项交付连接了两个问题：配置怎样保持一致，以及必要的环境差异怎样被明确表达和核对。</p><!-- case-image:gitops-environments --></div><div class=\"case-deliverable\"><h3>团队能够继续使用的规范与文档</h3><p>制定最佳实践和规范文档，指导开发与运维团队采用共同流程。工具链、配置模板、审核规则和回滚方式一起交付，让后续变更能够继续按同一套方法处理。</p></div></section><section><h2>这个案例能够说明的能力</h2><p>在 Kubernetes 多环境部署场景中，我能够把发布效率、配置一致性和变更可靠性的要求，落实为配置管理、自动发布、审核与回滚的工程方案，并推动团队使用。</p><p>如果团队正面临多环境发布流程需要统一、配置容易出错或部署周期较长的问题，这个项目可以作为评估类似交付能力的参考。具体方案仍需要结合应用形态、现有工具和团队协作方式确定。</p></section></div>",
     "steps": [
       {
         "title": "配置纳入 Git",
@@ -436,17 +466,23 @@
     "imageSlots": [
       {
         "id": "gitops-delivery",
-        "title": "一次实际发布的运行记录",
-        "caption": "对照同一次变更的流水线记录与 ArgoCD 部署状态，展示链路如何运行。",
+        "title": "可追溯的发布链路示意",
+        "caption": "发布链路示意：依据案例内容重绘 Git、审核、GitLab Runner、ArgoCD 与 Kubernetes 的关系；并非历史发布截图。",
         "request": "提供同一次发布的 GitLab 流水线与 ArgoCD 应用状态截图；保留提交或版本标识、运行状态，以及可见的开始结束时间，用于说明发布过程和用时。",
-        "src": null
+        "src": "/assets/cases/gitops-delivery.webp",
+        "width": 2160,
+        "height": 1800,
+        "alt": "发布链路示意：依据案例内容重绘 Git、审核、GitLab Runner、ArgoCD 与 Kubernetes 的关系；并非历史发布截图。"
       },
       {
         "id": "gitops-environments",
-        "title": "环境配置模板与一次变更审核",
-        "caption": "展示共用配置、环境差异，以及变更提交后的审核依据。",
+        "title": "多环境配置与审核示意",
+        "caption": "用示例目录和变更说明共用配置、环境差异与审核依据；并非原项目配置记录。",
         "request": "提供 Kustomize 共用配置与环境差异的目录或文件片段，搭配一次 Merge Request 变更或审核截图；保留可读字段，去掉凭据与内部地址。",
-        "src": null
+        "src": "/assets/cases/gitops-environments.webp",
+        "width": 2160,
+        "height": 1800,
+        "alt": "用示例目录和变更说明共用配置、环境差异与审核依据；并非原项目配置记录。"
       }
     ]
   },
@@ -461,7 +497,7 @@
     "period": {
       "start": "2021-12"
     },
-    "html": "<div class=\"case-sample\"><section><h2>要解决的问题，为什么值得投入</h2><p>业务规模扩大后，传统虚拟机部署出现资源利用率低、环境一致性差和运维成本高的问题。应用分散运行，部署环境和状态需要分别维护。</p><dl class=\"case-problem-points\"><div><dt>资源投入</dt><dd>需要提高资源利用率，并使基础设施能够持续承接业务。</dd></div><div><dt>部署效率</dt><dd>环境差异和分散的部署方式影响应用进入运行环境的速度。</dd></div><div><dt>运行维护</dt><dd>迁移以后仍需统一查看日志、监控和告警，支持故障响应。</dd></div></dl><p>项目因此需要同时建设运行平台和推进应用迁移。应用进入统一环境，并拥有共同的镜像与可观测方法，平台才能服务于日常交付。</p></section><section><h2>结果记录</h2><div class=\"markdown-table-wrap\"><table class=\"case-results\"><thead><tr><th>衡量项</th><th>简历记录</th><th>对应的价值</th></tr></thead><tbody><tr><td>应用改造范围</td><td>指导团队完成 50+ 应用容器化改造</td><td>让平台实际承接已有业务</td></tr><tr><td>资源利用率</td><td>提升 40%</td><td>改善基础设施的资源使用</td></tr><tr><td>部署效率</td><td>提升 300%，用时从小时级到分钟级</td><td>加快应用部署</td></tr><tr><td>故障平均响应时间</td><td>缩短 50%</td><td>让统一可观测体系支持问题响应</td></tr></tbody></table></div><p class=\"case-source-note\">上述数据来自个人简历记录。统计周期、应用范围和效率指标口径尚待补充，下方保留平台与迁移材料的位置。</p></section><section><h2>我的工作范围</h2><ul><li>设计并部署生产级 Kubernetes 集群，完成多可用区高可用架构与网络方案选型。</li><li>构建镜像流水线，规范基础镜像制作和应用容器化流程。</li><li>基于 ELK 和 Prometheus 建设日志采集、监控与告警体系。</li><li>制定应用改造规范，指导开发团队推进 50+ 应用的容器化改造。</li></ul><p>平台建设由我承担相应架构与实施工作，应用改造通过规范与开发团队协作推进。交付同时覆盖基础平台和团队采用的方法。</p></section><section><h2>交付物与关键做法</h2><div class=\"case-deliverable\"><h3>能够承接生产应用的运行平台</h3><p>建设 Kubernetes 集群，处理高可用与网络方案，并为应用提供共同运行基础。平台架构需要和已有应用的运行需求一起考虑。</p><!-- case-image:container-architecture --></div><div class=\"case-deliverable\"><h3>镜像、日志与监控组成的迁移基础</h3><p>镜像规范组织应用构建与容器化方式，ELK 和 Prometheus 连接迁移后的日志、状态和告警。应用进入集群后，团队仍能够查看运行情况并响应问题。</p><!-- case-image:container-observability --></div><div class=\"case-deliverable\"><h3>开发与运维共同采用的改造规范</h3><p>制定容器化改造规范并指导开发团队，让迁移按共同方法推进。运行平台、应用改造和可观测能力一起交付，降低平台建成后难以承接实际业务的风险。</p></div></section><section><h2>这个案例能够说明的能力</h2><p>能够从基础设施问题出发建设运行平台，并把镜像、可观测体系与应用迁移连接成完整的工程交付。</p><p>适用于希望统一应用运行环境、推进容器化迁移的团队。具体方案需要结合应用特征、高可用要求与团队维护能力确定，迁移后的部署和故障响应也应共同验收。</p></section></div>",
+    "html": "<div class=\"case-sample\"><section><h2>要解决的问题，为什么值得投入</h2><p>业务规模扩大后，传统虚拟机部署出现资源利用率低、环境一致性差和运维成本高的问题。应用分散运行，部署环境和状态需要分别维护。</p><dl class=\"case-problem-points\"><div><dt>资源投入</dt><dd>需要提高资源利用率，并使基础设施能够持续承接业务。</dd></div><div><dt>部署效率</dt><dd>环境差异和分散的部署方式影响应用进入运行环境的速度。</dd></div><div><dt>运行维护</dt><dd>迁移以后仍需统一查看日志、监控和告警，支持故障响应。</dd></div></dl><p>项目因此需要同时建设运行平台和推进应用迁移。应用进入统一环境，并拥有共同的镜像与可观测方法，平台才能服务于日常交付。</p></section><section><h2>结果记录</h2><div class=\"markdown-table-wrap\"><table class=\"case-results\"><thead><tr><th>衡量项</th><th>简历记录</th><th>对应的价值</th></tr></thead><tbody><tr><td>应用改造范围</td><td>指导团队完成 50+ 应用容器化改造</td><td>让平台实际承接已有业务</td></tr><tr><td>资源利用率</td><td>提升 40%</td><td>改善基础设施的资源使用</td></tr><tr><td>部署效率</td><td>提升 300%，用时从小时级到分钟级</td><td>加快应用部署</td></tr><tr><td>故障平均响应时间</td><td>缩短 50%</td><td>让统一可观测体系支持问题响应</td></tr></tbody></table></div><p class=\"case-source-note\">上述数据来自个人简历记录。统计周期、应用范围和效率指标口径尚待补充，下方用平台架构与迁移关系示意说明方案。</p></section><section><h2>我的工作范围</h2><ul><li>设计并部署生产级 Kubernetes 集群，完成多可用区高可用架构与网络方案选型。</li><li>构建镜像流水线，规范基础镜像制作和应用容器化流程。</li><li>基于 ELK 和 Prometheus 建设日志采集、监控与告警体系。</li><li>制定应用改造规范，指导开发团队推进 50+ 应用的容器化改造。</li></ul><p>平台建设由我承担相应架构与实施工作，应用改造通过规范与开发团队协作推进。交付同时覆盖基础平台和团队采用的方法。</p></section><section><h2>交付物与关键做法</h2><div class=\"case-deliverable\"><h3>能够承接生产应用的运行平台</h3><p>建设 Kubernetes 集群，处理高可用与网络方案，并为应用提供共同运行基础。平台架构需要和已有应用的运行需求一起考虑。</p><!-- case-image:container-architecture --></div><div class=\"case-deliverable\"><h3>镜像、日志与监控组成的迁移基础</h3><p>镜像规范组织应用构建与容器化方式，ELK 和 Prometheus 连接迁移后的日志、状态和告警。应用进入集群后，团队仍能够查看运行情况并响应问题。</p><!-- case-image:container-observability --></div><div class=\"case-deliverable\"><h3>开发与运维共同采用的改造规范</h3><p>制定容器化改造规范并指导开发团队，让迁移按共同方法推进。运行平台、应用改造和可观测能力一起交付，降低平台建成后难以承接实际业务的风险。</p></div></section><section><h2>这个案例能够说明的能力</h2><p>能够从基础设施问题出发建设运行平台，并把镜像、可观测体系与应用迁移连接成完整的工程交付。</p><p>适用于希望统一应用运行环境、推进容器化迁移的团队。具体方案需要结合应用特征、高可用要求与团队维护能力确定，迁移后的部署和故障响应也应共同验收。</p></section></div>",
     "steps": [
       {
         "title": "建设运行平台",
@@ -497,17 +533,23 @@
     "imageSlots": [
       {
         "id": "container-architecture",
-        "title": "生产集群与应用承载关系",
-        "caption": "展示高可用集群、网络和应用运行基础之间的关系。",
+        "title": "高可用集群与应用承载关系示意",
+        "caption": "依据案例范围重绘控制平面、可用区、工作节点和应用关系；节点与应用数量为示意。",
         "request": "提供当时的 Kubernetes 集群架构或拓扑图，保留可用区、节点角色、网络与应用承载关系，使用角色名替代内部地址。",
-        "src": null
+        "src": "/assets/cases/container-architecture.webp",
+        "width": 2160,
+        "height": 1800,
+        "alt": "依据案例范围重绘控制平面、可用区、工作节点和应用关系；节点与应用数量为示意。"
       },
       {
         "id": "container-observability",
-        "title": "同一应用的迁移与运行材料",
-        "caption": "对照迁移记录、日志或监控，说明平台怎样承接应用和后续维护。",
+        "title": "应用迁移与可观测关系示意",
+        "caption": "用示例应用连接镜像规范、容器化部署、Prometheus 监控和 ELK 日志；并非实际运行截图。",
         "request": "提供应用迁移清单或部署前后对照，搭配同一应用的 Prometheus 监控或 ELK 日志；若有原始用时与响应记录，可用于补充指标证据。",
-        "src": null
+        "src": "/assets/cases/container-observability.webp",
+        "width": 2160,
+        "height": 1800,
+        "alt": "用示例应用连接镜像规范、容器化部署、Prometheus 监控和 ELK 日志；并非实际运行截图。"
       }
     ]
   }

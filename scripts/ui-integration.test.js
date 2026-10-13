@@ -34,18 +34,26 @@ test('phone workspace article renders its related article as a navigable link', 
   assert.ok(!doc.querySelector('.prose').textContent.includes(`](${destination})`));
 });
 
-test('case details render image placeholders in the story without broken images or editorial requests', () => {
+test('case details render supplied illustrations or placeholders without broken images or editorial requests', () => {
   for (const item of cases) {
     const doc = documentAt(`cases/${item.slug}`);
     assert.deepEqual([...doc.querySelectorAll('[data-image-slot]')].map(e => e.dataset.imageSlot), item.imageSlots.map(s => s.id));
-    assert.equal(doc.querySelectorAll('.case-image-placeholder').length, item.imageSlots.length);
-    assert.equal(doc.querySelectorAll('.case-evidence img').length, 0);
+    assert.equal(doc.querySelectorAll('.case-image-placeholder').length, item.imageSlots.filter(slot => !slot.src).length);
+    assert.equal(doc.querySelectorAll('.case-evidence img').length, item.imageSlots.filter(slot => slot.src).length);
     assert.equal(doc.querySelectorAll('.case-brief dt').length, item.overview.length);
     assert.ok(!doc.querySelector('.prose').innerHTML.includes('<!-- case-image:'));
     for (const slot of item.imageSlots) {
       const figure = doc.querySelector(`[data-image-slot="${slot.id}"]`);
       assert.equal(figure.querySelector('figcaption').textContent, slot.caption);
-      assert.ok(figure.textContent.includes('图片待补充'));
+      if (slot.src) {
+        const image = figure.querySelector('img');
+        assert.equal(image.getAttribute('src'), slot.src);
+        assert.equal(image.getAttribute('alt'), slot.alt || slot.caption);
+        assert.ok(fs.existsSync(path.join(output, slot.src)));
+        assert.ok(fs.statSync(path.join(output, slot.src)).size > 1000);
+      } else {
+        assert.ok(figure.textContent.includes('图片待补充'));
+      }
       assert.ok(figure.closest('section').querySelector('h2'));
       assert.ok(!html(`cases/${item.slug}`).includes(slot.request));
     }
