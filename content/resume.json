@@ -10,7 +10,7 @@
       "bullets": [
         "长期远程参与全栈产品、AI 工作流、Web3 工具与自动化项目，适应异步协作，能够独立拆分和推进任务。",
         "负责或参与需求理解、方案设计、前后端开发、数据库设计、第三方 API 集成与部署交付，衔接产品从需求到上线的各个环节。",
-        "实践达人营销 AI 工作流、KeySafe、Claude Code 任务拆分工具与 Job Search Materials Skill 等项目，将业务要求拆成可执行流程，明确 AI 节点、人工确认、异常分支与数据流转。",
+        "实践达人营销、猎头交付、KeySafe 等项目，将业务要求拆成可执行流程，明确 AI 节点、人工确认、异常分支与数据流转。",
         "结合 DevOps 背景处理部署、日志排查与运行维护，沉淀文档和交付流程，支持产品后续迭代。"
       ]
     },
@@ -36,7 +36,7 @@
     }
   ],
   "capabilities": [
-    {"label": "业务与产品", "text": "业务调研、流程梳理、需求分析、方案设计、MVP 验证；执行标准与人工审核职责。"},
+    {"label": "业务与产品", "text": "业务调研、流程梳理、需求分析、方案设计、MVP 验证。"},
     {"label": "AI 应用", "text": "Agent、工具调用、上下文组织、Skills、Workflow、RAG，以及反馈与评测机制。"},
     {"label": "全栈开发", "text": "React、Next.js、Vue、TypeScript；Python、Django、FastAPI、Node.js；PostgreSQL 与第三方服务集成。"},
     {"label": "工程与运维", "text": "Linux、Docker、Kubernetes、GitLab CI、ArgoCD、Kustomize；日志、监控、自动化与部署维护。"}
