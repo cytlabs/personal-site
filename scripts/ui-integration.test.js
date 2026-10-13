@@ -206,7 +206,23 @@ test('web resume includes current personal details and concise experience titles
   for (const link of doc.querySelectorAll('#resume-projects .resume-entry a')) {
     assert.ok(cases.some(c => new URL(link.getAttribute('href'), 'https://example.com').pathname === `/cases/${c.slug}/`));
   }
-  assert.equal(doc.querySelector('[data-print-resume]'), null);
+  const printButton = doc.querySelector('[data-print-resume]');
+  assert.equal(printButton.textContent, '打印简历');
+  assert.equal(printButton.hidden, true);
+  let printed = 0;
+  dom.window.print = () => printed++;
+  dom.window.eval(fs.readFileSync(path.join(root, 'src/main.js'), 'utf8'));
+  assert.equal(printButton.hidden, false);
+  printButton.click();
+  assert.equal(printed, 1);
+  const printStyles = new JSDOM(`<style>${fs.readFileSync(path.join(root, 'src/styles.css'), 'utf8')}</style>`);
+  const media = [...printStyles.window.document.styleSheets[0].cssRules].find(rule => rule.conditionText === 'print');
+  assert.ok(media);
+  for (const selector of ['.site-header', '.site-footer', '.resume-toolbar']) {
+    assert.ok([...media.cssRules].some(rule => rule.selectorText?.includes(selector) && rule.style.display === 'none'));
+  }
+  assert.ok(![...media.cssRules].some(rule => rule.selectorText?.includes('.resume-header') && rule.style?.display === 'none'));
+  printStyles.window.close();
   assert.equal(doc.querySelector('.resume-download'), null);
   assert.equal(fs.existsSync(path.join(output, 'assets/resume.pdf')), false);
   for (const link of section.querySelectorAll('.resume-entry > a')) assert.equal(clean(link.textContent), '查看详情 →');
