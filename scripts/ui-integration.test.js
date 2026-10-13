@@ -208,6 +208,7 @@ test('web resume includes current personal details and concise experience titles
   }
   const printButton = doc.querySelector('[data-print-resume]');
   assert.equal(printButton.textContent, '打印简历');
+  assert.equal(printButton.querySelector('svg').getAttribute('aria-hidden'), 'true');
   assert.equal(printButton.hidden, true);
   let printed = 0;
   dom.window.print = () => printed++;
@@ -218,7 +219,7 @@ test('web resume includes current personal details and concise experience titles
   const printStyles = new JSDOM(`<style>${fs.readFileSync(path.join(root, 'src/styles.css'), 'utf8')}</style>`);
   const media = [...printStyles.window.document.styleSheets[0].cssRules].find(rule => rule.conditionText === 'print');
   assert.ok(media);
-  for (const selector of ['.site-header', '.site-footer', '.resume-toolbar']) {
+  for (const selector of ['.site-header', '.site-footer', '.resume-toolbar', '.resume-case-link']) {
     assert.ok([...media.cssRules].some(rule => rule.selectorText?.includes(selector) && rule.style.display === 'none'));
   }
   assert.ok(![...media.cssRules].some(rule => rule.selectorText?.includes('.resume-header') && rule.style?.display === 'none'));

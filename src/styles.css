@@ -247,8 +247,9 @@
 /* Resume: compact reading layout. */
 .resume-shell{max-width:880px;padding-top:36px}
 .resume-toolbar{display:flex;align-items:center;justify-content:space-between;gap:20px;margin-bottom:30px}
-.resume-print{border:1px solid var(--line);border-radius:4px;background:var(--paper);color:var(--ink);padding:11px 17px;font-size:.9375rem;line-height:1.8}
-.resume-print:hover{border-color:var(--green)}
+.resume-print{display:inline-flex;align-items:center;gap:8px;min-height:44px;border:0;border-radius:4px;background:transparent;color:var(--muted);padding:8px 10px;margin-right:-10px;font-size:.875rem;font-weight:550;line-height:1.8;transition:color .2s,background .2s}
+.resume-print svg{flex-shrink:0}
+.resume-print:hover{color:var(--ink);background:var(--soft)}
 .resume-header{padding-bottom:30px}
 .resume-header h1{font-size:42px;letter-spacing:0;margin-bottom:18px;text-align:center}
 .resume-contact{display:flex;justify-content:center;gap:10px 0;flex-wrap:wrap;font-size:.9375rem;color:var(--muted);line-height:1.8;padding-bottom:25px;border-bottom:1px solid var(--line);text-align:center}
@@ -281,7 +282,7 @@
  .resume-shell{padding-top:26px}
  .resume-toolbar{gap:12px;margin-bottom:26px}
  .resume-toolbar .text-link{font-size:.875rem}
- .resume-print{font-size:.875rem;padding:10px 12px}
+ .resume-print{font-size:.875rem;padding:8px 10px}
  .resume-header h1{font-size:34px}
  .resume-contact{gap:9px 16px}
  .resume-contact>*{padding:0;border-left:0}
@@ -317,7 +318,6 @@
  .resume-page .resume-entry ul{font-size:10.5pt;line-height:1.55;margin-top:5pt}
  .resume-page .resume-entry li{margin-bottom:4pt;orphans:2;widows:2}
  .resume-page .resume-capabilities>div{grid-template-columns:78pt minmax(0,1fr);gap:10pt;font-size:10.5pt;line-height:1.55;margin-bottom:7pt;break-inside:avoid}
- .resume-page .resume-section-heading>.resume-case-link{display:none!important}
- .resume-page .resume-entry>.resume-case-link{font-size:9pt;margin-top:5pt}
+ .resume-page .resume-case-link{display:none!important}
  .resume-page a{color:#222!important;text-decoration:none}
 }
