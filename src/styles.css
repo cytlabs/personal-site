@@ -376,3 +376,22 @@ html[lang=en] .about-aside{overflow-wrap:anywhere}
  .room-stage{height:calc(100svh - 106px)}
 }
 @media print{.language-switch{display:none!important}}
+
+/* Compact contact details within the existing reading column. */
+#contact{container-type:inline-size}
+.contact-heading{display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.prose .contact-heading h2{margin:0}
+.prose .contact-heading .text-link{font-size:1rem;line-height:1.65;white-space:nowrap;text-decoration:none}
+.contact-context{display:grid;gap:10px;margin:0 0 24px;font-size:1rem;line-height:1.7}
+.contact-context>div{display:grid;grid-template-columns:5em minmax(0,1fr);gap:8px 16px}
+.contact-context dt,.contact-grid dt{color:var(--muted);font-weight:400}
+.contact-context dd,.contact-grid dd{min-width:0;margin:0;overflow-wrap:anywhere}
+.contact-grid{display:grid;grid-template-columns:1fr;gap:16px 28px;margin:0;font-size:1rem;line-height:1.65}
+.contact-grid>div{min-width:0;padding-top:14px;border-top:1px solid var(--line)}
+.contact-grid dt{font-size:.875rem;margin-bottom:6px}
+@container(min-width:460px){.contact-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@container(max-width:459px){
+ .contact-grid{row-gap:12px}
+ .contact-grid>div{display:grid;grid-template-columns:6.25em minmax(0,1fr);gap:16px;align-items:baseline}
+ .contact-grid dt{margin:0}
+}
