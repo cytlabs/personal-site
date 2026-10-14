@@ -49,7 +49,7 @@ python3 -m http.server 4173 --directory dist
 
 项目资料位于 `content/case-studies.json`。将案例设为 `publish: false` 可保留原始内容并停止生成公开展示：案例列表、详情、房间工作台和站点地图均会过滤。99MedPass 与 VOWSCENE 当前隐藏，九份案例资料中展示七个；首页仍展示配置指定的两个案例。统一用 `period.start` 保存开始时间，卡片、详情和房间工作台均显示“项目时间 · 年月”，不再显示结束时间或阶段记录。案例列表与工作台按开始时间倒序排列，同日保持原有顺序。当前已确认日期：达人营销 2026.07、KeySafe 2024.12、多云资源管理平台 2024.06、GitOps 发布平台 2022.12、容器平台 2021.12。其他时间沿用当前值，后续可按站主提供的更精确日期更新。
 
-案例详情按背景问题、参与工作、关键方案、交付结果与复盘组织。`overview` 保存角色及交付概览，`imageSlots` 保存图片位置与需求；正文以 `<!-- case-image:图片编号 -->` 引用。图片 `src` 为空时显示占位，提供素材后将文件放入 `public/assets/` 并填写对应路径即可替换。图片需求清单位于 `reports/case-image-requests.csv`。列表封面继续使用示意图，详情中的占位用于真实截图或项目材料。
+案例详情按背景问题、参与工作、关键方案、交付结果与复盘组织。`overview` 保存角色及交付概览，`html` 保存案例正文。详情页目前以文字呈现，不包含配图、图片占位或图片需求清单。
 
 维护位置：`site.config.mjs`（首页介绍）、`src/styles.css`（样式）、`src/main.js`（搜索及主题按钮）、`src/room*.js`（房间）、`content/room.json`（房间便签）。`npm run build:blog` 是兼容旧发布工具的生成步骤；完整预览与部署使用 `npm run build`。
 
