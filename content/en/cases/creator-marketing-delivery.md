@@ -13,24 +13,26 @@ I analyzed the workflow from requirements confirmation through sourcing, candida
 I made the handoff between client communication and operational work concrete through a creator sourcing guide. The project manager communicates with the client in the business group, while AI helps prepare a requirements document. After the manager checks it and the client confirms it, the guide goes to the project's operations staff.
 
 ```mermaid
-flowchart TD
-    A["Client brief and conversation"] --> B["Project manager clarifies requirements"]
-    B --> C["AI organizes the requirements document"]
-    C --> D["Project manager checks"]
-    D --> E{"Client confirms"}
-    E -->|Add or correct information| B
-    E -->|Confirmed| F["Create the sourcing guide"]
-    F --> G["Operations sources and submits creators"]
-    G --> H["Agent assists review against the criteria"]
-    H --> I{"Review outcome"}
-    I -->|Fits| J["Update shortlist and add reasons"]
-    I -->|Does not fit| K["Give specific reasons to operations"]
-    I -->|Business judgment needed| L["Project manager decides"]
-    K --> G
-    L -->|More information| G
-    L -->|Confirm inclusion| J
-    J --> M["Business staff approve the client shortlist"]
-    M --> N["Deliver shortlist and receive feedback"]
+flowchart LR
+    subgraph NEED["Confirm needs"]
+        direction TB
+        A["Client brief"] --> B["AI draft, PM check"] --> C["Confirm sourcing guide"]
+        C -->|Revise| A
+    end
+    subgraph SOURCE["Operations"]
+        direction TB
+        E["Source creators"] --> F["Submit materials"]
+    end
+    subgraph REVIEW["Review and deliver"]
+        direction TB
+        H{"Agent review"}
+        H -->|Fits| I["List and reasons"]
+        H -->|Needs judgment| J["Manager decides"]
+        J --> I
+        I --> K["Approve and deliver"]
+        H -->|Does not fit| X["Give reasons; source again"]
+    end
+    NEED --> SOURCE --> REVIEW
 ```
 
 Confirmed requirements serve both sourcing and review. Operations knows what to submit, and reviewers have explicit criteria. The project manager handles ambiguous candidates and commercial judgments; business staff approve the shortlist sent to the client.
@@ -43,14 +45,12 @@ I also organized the information needed for deduplication, previous assessments 
 
 ```mermaid
 flowchart TD
-    A["Client feedback"] --> B["Link project, creator and shortlist version"]
-    B --> C{"Does it change requirements"}
-    C -->|No| D["Retain this creator's decision and reasons"]
-    C -->|Yes| E["Manager and client confirm the change"]
-    E --> F["Update the active sourcing guide"]
-    D --> G["Next round of sourcing and review"]
+    A["Client feedback"] --> B["Link shortlist version"] --> C{"Requirement change?"}
+    C -->|No| D["Keep candidate decision"]
+    C -->|Yes| E["Manager and client confirm"] --> F["Update active guide"]
+    D --> G["Next sourcing round"]
     F --> G
-    H["Existing candidates and review history"] --> G
+    H["Candidate history"] --> G
 ```
 
 Feedback returns to the object it concerns. Rejecting one creator is initially a decision about that candidate; the active criteria change only after a change in client requirements is confirmed. Operations and reviewers can therefore continue using the same requirements.

@@ -15,18 +15,22 @@ I worked through client conversations, requirements analysis, sourcing, recommen
 The project lead understands requirements, confirms criteria, approves recommendations and communicates with the client. Delivery consultants source and communicate with candidates, submit materials and follow up on offers and onboarding. AI helps organize information, assess matches and produce drafts; the lead retains the key business decisions.
 
 ```mermaid
-flowchart TD
-    A["Client raises a hiring need"] --> B["Project lead clarifies requirements"]
-    B --> C["Prepare and confirm sourcing criteria"]
-    C --> D["Consultant sources and submits candidates"]
-    D --> E["AI assists analysis and drafts recommendations"]
-    E --> F{"Lead reviews"}
-    F -->|More information or changes| D
-    F -->|Recommendation approved| G["Recommend to the client"]
-    G --> H["Client interview and feedback"]
-    H --> I{"Lead decides the next direction"}
-    I -->|Continue sourcing or revise criteria| C
-    I -->|Proceed with an offer| J["Delivery team follows up on onboarding"]
+flowchart LR
+    subgraph RQ["Requirements"]
+        direction TB
+        A["Client hiring need"] --> B["Lead clarifies"] --> C["Confirm criteria"]
+    end
+    subgraph DL["Source and review"]
+        direction TB
+        D["Consultant submits"] --> E["AI assessment"] --> F{"Lead review"}
+        F -->|Revise| D
+    end
+    subgraph RC["Client delivery"]
+        direction TB
+        G["Recommend"] --> H["Interview feedback"] --> I["Follow up on hire"]
+    end
+    RQ --> DL
+    DL -->|Approved| RC
 ```
 
 Recommendation drafts are reviewed by the lead. Client feedback also goes through a business decision before it changes the sourcing direction. AI analysis and human decisions have explicit handoff points.
@@ -36,16 +40,16 @@ Recommendation drafts are reviewed by the lead. Client feedback also goes throug
 Hiring criteria become more specific through client conversations. I designed shared project records linking client background, current sourcing criteria, candidate materials, recommendations and feedback so a new assessment can read the relevant context.
 
 ```mermaid
-flowchart TD
-    P["Recruitment project"] --- C["Client background and confirmed preferences"]
-    P --- R["Current sourcing criteria"]
-    P --- N["Candidate materials and analysis"]
-    P --- S["Recommendations and review decisions"]
-    P --- F["Client feedback and interview materials"]
+flowchart LR
+    P["Recruitment project"] --- C["Client context"]
+    P --- R["Active criteria"]
+    P --- N["Candidate analysis"]
+    P --- S["Review history"]
+    P --- F["Client feedback"]
     F --- N
     F --- S
-    F --> J["Lead decides the scope of the feedback"]
-    J -->|Revision needed| R
+    F --> J["Lead assesses scope"]
+    J -->|Confirmed change| R
 ```
 
 A rejection needs to retain the candidate, role and reason it concerns. It may apply only to one person's experience, or it may indicate that the broader search direction should change. Preserving the relationships before asking the lead to decide helps avoid applying one local judgment to every later candidate.

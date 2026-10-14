@@ -16,17 +16,15 @@ The platform uses a Vue frontend and Django backend. The frontend provides a con
 
 ```mermaid
 flowchart TD
-    A["Customer environment: Volcengine"] --> R["Cloud platform integration"]
-    B["Customer environment: Alibaba Cloud"] --> R
-    C["Other connected environments"] --> R
-    R --> M["Unified resource model<br/>Customer, environment and ownership"]
-    M --> S["Django business services"]
-    S --> U["Vue management interface"]
+    A["Volcengine"] --> R["Cloud integration"]
+    B["Alibaba Cloud"] --> R
+    C["Other environments"] --> R
+    R --> M["Resource model"] --> S["Django services"] --> U["Vue interface"]
     O["Operations team"] --> U
-    S --- V["Monitoring and alerts"]
-    S --- L["Lifecycle management"]
+    S --- V["Monitoring"]
+    S --- L["Lifecycle"]
     S --- F["Cost analysis"]
-    S --- T["Automated alert handling"]
+    S --- T["Alert automation"]
 ```
 
 The relationships help answer where a resource is, who it belongs to, how it is running and which maintenance actions concern it. The unified model also gives management modules a common basis for associating information.
@@ -37,14 +35,12 @@ A resource inventory alone does not cover daily operations. I implemented monito
 
 ```mermaid
 flowchart TD
-    A["Resource state and alerts"] --> B["Associate resource, environment and customer"]
-    B --> C{"Alert handling route"}
-    C -->|Matches automation rules| D["Execute the corresponding handling"]
-    C -->|Human judgment needed| E["Operations staff inspect and handle"]
-    D --> F["Check resource state"]
+    A["State and alerts"] --> B["Locate resource"] --> C{"Handling rules"}
+    C -->|Automated| D["Execute handling"]
+    C -->|Human| E["Staff handles"]
+    D --> F["Check state"]
     E --> F
-    G["Resource lifecycle and cost information"] --> H["Inspect resource use and spending"]
-    H --> I["Arrange maintenance or resource changes"]
+    G["Lifecycle and costs"] --> H["Review usage"] --> I["Plan maintenance"]
 ```
 
 State, alerts and costs are organized around the same resource. Staff can locate ownership when handling a problem and examine spending alongside usage. Automated handling and human maintenance take on the work appropriate to each.

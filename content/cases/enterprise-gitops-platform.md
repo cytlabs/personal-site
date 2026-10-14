@@ -15,18 +15,22 @@
 GitLab Runner、Kustomize 与 ArgoCD 共同组成发布平台：流水线承接执行步骤，Kustomize 组织环境配置，ArgoCD 衔接配置同步与应用部署。
 
 ```mermaid
-flowchart TD
-    A["提出应用或配置变更"] --> B["按模板修改 Git 中的配置"]
-    B --> C{"变更审核"}
-    C -->|修正| B
-    C -->|通过| D["形成明确配置版本"]
-    D --> E["GitLab Runner 执行流水线"]
-    E --> F["Kustomize 组织目标环境配置"]
-    F --> G["ArgoCD 同步应用配置"]
-    G --> H["Kubernetes 中的应用"]
-    H --> I["查看部署与应用状态"]
-    I -->|需要回滚| J["选择对应历史配置版本"]
-    J --> C
+flowchart LR
+    subgraph CONFIG["配置与审核"]
+        direction TB
+        A["提出变更"] --> B["修改 Git 配置"] --> C{"变更审核"}
+        C -->|修正| B
+    end
+    subgraph PIPE["流水线"]
+        direction TB
+        D["GitLab Runner"] --> E["Kustomize 环境配置"]
+    end
+    subgraph DEPLOY["同步与核对"]
+        direction TB
+        F["ArgoCD 同步"] --> G["K8s 应用部署"] --> H["核对应用状态"]
+    end
+    CONFIG -->|通过| PIPE --> DEPLOY
+    DEPLOY -->|需回滚：选择历史版本| CONFIG
 ```
 
 图中展示的是整体发布关系。版本标识连接配置变更和应用状态，团队在排查发布问题时能够沿着这条关系核对，而回滚也通过共同的变更流程处理。
@@ -39,12 +43,9 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A["共同应用配置"] --> B["目标环境 A 的差异配置"]
-    A --> C["目标环境 B 的差异配置"]
-    A --> D["目标环境 C 的差异配置"]
-    B --> E["生成环境 A 的部署配置"]
-    C --> F["生成环境 B 的部署配置"]
-    D --> G["生成环境 C 的部署配置"]
+    A["共同应用配置"] --> B["环境 A 差异"] --> E["A 部署配置"]
+    A --> C["环境 B 差异"] --> F["B 部署配置"]
+    A --> D["环境 C 差异"] --> G["C 部署配置"]
 ```
 
 这样，审核既能核对共同配置的变更，也能看清特定环境的差异。模板为团队提供一致的组织方式，必要差异仍能被明确表达。

@@ -15,16 +15,16 @@ I used Next.js, React, TypeScript and Ant Design for frontend work and PostgreSQ
 The following diagram organizes the product capabilities and the concerns that need to be considered together.
 
 ```mermaid
-flowchart TD
-    P["KeySafe password management"] --- U["Everyday use"]
-    P --- S["Access and data protection"]
+flowchart LR
+    P["KeySafe"] --- U["Everyday use"]
+    P --- S["Protection"]
     P --- I["Web3 integration"]
-    U --- V["View and maintain entries"]
-    U --- D["Interface and data-state coordination"]
+    U --- V["Manage entries"]
+    U --- D["Interface and data"]
     S --- M["Master password"]
-    S --- E["Multiple encryption strategies"]
+    S --- E["Encryption"]
     S --- T["Two-factor protection"]
-    I --- W["MetaMask wallet integration"]
+    I --- W["MetaMask wallet"]
     I --- F["IPFS integration"]
 ```
 
@@ -38,9 +38,7 @@ The product also needs to clarify the relationships between identity confirmatio
 
 ```mermaid
 flowchart LR
-    A["Need to view or maintain credentials"] --- B["Corresponding page and action"]
-    B --- C["Access protection and user guidance"]
-    C --- D["Data processing and state feedback"]
+    A["Credential task"] --- B["Page and actions"] --- C["Protection and guidance"] --- D["Data and feedback"]
 ```
 
 The diagram connects product tasks to development concerns. Wallet integration, protection mechanisms and entry operations are organized around the same purpose, giving technical components concrete product responsibilities.
