@@ -7,7 +7,7 @@ async function walk(dir){return(await Promise.all((await fs.readdir(dir,{withFil
 const files=await walk(root);let checked=0;
 for(const file of files.filter(f=>f.endsWith('.html'))){
   const html=await fs.readFile(file,'utf8');
-  assert.match(html,/<html lang="zh-CN">/);assert.match(html,/<title>[^<]+<\/title>/);assert.match(html,/<main id="main"/);
+  assert.match(html, file.startsWith(path.join(root, 'en') + path.sep) ? /<html lang="en">/ : /<html lang="zh-CN">/);assert.match(html,/<title>[^<]+<\/title>/);assert.match(html,/<main id="main"/);
   assert.equal((html.match(/<h1[ >]/g)||[]).length,1,`${file}: exactly one h1`);
   const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);assert.equal(new Set(ids).size,ids.length,`${file}: duplicate IDs`);
   for(const [,raw] of html.matchAll(/(?:href|src)="([^"]+)"/g)){

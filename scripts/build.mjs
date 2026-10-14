@@ -7,6 +7,8 @@ import markdown from '../markdown-renderer.js';
 import { build as bundle } from 'esbuild';
 import site from '../site.config.mjs';
 import { readResumeContent } from './resume-content.mjs';
+import { createLocalizer } from './localization.mjs';
+import { translationSourceHash } from './translation-source.mjs';
 
 const root = path.resolve(import.meta.dirname, '..');
 // Inline before styles so stored/system theme is applied before first paint.
@@ -55,12 +57,12 @@ export function selectFeaturedCases(cases, slugs = site.featuredCaseSlugs) {
 
 function layout({ title, description = site.description, route = '/', active = '', body, room = false, article = null, bodyClass = '' }) {
   const canonical = site.url ? new URL(u(route), site.url).href : '';
-  return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><title>${esc(title ? `${title} · ${site.name}` : site.title)}</title><meta name="description" content="${esc(description)}"><meta property="og:type" content="${article ? 'article' : 'website'}"><meta property="og:locale" content="zh_CN"><meta name="twitter:card" content="summary"><meta property="og:title" content="${esc(title || site.title)}"><meta property="og:description" content="${esc(description)}">${canonical ? `<link rel="canonical" href="${esc(canonical)}"><meta property="og:url" content="${esc(canonical)}"><link rel="alternate" type="application/rss+xml" title="${esc(site.name)}的文章" href="${u('/feed.xml')}">` : ''}${article && canonical ? `<script type="application/ld+json">${JSON.stringify({
+  return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="color-scheme" content="light dark"><title>${esc(title ? `${title} · ${site.name}` : site.title)}</title><meta name="description" content="${esc(description)}"><meta property="og:type" content="${article ? 'article' : 'website'}"><meta property="og:locale" content="zh_CN"><meta name="twitter:card" content="summary"><meta property="og:title" content="${esc(title || site.title)}"><meta property="og:description" content="${esc(description)}">${canonical ? `<link rel="canonical" href="${esc(canonical)}"><link rel="alternate" hreflang="zh-CN" href="${esc(canonical)}"><link rel="alternate" hreflang="en" href="${esc(new URL(u('/en' + route), site.url).href)}"><link rel="alternate" hreflang="x-default" href="${esc(canonical)}"><meta property="og:url" content="${esc(canonical)}"><link rel="alternate" type="application/rss+xml" title="${esc(site.name)}的文章" href="${u('/feed.xml')}">` : ''}${article && canonical ? `<script type="application/ld+json">${JSON.stringify({
     '@context':'https://schema.org', '@type':'BlogPosting', headline:article.title,
     description:article.description, datePublished:article.date, inLanguage:'zh-CN',
     mainEntityOfPage:canonical, url:canonical, keywords:article.tags,
     author:{'@type':'Person',name:site.name,url:new URL(u('/about/'),site.url).href}
-  }).replace(/</g,'\\u003c')}</script>` : ''}<meta name="theme-color" content="#e9eee5"><script>${themeScript}</script><link rel="icon" href="${u('/assets/favicon.svg')}" type="image/svg+xml"><link rel="stylesheet" href="${u('/assets/styles.css')}"><script type="module" src="${u('/assets/main.js')}"></script></head><body class="${room ? 'room-page' : esc(bodyClass)}"><a class="skip-link" href="#main">跳到主要内容</a><header class="site-header"><a class="brand" href="${u('/')}" aria-label="${esc(site.name)}，首页">${mark}<span>${esc(site.name)}<small>${esc(site.romanName)}</small></span></a><nav aria-label="主导航">${[['/', '首页'], ['/blog/', '文章'], ['/cases/', '案例'], ['/about/', '关于']].map(([href, text]) => `<a href="${u(href)}" ${active === href ? 'aria-current="page"' : ''}>${text}</a>`).join('')}</nav><a class="header-explore" href="${u('/explore/')}" ${room ? 'aria-current="page"' : ''}>探索 <span aria-hidden="true">✳</span></a><button type="button" class="theme-toggle" data-theme-toggle aria-label="深色模式" aria-pressed="false" title="切换到夜晚" hidden><svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14A8.6 8.6 0 0 1 10 3.5 8.7 8.7 0 1 0 20.5 14Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button></header><main id="main" ${room ? 'class="explore-main"' : ''}>${body}</main>${room ? '' : `<footer class="site-footer"><div>${mark}<span>© ${new Date().getFullYear()} ${esc(site.name)}<small>保持好奇，慢慢生长。</small></span></div><div class="footer-links"><a href="${u('/about/')}#contact">联系我 ${arrow}</a><a href="${u('/resume/')}">简历 ${arrow}</a>${site.url ? `<a href="${u('/feed.xml')}">RSS ${arrow}</a>` : ''}<a href="${u('/explore/')}">去房间逛逛 ${arrow}</a></div></footer>`}</body></html>`;
+  }).replace(/</g,'\\u003c')}</script>` : ''}<meta name="theme-color" content="#e9eee5"><script>${themeScript}</script><link rel="icon" href="${u('/assets/favicon.svg')}" type="image/svg+xml"><link rel="stylesheet" href="${u('/assets/styles.css')}"><script type="module" src="${u('/assets/main.js')}"></script></head><body class="${room ? 'room-page' : esc(bodyClass)}"><a class="skip-link" href="#main">跳到主要内容</a><header class="site-header"><a class="brand" href="${u('/')}" aria-label="${esc(site.name)}，首页">${mark}<span>${esc(site.name)}<small>${esc(site.romanName)}</small></span></a><nav aria-label="主导航">${[['/', '首页'], ['/blog/', '文章'], ['/cases/', '案例'], ['/about/', '关于']].map(([href, text]) => `<a href="${u(href)}" ${active === href ? 'aria-current="page"' : ''}>${text}</a>`).join('')}</nav><a class="header-explore" href="${u('/explore/')}" ${room ? 'aria-current="page"' : ''}>探索 <span aria-hidden="true">✳</span></a><a class="language-switch" data-language-switch href="${u('/en' + route)}" lang="en" hreflang="en" aria-label="用英文阅读此页面">EN</a><button type="button" class="theme-toggle" data-theme-toggle aria-label="深色模式" aria-pressed="false" title="切换到夜晚" hidden><svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14A8.6 8.6 0 0 1 10 3.5 8.7 8.7 0 1 0 20.5 14Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button></header><main id="main" ${room ? 'class="explore-main"' : ''}>${body}</main>${room ? '' : `<footer class="site-footer"><div>${mark}<span>© ${new Date().getFullYear()} ${esc(site.name)}<small>保持好奇，慢慢生长。</small></span></div><div class="footer-links"><a href="${u('/about/')}#contact">联系我 ${arrow}</a><a href="${u('/resume/')}">简历 ${arrow}</a>${site.url ? `<a href="${u('/feed.xml')}">RSS ${arrow}</a>` : ''}<a href="${u('/explore/')}">去房间逛逛 ${arrow}</a></div></footer>`}</body></html>`;
 }
 
 function postRow(p, index, search = false) {
@@ -108,7 +110,7 @@ function withToc(html) {
 export function renderMarkdown(body, title = '') {
   // Reuse the site's escaping, public-source filtering, tables and Mermaid support.
   const html = markdown.renderMarkdown(body).replace(/^<h1>([\s\S]*?)<\/h1>\s*/, (all, heading) => plainText(heading).trim() === title.trim() ? '' : all).replace(/<h1>([\s\S]*?)<\/h1>/g, '<h2>$1</h2>');
-  return withToc(html);
+  return withToc(html.replace(/(src|href)="(\/(?!\/)[^"]+)"/g, (_, attribute, url) => `${attribute}="${u(url)}"`));
 }
 
 function caseBrief(p) {
@@ -173,7 +175,24 @@ export async function build({ outputDir = path.join(root, 'dist') } = {}) {
   roomContent.journal = posts.slice(0,4).map(p=>({date:formatDate(p.date),title:p.title,text:publicExcerpts(p.body)[0] || p.description,note:p.description,url:u(p.url)}));
   const pages = [ ['/',home(posts,cases)],...pagination.getBlogPages(posts).map(page=>[page.route,listing(page.posts,'blog',page,pagination.getBlogPages(posts))]),['/cases/',listing(cases,'cases')],['/about/',await about()],['/resume/',resume(resumeData)],['/explore/',explore(posts,cases)],...posts.map(p=>[p.url,detail(p,posts,'blog')]),...cases.map(p=>[p.url,detail(p,cases,'cases')]) ];
   for(const [route,html] of pages) {const folder=path.join(out,route);await fs.mkdir(folder,{recursive:true});await fs.writeFile(path.join(folder,'index.html'),html);}
+  const dictionary = JSON.parse(await fs.readFile(path.join(root, 'content/en/strings.json'), 'utf8'));
+  const englishPosts = JSON.parse(await fs.readFile(path.join(root, 'content/en/posts.json'), 'utf8'));
+  for (const post of posts) {
+    const translated = englishPosts[post.slug];
+    if (!translated) throw new Error(`Missing English article metadata: ${post.slug}`);
+    if (translated.sourceHash !== translationSourceHash(post)) throw new Error(`English article is out of date: ${post.slug}. Update its translation, then run npm run i18n:record-source.`);
+    translated.body = await fs.readFile(path.join(root, 'content/en/posts', `${post.slug}.md`), 'utf8');
+    for (const key of ['title', 'summary', 'category']) dictionary[post[key]] = translated[key];
+    post.tags.forEach((tag, i) => { dictionary[tag] = translated.tags[i]; });
+  }
+  const english = createLocalizer(dictionary, { base, origin: site.url, posts: englishPosts });
+  const englishPages = pages.map(([route, html]) => ['/en' + route, english.page(html, route)]);
+  for (const [route, html] of englishPages) { const folder = path.join(out, route); await fs.mkdir(folder, { recursive: true }); await fs.writeFile(path.join(folder, 'index.html'), html); }
+  await fs.mkdir(path.join(out, 'en/assets'), { recursive: true });
+  await fs.writeFile(path.join(out, 'en/assets/search-index.json'), JSON.stringify(english.data(posts.map(p => ({title:p.title,description:p.description,category:p.category,date:p.date,url:u(p.url),tags:p.tags})))));
+
   await fs.writeFile(path.join(out,'404.html'),layout({title:'这一页不在这里',body:`<div class="page-shell not-found"><p class="eyebrow">404 · LOST & FOUND</p><h1>好像走到了一条小岔路。</h1><p>这篇内容可能已经搬家，或者链接有一点偏差。</p><a class="solid-link" href="${u('/')}">回到首页 →</a></div>`}));
+  await fs.writeFile(path.join(out, 'en/404.html'), english.page(await fs.readFile(path.join(out, '404.html'), 'utf8'), '/'));
   await bundle({entryPoints:[path.join(root,'src/main.js'),path.join(root,'src/room.js'),path.join(root,'src/resume-image.js')],outdir:path.join(out,'assets'),bundle:true,minify:true,format:'esm',target:'es2022',legalComments:'linked',metafile:false});
   await fs.copyFile(path.join(root,'src/vendor/html2canvas-1.4.1.min.js'),path.join(out,'assets/html2canvas-1.4.1.min.js'));
   await fs.copyFile(path.join(root,'src/vendor/html2canvas-LICENSE.txt'),path.join(out,'assets/html2canvas-LICENSE.txt'));
@@ -185,10 +204,12 @@ export async function build({ outputDir = path.join(root, 'dist') } = {}) {
   await fs.copyFile(path.join(root,'src/styles.css'),path.join(out,'assets/styles.css'));
   if(site.url){
     const full=p=>new URL(u(p),site.url).href;
-    await fs.writeFile(path.join(out,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${pages.map(([r])=>`<url><loc>${esc(full(r))}</loc></url>`).join('')}</urlset>`);
+    await fs.writeFile(path.join(out,'sitemap.xml'),`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${[...pages,...englishPages].map(([r])=>`<url><loc>${esc(full(r))}</loc></url>`).join('')}</urlset>`);
     await fs.writeFile(path.join(out,'feed.xml'),`<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>${esc(site.title)}</title><link>${esc(full('/'))}</link><description>${esc(site.description)}</description><language>zh-CN</language>${posts.map(p=>`<item><title>${esc(p.title)}</title><link>${esc(full(p.url))}</link><guid>${esc(full(p.url))}</guid><description>${esc(p.description)}</description><pubDate>${new Date(p.date+'T00:00:00+08:00').toUTCString()}</pubDate></item>`).join('')}</channel></rss>`);
+    await fs.writeFile(path.join(out, 'en/feed.xml'), `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel><title>${esc(english.text(site.title))}</title><link>${esc(full('/en/'))}</link><description>${esc(english.text(site.description))}</description><language>en</language>${posts.map(p => `<item><title>${esc(englishPosts[p.slug].title)}</title><link>${esc(full('/en' + p.url))}</link><guid>${esc(full('/en' + p.url))}</guid><description>${esc(englishPosts[p.slug].summary)}</description><pubDate>${new Date(p.date + 'T00:00:00+08:00').toUTCString()}</pubDate></item>`).join('')}</channel></rss>`);
   }
   await fs.writeFile(path.join(out,'robots.txt'),`User-agent: *\nAllow: /\n${site.url?`Sitemap: ${new URL(u('/sitemap.xml'),site.url).href}\n`:''}`);
-  console.log(`Built ${pages.length} pages + 404 (${posts.length} posts, ${cases.length} cases).`);
+  english.assertComplete();
+  console.log(`Built ${pages.length + englishPages.length} pages + 404 (${posts.length} posts, ${cases.length} cases).`);
 }
 if (process.argv[1] && path.resolve(process.argv[1]) === import.meta.filename) await build();

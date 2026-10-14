@@ -9,7 +9,8 @@
     "test": "node --test scripts/*.test.js",
     "dev": "node scripts/dev.mjs",
     "preview": "node scripts/dev.mjs --preview",
-    "check": "npm test && npm run build && node scripts/check.mjs"
+    "check": "npm test && npm run build && node scripts/check.mjs",
+    "i18n:record-source": "node scripts/record-translation-source.mjs"
   },
   "dependencies": {
     "three": "0.186.1"

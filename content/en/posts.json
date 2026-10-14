@@ -1,0 +1,194 @@
+{
+  "cloud-workspace-from-phone": {
+    "title": "How I want to work from a phone",
+    "summary": "I want my phone to become the entry point for work: give instructions through conversation, let AI execute in the cloud, and open a cloud desktop when I need to work directly. A server, a cloud desktop and shared working materials are the foundation I am building.",
+    "category": "AI practice",
+    "tags": [
+      "Cloud workspace",
+      "Wuying cloud desktop",
+      "AI collaboration",
+      "OpenClaw",
+      "OpenViking",
+      "Personal practice"
+    ],
+    "sourceHash": "bcc1aa4633cc18cff8044b505426e371c095610f4df0527f3f1fc5b409212f70"
+  },
+  "outsource-capabilities-own-context": {
+    "title": "Capabilities can be outsourced; AI context cannot",
+    "summary": "AI has reduced the effort of analysis and writing, but people still maintain continuity: making business decisions, coordinating AI, moving information and checking results.",
+    "category": "AI practice",
+    "tags": [
+      "AI productivity",
+      "Context",
+      "Human–AI collaboration"
+    ],
+    "sourceHash": "ec5e3cb4b37503cf9885d01954129b5241ae6276c6d775e58f46ef5b69205e75"
+  },
+  "anthropic-economic-futures": {
+    "title": "Anthropic: what might our economic future look like?",
+    "summary": "Starting from Anthropic's three economic scenarios, I examine how AI may affect growth, work and income distribution, and why a richer economy does not necessarily benefit everyone.",
+    "category": "AI reflections",
+    "tags": [
+      "Anthropic",
+      "AI economics",
+      "Future of work"
+    ],
+    "sourceHash": "5f56c06797e8a3d0e7658a47313760dd6ea92b8943ee0904cbc3a2323d518794"
+  },
+  "enterprise-and-personal-anc": {
+    "title": "Enterprise and personal ANC: one architecture for organizing AI work around goals",
+    "summary": "Enterprises and individuals operate at different scales, but share the same question: how can goals, context, working methods and available capabilities be organized so AI understands what to do and keeps making progress?",
+    "category": "AI practice",
+    "tags": [
+      "ANC",
+      "Digital counterpart",
+      "AI collaboration"
+    ],
+    "sourceHash": "c3d3882f8adbe8eb14d4374a9f4990708aaba95a8ef1ae0fdfd2197ddc79e031"
+  },
+  "personal-organizational-efficiency-ai-products": {
+    "title": "Personal productivity, organizational productivity and AI products solve different problems",
+    "summary": "Personal productivity, organizational productivity and AI products address distinct problems: expanding individual capability, changing organizational collaboration and redesigning how a problem is solved.",
+    "category": "AI practice",
+    "tags": [
+      "AI productivity",
+      "Organizational collaboration",
+      "AI products"
+    ],
+    "sourceHash": "36c79c867fcd8ad00be9e08fe37caf83db34dba25817d0f9cf31fb60d0eb8cfd"
+  },
+  "ai-changes-work-itself": {
+    "title": "AI may change work itself, not just efficiency",
+    "summary": "AI brings more than efficiency gains. As execution and coordination become cheaper, roles, workflows and the boundary between thinking and doing are worth redesigning.",
+    "category": "AI reflections",
+    "tags": [
+      "AI",
+      "Ways of working",
+      "Organizational change"
+    ],
+    "sourceHash": "3b982be39d0ecc11257d0ed273dbe5ac774bd8d139302bda82daff875a2509cb"
+  },
+  "how-ai-may-reshape-recruiting": {
+    "title": "How AI might reshape recruiting",
+    "summary": "As AI changes the cost of information access, talent sourcing, capability assessment and communication, how might recruiting roles, responsibilities and business models change?",
+    "category": "AI reflections",
+    "tags": [
+      "AI",
+      "Recruiting",
+      "Industry analysis"
+    ],
+    "sourceHash": "f32cafd3eb4dbb3424b55c5e5022717454819d2bbd4d96f8834aaa09043b33f7"
+  },
+  "do-not-let-means-replace-ends": {
+    "title": "Don't let means replace ends: keep your destination in view",
+    "summary": "Completing a means does not guarantee achieving an end. Individuals and companies need to keep checking goals, direction and actual outcomes while taking action.",
+    "category": "Product methods",
+    "tags": [
+      "Goal management",
+      "Product thinking",
+      "Reflection"
+    ],
+    "sourceHash": "5703d547ba0c3d82d74369ef720bb7caf4d8f92a4eed48a161827461cf3f48e9"
+  },
+  "when-ai-no-longer-needs-human-work": {
+    "title": "When AI no longer needs human work, power becomes the real question",
+    "summary": "As AI moves from assisting humans to organizing production independently, work is not the only thing changing: enterprises, states, resource distribution and the basis of human value may change too.",
+    "category": "AI reflections",
+    "tags": [
+      "AI",
+      "Future society",
+      "Restructuring power"
+    ],
+    "sourceHash": "940844d19fdeae527af7e2e68dbaf140393023156acbfbeee88134de5a430d5c"
+  },
+  "designing-agent-environment-harness": {
+    "title": "How should we design the environment around a model that can act?",
+    "summary": "Agent products need more than longer prompts: models need observable, actionable, verifiable and constrained environments. Starting from a real conversational mistake, this article explores responsibilities across skills, tools, harnesses, CLI and LangGraph.",
+    "category": "Agent design",
+    "tags": [
+      "Agent",
+      "Harness",
+      "Skill",
+      "MCP",
+      "LangGraph"
+    ],
+    "sourceHash": "9ee03d5f2ee7f386fe62559b3da8119230f30faa83d1181cb99c504171ab6dba"
+  },
+  "ai-native-product-rewrites-interaction": {
+    "title": "Eating is the goal; ordering delivery is a means: how AI-native products may rewrite interaction",
+    "summary": "An AI-native product does not merely replace buttons with chat. It reorganizes context, workflows, confirmation and execution around user goals, removing unnecessary interaction.",
+    "category": "AI delivery",
+    "tags": [
+      "AI Native",
+      "Product design",
+      "Interaction design"
+    ],
+    "sourceHash": "d3fa30ec29bbb5cfa08ffceaebfdfe4bda2a0e1ceb944a6a1bf05f14791e1bd7"
+  },
+  "product-manager-understand-business-process": {
+    "title": "How good product managers quickly understand business workflows",
+    "summary": "Understanding workflows quickly means more than researching an industry and collecting requests. It requires a product judgement framework around value streams, real tasks, costs and priorities.",
+    "category": "Product methods",
+    "tags": [
+      "Product management",
+      "Business workflows",
+      "Requirements evaluation"
+    ],
+    "sourceHash": "5ce74ec0b4e27ecb55ae253c4951b81693fe5d91c4d7b8edf18dc419f2314e62"
+  },
+  "ai-native-process": {
+    "title": "AI-native does not eliminate processes; it removes the need to operate them manually",
+    "summary": "AI-native is more than replacing buttons with chat: software should understand human work and move workflow operations behind the scenes.",
+    "category": "AI delivery",
+    "tags": [
+      "AI Native",
+      "AI Workflow",
+      "Workflow design"
+    ],
+    "sourceHash": "2f9539904650ead5e030d54615e71170e07f411fc22e779850dc48a6f6984da4"
+  },
+  "fde-nine-grid-ai-project": {
+    "title": "The FDE nine-part framework: from unclear requirements to a deliverable AI project",
+    "summary": "The FDE nine-part framework connects sales, product and engineering approaches to client types, turning vague AI productivity requests into assessable, deliverable projects.",
+    "category": "FDE",
+    "tags": [
+      "FDE",
+      "Client assessment",
+      "AI delivery"
+    ],
+    "sourceHash": "ea686e88c3d77d2a1691f03d9ed5b44c14cea293e207c6651119b28fe920a2e0"
+  },
+  "skill-design-superpowers-fde-skills": {
+    "title": "A skill should be more than a longer prompt: design lessons from Superpowers and FDE Skills",
+    "summary": "A skill should be more than a longer prompt. It should provide composable, maintainable behavioral constraints designed around work stages and failure modes.",
+    "category": "Skill design",
+    "tags": [
+      "Skill",
+      "Superpowers",
+      "FDE"
+    ],
+    "sourceHash": "9b07b3c288d123b1a2758cc1cf13fbef4dd2d86b9c1527c32ea6195c843a9798"
+  },
+  "ai-workflow-fde-lessons": {
+    "title": "Nine FDE lessons from an AI workflow proposal",
+    "summary": "Lessons from analyzing an enterprise AI workflow proposal: scope decisions, validation objectives, delivery rhythm and implementation.",
+    "category": "FDE",
+    "tags": [
+      "FDE",
+      "AI Workflow",
+      "Proposal analysis"
+    ],
+    "sourceHash": "2ecaa4d7d7f08de7e17b9bc898fe03f3aab7feb4a47c8ddf6f46cb006a64dc0d"
+  },
+  "ai-training-and-fde-delivery": {
+    "title": "Enterprise AI: training builds understanding; FDE delivers implementation",
+    "summary": "AI training can build understanding and inspire ideas, but real implementation needs an FDE to diagnose workflows, identify opportunities and deliver a verifiable feedback loop.",
+    "category": "AI delivery",
+    "tags": [
+      "AI training",
+      "FDE",
+      "Enterprise implementation"
+    ],
+    "sourceHash": "162fe137ff407e0ca96b9fc42df2c88cd71c5a748a20670d8e7c769d1410d546"
+  }
+}

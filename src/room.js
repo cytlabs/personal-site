@@ -1,3 +1,4 @@
+import { translate } from './i18n.js';
 import * as THREE from 'three';
 import { createExperiences } from './room-experiences.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
@@ -255,7 +256,7 @@ async function startRoom() {
     if(e.buttons){tooltip.hidden=true;return;}
     selected=hit(e);renderer.domElement.style.cursor=selected?'pointer':'grab';
     if(selected && panel.hidden && e.pointerType!=='touch'){
-      const rect=container.getBoundingClientRect();tooltip.textContent=({books:'抽一本书',desk:'打开电脑',notebook:'翻翻手记',wall:'挪动画框',plant:'照顾绿植'})[selected.id]+' ↗';
+      const rect=container.getBoundingClientRect();tooltip.textContent=translate(({books:'抽一本书',desk:'打开电脑',notebook:'翻翻手记',wall:'挪动画框',plant:'照顾绿植'})[selected.id])+' ↗';
       tooltip.style.left=`${Math.min(Math.max(e.clientX-rect.left,90),rect.width-90)}px`;tooltip.style.top=`${e.clientY-rect.top-10}px`;tooltip.hidden=false;
     }else tooltip.hidden=true;
   });

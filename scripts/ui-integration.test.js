@@ -12,6 +12,7 @@ let buildModule;
 const html = route => fs.readFileSync(path.join(output, route, 'index.html'), 'utf8');
 const documentAt = route => new JSDOM(html(route)).window.document;
 const clean = text => text.replace(/\s+/g, ' ').trim();
+const browserSource = (file, globalName) => require('esbuild').buildSync({entryPoints:[path.join(root, file)],bundle:true,write:false,format:'iife',globalName}).outputFiles[0].text;
 const allCases = JSON.parse(fs.readFileSync(path.join(root, 'content/case-studies.json')));
 const cases = allCases.filter(c => c.publish !== false);
 const posts = readPosts(path.join(root, 'posts'));
@@ -47,6 +48,93 @@ test('case details retain their content without illustrations or image placehold
       assert.ok([...prose.querySelectorAll('h2')].some(h => h.textContent === heading));
     }
   }
+});
+
+test('English pages pair with Chinese routes and keep translated content, metadata and anchors', () => {
+  const routes = ['', 'about', 'resume', 'cases', 'explore', 'blog', 'blog/page/2', 'blog/page/3',
+    ...posts.map(p => `blog/${p.slug}`), ...cases.map(c => `cases/${c.slug}`)];
+  for (const route of routes) {
+    const zh = documentAt(route);
+    const en = documentAt(`en/${route}`);
+    assert.equal(zh.documentElement.lang, 'zh-CN');
+    assert.equal(en.documentElement.lang, 'en');
+    const relative = route ? `/${route}/` : '/';
+    assert.equal(zh.querySelector('[data-language-switch]').getAttribute('href'), '/en' + relative);
+    assert.equal(en.querySelector('[data-language-switch]').getAttribute('href'), relative);
+    assert.equal(en.querySelector('link[rel="canonical"]').href, 'https://example.com/en' + relative);
+    assert.equal(en.querySelector('meta[property="og:locale"]').content, 'en_US');
+    assert.equal(en.querySelector('link[hreflang="zh-CN"]').href, 'https://example.com' + relative);
+    assert.equal(en.querySelector('link[hreflang="en"]').href, 'https://example.com/en' + relative);
+    assert.equal(en.querySelectorAll('h1').length, 1);
+    const walker = en.createTreeWalker(en.body, 4);
+    let node;
+    while ((node = walker.nextNode())) {
+      if (node.parentElement.closest('script, style, code, pre, [data-language-switch]')) continue;
+      assert.doesNotMatch(node.textContent, /[\u3400-\u9fff]/u, `untranslated text in ${route}`);
+    }
+    if (route.startsWith('blog/') && !route.startsWith('blog/page/')) {
+      assert.deepEqual([...en.querySelectorAll('.prose h2, .prose h3')].map(h => h.id),
+        [...zh.querySelectorAll('.prose h2, .prose h3')].map(h => h.id));
+      const schema = JSON.parse(en.querySelector('script[type="application/ld+json"]').textContent);
+      assert.equal(schema.inLanguage, 'en');
+      assert.equal(schema.mainEntityOfPage, 'https://example.com/en' + relative);
+      assert.equal(en.querySelectorAll('script[src$="/assets/diagrams.js"]').length,
+        zh.querySelectorAll('script[src$="/assets/diagrams.js"]').length);
+    }
+    for (const a of en.querySelectorAll('a[href^="/"]')) {
+      if (a.matches('[data-language-switch]')) continue;
+      assert.ok(a.getAttribute('href').startsWith('/en/'), `English page links to Chinese: ${a.href}`);
+    }
+  }
+  assert.equal(documentAt('en/resume').querySelector('h1').textContent, 'Yutong Chen');
+  assert.equal(documentAt('en/resume').querySelector('[data-print-resume]').textContent, 'Print resume');
+  const index = JSON.parse(fs.readFileSync(path.join(output, 'en/assets/search-index.json')));
+  assert.equal(index.length, posts.length);
+  assert.ok(index.every(item => item.url.startsWith('/en/blog/') && !/[\u3400-\u9fff]/u.test(item.title + item.description)));
+  for (const c of allCases.filter(c => c.publish === false)) assert.ok(!fs.existsSync(path.join(output, 'en/cases', c.slug)));
+  assert.ok(fs.readFileSync(path.join(output, 'en/feed.xml'), 'utf8').includes('<language>en</language>'));
+});
+
+test('English search, room interactions and resume export stay in the chosen language', async () => {
+  const dom = interactive('en/blog');
+  const { window } = dom;
+  const index = JSON.parse(fs.readFileSync(path.join(output, 'en/assets/search-index.json')));
+  const requests = [];
+  window.fetch = async url => { requests.push(url); return {ok:true,json:async () => index}; };
+  window.eval(browserSource('src/main.js'));
+  const input = window.document.querySelector('#post-search');
+  input.value = 'context';
+  input.dispatchEvent(new window.Event('input'));
+  await new Promise(resolve => setTimeout(resolve, 0));
+  assert.deepEqual(requests, ['/en/assets/search-index.json']);
+  assert.match(window.document.querySelector('#search-status').textContent, /articles found/);
+  assert.ok([...window.document.querySelectorAll('#search-results a')].every(a => a.pathname.startsWith('/en/blog/')));
+  dom.window.close();
+
+  const room = interactive('en/explore');
+  const doc = room.window.document;
+  const data = JSON.parse(doc.querySelector('#room-content').textContent);
+  room.window.eval(browserSource('src/room-experiences.js', 'roomExperiences'));
+  room.window.roomExperiences.createExperiences({panel:doc.querySelector('#room-panel'),tooltip:doc.querySelector('#room-tooltip'),buttons:[...doc.querySelectorAll('[data-zone]')],data});
+  for (const zone of ['books', 'desk', 'wall', 'notebook', 'plant']) {
+    doc.querySelector(`[data-zone="${zone}"]`).click();
+    assert.doesNotMatch(doc.querySelector('#room-panel').textContent, /[\u3400-\u9fff]/u);
+    assert.ok([...doc.querySelectorAll('#room-panel-links a')].every(a => a.pathname.startsWith('/en/')));
+  }
+  room.window.close();
+
+  const { initializeResumeImageExport } = await import('../src/resume-image.js');
+  const resume = new JSDOM(html('en/resume'));
+  let filename;
+  const exportImage = initializeResumeImageExport(resume.window.document, {
+    renderer:async () => async () => ({toBlob:callback => callback(new Blob(['image']))}),
+    save:async (_blob, name) => { filename = name; },
+  });
+  await exportImage();
+  assert.equal(filename, 'Yutong Chen-Resume.png');
+  assert.equal(resume.window.document.querySelector('[data-export-resume-image] span').textContent, 'Export image');
+  assert.match(resume.window.document.querySelector('[data-resume-export-status]').textContent, /image is ready/);
+  resume.window.close();
 });
 
 test('project start dates order the published listing and room workbench independently of homepage selection', () => {
@@ -192,7 +280,7 @@ test('web resume includes current personal details and concise experience titles
   assert.equal(printButton.hidden, true);
   let printed = 0;
   dom.window.print = () => printed++;
-  dom.window.eval(fs.readFileSync(path.join(root, 'src/main.js'), 'utf8'));
+  dom.window.eval(browserSource('src/main.js'));
   assert.equal(printButton.hidden, false);
   printButton.click();
   assert.equal(printed, 1);
@@ -325,7 +413,7 @@ test('search finds posts outside the current page, combines category filters and
   const dom = interactive('blog');
   const {window} = dom; const doc = window.document;
   window.fetch = async () => ({ ok:true, json:async()=>JSON.parse(fs.readFileSync(path.join(output,'assets/search-index.json'))) });
-  window.eval(fs.readFileSync(path.join(root,'src/main.js'),'utf8'));
+  window.eval(browserSource('src/main.js'));
   const search = doc.querySelector('#post-search');
   search.value = posts.at(-1).title;
   search.dispatchEvent(new window.Event('input'));
@@ -347,7 +435,7 @@ test('failed and stale search requests keep static pages usable', async () => {
   const dom = interactive('blog/page/2'); const {window} = dom; const doc = window.document;
   let resolve;
   window.fetch = () => new Promise(done=>{resolve=done;});
-  window.eval(fs.readFileSync(path.join(root,'src/main.js'),'utf8'));
+  window.eval(browserSource('src/main.js'));
   const search = doc.querySelector('#post-search');
   search.value = 'AI'; search.dispatchEvent(new window.Event('input'));
   search.value = ''; search.dispatchEvent(new window.Event('input'));
@@ -364,7 +452,7 @@ test('failed and stale search requests keep static pages usable', async () => {
 test('theme toggles and survives page initialization; restricted storage does not break it', () => {
   const dom = interactive(''); const {window} = dom;
   const theme = fs.readFileSync(path.join(root,'src/theme.js'),'utf8');
-  window.eval(fs.readFileSync(path.join(root,'src/main.js'),'utf8'));
+  window.eval(browserSource('src/main.js'));
   window.document.querySelector('[data-theme-toggle]').click();
   assert.equal(window.document.documentElement.dataset.theme,'dark');
   window.eval(theme);
@@ -383,7 +471,8 @@ test('room uses published content and all five experiences work without WebGL', 
   assert.equal(data.zones[1].links.length,cases.length);
   assert.equal(data.journal[0].title,posts[0].title);
   assert.ok(data.journal[0].url.startsWith('/blog/'));
-  window.eval(fs.readFileSync(path.join(root,'src/room-experiences.js'),'utf8').replace('export function','function'));
+  window.eval(browserSource('src/room-experiences.js', 'roomExperiences'));
+  window.createExperiences = window.roomExperiences.createExperiences;
   window.createExperiences({panel:doc.querySelector('#room-panel'),tooltip:doc.querySelector('#room-tooltip'),buttons:[...doc.querySelectorAll('[data-zone]')],data});
   for (const zone of ['books','desk','wall','notebook','plant']) {
     doc.querySelector(`[data-zone="${zone}"]`).click();

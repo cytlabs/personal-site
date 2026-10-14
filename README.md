@@ -51,6 +51,14 @@ python3 -m http.server 4173 --directory dist
 
 案例详情按背景问题、参与工作、关键方案、交付结果与复盘组织。`overview` 保存角色及交付概览，`html` 保存案例正文。详情页目前以文字呈现，不包含配图、图片占位或图片需求清单。
 
+### 中英双语
+
+中文保留原地址；完整英文版位于 `/en/`，包括首页、文章正文、案例、关于我、简历和探索房间。页眉的 `EN` / `中文` 跳转到同一页面，文章与关于页保留相同锚点。两种语言分别提供搜索索引和 RSS，并生成对应 canonical、hreflang 和站点地图条目。
+
+`content/en/strings.json` 保存网站文案、案例和简历的英文翻译；`content/en/posts.json` 保存文章英文元数据；`content/en/posts/<slug>.md` 保存完整英文正文。浏览器交互文案位于 `src/locale-en.json`。英文姓名使用 `Yutong Chen`。
+
+新增或修改中文文章后，同步更新对应英文正文和元数据。确认英文已与中文校对后，运行 `npm run i18n:record-source` 记录其中文来源版本，再运行 `npm run check`。中文文章变化而英文来源版本未更新、界面文案缺少翻译、英文文章缺失或章节结构不一致时，构建会报错。隐藏文章和案例不会因为存在英文素材而公开。
+
 维护位置：`site.config.mjs`（首页介绍）、`src/styles.css`（样式）、`src/main.js`（搜索及主题按钮）、`src/room*.js`（房间）、`content/room.json`（房间便签）。`npm run build:blog` 是兼容旧发布工具的生成步骤；完整预览与部署使用 `npm run build`。
 
 使用 Node.js 22 或更新版本：
