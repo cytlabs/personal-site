@@ -41,23 +41,23 @@ python3 -m http.server 4173 --directory dist
 - 搜索与分类覆盖所有已发布文章，包括其他分页；搜索加载失败时保留当前页及翻页入口。
 - 原关于页正文、联系方式和锚点迁至 `content/about.html`；原案例正文迁至 `content/case-studies.json`，详情页位于 `/cases/<id>/`。原 Markdown 资料继续保留。
 - 3D 房间的书架、电脑和手记使用真实文章、案例与摘录；WebGL 不可用时仍能通过按钮浏览内容。房间脚本只在 `/explore/` 加载。
-- 保留原 Markdown 公开内容过滤、表格、代码块、Mermaid、BlogPosting、canonical 和 sitemap，增加 `/feed.xml`。Mermaid 沿用原站 CDN，加载失败显示原文。
+- 保留原 Markdown 公开内容过滤、表格、代码块、Mermaid、BlogPosting、canonical 和 sitemap，增加 `/feed.xml`。Mermaid 随站点打包并按需加载本地模块，加载失败仍保留原文。
 
-新增案例来自 `cytlabs/enterprise-ai-practice` 的 `543b75b31218cbc0309b335863931b51ea7f886b`：猎头招聘交付与达人营销交付。两篇案例进入案例列表、详情与房间工作台；正文附原始材料链接，保留阶段说明和效果数据口径。
+新增案例来自 `cytlabs/enterprise-ai-practice` 的 `543b75b31218cbc0309b335863931b51ea7f886b`：猎头招聘交付与达人营销交付。两篇案例进入案例列表、详情与房间工作台，正文按已审阅的项目故事呈现。
 
 新增 99MedPass 医疗服务、VOWSCENE 婚纱摄影与 Intent 个人 AI 三个自主项目，与简历项目合计九个案例。首页仅展示时间最新的两个案例，其他通过“查看更多”进入案例列表，案例列表、详情页、房间工作台与 sitemap 自动接入。三个项目各有独立 SVG 封面，详情注明当前阶段：官网与流程原型、品牌官网与产品设计、产品定义与架构设计。内容依据各项目当前仓库资料整理，不把原型、前端演示或规划写成已上线能力。
 
 项目资料位于 `content/case-studies.json`。将案例设为 `publish: false` 可保留原始内容并停止生成公开展示：案例列表、详情、房间工作台和站点地图均会过滤。99MedPass 与 VOWSCENE 当前隐藏，九份案例资料中展示七个；首页仍展示配置指定的两个案例。统一用 `period.start` 保存开始时间，卡片、详情和房间工作台均显示“项目时间 · 年月”，不再显示结束时间或阶段记录。案例列表与工作台按开始时间倒序排列，同日保持原有顺序。当前已确认日期：达人营销 2026.07、KeySafe 2024.12、多云资源管理平台 2024.06、GitOps 发布平台 2022.12、容器平台 2021.12。其他时间沿用当前值，后续可按站主提供的更精确日期更新。
 
-案例详情按背景问题、参与工作、关键方案、交付结果与复盘组织。`overview` 保存角色及交付概览，`html` 保存案例正文。详情页目前以文字呈现，不包含配图、图片占位或图片需求清单。
+7 篇公开案例正文位于 `content/cases/<slug>.md`，`content/case-studies.json` 中的 `markdown` 字段引用源稿，`overview` 保存角色及交付概览。正文按各项目自己的故事组织，内嵌共 15 张 Mermaid 流程图、架构图与能力关系图。项目时间仍由 `period.start` 统一显示；源稿开头的标题与时间行不会重复展示。图在自身区域内滚动，支持键盘访问。审阅说明和内部核实问题不进入公开内容，隐藏项目继续保留原有 HTML。
 
 ### 中英双语
 
 中文保留原地址；完整英文版位于 `/en/`，包括首页、文章正文、案例、关于我、简历和探索房间。页眉的 `EN` / `中文` 跳转到同一页面，文章与关于页保留相同锚点。两种语言分别提供搜索索引和 RSS，并生成对应 canonical、hreflang 和站点地图条目。
 
-`content/en/strings.json` 保存网站文案、案例和简历的英文翻译；`content/en/posts.json` 保存文章英文元数据；`content/en/posts/<slug>.md` 保存完整英文正文。浏览器交互文案位于 `src/locale-en.json`。英文姓名使用 `Yutong Chen`。
+`content/en/strings.json` 保存网站界面与简历的英文翻译；案例英文正文位于 `content/en/cases/<slug>.md`，英文元数据位于 `content/en/cases.json`；`content/en/posts.json` 保存文章英文元数据；`content/en/posts/<slug>.md` 保存完整英文正文。浏览器交互文案位于 `src/locale-en.json`。英文姓名使用 `Yutong Chen`。
 
-新增或修改中文文章后，同步更新对应英文正文和元数据。确认英文已与中文校对后，运行 `npm run i18n:record-source` 记录其中文来源版本，再运行 `npm run check`。中文文章变化而英文来源版本未更新、界面文案缺少翻译、英文文章缺失或章节结构不一致时，构建会报错。隐藏文章和案例不会因为存在英文素材而公开。
+新增或修改中文文章、案例后，同步更新对应英文正文和元数据，流程图中的标签也要翻译。确认英文已与中文校对后，运行 `npm run i18n:record-source` 记录其中文来源版本，再运行 `npm run check`。中文文章或案例变化而英文来源版本未更新、界面文案缺少翻译、英文正文缺失或章节结构不一致时，构建会报错。隐藏文章和案例不会因为存在英文素材而公开。
 
 维护位置：`site.config.mjs`（首页介绍）、`src/styles.css`（样式）、`src/main.js`（搜索及主题按钮）、`src/room*.js`（房间）、`content/room.json`（房间便签）。`npm run build:blog` 是兼容旧发布工具的生成步骤；完整预览与部署使用 `npm run build`。
 

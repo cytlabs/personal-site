@@ -35,7 +35,7 @@ test('phone workspace article renders its related article as a navigable link', 
   assert.ok(!doc.querySelector('.prose').textContent.includes(`](${destination})`));
 });
 
-test('case details retain their content without illustrations or image placeholders', () => {
+test('approved Markdown case stories publish with paired diagrams and no review notes', () => {
   for (const item of cases) {
     const doc = documentAt(`cases/${item.slug}`);
     const prose = doc.querySelector('.prose');
@@ -44,9 +44,19 @@ test('case details retain their content without illustrations or image placehold
     assert.ok(!prose.textContent.includes('图片待补充'));
     assert.ok(!Object.hasOwn(item, 'imageSlots'));
     assert.equal(doc.querySelectorAll('.case-brief dt').length, item.overview.length);
-    for (const heading of ['我的工作范围', '交付物与关键做法', '这个案例能够说明的能力']) {
-      assert.ok([...prose.querySelectorAll('h2')].some(h => h.textContent === heading));
-    }
+    const source = fs.readFileSync(path.join(root, item.markdown), 'utf8');
+    const diagramCount = (source.match(/```mermaid/g) || []).length;
+    assert.equal(prose.querySelectorAll('pre.mermaid').length, diagramCount);
+    assert.ok(diagramCount >= 2);
+    assert.equal(doc.querySelectorAll('h1').length, 1);
+    assert.doesNotMatch(prose.textContent, /案例来源|仍[在待需].{0,15}验证|尚待补充|材料不足/);
+    assert.ok(!prose.textContent.includes('项目时间：'));
+    const en = documentAt(`en/cases/${item.slug}`);
+    assert.equal(en.querySelectorAll('pre.mermaid').length, diagramCount);
+    for (const diagram of en.querySelectorAll('pre.mermaid')) assert.doesNotMatch(diagram.textContent, /[\u3400-\u9fff]/u);
+    assert.deepEqual([...en.querySelectorAll('.prose h2, .prose h3')].map(h => h.id),
+      [...prose.querySelectorAll('h2, h3')].map(h => h.id));
+    assert.equal(en.querySelectorAll('script[src$="/assets/diagrams.js"]').length, 1);
   }
 });
 

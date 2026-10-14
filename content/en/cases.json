@@ -1,0 +1,268 @@
+{
+  "recruitment-delivery": {
+    "description": "Mapping recruitment workflows and designing AI collaboration around shared project context to reduce repeated explanations of hiring criteria and disconnected analysis.",
+    "status": "Workflow analysis and solution design",
+    "title": "Executive Search: Keeping Hiring Criteria Consistent Throughout Delivery",
+    "overview": [
+      {
+        "label": "Project objective",
+        "value": "Keep requirements, candidate decisions and client feedback useful throughout recruiting delivery"
+      },
+      {
+        "label": "My responsibility",
+        "value": "Map recruiting workflows, AI capabilities and human review boundaries"
+      },
+      {
+        "label": "Core deliverables",
+        "value": "Business workflows, nine task capabilities and a shared project dossier design"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Submit candidate materials",
+        "text": "A delivery consultant submits materials to start analysis under agreed rules. This is a design for proactive collaboration within a recruiting project."
+      },
+      {
+        "title": "Read the project dossier and analyze",
+        "text": "Compare new resumes with search criteria and previous decisions; ask the consultant to supply missing critical information."
+      },
+      {
+        "title": "Draft a recommendation",
+        "text": "Use shared evaluation methods to identify fit, risks and supporting evidence, then submit the draft to the project lead for review and confirmation."
+      },
+      {
+        "title": "Record feedback and follow up",
+        "text": "Retain review outcomes and reasons for changes, linking client feedback to the candidate and role. The lead decides whether the search direction should change."
+      }
+    ],
+    "sourceHash": "d1506646cadf72543040ecd7e9cafd9566b56b2ce965f664ff892a633f7aaf5a"
+  },
+  "creator-marketing-delivery": {
+    "description": "Designing a creator delivery workflow with shared criteria across client confirmation, operational sourcing and agent-assisted review.",
+    "status": "Workflow design and collaboration demonstration",
+    "title": "Creator Marketing: Shared Criteria for Sourcing, Review and Shortlist Delivery",
+    "overview": [
+      {
+        "label": "Project objective",
+        "value": "Use the same confirmed criteria for sourcing, review and shortlist delivery"
+      },
+      {
+        "label": "My responsibility",
+        "value": "Requirements analysis, screening design and collaborative workflow design"
+      },
+      {
+        "label": "Core deliverables",
+        "value": "Creator sourcing briefs, candidate review and shortlist feedback workflows"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Clarify and confirm requirements",
+        "text": "The project manager communicates with the client in a group chat while AI organizes the requirements. Manager review and client confirmation produce a creator sourcing brief."
+      },
+      {
+        "title": "Operational sourcing and submission",
+        "text": "The brief goes to the project's delivery operators, who source creators against shared criteria and submit their information to the agent."
+      },
+      {
+        "title": "Agent review and feedback",
+        "text": "Review against confirmed client requirements: update the shortlist and add recommendation reasons when criteria are met; otherwise return specific reasons to the operator."
+      },
+      {
+        "title": "Connect delivery through project context",
+        "text": "Retain ownership, operational responsibilities, confirmed requirements and review status. Confirm requirement changes before updating the active sourcing guide."
+      }
+    ],
+    "sourceHash": "e76315f55a256bc9e978e1fff26dd5adf63d0e3826ff0771ceda53f88e279f13"
+  },
+  "intent": {
+    "description": "Building a workspace that connects records, projects, tasks and actions to address repeated organization in personal AI collaboration.",
+    "status": "Live · Ongoing iteration",
+    "title": "Intent: Connecting Ideas in Conversations to Action",
+    "overview": [
+      {
+        "label": "Project objective",
+        "value": "Turn records, decisions and execution results into reusable working context"
+      },
+      {
+        "label": "My responsibility",
+        "value": "Independent product design, development and personal assistant integration"
+      },
+      {
+        "label": "Core deliverables",
+        "value": "Web workspace, business services, MCP interfaces and organization reports"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Capture a record",
+        "text": "Retain the original input and source, then let AI organize it and associate it with existing projects."
+      },
+      {
+        "title": "Review and confirm",
+        "text": "Read the organization report and suggestions, then explicitly confirm formal tasks and objects."
+      },
+      {
+        "title": "Execute and retain results",
+        "text": "The web interface and agent share business data; outputs, materials and actions return to the project."
+      },
+      {
+        "title": "Retain attention and notification state",
+        "text": "Record attention, execution events and notification state so organization reports and subsequent actions can be linked to projects."
+      }
+    ],
+    "sourceHash": "3f54709e58eaa0caf3a528fcad46c6f27a3195ad7a125d09604d6b14dcd04553"
+  },
+  "keysafe-password-manager": {
+    "description": "Full-stack development connecting the product interface, data management and Web3 integration for everyday password management and access protection.",
+    "status": "Product development project",
+    "title": "KeySafe: Bringing Password Management and Protection into One Product",
+    "overview": [
+      {
+        "label": "Project objective",
+        "value": "Connect password management and access protection in the same product"
+      },
+      {
+        "label": "My responsibility",
+        "value": "Full-stack development connecting the interface, data management and Web3 integration"
+      },
+      {
+        "label": "Core deliverables",
+        "value": "Password management development, demonstration link and documentation"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Define the password management direction",
+        "text": "Explore the combination of Web2 and Web3 through decentralized password management."
+      },
+      {
+        "title": "Connect the full-stack components",
+        "text": "Use technologies including Next.js, TypeScript and PostgreSQL to connect the interface and data management."
+      },
+      {
+        "title": "Consider protection mechanisms",
+        "text": "The design includes a master password, multiple encryption strategies and two-factor protection."
+      },
+      {
+        "title": "Provide a project demonstration",
+        "text": "Provide a demonstration and documentation covering the interface, data management and Web3 integration."
+      }
+    ],
+    "sourceHash": "0db7eb6fda1e6efc5834ae5ff8c04d0841783778ed5b3a1ea6c26f5e8dc9440d"
+  },
+  "multi-cloud-management": {
+    "description": "Leading a unified multi-cloud resource platform and customer integration to address scattered resources, disconnected monitoring and fragmented cost reporting.",
+    "status": "Platform development and customer integration",
+    "title": "Multi-Cloud Resource Management: One Operations Entry Point for Customer Environments",
+    "overview": [
+      {
+        "label": "Project objective",
+        "value": "Unify resource and operations access, managing state, alerts and costs together"
+      },
+      {
+        "label": "My responsibility",
+        "value": "Platform architecture, full-stack development and customer environment integration"
+      },
+      {
+        "label": "Core deliverables",
+        "value": "Unified resource model, cross-cloud monitoring and operations automation modules"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Unify the resource model",
+        "text": "Design a cross-cloud resource model connecting platforms such as Volcano Engine and Alibaba Cloud."
+      },
+      {
+        "title": "Build a management interface",
+        "text": "Use Vue and Django to build a resource platform with separate frontend and backend layers."
+      },
+      {
+        "title": "Connect operations capabilities",
+        "text": "Unify monitoring and alerts, and develop lifecycle management, cost analysis and automated alert handling."
+      },
+      {
+        "title": "Integrate customer environments",
+        "text": "The platform integrates more than 15 customer environments and centrally manages over 100 cloud servers."
+      }
+    ],
+    "sourceHash": "7682b17277ddd3aa1f797281db8c7b0f6d0c5de876d8f06a69bb5cb22cec3fef"
+  },
+  "enterprise-gitops-platform": {
+    "description": "Building a reviewable, traceable release process across environments to address slow releases, configuration differences and manual operations.",
+    "status": "Release platform delivery",
+    "title": "Enterprise GitOps Delivery: Deploying Across Environments from Versioned Configuration",
+    "overview": [
+      {
+        "label": "Project objective",
+        "value": "Shorten release cycles and improve consistency and reliability across environments"
+      },
+      {
+        "label": "My responsibility",
+        "value": "Architecture, platform delivery, configuration standards and team adoption"
+      },
+      {
+        "label": "Core deliverables",
+        "value": "Automated releases, environment templates, review and rollback processes"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Manage configuration in Git",
+        "text": "Centrally manage infrastructure and application configuration while retaining change history."
+      },
+      {
+        "title": "Create templates for multiple environments",
+        "text": "Use Kustomize to organize environment differences and define configuration templates and review standards."
+      },
+      {
+        "title": "Connect automated releases",
+        "text": "Build a GitLab Runner and Argo CD release pipeline with consistent multi-environment processes."
+      },
+      {
+        "title": "Support team adoption",
+        "text": "Use documentation and training to help development and operations teams continue using the release platform."
+      }
+    ],
+    "sourceHash": "2a9e122b215cc6c501ecf77956b7d7fbbc94decb3faaf9ac045b957a89714784"
+  },
+  "kubernetes-platform": {
+    "description": "Building a container runtime platform and supporting the containerization of over 50 applications to improve resource use, environment consistency and maintenance.",
+    "status": "Platform delivery and application migration",
+    "title": "Enterprise Container Platform and Application Migration",
+    "overview": [
+      {
+        "label": "Project objective",
+        "value": "Unify application infrastructure and improve deployment efficiency and observability"
+      },
+      {
+        "label": "My responsibility",
+        "value": "Cluster delivery, image standards, observability and application migration"
+      },
+      {
+        "label": "Core deliverables",
+        "value": "Production cluster, image pipelines, logging, monitoring and migration standards"
+      }
+    ],
+    "steps": [
+      {
+        "title": "Build the runtime platform",
+        "text": "Design and deploy a production Kubernetes cluster, choosing high-availability and networking approaches."
+      },
+      {
+        "title": "Standardize application images",
+        "text": "Build image pipelines and standardize base images and containerization."
+      },
+      {
+        "title": "Connect logs and monitoring",
+        "text": "Build shared logging, monitoring and alerting using ELK and Prometheus."
+      },
+      {
+        "title": "Advance application migration",
+        "text": "Define migration standards and guide developers through containerizing over 50 applications."
+      }
+    ],
+    "sourceHash": "1d3155bec4d4255bdf6370caed0e3c7bfcc3c98c078ff39def617ee07dc3767e"
+  }
+}
