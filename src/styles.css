@@ -337,3 +337,21 @@
 .resume-image-sheet .resume-capabilities>div{font-size:16px;line-height:1.65;display:flex;gap:18px}
 .resume-image-sheet .resume-capabilities dt{flex:0 0 112px}
 .resume-image-sheet .resume-capabilities dd{flex:1}
+
+/* A compact language link stays available on every page. */
+.language-switch{font-size:.875rem;line-height:1;padding:10px 5px;color:var(--muted);flex-shrink:0;border-radius:4px}
+.language-switch:hover{color:var(--ink);background:var(--soft)}
+.language-switch:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+html[lang=en] .page-intro h1,html[lang=en] .home-intro h1{letter-spacing:-.025em}
+html[lang=en] .prose{line-height:1.8}
+html[lang=en] .about-aside{overflow-wrap:anywhere}
+@media(max-width:620px){
+ .site-header{flex-wrap:wrap;gap:10px;min-height:106px;height:auto;padding-block:12px}
+ .site-header nav{order:3;flex-basis:100%;justify-content:space-between;margin:0;gap:12px;height:30px}
+ .site-header nav a{height:30px}
+ .site-header nav a[aria-current]:after{bottom:-3px}
+ .header-explore{margin-left:auto}
+ .theme-toggle{margin-left:0}
+ .room-stage{height:calc(100svh - 106px)}
+}
+@media print{.language-switch{display:none!important}}

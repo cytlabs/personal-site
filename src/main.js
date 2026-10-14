@@ -1,3 +1,4 @@
+import { translate } from './i18n.js';
 // Every page uses the same theme controller, including the 3D room.
 const themeToggle = document.querySelector('[data-theme-toggle]');
 function updateThemeToggle() {
@@ -5,7 +6,7 @@ function updateThemeToggle() {
   const dark = window.siteTheme.current === 'dark';
   themeToggle.hidden = false;
   themeToggle.setAttribute('aria-pressed', String(dark));
-  themeToggle.title = dark ? '切换到白天' : '切换到夜晚';
+  themeToggle.title = translate(dark ? '切换到白天' : '切换到夜晚');
 }
 themeToggle?.addEventListener('click', () => window.siteTheme.toggle());
 window.addEventListener('site-theme-change', updateThemeToggle);
@@ -69,7 +70,7 @@ if (filters) {
       return;
     }
     status.hidden = false;
-    status.textContent = '正在搜索全部文章…';
+    status.textContent = translate('正在搜索全部文章…');
     try {
       index ||= fetch(search.dataset.searchIndex).then(response => {
         if (!response.ok) throw new Error('Search index unavailable');
@@ -84,7 +85,7 @@ if (filters) {
       pagePosts.hidden = true;
       if (pagination) pagination.hidden = true;
       empty.hidden = matches.length !== 0;
-      status.textContent = `找到 ${matches.length} 篇文章（全部 ${posts.length} 篇）`;
+      status.textContent = translate(`找到 ${matches.length} 篇文章（全部 ${posts.length} 篇）`);
     } catch {
       index = null;
       if (request !== version) return;
@@ -92,7 +93,7 @@ if (filters) {
       pagePosts.hidden = false;
       if (pagination) pagination.hidden = false;
       empty.hidden = true;
-      status.textContent = '搜索暂时无法加载，可以继续翻页阅读，或重新输入关键词重试。';
+      status.textContent = translate('搜索暂时无法加载，可以继续翻页阅读，或重新输入关键词重试。');
     }
   }
   buttons.forEach(button => button.addEventListener('click', () => {

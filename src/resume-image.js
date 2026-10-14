@@ -1,3 +1,4 @@
+import { translate } from './i18n.js';
 let rendererPromise;
 
 // Load the local renderer only when the visitor requests an image.
@@ -82,21 +83,21 @@ export function initializeResumeImageExport(doc, { renderer = loadRenderer, save
     if (button.disabled) return;
     button.disabled = true;
     button.setAttribute('aria-busy', 'true');
-    label.textContent = '正在生成…';
+    label.textContent = translate('正在生成…', doc);
     status.hidden = false;
-    status.textContent = '正在生成简历图片…';
+    status.textContent = translate('正在生成简历图片…', doc);
     try {
       const rasterize = await renderer(doc);
       const blob = await renderResumeImage(resume, rasterize);
       const name = resume.querySelector('h1').textContent.trim().replace(/[\\/:*?"<>|]/g, '');
-      await save(blob, `${name}-简历.png`, doc);
-      status.textContent = '图片已生成，请在浏览器下载中查看。';
+      await save(blob, `${name}-${translate('简历', doc)}.png`, doc);
+      status.textContent = translate('图片已生成，请在浏览器下载中查看。', doc);
     } catch {
-      status.textContent = '图片生成失败，请重试。也可以使用“打印简历”保存 PDF。';
+      status.textContent = translate('图片生成失败，请重试。也可以使用“打印简历”保存 PDF。', doc);
     } finally {
       button.disabled = false;
       button.removeAttribute('aria-busy');
-      label.textContent = '导出图片';
+      label.textContent = translate('导出图片', doc);
     }
   };
   button.addEventListener('click', exportImage);

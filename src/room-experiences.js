@@ -1,3 +1,4 @@
+import { translateElement } from './i18n.js';
 // The reading / exploring layer also works when WebGL is unavailable.
 export function createExperiences({panel, tooltip, buttons, data}) {
   const {zones,journal,bookNotes,secretNote}=data;
@@ -38,6 +39,7 @@ export function createExperiences({panel, tooltip, buttons, data}) {
     }else{
       content.innerHTML=`<div class="plant-moment ${watered?'watered':''}"><span class="plant-illustration" aria-hidden="true">♧</span><h3>${watered?'今天的水，已经够了。':'它在等一场小雨。'}</h3><p>${watered?'有些变化很慢，但正在发生。谢谢你照顾这个小角落。':'给它一点水，看看会发生什么。'}</p>${watered?'<span class="plant-flower" aria-hidden="true">✿</span>':''}</div>${button(watered?'让它慢慢长大':'浇一点水 ↓','water',watered?'disabled':'')}<p class="experience-feedback" role="status">${watered?'你发现了一朵小花。':'不赶时间，也不需要完成什么。'}</p>`;
     }
+    translateElement(panel);
     // Keep keyboard focus on the corresponding control after a page re-render.
     if(focusAction){const el=[...content.querySelectorAll('[data-action]')].find(e=>e.dataset.action===focusAction.name&&e.dataset.index===focusAction.index&&e.dataset.tab===focusAction.tab&&!e.disabled);(el||content.querySelector('.experience-pager button:not(:disabled)')||closeButton).focus({preventScroll:true});}
   }
