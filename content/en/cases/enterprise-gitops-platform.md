@@ -28,9 +28,9 @@ flowchart LR
     subgraph DEPLOY["Deploy and inspect"]
         direction TB
         F["ArgoCD sync"] --> G["K8s deployment"] --> H["Inspect state"]
+        H -->|Rollback needed| R["Select previous version"]
     end
     CONFIG -->|Approved| PIPE --> DEPLOY
-    DEPLOY -->|Rollback: select prior version| CONFIG
 ```
 
 The diagram shows the overall deployment relationships. Version identifiers connect configuration changes to application state, giving the team a path for checking release problems. Rollback follows the shared change process as well.

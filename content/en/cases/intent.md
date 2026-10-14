@@ -55,7 +55,6 @@ flowchart LR
         R["Daily report"] --> N["WeChat brief"]
     end
     ENTRY --> SERVICE --> REPORT
-    REPORT -.->|Return to entry points| ENTRY
 ```
 
 MCP provides the assistant's interface to product capabilities. The website and assistant use the same services to access and operate on project objects. Work can start through different entry points while the product maintains the relationships between project tasks, materials and state.

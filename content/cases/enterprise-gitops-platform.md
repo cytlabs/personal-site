@@ -23,14 +23,14 @@ flowchart LR
     end
     subgraph PIPE["流水线"]
         direction TB
-        D["GitLab Runner"] --> E["Kustomize 环境配置"]
+        D["GitLab Runner"] --> E["Kustomize<br/>环境配置"]
     end
     subgraph DEPLOY["同步与核对"]
         direction TB
         F["ArgoCD 同步"] --> G["K8s 应用部署"] --> H["核对应用状态"]
+        H -->|需回滚| R["选择历史版本"]
     end
     CONFIG -->|通过| PIPE --> DEPLOY
-    DEPLOY -->|需回滚：选择历史版本| CONFIG
 ```
 
 图中展示的是整体发布关系。版本标识连接配置变更和应用状态，团队在排查发布问题时能够沿着这条关系核对，而回滚也通过共同的变更流程处理。

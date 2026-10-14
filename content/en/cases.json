@@ -35,7 +35,7 @@
         "text": "Retain review outcomes and reasons for changes, linking client feedback to the candidate and role. The lead decides whether the search direction should change."
       }
     ],
-    "sourceHash": "955920288804861ed31137fb0e77d4b581f553aa1c8aa5c0be2caab5147093b8"
+    "sourceHash": "8456abcc64d00050383f1e51d9a657ec2f2e650e6af3429eb6ab776e0249671a"
   },
   "creator-marketing-delivery": {
     "description": "Designing a creator delivery workflow with shared criteria across client confirmation, operational sourcing and agent-assisted review.",
@@ -73,7 +73,7 @@
         "text": "Retain ownership, operational responsibilities, confirmed requirements and review status. Confirm requirement changes before updating the active sourcing guide."
       }
     ],
-    "sourceHash": "e74eac487aa403236c05638ef74077913349e59a400995e3948a435a6dfd18bd"
+    "sourceHash": "ec8ae8a49dd28b6a0a3b40402a5e46f2b04a642100ddf5b3bad5cef050414d9c"
   },
   "intent": {
     "description": "Building a workspace that connects records, projects, tasks and actions to address repeated organization in personal AI collaboration.",
@@ -111,7 +111,7 @@
         "text": "Record attention, execution events and notification state so organization reports and subsequent actions can be linked to projects."
       }
     ],
-    "sourceHash": "b9e390f32add5b8ed6208cb1257286cc568f7cfb738bca4732ef0066eb64017f"
+    "sourceHash": "1a30ed4f8834b6182a87d2efdb644aa0fe83d9ba580a3bb768f34c957f61a343"
   },
   "keysafe-password-manager": {
     "description": "Full-stack development connecting the product interface, data management and Web3 integration for everyday password management and access protection.",
@@ -225,7 +225,7 @@
         "text": "Use documentation and training to help development and operations teams continue using the release platform."
       }
     ],
-    "sourceHash": "6280d2f69063152fc1d3f56ad69ce5312cc1aee65c96b971c847bfc56cf0fad1"
+    "sourceHash": "ef0a8f85a09122cdd3f834203e8badd58dbefe33dd7173a72d01a54d6c798fdb"
   },
   "kubernetes-platform": {
     "description": "Building a container runtime platform and supporting the containerization of over 50 applications to improve resource use, environment consistency and maintenance.",
@@ -263,6 +263,6 @@
         "text": "Define migration standards and guide developers through containerizing over 50 applications."
       }
     ],
-    "sourceHash": "24ab87c6e587be2e53dbbc75ec4352a5dba49f4dc3b235a14803c98221013cae"
+    "sourceHash": "72969cd00f370bfd0050cd1b85a8856db91ff690a75bc082a6570c4f7aec31a3"
   }
 }

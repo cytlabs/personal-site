@@ -173,7 +173,7 @@
 .prose pre.mermaid{background:var(--diagram-bg);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:20px;line-height:1.3;white-space:pre}
 .prose pre.mermaid[data-processed=true]{white-space:normal}
 .prose pre.mermaid svg{display:block;max-width:none!important;height:auto;margin-inline:auto}
-.diagram-actions{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:-12px 0 28px}
+.diagram-actions{display:flex;justify-content:space-between;align-items:center;gap:16px;margin:0 0 28px}
 .diagram-actions span{font-size:.8125rem;color:var(--muted)}
 .diagram-actions button{margin-left:auto}
 .diagram-actions button{border:0;background:none;color:var(--muted);padding:5px 0 5px 12px;font-size:.8125rem}

@@ -20,7 +20,7 @@
 flowchart LR
     subgraph ENV["准备环境"]
         direction TB
-        A["建设 K8s 环境"] --> B["网络与基础配套"] --> C["镜像规范与日志监控"]
+        A["建设 K8s 环境"] --> B["网络与基础配套"] --> C["镜像规范<br/>日志与监控"]
     end
     subgraph DEPLOY["部署服务"]
         direction TB
@@ -28,7 +28,7 @@ flowchart LR
     end
     subgraph SWITCH["切换流量"]
         direction TB
-        F["核对运行与业务访问"] --> G["安排流量切换"]
+        F["运行与业务核对"] --> G["安排流量切换"]
     end
     ENV --> DEPLOY --> SWITCH
     O["原有环境承载业务"] -.->|建设期间保留| SWITCH
