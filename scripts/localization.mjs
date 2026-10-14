@@ -4,7 +4,7 @@ import markdown from '../markdown-renderer.js';
 const han = /[\u3400-\u9fff]/u;
 
 // English is generated at build time: it works without browser-side translation.
-export function createLocalizer(dictionary, { base = '', origin = '', posts = {} } = {}) {
+export function createLocalizer(dictionary, { base = '', origin = '', posts = {}, cases = {} } = {}) {
   const missing = new Set();
   function text(value) {
     if (!han.test(value)) return value.replace('Email：', 'Email: ');
@@ -46,9 +46,10 @@ export function createLocalizer(dictionary, { base = '', origin = '', posts = {}
     const doc = dom.window.document;
     doc.documentElement.lang = 'en';
     const articleSlug = route.match(/^\/blog\/([^/]+)\/$/u)?.[1];
-    if (articleSlug) {
-      const article = posts[articleSlug];
-      if (!article?.body) throw new Error(`Missing English article: ${articleSlug}`);
+    const caseSlug = route.match(/^\/cases\/([^/]+)\/$/u)?.[1];
+    if (articleSlug || (caseSlug && cases[caseSlug])) {
+      const article = articleSlug ? posts[articleSlug] : cases[caseSlug];
+      if (!article?.body) throw new Error(`Missing English content: ${articleSlug || caseSlug}`);
       const prose = doc.querySelector('.prose');
       const originalHeadings = [...prose.querySelectorAll('h2, h3')];
       const controls = [...prose.children].filter(element => element.matches('.article-end, .next-article, script[src]'));

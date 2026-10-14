@@ -170,7 +170,9 @@
 .prose th{background:var(--soft);font-weight:600}
 .markdown-table-wrap,.capability-table-wrap{overflow-x:auto;margin:26px 0}
 .prose pre{max-width:100%;overflow:auto}
-.prose pre.mermaid{background:var(--paper);color:#253a34}
+.prose pre.mermaid{background:#fff;color:#253a34;border:1px solid var(--line);border-radius:8px;padding:20px;white-space:normal}
+.prose pre.mermaid svg{display:block;width:100%;max-width:none!important;height:auto}
+.prose pre.mermaid:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .prose .info-list{font-size:1rem;margin-bottom:0}
 .info-list>div{padding:14px 0;border-bottom:1px solid var(--line)}
 .info-list dt{font-size:0.8125rem;color:var(--muted);margin-bottom:5px}

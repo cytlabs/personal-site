@@ -1,8 +1,15 @@
-// Preserve the existing Mermaid integration; the source stays readable if the CDN fails.
+// Bundle Mermaid locally so case diagrams do not depend on an external CDN.
+import mermaid from 'mermaid';
 try {
-  const { default: mermaid } = await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs');
-  mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', theme: 'neutral' });
+  mermaid.initialize({ startOnLoad: false, securityLevel: 'strict', theme: 'neutral', fontFamily: getComputedStyle(document.body).fontFamily, flowchart: { htmlLabels: false } });
+  await document.fonts.ready;
   await mermaid.run({ querySelector: '.mermaid' });
+  document.querySelectorAll('.mermaid svg').forEach(svg => {
+    svg.style.minWidth = `${Math.ceil(svg.viewBox.baseVal.width)}px`;
+    svg.setAttribute('role', 'img');
+    svg.setAttribute('aria-label', document.documentElement.lang === 'en' ? 'Project diagram' : '项目流程与关系图');
+    svg.parentElement.setAttribute('tabindex', '0');
+  });
 } catch {
   document.querySelectorAll('pre.mermaid').forEach(element => {
     const notice = document.createElement('p');

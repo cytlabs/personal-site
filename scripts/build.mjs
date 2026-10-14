@@ -32,10 +32,11 @@ async function content(dir) {
     url: `/blog/${p.slug}/`,
   }));
   const cases = JSON.parse(await fs.readFile(path.join(root, 'content/case-studies.json'), 'utf8'));
-  return sortCases(cases.filter(c => c.publish !== false)).map(c => ({ ...c, url: `/cases/${c.slug}/`,
-    body: c.html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
+  return Promise.all(sortCases(cases.filter(c => c.publish !== false)).map(async c => ({ ...c, url: `/cases/${c.slug}/`,
+    html: c.markdown ? undefined : c.html,
+    body: c.markdown ? await fs.readFile(path.join(root, c.markdown), 'utf8') : c.html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
     status: c.status || '项目复盘', kind: c.kind || '交付实践',
-  }));
+  })));
 }
 
 export function sortCases(cases) {
@@ -120,6 +121,7 @@ function caseBrief(p) {
 
 function detail(p, list, type) {
   const blog = type==='blog';
+  if (p.markdown) p = {...p, body:p.body.replace(/^# .+\n+项目时间：[^\n]+\n+/u, '')};
   const {html,toc} = p.html ? withToc(p.html.replace(/(src|href)="(\/(?:assets|cases)\/[^"]+)"/g, (_, attribute, url) => `${attribute}="${u(url)}"`).replace(/<h2>([\s\S]*?)<\/h2>/, (all, heading) => plainText(heading).trim() === p.title.trim() ? '' : all)) : renderMarkdown(p.body, p.title);
   const related = list.find(item => item.slug !== p.slug);
   return layout({title:p.title,description:p.description,route:p.url,active:blog?'/blog/':'/cases/',article:blog?p:null,body:`<div class="reading-progress" aria-hidden="true"></div><div class="page-shell detail-shell"><a class="back-link" href="${u(`/${type}/`)}">← ${blog?'全部文章':'全部案例'}</a><header class="article-header"><div class="article-kicker"><span>${esc(p.category)}</span>${!blog ? `<span> / </span><span>${esc(p.status)}</span>` : ''}${p.date ? `<span> / </span><time datetime="${p.date}">${formatDate(p.date)}</time><span> / </span><span>约 ${p.minutes} 分钟</span>` : ''}</div><h1>${esc(p.title)}</h1><p>${esc(p.description)}</p>${!blog ? casePeriod(p.period) + caseBrief(p) : ''}</header><div class="article-layout"><article class="prose">${html}${html.includes('class="mermaid"') ? `<script type="module" src="${u('/assets/diagrams.js')}"></script>` : ''}<div class="article-end"><span>—</span><p>谢谢你读到这里。</p></div>${related?`<a class="next-article" href="${u(related.url)}"><small>${blog?'再读一篇':'另一个案例'}</small><strong>${esc(related.title)} <span aria-hidden="true">→</span></strong></a>`:''}</article><aside class="toc"><p>这一页里</p><nav aria-label="文章目录">${toc.map(t=>`<a href="#${t.id}">${t.text}</a>`).join('')}</nav><a class="toc-about" href="${u('/about/')}">${mark}<span>夏目<br><small>写下来，也做出来。</small></span></a></aside></div></div>`});
@@ -185,7 +187,17 @@ export async function build({ outputDir = path.join(root, 'dist') } = {}) {
     for (const key of ['title', 'summary', 'category']) dictionary[post[key]] = translated[key];
     post.tags.forEach((tag, i) => { dictionary[tag] = translated.tags[i]; });
   }
-  const english = createLocalizer(dictionary, { base, origin: site.url, posts: englishPosts });
+  const englishCases = JSON.parse(await fs.readFile(path.join(root, 'content/en/cases.json'), 'utf8'));
+  for (const item of cases.filter(c => c.markdown)) {
+    const translated = englishCases[item.slug];
+    if (!translated || translated.sourceHash !== translationSourceHash(item)) throw new Error(`English case is missing or out of date: ${item.slug}. Review its translation, then run npm run i18n:record-source.`);
+    translated.body = (await fs.readFile(path.join(root, 'content/en/cases', `${item.slug}.md`), 'utf8')).replace(/^# .+\n+Project date: [^\n]+\n+/u, '');
+    for (const key of ['title', 'description', 'status']) dictionary[item[key]] = translated[key];
+    for (const key of ['overview', 'steps']) item[key].forEach((entry, i) => {
+      for (const field of Object.keys(entry)) dictionary[entry[field]] = translated[key][i][field];
+    });
+  }
+  const english = createLocalizer(dictionary, { base, origin: site.url, posts: englishPosts, cases: englishCases });
   const englishPages = pages.map(([route, html]) => ['/en' + route, english.page(html, route)]);
   for (const [route, html] of englishPages) { const folder = path.join(out, route); await fs.mkdir(folder, { recursive: true }); await fs.writeFile(path.join(folder, 'index.html'), html); }
   await fs.mkdir(path.join(out, 'en/assets'), { recursive: true });
@@ -196,7 +208,7 @@ export async function build({ outputDir = path.join(root, 'dist') } = {}) {
   await bundle({entryPoints:[path.join(root,'src/main.js'),path.join(root,'src/room.js'),path.join(root,'src/resume-image.js')],outdir:path.join(out,'assets'),bundle:true,minify:true,format:'esm',target:'es2022',legalComments:'linked',metafile:false});
   await fs.copyFile(path.join(root,'src/vendor/html2canvas-1.4.1.min.js'),path.join(out,'assets/html2canvas-1.4.1.min.js'));
   await fs.copyFile(path.join(root,'src/vendor/html2canvas-LICENSE.txt'),path.join(out,'assets/html2canvas-LICENSE.txt'));
-  await fs.copyFile(path.join(root,'src/diagrams.js'),path.join(out,'assets/diagrams.js'));
+  await bundle({entryPoints:[path.join(root,'src/diagrams.js')],outdir:path.join(out,'assets'),bundle:true,minify:true,format:'esm',splitting:true,chunkNames:'diagram-chunks/[name]-[hash]',target:'es2022',legalComments:'linked'});
   await fs.writeFile(path.join(out,'assets/search-index.json'), JSON.stringify(posts.map(p=>({title:p.title,description:p.description,category:p.category,date:p.date,url:u(p.url),tags:p.tags}))));
   await fs.mkdir(path.join(out,'generated'),{recursive:true});
   await fs.writeFile(path.join(out,'generated/blog-index.json'), JSON.stringify(posts.map(p=>({slug:p.slug,title:p.title,summary:p.summary,category:p.category,tags:p.tags,published:p.date,url:`./${p.slug}/`}))));
