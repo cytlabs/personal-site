@@ -34,47 +34,19 @@ test('phone workspace article renders its related article as a navigable link', 
   assert.ok(!doc.querySelector('.prose').textContent.includes(`](${destination})`));
 });
 
-test('case details render supplied illustrations or placeholders without broken images or editorial requests', () => {
+test('case details retain their content without illustrations or image placeholders', () => {
   for (const item of cases) {
     const doc = documentAt(`cases/${item.slug}`);
-    assert.deepEqual([...doc.querySelectorAll('[data-image-slot]')].map(e => e.dataset.imageSlot), item.imageSlots.map(s => s.id));
-    assert.equal(doc.querySelectorAll('.case-image-placeholder').length, item.imageSlots.filter(slot => !slot.src).length);
-    assert.equal(doc.querySelectorAll('.case-evidence img').length, item.imageSlots.filter(slot => slot.src).length);
+    const prose = doc.querySelector('.prose');
+    assert.equal(prose.querySelectorAll('img, figure, [data-image-slot], .case-image-placeholder').length, 0);
+    assert.ok(!prose.innerHTML.includes('<!-- case-image:'));
+    assert.ok(!prose.textContent.includes('图片待补充'));
+    assert.ok(!Object.hasOwn(item, 'imageSlots'));
     assert.equal(doc.querySelectorAll('.case-brief dt').length, item.overview.length);
-    assert.ok(!doc.querySelector('.prose').innerHTML.includes('<!-- case-image:'));
-    for (const slot of item.imageSlots) {
-      const figure = doc.querySelector(`[data-image-slot="${slot.id}"]`);
-      assert.equal(figure.querySelector('figcaption').textContent, slot.caption);
-      if (slot.src) {
-        const image = figure.querySelector('img');
-        assert.equal(image.getAttribute('src'), slot.src);
-        assert.equal(image.getAttribute('alt'), slot.alt || slot.caption);
-        assert.ok(fs.existsSync(path.join(output, slot.src)));
-        assert.ok(fs.statSync(path.join(output, slot.src)).size > 1000);
-      } else {
-        assert.ok(figure.textContent.includes('图片待补充'));
-      }
-      assert.ok(figure.closest('section').querySelector('h2'));
-      assert.ok(!html(`cases/${item.slug}`).includes(slot.request));
+    for (const heading of ['我的工作范围', '交付物与关键做法', '这个案例能够说明的能力']) {
+      assert.ok([...prose.querySelectorAll('h2')].some(h => h.textContent === heading));
     }
   }
-});
-
-test('a supplied case image replaces its placeholder with an accessible local asset', () => {
-  const caseWithImage = structuredClone(cases[0]);
-  const slot = caseWithImage.imageSlots[0];
-  slot.src = `/assets/${caseWithImage.cover}.svg`;
-  slot.alt = 'Project evidence supplied by the owner';
-  const doc = new JSDOM(buildModule.renderCaseImages(caseWithImage)).window.document;
-  const figure = doc.querySelector(`[data-image-slot="${slot.id}"]`);
-  assert.equal(figure.querySelector('img').getAttribute('src'), slot.src);
-  assert.equal(figure.querySelector('img').getAttribute('alt'), slot.alt);
-  assert.equal(figure.querySelector('.case-image-placeholder'), null);
-  assert.equal(figure.querySelector('figcaption').textContent, slot.caption);
-  assert.ok(fs.existsSync(path.join(output, slot.src)));
-  slot.src = '../private.png';
-  assert.throws(() => buildModule.renderCaseImages(caseWithImage), /local \/assets\//);
-  assert.throws(() => buildModule.renderCaseImages({html:'<!-- case-image:missing -->',imageSlots:[]}), /missing case image slot/);
 });
 
 test('project start dates order the published listing and room workbench independently of homepage selection', () => {

@@ -7,7 +7,7 @@
     "cover": "recruitment",
     "status": "流程梳理与方案设计",
     "kind": "企业 AI 实践",
-    "html": "<div class=\"case-sample\"><section><h2>要解决的问题，为什么值得投入</h2><p>猎头招聘交付跨越客户沟通、候选人寻找、推荐、面试和入职。项目负责人既要理解客户真正需要什么人，也要把标准传递给交付顾问，并根据反馈调整寻找方向。</p><dl class=\"case-problem-points\"><div><dt>标准传递</dt><dd>找人要求和客户偏好需要反复解释，分析一份简历前也要重新准备背景。</dd></div><div><dt>判断连续性</dt><dd>候选人和反馈不断增加，已有判断需要关联到具体岗位与人选。</dd></div><div><dt>任务衔接</dt><dd>即使 AI 能辅助分析，负责人仍要搬运资料、发起任务并安排下一步。</dd></div></dl><p>这个问题影响负责人把时间用在哪里，以及团队能否沿着同一份标准持续交付。方案因此同时考虑分析能力、项目资料和人工审核职责。</p></section><section><h2>当前交付与验证范围</h2><div class=\"markdown-table-wrap\"><table class=\"case-results\"><thead><tr><th>交付物</th><th>已有材料覆盖的内容</th><th>服务的业务判断</th></tr></thead><tbody><tr><td>招聘工作流</td><td>真实招聘链路与角色分工梳理</td><td>明确资料交给谁、在哪里审核</td></tr><tr><td>AI 任务能力</td><td>九类核心任务的输入、产出与审核边界</td><td>让分析围绕具体岗位任务开展</td></tr><tr><td>共享项目档案方案</td><td>客户、岗位、候选人、推荐记录与反馈的关联</td><td>保留当前有效的要求和历史判断</td></tr></tbody></table></div><p class=\"case-source-note\">目前交付以工作流梳理、能力定义与平台方案为主。完整主动衔接机制仍需真实项目验证，现有材料不足以给出可核实的持续提效比例。</p></section><section><h2>我的工作范围</h2><ul><li>梳理需求预研、客户沟通、简历判断、推荐、面试与入职等招聘环节。</li><li>定义需求预研、访谈准备、会议纪要、客户档案、找人标准、简历评估、推荐材料、面试报告和复盘九类能力。</li><li>组织共享项目档案与业务对象关系，明确分析需要读取的材料。</li><li>区分 AI 辅助工作与人工判断，保留项目负责人的需求确认和推荐审核。</li></ul><p>交付顾问仍负责寻找与提交候选人，以及录用沟通和入职跟进。项目负责人审核推荐、对接客户；面试过程可保留录音用于报告整理，负责人不承担陪同面试职责。</p></section><section><h2>交付物与关键做法</h2><div class=\"case-deliverable\"><h3>一张能够明确交接的招聘工作流</h3><p>将主要业务动作和参与者放在同一条链路中，再确定每一步需要什么材料、产出交给谁。流程梳理为后续任务能力和平台方案提供共同依据。</p><ol class=\"case-flow\" aria-label=\"业务流程示意\"><li><strong>确认需求</strong><span>项目负责人与客户</span></li><li><strong>形成找人标准</strong><span>需求与会议材料</span></li><li><strong>寻找并提交</strong><span>交付顾问</span></li><li><strong>分析与审核</strong><span>AI 辅助、负责人判断</span></li><li><strong>推荐与反馈</strong><span>负责人对接客户</span></li></ol><p class=\"case-source-note\">上方是业务链路示意，AI 任务接入范围以实际验证为准。</p><!-- case-image:recruitment-workflow --></div><div class=\"case-deliverable\"><h3>一份能够支撑判断的项目档案方案</h3><p>把客户背景、当前找人说明书、候选人分析、推荐状态与客户反馈关联起来。分析时读取同一份标准，反馈也回到对应岗位和候选人。</p><p>例如，拒绝一个候选人可能只针对这个人，也可能意味着寻找方向需要调整。方案要求先保留反馈对象和原因，再由负责人判断它的适用范围。</p><!-- case-image:recruitment-evaluation --></div><div class=\"case-deliverable\"><h3>有人工审核和后续动作的能力分工</h3><p>每项能力说明输入、输出和审核者。下一阶段设计由顾问提交资料触发分析，缺少信息时请求补充，资料齐备后交负责人审核，再承接客户反馈；完整机制仍待验证。</p></div></section><section><h2>这个案例能够说明的能力</h2><p>能够从真实岗位职责出发拆解工作，定义 AI 任务与人工判断边界，并把零散资料组织成共享的业务上下文。</p><p>适用于分析能力已有基础、但业务标准和交接仍主要依赖人记忆的团队。现阶段可评估流程与方案设计能力；实际节省的时间和返工需要继续用项目记录验证。</p></section><section><h2>案例来源</h2><p>整理自企业 AI 提效展示稿（第 6–11 页）与案例背景资料。</p><p><a href=\"https://github.com/cytlabs/enterprise-ai-practice/blob/543b75b31218cbc0309b335863931b51ea7f886b/index.html\" target=\"_blank\" rel=\"noopener noreferrer\">查看原展示稿</a> · <a href=\"https://github.com/cytlabs/enterprise-ai-practice/blob/543b75b31218cbc0309b335863931b51ea7f886b/案例背景资料.md\" target=\"_blank\" rel=\"noopener noreferrer\">查看案例背景与阶段说明</a></p></section></div>",
+    "html": "<div class=\"case-sample\"><section><h2>要解决的问题，为什么值得投入</h2><p>猎头招聘交付跨越客户沟通、候选人寻找、推荐、面试和入职。项目负责人既要理解客户真正需要什么人，也要把标准传递给交付顾问，并根据反馈调整寻找方向。</p><dl class=\"case-problem-points\"><div><dt>标准传递</dt><dd>找人要求和客户偏好需要反复解释，分析一份简历前也要重新准备背景。</dd></div><div><dt>判断连续性</dt><dd>候选人和反馈不断增加，已有判断需要关联到具体岗位与人选。</dd></div><div><dt>任务衔接</dt><dd>即使 AI 能辅助分析，负责人仍要搬运资料、发起任务并安排下一步。</dd></div></dl><p>这个问题影响负责人把时间用在哪里，以及团队能否沿着同一份标准持续交付。方案因此同时考虑分析能力、项目资料和人工审核职责。</p></section><section><h2>当前交付与验证范围</h2><div class=\"markdown-table-wrap\"><table class=\"case-results\"><thead><tr><th>交付物</th><th>已有材料覆盖的内容</th><th>服务的业务判断</th></tr></thead><tbody><tr><td>招聘工作流</td><td>真实招聘链路与角色分工梳理</td><td>明确资料交给谁、在哪里审核</td></tr><tr><td>AI 任务能力</td><td>九类核心任务的输入、产出与审核边界</td><td>让分析围绕具体岗位任务开展</td></tr><tr><td>共享项目档案方案</td><td>客户、岗位、候选人、推荐记录与反馈的关联</td><td>保留当前有效的要求和历史判断</td></tr></tbody></table></div><p class=\"case-source-note\">目前交付以工作流梳理、能力定义与平台方案为主。完整主动衔接机制仍需真实项目验证，现有材料不足以给出可核实的持续提效比例。</p></section><section><h2>我的工作范围</h2><ul><li>梳理需求预研、客户沟通、简历判断、推荐、面试与入职等招聘环节。</li><li>定义需求预研、访谈准备、会议纪要、客户档案、找人标准、简历评估、推荐材料、面试报告和复盘九类能力。</li><li>组织共享项目档案与业务对象关系，明确分析需要读取的材料。</li><li>区分 AI 辅助工作与人工判断，保留项目负责人的需求确认和推荐审核。</li></ul><p>交付顾问仍负责寻找与提交候选人，以及录用沟通和入职跟进。项目负责人审核推荐、对接客户；面试过程可保留录音用于报告整理，负责人不承担陪同面试职责。</p></section><section><h2>交付物与关键做法</h2><div class=\"case-deliverable\"><h3>一张能够明确交接的招聘工作流</h3><p>将主要业务动作和参与者放在同一条链路中，再确定每一步需要什么材料、产出交给谁。流程梳理为后续任务能力和平台方案提供共同依据。</p><ol class=\"case-flow\" aria-label=\"业务流程示意\"><li><strong>确认需求</strong><span>项目负责人与客户</span></li><li><strong>形成找人标准</strong><span>需求与会议材料</span></li><li><strong>寻找并提交</strong><span>交付顾问</span></li><li><strong>分析与审核</strong><span>AI 辅助、负责人判断</span></li><li><strong>推荐与反馈</strong><span>负责人对接客户</span></li></ol><p class=\"case-source-note\">上方是业务链路示意，AI 任务接入范围以实际验证为准。</p></div><div class=\"case-deliverable\"><h3>一份能够支撑判断的项目档案方案</h3><p>把客户背景、当前找人说明书、候选人分析、推荐状态与客户反馈关联起来。分析时读取同一份标准，反馈也回到对应岗位和候选人。</p><p>例如，拒绝一个候选人可能只针对这个人，也可能意味着寻找方向需要调整。方案要求先保留反馈对象和原因，再由负责人判断它的适用范围。</p></div><div class=\"case-deliverable\"><h3>有人工审核和后续动作的能力分工</h3><p>每项能力说明输入、输出和审核者。下一阶段设计由顾问提交资料触发分析，缺少信息时请求补充，资料齐备后交负责人审核，再承接客户反馈；完整机制仍待验证。</p></div></section><section><h2>这个案例能够说明的能力</h2><p>能够从真实岗位职责出发拆解工作，定义 AI 任务与人工判断边界，并把零散资料组织成共享的业务上下文。</p><p>适用于分析能力已有基础、但业务标准和交接仍主要依赖人记忆的团队。现阶段可评估流程与方案设计能力；实际节省的时间和返工需要继续用项目记录验证。</p></section><section><h2>案例来源</h2><p>整理自企业 AI 提效展示稿（第 6–11 页）与案例背景资料。</p><p><a href=\"https://github.com/cytlabs/enterprise-ai-practice/blob/543b75b31218cbc0309b335863931b51ea7f886b/index.html\" target=\"_blank\" rel=\"noopener noreferrer\">查看原展示稿</a> · <a href=\"https://github.com/cytlabs/enterprise-ai-practice/blob/543b75b31218cbc0309b335863931b51ea7f886b/案例背景资料.md\" target=\"_blank\" rel=\"noopener noreferrer\">查看案例背景与阶段说明</a></p></section></div>",
     "steps": [
       {
         "title": "提交候选人资料",
@@ -54,28 +54,6 @@
         "label": "核心交付",
         "value": "业务流程、九类任务能力与共享项目档案方案"
       }
-    ],
-    "imageSlots": [
-      {
-        "id": "recruitment-workflow",
-        "title": "招聘项目与交付协作",
-        "caption": "围绕岗位标准、候选人和角色交接组织招聘交付。界面依据项目方案复原。",
-        "request": "提供原招聘负责人工作流图或实际交付流程图；保留关键角色、资料输入和审核节点，用于证明流程梳理的范围。",
-        "src": "/assets/cases/recruitment-workflow.webp",
-        "width": 1774,
-        "height": 887,
-        "alt": "招聘项目与交付协作"
-      },
-      {
-        "id": "recruitment-evaluation",
-        "title": "找人标准与人选评估",
-        "caption": "对照找人标准与简历依据，保留 AI 分析建议、待核实问题和人工复核意见。",
-        "request": "提供同一岗位的找人说明书、候选人评估和一条人工修正或反馈；保留标准与判断理由的对应关系，客户和人物可使用化名。",
-        "src": "/assets/cases/recruitment-evaluation.webp",
-        "width": 1774,
-        "height": 887,
-        "alt": "找人标准与人选评估"
-      }
     ]
   },
   {
@@ -86,7 +64,7 @@
     "cover": "creator-marketing",
     "status": "前置筛选与流程验证",
     "kind": "企业 AI 实践",
-    "html": "<div class=\"case-sample\"><section><h2>要解决的问题，为什么值得投入</h2><p>达人营销从客户 Brief 开始，运营需要寻找达人、查看主页和内容，再整理名单提交审核。客户描述往往需要澄清，平台标签也不能直接说明一个候选人是否满足业务要求。</p><dl class=\"case-problem-points\"><div><dt>需求清晰度</dt><dd>不完整的 Brief 需要转成可执行、可核对的寻找条件。</dd></div><div><dt>筛选投入</dt><dd>运营逐个查看内容，重复候选与判断理由需要留存。</dd></div><div><dt>反馈利用</dt><dd>客户反馈散在群聊和不同名单版本中，下一轮交付需要重新找依据。</dd></div></dl><p>让标准和反馈持续有效，才能使寻找、审核和名单调整接着已有工作推进。项目围绕这一交接问题开展前置探索与流程验证。</p></section><section><h2>当前交付与验证范围</h2><div class=\"markdown-table-wrap\"><table class=\"case-results\"><thead><tr><th>交付内容</th><th>已有探索与验证</th><th>对应的价值</th></tr></thead><tbody><tr><td>前置搜索筛选</td><td>需求理解、达人发现与内容判断探索</td><td>把模糊需求转成筛选方向</td></tr><tr><td>交付流程</td><td>需求、候选、评审、名单与反馈之间的流程验证</td><td>让每次判断与名单版本有关联</td></tr><tr><td>协作演示</td><td>需求确认、运营寻找、Agent 审核的职责关系</td><td>使寻找和审核有共同依据</td></tr></tbody></table></div><p class=\"case-source-note\">当前材料支持前置探索、交付流程验证与协作演示。候选覆盖、长期使用、人工审核投入和完整真实项目运行仍需验证，暂不把预期效率作为实测成果。</p></section><section><h2>我的工作范围</h2><ul><li>梳理客户 Brief、达人寻找、内容核验与名单反馈的业务链路。</li><li>探索需求理解、搜索方向拆解、达人核验、名单去重与反馈整理。</li><li>明确项目经理、运营与 Agent 在协作中的输入、输出和交接。</li><li>将客户、Brief、候选人、名单版本和反馈组织成可关联的项目上下文。</li></ul><p>客户需求确认、模糊候选判断、对客名单审核和外部沟通由业务人员承担。Agent 辅助核验、整理推荐理由和反馈原因。</p></section><section><h2>交付物与关键做法</h2><div class=\"case-deliverable\"><h3>一份经确认后可以执行的寻找说明书</h3><p>项目经理对接客户，AI 整理需求文档；经项目经理核对、客户确认后形成说明书，再交给当前项目的运营人员。确认后的要求成为寻找和审核的共同依据。</p><!-- case-image:creator-brief --></div><div class=\"case-deliverable\"><h3>一个保留审核原因的名单交付流程</h3><p>运营按说明书寻找并提交达人，Agent 对照标准审核。符合要求的更新清单并补充理由，不符合的反馈具体原因，让运营知道下一次提交需要怎样调整。</p><ol class=\"case-flow\" aria-label=\"业务流程示意\"><li><strong>澄清与确认</strong><span>项目经理、客户</span></li><li><strong>形成说明书</strong><span>确认后的标准</span></li><li><strong>寻找与提交</strong><span>项目运营</span></li><li><strong>审核与反馈</strong><span>Agent 辅助判断</span></li><li><strong>名单确认</strong><span>业务人员审核</span></li></ol><p class=\"case-source-note\">上方为已确认的协作演示关系，完整真实项目运行仍需验证。</p><!-- case-image:creator-review --></div><div class=\"case-deliverable\"><h3>能够承接变更的项目上下文</h3><p>需求、候选人、名单版本和反馈关联到同一项目。客户提出新条件时先确认变更，再更新有效标准，避免寻找与审核分别沿用不同版本。</p></div></section><section><h2>这个案例能够说明的能力</h2><p>能够把模糊的客户要求整理为执行标准，连接运营工作与 AI 辅助审核，并设计留下依据和反馈的协作流程。</p><p>适用于筛选依赖业务判断、客户要求持续变化的交付团队。实际使用效果需要继续观察名单返工、重复候选和人工审核投入。</p></section><section><h2>案例来源</h2><p>整理自企业 AI 提效展示稿（第 13 页）与案例背景资料。</p><p><a href=\"https://github.com/cytlabs/enterprise-ai-practice/blob/543b75b31218cbc0309b335863931b51ea7f886b/index.html\" target=\"_blank\" rel=\"noopener noreferrer\">查看原展示稿</a> · <a href=\"https://github.com/cytlabs/enterprise-ai-practice/blob/543b75b31218cbc0309b335863931b51ea7f886b/案例背景资料.md\" target=\"_blank\" rel=\"noopener noreferrer\">查看案例背景与阶段说明</a></p></section></div>",
+    "html": "<div class=\"case-sample\"><section><h2>要解决的问题，为什么值得投入</h2><p>达人营销从客户 Brief 开始，运营需要寻找达人、查看主页和内容，再整理名单提交审核。客户描述往往需要澄清，平台标签也不能直接说明一个候选人是否满足业务要求。</p><dl class=\"case-problem-points\"><div><dt>需求清晰度</dt><dd>不完整的 Brief 需要转成可执行、可核对的寻找条件。</dd></div><div><dt>筛选投入</dt><dd>运营逐个查看内容，重复候选与判断理由需要留存。</dd></div><div><dt>反馈利用</dt><dd>客户反馈散在群聊和不同名单版本中，下一轮交付需要重新找依据。</dd></div></dl><p>让标准和反馈持续有效，才能使寻找、审核和名单调整接着已有工作推进。项目围绕这一交接问题开展前置探索与流程验证。</p></section><section><h2>当前交付与验证范围</h2><div class=\"markdown-table-wrap\"><table class=\"case-results\"><thead><tr><th>交付内容</th><th>已有探索与验证</th><th>对应的价值</th></tr></thead><tbody><tr><td>前置搜索筛选</td><td>需求理解、达人发现与内容判断探索</td><td>把模糊需求转成筛选方向</td></tr><tr><td>交付流程</td><td>需求、候选、评审、名单与反馈之间的流程验证</td><td>让每次判断与名单版本有关联</td></tr><tr><td>协作演示</td><td>需求确认、运营寻找、Agent 审核的职责关系</td><td>使寻找和审核有共同依据</td></tr></tbody></table></div><p class=\"case-source-note\">当前材料支持前置探索、交付流程验证与协作演示。候选覆盖、长期使用、人工审核投入和完整真实项目运行仍需验证，暂不把预期效率作为实测成果。</p></section><section><h2>我的工作范围</h2><ul><li>梳理客户 Brief、达人寻找、内容核验与名单反馈的业务链路。</li><li>探索需求理解、搜索方向拆解、达人核验、名单去重与反馈整理。</li><li>明确项目经理、运营与 Agent 在协作中的输入、输出和交接。</li><li>将客户、Brief、候选人、名单版本和反馈组织成可关联的项目上下文。</li></ul><p>客户需求确认、模糊候选判断、对客名单审核和外部沟通由业务人员承担。Agent 辅助核验、整理推荐理由和反馈原因。</p></section><section><h2>交付物与关键做法</h2><div class=\"case-deliverable\"><h3>一份经确认后可以执行的寻找说明书</h3><p>项目经理对接客户，AI 整理需求文档；经项目经理核对、客户确认后形成说明书，再交给当前项目的运营人员。确认后的要求成为寻找和审核的共同依据。</p></div><div class=\"case-deliverable\"><h3>一个保留审核原因的名单交付流程</h3><p>运营按说明书寻找并提交达人，Agent 对照标准审核。符合要求的更新清单并补充理由，不符合的反馈具体原因，让运营知道下一次提交需要怎样调整。</p><ol class=\"case-flow\" aria-label=\"业务流程示意\"><li><strong>澄清与确认</strong><span>项目经理、客户</span></li><li><strong>形成说明书</strong><span>确认后的标准</span></li><li><strong>寻找与提交</strong><span>项目运营</span></li><li><strong>审核与反馈</strong><span>Agent 辅助判断</span></li><li><strong>名单确认</strong><span>业务人员审核</span></li></ol><p class=\"case-source-note\">上方为已确认的协作演示关系，完整真实项目运行仍需验证。</p></div><div class=\"case-deliverable\"><h3>能够承接变更的项目上下文</h3><p>需求、候选人、名单版本和反馈关联到同一项目。客户提出新条件时先确认变更，再更新有效标准，避免寻找与审核分别沿用不同版本。</p></div></section><section><h2>这个案例能够说明的能力</h2><p>能够把模糊的客户要求整理为执行标准，连接运营工作与 AI 辅助审核，并设计留下依据和反馈的协作流程。</p><p>适用于筛选依赖业务判断、客户要求持续变化的交付团队。实际使用效果需要继续观察名单返工、重复候选和人工审核投入。</p></section><section><h2>案例来源</h2><p>整理自企业 AI 提效展示稿（第 13 页）与案例背景资料。</p><p><a href=\"https://github.com/cytlabs/enterprise-ai-practice/blob/543b75b31218cbc0309b335863931b51ea7f886b/index.html\" target=\"_blank\" rel=\"noopener noreferrer\">查看原展示稿</a> · <a href=\"https://github.com/cytlabs/enterprise-ai-practice/blob/543b75b31218cbc0309b335863931b51ea7f886b/案例背景资料.md\" target=\"_blank\" rel=\"noopener noreferrer\">查看案例背景与阶段说明</a></p></section></div>",
     "steps": [
       {
         "title": "需求对接与确认",
@@ -127,28 +105,6 @@
       {
         "label": "核心交付",
         "value": "达人寻找说明书、候选审核与名单反馈流程"
-      }
-    ],
-    "imageSlots": [
-      {
-        "id": "creator-brief",
-        "title": "需求确认与寻找标准",
-        "caption": "将客户 Brief、目标市场和内容要求整理为共同的寻找标准。界面依据项目内容复原。",
-        "request": "提供同一项目的客户 Brief 与确认后的达人寻找说明书；保留目标市场、画像、内容要求、限制与确认状态的对应关系。",
-        "src": "/assets/cases/creator-brief.webp",
-        "width": 1774,
-        "height": 887,
-        "alt": "需求确认与寻找标准"
-      },
-      {
-        "id": "creator-review",
-        "title": "达人审核与候选名单",
-        "caption": "候选内容、审核依据与名单状态在同一工作台中关联，对客名单由业务人员确认。",
-        "request": "提供同一批候选的提交、Agent 审核与名单更新截图；最好包含通过与未通过样例及原因，演示材料请标明演示范围。",
-        "src": "/assets/cases/creator-review.webp",
-        "width": 1774,
-        "height": 887,
-        "alt": "达人审核与候选名单"
       }
     ]
   },
@@ -226,7 +182,7 @@
     "cover": "intent-context",
     "status": "已上线 · 持续迭代",
     "kind": "自主产品探索",
-    "html": "<div class=\"case-sample\"><section><h2>要解决的问题，为什么值得投入</h2><p>使用 AI 工作时，想法留在对话里，任务散在待办工具中，执行又产生新的文件和判断。继续同一个项目，个人需要重新说明背景、找资料、整理安排。</p><dl class=\"case-problem-points\"><div><dt>上下文连续性</dt><dd>对话结束以后，目标、判断和成果需要有稳定的存放与关联。</dd></div><div><dt>工作安排</dt><dd>随手输入不一定值得变成任务，需要区分行动、资料和普通记录。</dd></div><div><dt>操作负担</dt><dd>网页与助手之间反复搬运信息，会增加整理和推进的投入。</dd></div></dl><p>Intent 围绕这些实际使用问题，把输入、项目、任务、资料和行动连接起来。产品希望让个人更容易找到依据、作出取舍，并继续下一步工作。</p></section><section><h2>已经交付与仍待验证的部分</h2><div class=\"markdown-table-wrap\"><table class=\"case-results\"><thead><tr><th>交付内容</th><th>当前状态</th><th>支撑的工作</th></tr></thead><tbody><tr><td>个人工作空间</td><td>已有运行实例，电脑与手机流程经过验证</td><td>管理项目、任务、资料与行动</td></tr><tr><td>MCP 与助手接入</td><td>网页和 Agent 使用同一业务服务，已有实际接入验收</td><td>查询和操作同一份工作数据</td></tr><tr><td>每日整理报告</td><td>整理报告与微信简报已部署</td><td>把原始输入整理为可查看和确认的建议</td></tr><tr><td>关注与跟进基础</td><td>关注、运行事件与通知状态已实现并完成隔离测试</td><td>保存判断依据与后续状态</td></tr></tbody></table></div><p class=\"case-source-note\">单次微信投递和宿主执行报告已有真实验收记录。报告的真实对话修正与确认往返、回应后的完整推进和长期主动联系仍需继续验证；现有测试不代表整体使用效果已经确定。</p></section><section><h2>我的工作范围</h2><ul><li>定义记录、目标、项目、任务、资料和行动的对象与关系。</li><li>设计并开发以项目、近期资料和今日安排为中心的工作空间。</li><li>实现业务服务和 MCP 接口，接入自己的 Agent 与微信入口。</li><li>组织每日整理、资料归档、关注和跟进能力，并核对各阶段验收边界。</li></ul><p>目标、优先级与正式取舍由用户决定。产品服务保存正式对象与状态，AI 提供整理和执行帮助，运行结果仍需要对照实际任务验收。</p></section><section><h2>交付物与关键做法</h2><div class=\"case-deliverable\"><h3>一个围绕项目组织的工作空间</h3><p>项目连接任务、资料和成果，快速记录、详情抽屉、资料引用与任务就地操作放在相关工作附近。界面围绕正在推进的事情组织，帮助用户接着已有工作继续。</p><!-- case-image:intent-workspace --></div><div class=\"case-deliverable\"><h3>一条从原始记录到明确确认的整理路径</h3><p>先保留原文和来源，再由 AI 生成整理报告。用户能查看建议依据、修正分类并明确确认，随后形成正式对象与行动。普通流水继续保留为记录，资料需要有后续复用用途。</p><ol class=\"case-flow\" aria-label=\"业务流程示意\"><li><strong>保留原文</strong><span>输入与来源</span></li><li><strong>形成报告</strong><span>AI 整理建议</span></li><li><strong>核对与修正</strong><span>用户作出判断</span></li><li><strong>明确确认</strong><span>形成正式对象</span></li><li><strong>执行与留存</strong><span>任务、行动和成果</span></li></ol><p class=\"case-source-note\">上方为产品主流程，真实微信修正与确认往返仍待持续使用验收。</p><!-- case-image:intent-report --></div><div class=\"case-deliverable\"><h3>网页与 Agent 共用的业务数据</h3><p>网页和 MCP 通过同一产品服务查询和操作对象。Skill 说明整理与跟进方法，OpenClaw 连接微信入口，助手执行后的状态能够回到网页和项目中。</p><p>关注与通知还需要保存介入依据、用户回应和下一步条件，让是否联系和如何继续有明确记录。</p></div></section><section><h2>这个案例能够说明的能力</h2><p>能够从日常工作中的具体负担出发，完成产品对象、交互、业务服务与 Agent 接入的整体设计和开发，并把功能运行与实际体验分别验证。</p><p>适用于需要让个人助手持续理解项目、连接资料与行动的工作场景。后续重点是观察整理建议是否有用、操作负担是否减少，以及主动跟进能否形成真实闭环。</p></section><section><h2>项目资料</h2><p>本案例依据当前产品文档与接入、日报和主动关注验收记录整理，更新于 2026 年 10 月。</p><p><a href=\"https://github.com/cytlabs/intent\" target=\"_blank\" rel=\"noopener noreferrer\">查看项目仓库与文档 ↗</a></p></section></div>",
+    "html": "<div class=\"case-sample\"><section><h2>要解决的问题，为什么值得投入</h2><p>使用 AI 工作时，想法留在对话里，任务散在待办工具中，执行又产生新的文件和判断。继续同一个项目，个人需要重新说明背景、找资料、整理安排。</p><dl class=\"case-problem-points\"><div><dt>上下文连续性</dt><dd>对话结束以后，目标、判断和成果需要有稳定的存放与关联。</dd></div><div><dt>工作安排</dt><dd>随手输入不一定值得变成任务，需要区分行动、资料和普通记录。</dd></div><div><dt>操作负担</dt><dd>网页与助手之间反复搬运信息，会增加整理和推进的投入。</dd></div></dl><p>Intent 围绕这些实际使用问题，把输入、项目、任务、资料和行动连接起来。产品希望让个人更容易找到依据、作出取舍，并继续下一步工作。</p></section><section><h2>已经交付与仍待验证的部分</h2><div class=\"markdown-table-wrap\"><table class=\"case-results\"><thead><tr><th>交付内容</th><th>当前状态</th><th>支撑的工作</th></tr></thead><tbody><tr><td>个人工作空间</td><td>已有运行实例，电脑与手机流程经过验证</td><td>管理项目、任务、资料与行动</td></tr><tr><td>MCP 与助手接入</td><td>网页和 Agent 使用同一业务服务，已有实际接入验收</td><td>查询和操作同一份工作数据</td></tr><tr><td>每日整理报告</td><td>整理报告与微信简报已部署</td><td>把原始输入整理为可查看和确认的建议</td></tr><tr><td>关注与跟进基础</td><td>关注、运行事件与通知状态已实现并完成隔离测试</td><td>保存判断依据与后续状态</td></tr></tbody></table></div><p class=\"case-source-note\">单次微信投递和宿主执行报告已有真实验收记录。报告的真实对话修正与确认往返、回应后的完整推进和长期主动联系仍需继续验证；现有测试不代表整体使用效果已经确定。</p></section><section><h2>我的工作范围</h2><ul><li>定义记录、目标、项目、任务、资料和行动的对象与关系。</li><li>设计并开发以项目、近期资料和今日安排为中心的工作空间。</li><li>实现业务服务和 MCP 接口，接入自己的 Agent 与微信入口。</li><li>组织每日整理、资料归档、关注和跟进能力，并核对各阶段验收边界。</li></ul><p>目标、优先级与正式取舍由用户决定。产品服务保存正式对象与状态，AI 提供整理和执行帮助，运行结果仍需要对照实际任务验收。</p></section><section><h2>交付物与关键做法</h2><div class=\"case-deliverable\"><h3>一个围绕项目组织的工作空间</h3><p>项目连接任务、资料和成果，快速记录、详情抽屉、资料引用与任务就地操作放在相关工作附近。界面围绕正在推进的事情组织，帮助用户接着已有工作继续。</p></div><div class=\"case-deliverable\"><h3>一条从原始记录到明确确认的整理路径</h3><p>先保留原文和来源，再由 AI 生成整理报告。用户能查看建议依据、修正分类并明确确认，随后形成正式对象与行动。普通流水继续保留为记录，资料需要有后续复用用途。</p><ol class=\"case-flow\" aria-label=\"业务流程示意\"><li><strong>保留原文</strong><span>输入与来源</span></li><li><strong>形成报告</strong><span>AI 整理建议</span></li><li><strong>核对与修正</strong><span>用户作出判断</span></li><li><strong>明确确认</strong><span>形成正式对象</span></li><li><strong>执行与留存</strong><span>任务、行动和成果</span></li></ol><p class=\"case-source-note\">上方为产品主流程，真实微信修正与确认往返仍待持续使用验收。</p></div><div class=\"case-deliverable\"><h3>网页与 Agent 共用的业务数据</h3><p>网页和 MCP 通过同一产品服务查询和操作对象。Skill 说明整理与跟进方法，OpenClaw 连接微信入口，助手执行后的状态能够回到网页和项目中。</p><p>关注与通知还需要保存介入依据、用户回应和下一步条件，让是否联系和如何继续有明确记录。</p></div></section><section><h2>这个案例能够说明的能力</h2><p>能够从日常工作中的具体负担出发，完成产品对象、交互、业务服务与 Agent 接入的整体设计和开发，并把功能运行与实际体验分别验证。</p><p>适用于需要让个人助手持续理解项目、连接资料与行动的工作场景。后续重点是观察整理建议是否有用、操作负担是否减少，以及主动跟进能否形成真实闭环。</p></section><section><h2>项目资料</h2><p>本案例依据当前产品文档与接入、日报和主动关注验收记录整理，更新于 2026 年 10 月。</p><p><a href=\"https://github.com/cytlabs/intent\" target=\"_blank\" rel=\"noopener noreferrer\">查看项目仓库与文档 ↗</a></p></section></div>",
     "steps": [
       {
         "title": "随手记录",
@@ -261,28 +217,6 @@
         "label": "核心交付",
         "value": "网页工作空间、业务服务、MCP 接口与整理报告"
       }
-    ],
-    "imageSlots": [
-      {
-        "id": "intent-workspace",
-        "title": "项目工作空间",
-        "caption": "项目、任务、资料和当前安排集中组织，具体行动保留关联上下文。界面依据项目内容复原。",
-        "request": "提供 Intent 工作空间与一个项目详情截图，保留项目、任务、资料和安排的关联；用示例内容替换私人记录。",
-        "src": "/assets/cases/intent-workspace.webp",
-        "width": 1774,
-        "height": 887,
-        "alt": "项目工作空间"
-      },
-      {
-        "id": "intent-report",
-        "title": "整理报告与用户确认",
-        "caption": "从原始记录生成可修改的整理建议，经用户确认后创建项目与任务。",
-        "request": "提供同一条示例记录的微信输入或日报、网页整理报告及确认后的任务或项目；实际使用与隔离演示请区分，能看清来源与结果即可。",
-        "src": "/assets/cases/intent-report.webp",
-        "width": 1774,
-        "height": 887,
-        "alt": "整理报告与用户确认"
-      }
     ]
   },
   {
@@ -296,7 +230,7 @@
     "period": {
       "start": "2024-12"
     },
-    "html": "<div class=\"case-sample\"><section><h2>要解决的问题，为什么值得投入</h2><p>密码管理工具需要让用户能够查看和维护凭据，同时考虑访问与保存过程中的保护。KeySafe 围绕这个产品方向，探索 Web3 能力与 Web2 使用体验的结合。</p><dl class=\"case-problem-points\"><div><dt>日常管理</dt><dd>条目的组织和管理需要形成清楚的界面操作路径。</dd></div><div><dt>访问保护</dt><dd>主密码、多重加密与双因子机制需要放进产品设计。</dd></div><div><dt>组件衔接</dt><dd>前端、数据管理与 Web3 集成要能对应到用户的操作。</dd></div></dl><p>项目价值需要通过实际使用流程与保护机制的验证来评价。这个案例主要展示跨越界面、数据和集成边界的全栈开发工作。</p></section><section><h2>当前交付与材料范围</h2><div class=\"markdown-table-wrap\"><table class=\"case-results\"><thead><tr><th>项目记录</th><th>已有材料</th><th>可以评估的内容</th></tr></thead><tbody><tr><td>全栈开发角色</td><td>简历列明界面、数据与 Web3 相关技术构成</td><td>跨组件的产品开发范围</td></tr><tr><td>项目演示</td><td>已有演示地址</td><td>产品界面与操作路径</td></tr><tr><td>项目文档</td><td>已有项目文档链接</td><td>设计与技术构成说明</td></tr></tbody></table></div><p class=\"case-source-note\">现有材料未提供完整功能验收记录、量化使用结果或独立安全审计。主密码、多重加密和双因子保护按项目设计内容介绍，其有效性需要对应验证记录。</p></section><section><h2>我的工作范围</h2><ul><li>以全栈开发工程师角色参与产品界面、数据管理与 Web3 集成。</li><li>使用 Next.js、React、TypeScript 与 Ant Design 组织前端界面。</li><li>技术构成包括 PostgreSQL，以及 IPFS、MetaMask 等集成相关技术。</li><li>围绕主密码、多重加密与双因子保护组织产品设计。</li></ul><p>技术名称用于说明参与范围，实际操作和保护流程需要结合演示与文档核对。</p></section><section><h2>交付物与关键做法</h2><div class=\"case-deliverable\"><h3>密码条目管理的产品界面</h3><p>界面需要组织条目查看和维护，并与数据管理逻辑衔接。提供实际页面和操作样例，能够更具体地说明全栈工作如何服务于用户任务。</p><!-- case-image:keysafe-vault --></div><div class=\"case-deliverable\"><h3>围绕访问保护组织的交互</h3><p>项目设计包含主密码、多重加密策略和双因子保护，同时涉及钱包与去中心化能力的集成。需要通过对应界面说明用户在哪一步验证、怎样继续，以及不同机制如何衔接。</p><!-- case-image:keysafe-access --></div><div class=\"case-deliverable\"><h3>能够继续核对的演示和文档</h3><p>项目保留了演示地址与文档。后续可以用一组完整操作记录说明功能完成范围，再补充对应的验证材料。</p></div></section><section><h2>这个案例能够说明的能力</h2><p>能够参与包含前端界面、数据管理与 Web3 集成的全栈产品开发，并把保护机制与实际操作体验一起考虑。</p><p>适用于需要连接产品交互与不同技术组件的开发工作。密码工具的保护效果需要专门验证，当前案例主要作为开发范围与交付材料的参考。</p></section><section><h2>查看项目</h2><p><a href=\"https://keysafe-gamma.vercel.app/\" target=\"_blank\" rel=\"noopener noreferrer\">项目演示地址 ↗</a> · <a href=\"https://me8jpusxd9.feishu.cn/docx/ImR5d4zHuoMQrExgX7bctPOmnuc\" target=\"_blank\" rel=\"noopener noreferrer\">项目文档 ↗</a></p></section></div>",
+    "html": "<div class=\"case-sample\"><section><h2>要解决的问题，为什么值得投入</h2><p>密码管理工具需要让用户能够查看和维护凭据，同时考虑访问与保存过程中的保护。KeySafe 围绕这个产品方向，探索 Web3 能力与 Web2 使用体验的结合。</p><dl class=\"case-problem-points\"><div><dt>日常管理</dt><dd>条目的组织和管理需要形成清楚的界面操作路径。</dd></div><div><dt>访问保护</dt><dd>主密码、多重加密与双因子机制需要放进产品设计。</dd></div><div><dt>组件衔接</dt><dd>前端、数据管理与 Web3 集成要能对应到用户的操作。</dd></div></dl><p>项目价值需要通过实际使用流程与保护机制的验证来评价。这个案例主要展示跨越界面、数据和集成边界的全栈开发工作。</p></section><section><h2>当前交付与材料范围</h2><div class=\"markdown-table-wrap\"><table class=\"case-results\"><thead><tr><th>项目记录</th><th>已有材料</th><th>可以评估的内容</th></tr></thead><tbody><tr><td>全栈开发角色</td><td>简历列明界面、数据与 Web3 相关技术构成</td><td>跨组件的产品开发范围</td></tr><tr><td>项目演示</td><td>已有演示地址</td><td>产品界面与操作路径</td></tr><tr><td>项目文档</td><td>已有项目文档链接</td><td>设计与技术构成说明</td></tr></tbody></table></div><p class=\"case-source-note\">现有材料未提供完整功能验收记录、量化使用结果或独立安全审计。主密码、多重加密和双因子保护按项目设计内容介绍，其有效性需要对应验证记录。</p></section><section><h2>我的工作范围</h2><ul><li>以全栈开发工程师角色参与产品界面、数据管理与 Web3 集成。</li><li>使用 Next.js、React、TypeScript 与 Ant Design 组织前端界面。</li><li>技术构成包括 PostgreSQL，以及 IPFS、MetaMask 等集成相关技术。</li><li>围绕主密码、多重加密与双因子保护组织产品设计。</li></ul><p>技术名称用于说明参与范围，实际操作和保护流程需要结合演示与文档核对。</p></section><section><h2>交付物与关键做法</h2><div class=\"case-deliverable\"><h3>密码条目管理的产品界面</h3><p>界面需要组织条目查看和维护，并与数据管理逻辑衔接。提供实际页面和操作样例，能够更具体地说明全栈工作如何服务于用户任务。</p></div><div class=\"case-deliverable\"><h3>围绕访问保护组织的交互</h3><p>项目设计包含主密码、多重加密策略和双因子保护，同时涉及钱包与去中心化能力的集成。需要通过对应界面说明用户在哪一步验证、怎样继续，以及不同机制如何衔接。</p></div><div class=\"case-deliverable\"><h3>能够继续核对的演示和文档</h3><p>项目保留了演示地址与文档。后续可以用一组完整操作记录说明功能完成范围，再补充对应的验证材料。</p></div></section><section><h2>这个案例能够说明的能力</h2><p>能够参与包含前端界面、数据管理与 Web3 集成的全栈产品开发，并把保护机制与实际操作体验一起考虑。</p><p>适用于需要连接产品交互与不同技术组件的开发工作。密码工具的保护效果需要专门验证，当前案例主要作为开发范围与交付材料的参考。</p></section><section><h2>查看项目</h2><p><a href=\"https://keysafe-gamma.vercel.app/\" target=\"_blank\" rel=\"noopener noreferrer\">项目演示地址 ↗</a> · <a href=\"https://me8jpusxd9.feishu.cn/docx/ImR5d4zHuoMQrExgX7bctPOmnuc\" target=\"_blank\" rel=\"noopener noreferrer\">项目文档 ↗</a></p></section></div>",
     "steps": [
       {
         "title": "明确密码管理方向",
@@ -328,28 +262,6 @@
         "label": "核心交付",
         "value": "密码管理产品实践、项目演示地址与文档"
       }
-    ],
-    "imageSlots": [
-      {
-        "id": "keysafe-vault",
-        "title": "密码库与条目管理",
-        "caption": "通过列表、分类与条目详情管理账号凭据，密码保持遮挡。界面依据项目内容复原。",
-        "request": "提供 KeySafe 中同一示例条目的列表、详情或编辑截图；使用示例账号和条目，展示一次完整操作，不提供真实密码。",
-        "src": "/assets/cases/keysafe-vault.webp",
-        "width": 1774,
-        "height": 887,
-        "alt": "密码库与条目管理"
-      },
-      {
-        "id": "keysafe-access",
-        "title": "密码库解锁与访问保护",
-        "caption": "钱包连接、主密码解锁与已启用的两步验证构成访问流程。",
-        "request": "提供已有的解锁、主密码、钱包连接或双因子界面；优先选择与同一操作对应的连续截图，只有设计稿时请注明。",
-        "src": "/assets/cases/keysafe-access.webp",
-        "width": 1774,
-        "height": 887,
-        "alt": "密码库解锁与访问保护"
-      }
     ]
   },
   {
@@ -363,7 +275,7 @@
     "period": {
       "start": "2024-06"
     },
-    "html": "<div class=\"case-sample\"><section><h2>要解决的问题，为什么值得投入</h2><p>公司承接多个客户的私有化部署项目，客户使用不同的云服务提供商。资源查看、监控和操作分散在多个平台，团队需要跨环境寻找资源并汇总运行情况。</p><dl class=\"case-problem-points\"><div><dt>资源可见性</dt><dd>客户环境与云平台不同，资源信息需要有共同的查看和管理入口。</dd></div><div><dt>运维衔接</dt><dd>状态、告警和维护动作分散，处理问题时需要重新找到对应资源。</dd></div><div><dt>成本管理</dt><dd>不同环境的资源使用与成本需要汇总，才能支持优化判断。</dd></div></dl><p>这个问题同时影响运维投入、故障处理和资源成本。项目从统一资源模型出发，将后续监控、操作和成本分析连接到同一套对象。</p></section><section><h2>结果记录</h2><div class=\"markdown-table-wrap\"><table class=\"case-results\"><thead><tr><th>衡量项</th><th>简历记录</th><th>对应的价值</th></tr></thead><tbody><tr><td>环境接入</td><td>15+ 客户环境、超过 100 台云主机</td><td>让统一入口实际承接客户资源</td></tr><tr><td>运维效率</td><td>提升 200%</td><td>改善跨云环境的管理与操作效率</td></tr><tr><td>资源成本</td><td>客户平均节省 20%</td><td>使资源使用与优化效果可见</td></tr><tr><td>日常运维工作量</td><td>减少 60%</td><td>减少重复维护投入</td></tr></tbody></table></div><p class=\"case-source-note\">上述数据来自个人简历记录。统计周期、样本范围和各项指标的计算口径尚待补充，下方展示资源管理界面与运维关联图。</p></section><section><h2>我的工作范围</h2><ul><li>主导平台整体架构设计，采用 Vue 与 Django 的前后端分离架构。</li><li>设计统一多云资源管理模型，对接火山云、阿里云等环境。</li><li>实现资源监控告警、生命周期管理、成本分析和告警自动处理模块。</li><li>完成客户环境接入，让平台承接真实资源和日常维护。</li></ul><p>交付包含平台开发与环境接入。共同资源模型为后续管理模块提供一致的关联依据。</p></section><section><h2>交付物与关键做法</h2><div class=\"case-deliverable\"><h3>跨云资源的共同模型与管理入口</h3><p>不同云环境的资源先纳入统一模型。Vue 前端提供集中查看与操作，Django 后端承接资源对象和管理逻辑，资源按环境和归属组织起来。</p><!-- case-image:multicloud-resources --></div><div class=\"case-deliverable\"><h3>围绕资源连接的运维能力</h3><p>资源状态、告警、生命周期和成本信息围绕共同对象开展。统一监控帮助发现问题，维护与告警自动处理承接后续动作，成本分析用于查看资源投入。</p><!-- case-image:multicloud-operations --></div><div class=\"case-deliverable\"><h3>能够承接客户环境的接入工作</h3><p>平台接入客户实际使用的云环境，并集中管理资源。交付范围因此包括不同环境的连接与持续使用基础，成果需要在真实运维过程中观察。</p></div></section><section><h2>这个案例能够说明的能力</h2><p>能够把跨平台的资源管理需求转成共同模型，完成前后端开发，并连接监控、自动化操作与客户环境接入。</p><p>适用于资源分散在多个云环境、需要统一运维和成本视图的团队。类似交付还需核对接入范围、操作权限、日常维护方式与指标口径。</p></section></div>",
+    "html": "<div class=\"case-sample\"><section><h2>要解决的问题，为什么值得投入</h2><p>公司承接多个客户的私有化部署项目，客户使用不同的云服务提供商。资源查看、监控和操作分散在多个平台，团队需要跨环境寻找资源并汇总运行情况。</p><dl class=\"case-problem-points\"><div><dt>资源可见性</dt><dd>客户环境与云平台不同，资源信息需要有共同的查看和管理入口。</dd></div><div><dt>运维衔接</dt><dd>状态、告警和维护动作分散，处理问题时需要重新找到对应资源。</dd></div><div><dt>成本管理</dt><dd>不同环境的资源使用与成本需要汇总，才能支持优化判断。</dd></div></dl><p>这个问题同时影响运维投入、故障处理和资源成本。项目从统一资源模型出发，将后续监控、操作和成本分析连接到同一套对象。</p></section><section><h2>结果记录</h2><div class=\"markdown-table-wrap\"><table class=\"case-results\"><thead><tr><th>衡量项</th><th>简历记录</th><th>对应的价值</th></tr></thead><tbody><tr><td>环境接入</td><td>15+ 客户环境、超过 100 台云主机</td><td>让统一入口实际承接客户资源</td></tr><tr><td>运维效率</td><td>提升 200%</td><td>改善跨云环境的管理与操作效率</td></tr><tr><td>资源成本</td><td>客户平均节省 20%</td><td>使资源使用与优化效果可见</td></tr><tr><td>日常运维工作量</td><td>减少 60%</td><td>减少重复维护投入</td></tr></tbody></table></div><p class=\"case-source-note\">上述数据来自个人简历记录。统计周期、样本范围和各项指标的计算口径尚待补充。</p></section><section><h2>我的工作范围</h2><ul><li>主导平台整体架构设计，采用 Vue 与 Django 的前后端分离架构。</li><li>设计统一多云资源管理模型，对接火山云、阿里云等环境。</li><li>实现资源监控告警、生命周期管理、成本分析和告警自动处理模块。</li><li>完成客户环境接入，让平台承接真实资源和日常维护。</li></ul><p>交付包含平台开发与环境接入。共同资源模型为后续管理模块提供一致的关联依据。</p></section><section><h2>交付物与关键做法</h2><div class=\"case-deliverable\"><h3>跨云资源的共同模型与管理入口</h3><p>不同云环境的资源先纳入统一模型。Vue 前端提供集中查看与操作，Django 后端承接资源对象和管理逻辑，资源按环境和归属组织起来。</p></div><div class=\"case-deliverable\"><h3>围绕资源连接的运维能力</h3><p>资源状态、告警、生命周期和成本信息围绕共同对象开展。统一监控帮助发现问题，维护与告警自动处理承接后续动作，成本分析用于查看资源投入。</p></div><div class=\"case-deliverable\"><h3>能够承接客户环境的接入工作</h3><p>平台接入客户实际使用的云环境，并集中管理资源。交付范围因此包括不同环境的连接与持续使用基础，成果需要在真实运维过程中观察。</p></div></section><section><h2>这个案例能够说明的能力</h2><p>能够把跨平台的资源管理需求转成共同模型，完成前后端开发，并连接监控、自动化操作与客户环境接入。</p><p>适用于资源分散在多个云环境、需要统一运维和成本视图的团队。类似交付还需核对接入范围、操作权限、日常维护方式与指标口径。</p></section></div>",
     "steps": [
       {
         "title": "统一资源模型",
@@ -395,28 +307,6 @@
         "label": "核心交付",
         "value": "统一资源模型、跨云监控与自动化运维模块"
       }
-    ],
-    "imageSlots": [
-      {
-        "id": "multicloud-resources",
-        "title": "跨云资源的统一管理视图",
-        "caption": "统一查看阿里云与火山云资源的客户环境、配置、运行状态和操作入口。界面依据项目内容复原。",
-        "request": "提供同一列表中跨云资源或资源详情截图；保留云平台、环境、状态与操作字段，客户和主机名称可使用化名。",
-        "src": "/assets/cases/multicloud-resources.webp",
-        "width": 1774,
-        "height": 887,
-        "alt": "跨云资源的统一管理视图"
-      },
-      {
-        "id": "multicloud-operations",
-        "title": "资源监控与运维关联",
-        "caption": "围绕同一资源查看监控趋势、告警、处理记录、关联资源与成本。",
-        "request": "提供与资源列表对应的监控告警、处理记录或成本视图；若有成本或工作量前后统计，也可附原始报表说明指标口径。",
-        "src": "/assets/cases/multicloud-operations.webp",
-        "width": 1774,
-        "height": 887,
-        "alt": "资源监控与运维关联"
-      }
     ]
   },
   {
@@ -430,7 +320,7 @@
     "period": {
       "start": "2022-12"
     },
-    "html": "<div class=\"case-sample\"><section><h2>要解决的问题，为什么值得投入</h2><p>公司向云原生架构转型后，原有发布方式无法满足 Kubernetes 环境的部署需求。应用需要在不同环境中发布，配置版本、环境差异和人工操作都影响交付。</p><dl class=\"case-problem-points\"><div><dt>发布效率</dt><dd>原流程平均一次应用发布需要 30 分钟，发布周期是直接需要改善的指标。</dd></div><div><dt>环境一致性</dt><dd>不同环境的配置需要统一组织和管理，减少配置差异带来的错误。</dd></div><div><dt>变更可靠性</dt><dd>发布过程需要留下版本与审核依据，并能够追踪部署状态和执行回滚。</dd></div></dl><p>项目的价值在于让应用变更更快、更稳定地进入运行环境，同时减少配置错误和人工操作风险。这决定了交付需要覆盖整条发布流程。</p></section><section><h2>结果记录</h2><div class=\"markdown-table-wrap\"><table class=\"case-results\"><thead><tr><th>衡量项</th><th>简历记录</th><th>对应的价值</th></tr></thead><tbody><tr><td>平均应用发布时间</td><td>30 分钟 → 5 分钟</td><td>减少一次发布所需的等待与操作时间</td></tr><tr><td>发布成功率</td><td>提升至 99.9%</td><td>提高发布过程的稳定性</td></tr><tr><td>配置错误</td><td>降低 80%</td><td>减少环境配置差异带来的错误</td></tr><tr><td>代码提交到部署的周期</td><td>缩短 70%</td><td>加快变更进入运行环境的速度</td></tr></tbody></table></div><p class=\"case-source-note\">上述数据来自个人简历中的项目记录。统计周期、样本范围和计算口径尚待补充；下方展示发布链路与配置管理。</p></section><section><h2>我的工作范围</h2><ul><li>设计并实现 GitOps 发布架构，用 Git 管理基础设施与应用配置版本。</li><li>搭建 GitLab Runner、Kustomize 与 ArgoCD 组成的多环境发布平台。</li><li>制定配置模板、变更审核流程和最佳实践文档。</li><li>指导开发及运维团队使用工具，把发布规范落到团队协作中。</li></ul><p>我的交付覆盖方案、工具链和使用方法。开发与运维团队共同使用配置模板、审核规则与发布平台，才能让这套流程持续服务于日常交付。</p></section><section><h2>交付物与关键做法</h2><div class=\"case-deliverable\"><h3>一条能够追溯变更的发布链路</h3><p>将配置纳入 Git，保留变更版本和审核依据；通过 GitLab Runner 执行流水线，再由 ArgoCD 衔接应用同步与部署。发布过程围绕同一份配置版本推进，问题定位和回滚也有对应的版本依据。</p><ol class=\"case-flow\" aria-label=\"发布链路示意\"><li><strong>配置入库</strong><span>Git 配置版本</span></li><li><strong>变更审核</strong><span>模板与审核规范</span></li><li><strong>流水线执行</strong><span>GitLab Runner</span></li><li><strong>应用同步</strong><span>ArgoCD</span></li><li><strong>应用部署</strong><span>Kubernetes</span></li></ol><p class=\"case-source-note\">发布流程与应用状态通过版本标识相互关联。</p><!-- case-image:gitops-delivery --></div><div class=\"case-deliverable\"><h3>一套管理环境差异的配置模板</h3><p>用 Kustomize 组织多环境配置差异，并制定模板与变更审核规范。共同配置和环境差异进入版本管理，修改经过审核，再通过统一流程部署。</p><p>这项交付连接了两个问题：配置怎样保持一致，以及必要的环境差异怎样被明确表达和核对。</p><!-- case-image:gitops-environments --></div><div class=\"case-deliverable\"><h3>团队能够继续使用的规范与文档</h3><p>制定最佳实践和规范文档，指导开发与运维团队采用共同流程。工具链、配置模板、审核规则和回滚方式一起交付，让后续变更能够继续按同一套方法处理。</p></div></section><section><h2>这个案例能够说明的能力</h2><p>在 Kubernetes 多环境部署场景中，我能够把发布效率、配置一致性和变更可靠性的要求，落实为配置管理、自动发布、审核与回滚的工程方案，并推动团队使用。</p><p>如果团队正面临多环境发布流程需要统一、配置容易出错或部署周期较长的问题，这个项目可以作为评估类似交付能力的参考。具体方案仍需要结合应用形态、现有工具和团队协作方式确定。</p></section></div>",
+    "html": "<div class=\"case-sample\"><section><h2>要解决的问题，为什么值得投入</h2><p>公司向云原生架构转型后，原有发布方式无法满足 Kubernetes 环境的部署需求。应用需要在不同环境中发布，配置版本、环境差异和人工操作都影响交付。</p><dl class=\"case-problem-points\"><div><dt>发布效率</dt><dd>原流程平均一次应用发布需要 30 分钟，发布周期是直接需要改善的指标。</dd></div><div><dt>环境一致性</dt><dd>不同环境的配置需要统一组织和管理，减少配置差异带来的错误。</dd></div><div><dt>变更可靠性</dt><dd>发布过程需要留下版本与审核依据，并能够追踪部署状态和执行回滚。</dd></div></dl><p>项目的价值在于让应用变更更快、更稳定地进入运行环境，同时减少配置错误和人工操作风险。这决定了交付需要覆盖整条发布流程。</p></section><section><h2>结果记录</h2><div class=\"markdown-table-wrap\"><table class=\"case-results\"><thead><tr><th>衡量项</th><th>简历记录</th><th>对应的价值</th></tr></thead><tbody><tr><td>平均应用发布时间</td><td>30 分钟 → 5 分钟</td><td>减少一次发布所需的等待与操作时间</td></tr><tr><td>发布成功率</td><td>提升至 99.9%</td><td>提高发布过程的稳定性</td></tr><tr><td>配置错误</td><td>降低 80%</td><td>减少环境配置差异带来的错误</td></tr><tr><td>代码提交到部署的周期</td><td>缩短 70%</td><td>加快变更进入运行环境的速度</td></tr></tbody></table></div><p class=\"case-source-note\">上述数据来自个人简历中的项目记录。统计周期、样本范围和计算口径尚待补充。</p></section><section><h2>我的工作范围</h2><ul><li>设计并实现 GitOps 发布架构，用 Git 管理基础设施与应用配置版本。</li><li>搭建 GitLab Runner、Kustomize 与 ArgoCD 组成的多环境发布平台。</li><li>制定配置模板、变更审核流程和最佳实践文档。</li><li>指导开发及运维团队使用工具，把发布规范落到团队协作中。</li></ul><p>我的交付覆盖方案、工具链和使用方法。开发与运维团队共同使用配置模板、审核规则与发布平台，才能让这套流程持续服务于日常交付。</p></section><section><h2>交付物与关键做法</h2><div class=\"case-deliverable\"><h3>一条能够追溯变更的发布链路</h3><p>将配置纳入 Git，保留变更版本和审核依据；通过 GitLab Runner 执行流水线，再由 ArgoCD 衔接应用同步与部署。发布过程围绕同一份配置版本推进，问题定位和回滚也有对应的版本依据。</p><ol class=\"case-flow\" aria-label=\"发布链路示意\"><li><strong>配置入库</strong><span>Git 配置版本</span></li><li><strong>变更审核</strong><span>模板与审核规范</span></li><li><strong>流水线执行</strong><span>GitLab Runner</span></li><li><strong>应用同步</strong><span>ArgoCD</span></li><li><strong>应用部署</strong><span>Kubernetes</span></li></ol><p class=\"case-source-note\">发布流程与应用状态通过版本标识相互关联。</p></div><div class=\"case-deliverable\"><h3>一套管理环境差异的配置模板</h3><p>用 Kustomize 组织多环境配置差异，并制定模板与变更审核规范。共同配置和环境差异进入版本管理，修改经过审核，再通过统一流程部署。</p><p>这项交付连接了两个问题：配置怎样保持一致，以及必要的环境差异怎样被明确表达和核对。</p></div><div class=\"case-deliverable\"><h3>团队能够继续使用的规范与文档</h3><p>制定最佳实践和规范文档，指导开发与运维团队采用共同流程。工具链、配置模板、审核规则和回滚方式一起交付，让后续变更能够继续按同一套方法处理。</p></div></section><section><h2>这个案例能够说明的能力</h2><p>在 Kubernetes 多环境部署场景中，我能够把发布效率、配置一致性和变更可靠性的要求，落实为配置管理、自动发布、审核与回滚的工程方案，并推动团队使用。</p><p>如果团队正面临多环境发布流程需要统一、配置容易出错或部署周期较长的问题，这个项目可以作为评估类似交付能力的参考。具体方案仍需要结合应用形态、现有工具和团队协作方式确定。</p></section></div>",
     "steps": [
       {
         "title": "配置纳入 Git",
@@ -462,28 +352,6 @@
         "label": "核心交付",
         "value": "自动发布链路、环境配置模板、审核与回滚流程"
       }
-    ],
-    "imageSlots": [
-      {
-        "id": "gitops-delivery",
-        "title": "发布流水线与应用状态",
-        "caption": "通过版本标识连接 GitLab 流水线、Argo CD 应用状态与 Kubernetes 资源。界面依据项目内容复原。",
-        "request": "提供同一次发布的 GitLab 流水线与 ArgoCD 应用状态截图；保留提交或版本标识、运行状态，以及可见的开始结束时间，用于说明发布过程和用时。",
-        "src": "/assets/cases/gitops-delivery.webp",
-        "width": 1774,
-        "height": 887,
-        "alt": "发布流水线与应用状态"
-      },
-      {
-        "id": "gitops-environments",
-        "title": "环境配置与变更审核",
-        "caption": "共用配置和环境差异由 Kustomize 组织，配置变更经过审核并关联目标环境。",
-        "request": "提供 Kustomize 共用配置与环境差异的目录或文件片段，搭配一次 Merge Request 变更或审核截图；保留可读字段，去掉凭据与内部地址。",
-        "src": "/assets/cases/gitops-environments.webp",
-        "width": 1774,
-        "height": 887,
-        "alt": "环境配置与变更审核"
-      }
     ]
   },
   {
@@ -497,7 +365,7 @@
     "period": {
       "start": "2021-12"
     },
-    "html": "<div class=\"case-sample\"><section><h2>要解决的问题，为什么值得投入</h2><p>业务规模扩大后，传统虚拟机部署出现资源利用率低、环境一致性差和运维成本高的问题。应用分散运行，部署环境和状态需要分别维护。</p><dl class=\"case-problem-points\"><div><dt>资源投入</dt><dd>需要提高资源利用率，并使基础设施能够持续承接业务。</dd></div><div><dt>部署效率</dt><dd>环境差异和分散的部署方式影响应用进入运行环境的速度。</dd></div><div><dt>运行维护</dt><dd>迁移以后仍需统一查看日志、监控和告警，支持故障响应。</dd></div></dl><p>项目因此需要同时建设运行平台和推进应用迁移。应用进入统一环境，并拥有共同的镜像与可观测方法，平台才能服务于日常交付。</p></section><section><h2>结果记录</h2><div class=\"markdown-table-wrap\"><table class=\"case-results\"><thead><tr><th>衡量项</th><th>简历记录</th><th>对应的价值</th></tr></thead><tbody><tr><td>应用改造范围</td><td>指导团队完成 50+ 应用容器化改造</td><td>让平台实际承接已有业务</td></tr><tr><td>资源利用率</td><td>提升 40%</td><td>改善基础设施的资源使用</td></tr><tr><td>部署效率</td><td>提升 300%，用时从小时级到分钟级</td><td>加快应用部署</td></tr><tr><td>故障平均响应时间</td><td>缩短 50%</td><td>让统一可观测体系支持问题响应</td></tr></tbody></table></div><p class=\"case-source-note\">上述数据来自个人简历记录。统计周期、应用范围和效率指标口径尚待补充，下方展示平台拓扑与应用运行视图。</p></section><section><h2>我的工作范围</h2><ul><li>设计并部署生产级 Kubernetes 集群，完成多可用区高可用架构与网络方案选型。</li><li>构建镜像流水线，规范基础镜像制作和应用容器化流程。</li><li>基于 ELK 和 Prometheus 建设日志采集、监控与告警体系。</li><li>制定应用改造规范，指导开发团队推进 50+ 应用的容器化改造。</li></ul><p>平台建设由我承担相应架构与实施工作，应用改造通过规范与开发团队协作推进。交付同时覆盖基础平台和团队采用的方法。</p></section><section><h2>交付物与关键做法</h2><div class=\"case-deliverable\"><h3>能够承接生产应用的运行平台</h3><p>建设 Kubernetes 集群，处理高可用与网络方案，并为应用提供共同运行基础。平台架构需要和已有应用的运行需求一起考虑。</p><!-- case-image:container-architecture --></div><div class=\"case-deliverable\"><h3>镜像、日志与监控组成的迁移基础</h3><p>镜像规范组织应用构建与容器化方式，ELK 和 Prometheus 连接迁移后的日志、状态和告警。应用进入集群后，团队仍能够查看运行情况并响应问题。</p><!-- case-image:container-observability --></div><div class=\"case-deliverable\"><h3>开发与运维共同采用的改造规范</h3><p>制定容器化改造规范并指导开发团队，让迁移按共同方法推进。运行平台、应用改造和可观测能力一起交付，降低平台建成后难以承接实际业务的风险。</p></div></section><section><h2>这个案例能够说明的能力</h2><p>能够从基础设施问题出发建设运行平台，并把镜像、可观测体系与应用迁移连接成完整的工程交付。</p><p>适用于希望统一应用运行环境、推进容器化迁移的团队。具体方案需要结合应用特征、高可用要求与团队维护能力确定，迁移后的部署和故障响应也应共同验收。</p></section></div>",
+    "html": "<div class=\"case-sample\"><section><h2>要解决的问题，为什么值得投入</h2><p>业务规模扩大后，传统虚拟机部署出现资源利用率低、环境一致性差和运维成本高的问题。应用分散运行，部署环境和状态需要分别维护。</p><dl class=\"case-problem-points\"><div><dt>资源投入</dt><dd>需要提高资源利用率，并使基础设施能够持续承接业务。</dd></div><div><dt>部署效率</dt><dd>环境差异和分散的部署方式影响应用进入运行环境的速度。</dd></div><div><dt>运行维护</dt><dd>迁移以后仍需统一查看日志、监控和告警，支持故障响应。</dd></div></dl><p>项目因此需要同时建设运行平台和推进应用迁移。应用进入统一环境，并拥有共同的镜像与可观测方法，平台才能服务于日常交付。</p></section><section><h2>结果记录</h2><div class=\"markdown-table-wrap\"><table class=\"case-results\"><thead><tr><th>衡量项</th><th>简历记录</th><th>对应的价值</th></tr></thead><tbody><tr><td>应用改造范围</td><td>指导团队完成 50+ 应用容器化改造</td><td>让平台实际承接已有业务</td></tr><tr><td>资源利用率</td><td>提升 40%</td><td>改善基础设施的资源使用</td></tr><tr><td>部署效率</td><td>提升 300%，用时从小时级到分钟级</td><td>加快应用部署</td></tr><tr><td>故障平均响应时间</td><td>缩短 50%</td><td>让统一可观测体系支持问题响应</td></tr></tbody></table></div><p class=\"case-source-note\">上述数据来自个人简历记录。统计周期、应用范围和效率指标口径尚待补充。</p></section><section><h2>我的工作范围</h2><ul><li>设计并部署生产级 Kubernetes 集群，完成多可用区高可用架构与网络方案选型。</li><li>构建镜像流水线，规范基础镜像制作和应用容器化流程。</li><li>基于 ELK 和 Prometheus 建设日志采集、监控与告警体系。</li><li>制定应用改造规范，指导开发团队推进 50+ 应用的容器化改造。</li></ul><p>平台建设由我承担相应架构与实施工作，应用改造通过规范与开发团队协作推进。交付同时覆盖基础平台和团队采用的方法。</p></section><section><h2>交付物与关键做法</h2><div class=\"case-deliverable\"><h3>能够承接生产应用的运行平台</h3><p>建设 Kubernetes 集群，处理高可用与网络方案，并为应用提供共同运行基础。平台架构需要和已有应用的运行需求一起考虑。</p></div><div class=\"case-deliverable\"><h3>镜像、日志与监控组成的迁移基础</h3><p>镜像规范组织应用构建与容器化方式，ELK 和 Prometheus 连接迁移后的日志、状态和告警。应用进入集群后，团队仍能够查看运行情况并响应问题。</p></div><div class=\"case-deliverable\"><h3>开发与运维共同采用的改造规范</h3><p>制定容器化改造规范并指导开发团队，让迁移按共同方法推进。运行平台、应用改造和可观测能力一起交付，降低平台建成后难以承接实际业务的风险。</p></div></section><section><h2>这个案例能够说明的能力</h2><p>能够从基础设施问题出发建设运行平台，并把镜像、可观测体系与应用迁移连接成完整的工程交付。</p><p>适用于希望统一应用运行环境、推进容器化迁移的团队。具体方案需要结合应用特征、高可用要求与团队维护能力确定，迁移后的部署和故障响应也应共同验收。</p></section></div>",
     "steps": [
       {
         "title": "建设运行平台",
@@ -528,28 +396,6 @@
       {
         "label": "核心交付",
         "value": "生产级集群、镜像流水线、日志监控和迁移规范"
-      }
-    ],
-    "imageSlots": [
-      {
-        "id": "container-architecture",
-        "title": "集群拓扑与应用承载",
-        "caption": "控制平面、可用区、工作节点与应用资源在同一拓扑中呈现。界面依据项目内容复原。",
-        "request": "提供当时的 Kubernetes 集群架构或拓扑图，保留可用区、节点角色、网络与应用承载关系，使用角色名替代内部地址。",
-        "src": "/assets/cases/container-architecture.webp",
-        "width": 1774,
-        "height": 887,
-        "alt": "集群拓扑与应用承载"
-      },
-      {
-        "id": "container-observability",
-        "title": "应用运行与可观测性",
-        "caption": "以同一应用关联部署状态、Prometheus 监控和 ELK 日志，支持交付后的运行排查。",
-        "request": "提供应用迁移清单或部署前后对照，搭配同一应用的 Prometheus 监控或 ELK 日志；若有原始用时与响应记录，可用于补充指标证据。",
-        "src": "/assets/cases/container-observability.webp",
-        "width": 1774,
-        "height": 887,
-        "alt": "应用运行与可观测性"
       }
     ]
   }
