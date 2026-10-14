@@ -7,7 +7,9 @@ try {
   document.querySelectorAll('pre.mermaid').forEach(element => {
     const notice = document.createElement('p');
     notice.className = 'quiet-note';
-    notice.textContent = '图表暂时无法加载，下面保留了图表原文。';
+    notice.textContent = document.documentElement.lang === 'en'
+      ? 'The diagram is unavailable. Its source is shown below.'
+      : '图表暂时无法加载，下面保留了图表原文。';
     element.before(notice);
   });
 }
