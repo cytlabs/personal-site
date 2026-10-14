@@ -35,7 +35,7 @@
         "text": "Retain review outcomes and reasons for changes, linking client feedback to the candidate and role. The lead decides whether the search direction should change."
       }
     ],
-    "sourceHash": "d1506646cadf72543040ecd7e9cafd9566b56b2ce965f664ff892a633f7aaf5a"
+    "sourceHash": "8456abcc64d00050383f1e51d9a657ec2f2e650e6af3429eb6ab776e0249671a"
   },
   "creator-marketing-delivery": {
     "description": "Designing a creator delivery workflow with shared criteria across client confirmation, operational sourcing and agent-assisted review.",
@@ -73,7 +73,7 @@
         "text": "Retain ownership, operational responsibilities, confirmed requirements and review status. Confirm requirement changes before updating the active sourcing guide."
       }
     ],
-    "sourceHash": "e76315f55a256bc9e978e1fff26dd5adf63d0e3826ff0771ceda53f88e279f13"
+    "sourceHash": "ec8ae8a49dd28b6a0a3b40402a5e46f2b04a642100ddf5b3bad5cef050414d9c"
   },
   "intent": {
     "description": "Building a workspace that connects records, projects, tasks and actions to address repeated organization in personal AI collaboration.",
@@ -111,7 +111,7 @@
         "text": "Record attention, execution events and notification state so organization reports and subsequent actions can be linked to projects."
       }
     ],
-    "sourceHash": "3f54709e58eaa0caf3a528fcad46c6f27a3195ad7a125d09604d6b14dcd04553"
+    "sourceHash": "1a30ed4f8834b6182a87d2efdb644aa0fe83d9ba580a3bb768f34c957f61a343"
   },
   "keysafe-password-manager": {
     "description": "Full-stack development connecting the product interface, data management and Web3 integration for everyday password management and access protection.",
@@ -149,7 +149,7 @@
         "text": "Provide a demonstration and documentation covering the interface, data management and Web3 integration."
       }
     ],
-    "sourceHash": "0db7eb6fda1e6efc5834ae5ff8c04d0841783778ed5b3a1ea6c26f5e8dc9440d"
+    "sourceHash": "3159273e2f489cb0fa22e88c8399dd9f2be7c4c88297410164457c73e6401975"
   },
   "multi-cloud-management": {
     "description": "Leading a unified multi-cloud resource platform and customer integration to address scattered resources, disconnected monitoring and fragmented cost reporting.",
@@ -187,7 +187,7 @@
         "text": "The platform integrates more than 15 customer environments and centrally manages over 100 cloud servers."
       }
     ],
-    "sourceHash": "7682b17277ddd3aa1f797281db8c7b0f6d0c5de876d8f06a69bb5cb22cec3fef"
+    "sourceHash": "b6a2d89812fb65d6551fad1ffc24e676fd88bacce5a7ec67538dad0ee2d6ed91"
   },
   "enterprise-gitops-platform": {
     "description": "Building a reviewable, traceable release process across environments to address slow releases, configuration differences and manual operations.",
@@ -225,7 +225,7 @@
         "text": "Use documentation and training to help development and operations teams continue using the release platform."
       }
     ],
-    "sourceHash": "2a9e122b215cc6c501ecf77956b7d7fbbc94decb3faaf9ac045b957a89714784"
+    "sourceHash": "ef0a8f85a09122cdd3f834203e8badd58dbefe33dd7173a72d01a54d6c798fdb"
   },
   "kubernetes-platform": {
     "description": "Building a container runtime platform and supporting the containerization of over 50 applications to improve resource use, environment consistency and maintenance.",
@@ -263,6 +263,6 @@
         "text": "Define migration standards and guide developers through containerizing over 50 applications."
       }
     ],
-    "sourceHash": "1d3155bec4d4255bdf6370caed0e3c7bfcc3c98c078ff39def617ee07dc3767e"
+    "sourceHash": "72969cd00f370bfd0050cd1b85a8856db91ff690a75bc082a6570c4f7aec31a3"
   }
 }

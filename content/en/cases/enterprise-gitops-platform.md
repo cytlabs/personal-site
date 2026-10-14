@@ -15,18 +15,22 @@ I put infrastructure and application configuration under Git version control. Re
 GitLab Runner, Kustomize and ArgoCD form the delivery platform: pipelines handle execution steps, Kustomize organizes environment configuration, and ArgoCD connects configuration synchronization to application deployment.
 
 ```mermaid
-flowchart TD
-    A["Propose an application or configuration change"] --> B["Update Git configuration using templates"]
-    B --> C{"Change review"}
-    C -->|Revise| B
-    C -->|Approved| D["Establish an explicit configuration version"]
-    D --> E["GitLab Runner executes the pipeline"]
-    E --> F["Kustomize organizes target environment configuration"]
-    F --> G["ArgoCD synchronizes application configuration"]
-    G --> H["Application in Kubernetes"]
-    H --> I["Inspect deployment and application state"]
-    I -->|Rollback needed| J["Select the relevant previous configuration version"]
-    J --> C
+flowchart LR
+    subgraph CONFIG["Configuration"]
+        direction TB
+        A["Propose change"] --> B["Edit Git configuration"] --> C{"Change review"}
+        C -->|Revise| B
+    end
+    subgraph PIPE["Pipeline"]
+        direction TB
+        D["GitLab Runner"] --> E["Kustomize configuration"]
+    end
+    subgraph DEPLOY["Deploy and inspect"]
+        direction TB
+        F["ArgoCD sync"] --> G["K8s deployment"] --> H["Inspect state"]
+        H -->|Rollback needed| R["Select previous version"]
+    end
+    CONFIG -->|Approved| PIPE --> DEPLOY
 ```
 
 The diagram shows the overall deployment relationships. Version identifiers connect configuration changes to application state, giving the team a path for checking release problems. Rollback follows the shared change process as well.
@@ -39,12 +43,9 @@ I used Kustomize to organize environment configuration and defined templates and
 
 ```mermaid
 flowchart TD
-    A["Shared application configuration"] --> B["Environment A differences"]
-    A --> C["Environment B differences"]
-    A --> D["Environment C differences"]
-    B --> E["Generate environment A deployment configuration"]
-    C --> F["Generate environment B deployment configuration"]
-    D --> G["Generate environment C deployment configuration"]
+    A["Shared configuration"] --> B["Environment A"] --> E["A deployment config"]
+    A --> C["Environment B"] --> F["B deployment config"]
+    A --> D["Environment C"] --> G["C deployment config"]
 ```
 
 Reviewers can check both common changes and the differences specific to a target environment. Templates provide a consistent organization method while preserving necessary variation.

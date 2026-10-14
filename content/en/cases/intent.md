@@ -16,16 +16,19 @@ I separated original records from formal objects. The product retains the input 
 
 ```mermaid
 flowchart TD
-    A["Capture an idea, material or plan"] --> B["Retain original text and relationships"]
-    B --> C["AI prepares a report and suggestions"]
-    C --> D["User reviews, corrects and confirms"]
-    D --> E{"How should the content be used"}
-    E -->|Concrete action| F["Tasks and actions"]
-    E -->|Reusable material| G["Materials and project references"]
-    E -->|Ordinary record| H["Retain the record"]
-    F --> I["Advance the related project"]
-    G --> I
-    I --> J["Return outcomes and judgments to the project"]
+    subgraph CAPTURE["Capture"]
+        direction TB
+        A["Ideas and materials"] --> B["Retain original input"]
+    end
+    subgraph ORGANIZE["Organize and confirm"]
+        direction TB
+        C["AI report"] --> D{"User reviews"}
+        D -->|Action| E["Tasks and actions"]
+        D -->|Reuse| F["Project references"]
+        D -->|Record| G["Ordinary records"]
+    end
+    CAPTURE --> ORGANIZE
+    ORGANIZE --> H["Project work and outcomes"]
 ```
 
 The design preserves the user's decisions about goals and priorities. AI organizes information, users confirm formal tasks and plans, and the original input remains available to revisit.
@@ -37,18 +40,21 @@ The web workspace centers on projects, recent materials and today's plans. Proje
 If the website and assistant maintained separate data, users would again need to save and synchronize it twice. I implemented shared business services and MCP interfaces so both the web interface and the agent query and operate on the same objects.
 
 ```mermaid
-flowchart TD
-    U["User"] --> W["Web workspace"]
-    U --> C["WeChat entry point"]
-    C --> A["Personal AI assistant"]
-    A --> M["MCP interface"]
-    W --> S["Intent business services"]
-    M --> S
-    S --> D["Records, projects, tasks, materials and actions"]
-    D --> R["Daily organization report"]
-    R --> W
-    R --> N["WeChat brief"]
-    N --> U
+flowchart LR
+    subgraph ENTRY["Work entry points"]
+        direction TB
+        W["Web workspace"]
+        C["WeChat"] --> A["AI assistant"] --> M["MCP interface"]
+    end
+    subgraph SERVICE["Shared services"]
+        direction TB
+        S["Intent services"] --> D["Projects and tasks"]
+    end
+    subgraph REPORT["Organization output"]
+        direction TB
+        R["Daily report"] --> N["WeChat brief"]
+    end
+    ENTRY --> SERVICE --> REPORT
 ```
 
 MCP provides the assistant's interface to product capabilities. The website and assistant use the same services to access and operate on project objects. Work can start through different entry points while the product maintains the relationships between project tasks, materials and state.
