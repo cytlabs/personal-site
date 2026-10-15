@@ -1,13 +1,13 @@
 ---
 publish: true
 slug: rethinking-product-ux-ui-with-ai
-title: 和 AI 反复改界面之后，我重新理解了产品、UX 和 UI
+title: 不懂设计的人，怎样和 AI 一起做好设计？
 summary: 这让我重新想了两个问题：产品、UX 和 UI 到底各自负责什么？当我不懂设计时，应该怎样和 AI 一起把设计做好？
 category: AI实践
 tags: [AI协作, 产品设计, UX, UI, Intent]
 published: 2026-10-15
 ---
-# 和 AI 反复改界面之后，我重新理解了产品、UX 和 UI
+# 不懂设计的人，怎样和 AI 一起做好设计？
 
 最近，我让 AI 帮我重新设计 Intent 的界面。这个产品用来管理我的目标、项目、任务和资料，也在接入 AI 执行任务的能力。
 

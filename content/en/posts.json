@@ -192,7 +192,7 @@
     "sourceHash": "162fe137ff407e0ca96b9fc42df2c88cd71c5a748a20670d8e7c769d1410d546"
   },
   "rethinking-product-ux-ui-with-ai": {
-    "title": "After repeated interface revisions with AI, I rethought product design, UX and UI",
+    "title": "How can someone without a design background work with AI to get design right?",
     "summary": "This made me reconsider two questions: what exactly are product design, UX and UI each responsible for? And when I do not understand design, how should I work with AI to get it right?",
     "category": "AI practice",
     "tags": [
@@ -202,6 +202,6 @@
       "UI",
       "Intent"
     ],
-    "sourceHash": "1fc66ccee35462a0e3e7e755e2f1d6a4b06033d48ec122a399c623d1d08457e9"
+    "sourceHash": "0400bea986245be98819e5e6d270242d4a0ca6130a60e7953eade73521924855"
   }
 }
