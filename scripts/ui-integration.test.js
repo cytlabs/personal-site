@@ -262,7 +262,9 @@ test('web resume includes current personal details and concise experience titles
   assert.ok(about.querySelector('h1').textContent.includes('雨桐'));
   assert.ok(about.querySelector('.identity-card').textContent.includes('雨桐'));
   assert.equal(doc.querySelector('.resume-contact a[href^="mailto:"]').textContent, 'Email：cytlabss@gmail.com');
-  assert.equal(doc.querySelector('.resume-contact a[href="https://www.xiamu.cc/"]').textContent, 'xiamu.cc');
+  assert.equal(doc.querySelector('.resume-contact a[href="https://www.xiamu.cc/"]').textContent, '个人网站：xiamu.cc');
+  assert.equal(doc.querySelectorAll('.resume-contact > * > svg[aria-hidden="true"][focusable="false"]').length, 6);
+  assert.equal(documentAt('en/resume').querySelector('.resume-contact a[href="https://www.xiamu.cc/"]').textContent, 'Personal website: xiamu.cc');
   assert.equal(doc.querySelector('.resume-contact').children[4].textContent, '学历：本科');
   assert.equal(doc.querySelector('.resume-contact').lastElementChild.textContent, '工作年限：7年');
   assert.equal(doc.querySelector('.resume-summary'), null);
