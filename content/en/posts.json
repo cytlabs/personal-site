@@ -227,5 +227,17 @@
       "Flow"
     ],
     "sourceHash": "bced8a5bd5215e81b1a019bf1d85fcba56a137124b538673661dd2f6d25d1d17"
+  },
+  "openviking-memory-and-knowledge": {
+    "title": "Using OpenViking: distinguish automatic memory from knowledge organization",
+    "summary": "Lessons from everyday Codex memory and importing historical material: ingestion, semantic indexing, knowledge synthesis, file granularity and evaluation with real tasks.",
+    "category": "AI practice",
+    "tags": [
+      "OpenViking",
+      "Codex",
+      "AI memory",
+      "Knowledge management"
+    ],
+    "sourceHash": "c3e6911d6dd3c9d0d4a29821a8be7aaa32eb92410efa3437d17588a5dba7e213"
   }
 }
