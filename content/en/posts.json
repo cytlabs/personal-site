@@ -215,5 +215,17 @@
       "Personal reflections"
     ],
     "sourceHash": "7e12b7ac8229b3d477947e17b9565135c1b1b157f56430a3b66ae52faeb4b357"
+  },
+  "business-execution-and-focus": {
+    "title": "Making things happen: business, execution and focus",
+    "summary": "Reflections on distribution, customer value, learning from established businesses, execution, pricing, focus and flow.",
+    "category": "Business reflections",
+    "tags": [
+      "Business",
+      "Execution",
+      "Focus",
+      "Flow"
+    ],
+    "sourceHash": "bced8a5bd5215e81b1a019bf1d85fcba56a137124b538673661dd2f6d25d1d17"
   }
 }
