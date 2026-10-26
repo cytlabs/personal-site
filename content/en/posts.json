@@ -203,5 +203,17 @@
       "Intent"
     ],
     "sourceHash": "0400bea986245be98819e5e6d270242d4a0ca6130a60e7953eade73521924855"
+  },
+  "driving-and-restraining-forces": {
+    "title": "Many outcomes emerge from driving and restraining forces",
+    "summary": "From personal choices to business and policy, examining how motivations, constraints and interactions shape change—and how we choose where to direct our attention.",
+    "category": "Personal reflections",
+    "tags": [
+      "Driving and restraining forces",
+      "Bounded rationality",
+      "Institutions and incentives",
+      "Personal reflections"
+    ],
+    "sourceHash": "7e12b7ac8229b3d477947e17b9565135c1b1b157f56430a3b66ae52faeb4b357"
   }
 }
