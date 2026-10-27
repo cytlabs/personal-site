@@ -54,9 +54,13 @@ A better approach is to identify valid embedded images, extract them as attachme
 
 Progress estimation also needed correction. Parsing long conversations creates additional nodes as processing continues, so the total queue size changes. I initially interpreted the current node ratio as evidence that the whole import was nearly finished. It was not a fixed completion percentage and could not reliably predict the remaining time.
 
-By October 27, 2026, both the flomo and ChatGPT import tasks had finished. Their processing queues were empty when checked, with no failures reported. However, the encoded-content noise had not yet been cleaned up, and topic-based knowledge organization had not been run.
+When checked on October 27, 2026, both the flomo and ChatGPT import tasks had finished. Their processing queues were empty, with no failures reported. At that point, the encoded-content noise had not yet been cleaned up, and topic-based knowledge organization had not been run.
 
 The remediation plan is to inventory the affected sources and derived nodes, create cleaned copies preserving the text, message relationships and attachment references, validate them in a controlled scope, and then replace the corresponding old content and index records. Adding a clean copy alone would leave the old noise searchable. Other successfully ingested material does not need a full reimport.
+
+That remediation has since been completed: back up the original content and vectors, validate the cleaned copy in an isolated account, and replace the production content and old index records. All 379 message IDs in the affected conversation were preserved, eight complete image attachments were extracted, and no long encoded strings remained in the validated package. The original conversation uses full-text vector indexing; topic pages receive their own semantic summaries, reducing repeated summarization of historical code fragments.
+
+The preprocessing entry point now checks for encoded payloads and unusual long strings, stopping the import for review when they appear. Another configuration issue was that model and embedding concurrency had both been explicitly set to two, rather than using the installed version's defaults. Both limits have been changed to four and verified. That does not establish that throughput has doubled.
 
 **Official organization guidance still needs to be executed.**
 
@@ -78,7 +82,7 @@ I would check more than whether a source can be found: does retrieval omit relev
 
 The model comparison also taught me that better evidence coverage on a small sample does not establish suitable throughput for bulk processing. Quality, long inputs, concurrency and throughput should be evaluated against the real workload.
 
-The collection has now been ingested and indexed. The identified encoded-content noise still needs correction before proceeding with topic-based knowledge organization; I cannot describe it as an already completed and validated personal Wiki.
+The collection has now been ingested and indexed, and the identified source of encoded-content noise has been repaired. Following the official `llm-wiki` content rules, the assistant has organized two sample topics, problem-driven learning and demand and solution validation, and verified their retrieval with practical questions. These pages were authored by the assistant and saved in OpenViking. The native Compile runtime is not configured, so this is not automatic compilation of the full collection, nor do two sample pages mean all the material has been organized.
 
 My desired workflow leaves routine maintenance to the assistant: capture new conversations, process material worth keeping and integrate relevant knowledge into existing pages. Users should focus on accurate understanding and useful results rather than continually rearranging folders.
 
