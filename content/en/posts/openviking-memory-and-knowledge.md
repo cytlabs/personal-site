@@ -44,6 +44,20 @@ I now prefer a relatively complete idea or question as the organizing unit. Full
 
 Original archives can remain as backups. The knowledge used day to day does not need to mirror the export's file structure.
 
+**Identify content that should not be sent for summarization.**
+
+Further investigation exposed a more specific problem than file granularity. One historical conversation of roughly 2.2 MB contained about 1.43 million characters in long encoded strings, along with several `data:image/` embedded image payloads. Preprocessing had preserved them directly, and some encoded content was subsequently split into fragments and included in semantic summaries and the retrieval index.
+
+The system processed the material, but some outputs merely described an uninterpretable sequence of characters. Those outputs used model calls and introduced retrieval noise. Successful task completion and acceptable content quality therefore require separate checks. This is one confirmed source of unnecessary work; it does not establish that the encoded payloads caused all the processing time.
+
+A better approach is to identify valid embedded images, extract them as attachments and retain traceable references in the text. Payloads that cannot be decoded should keep their original evidence and an explicit explanation. A long string alone is not a sufficient reason to delete content, and normal prose, code and speaker attribution must be preserved.
+
+Progress estimation also needed correction. Parsing long conversations creates additional nodes as processing continues, so the total queue size changes. I initially interpreted the current node ratio as evidence that the whole import was nearly finished. It was not a fixed completion percentage and could not reliably predict the remaining time.
+
+By October 27, 2026, both the flomo and ChatGPT import tasks had finished. Their processing queues were empty when checked, with no failures reported. However, the encoded-content noise had not yet been cleaned up, and topic-based knowledge organization had not been run.
+
+The remediation plan is to inventory the affected sources and derived nodes, create cleaned copies preserving the text, message relationships and attachment references, validate them in a controlled scope, and then replace the corresponding old content and index records. Adding a clean copy alone would leave the old noise searchable. Other successfully ingested material does not need a full reimport.
+
 **Official organization guidance still needs to be executed.**
 
 OpenViking's official `llm-wiki` Skill provides rules for this work: identify entities, concepts and relationships, integrate evidence into durable knowledge pages, and maintain citations, disagreements and a navigation index.
@@ -64,7 +78,7 @@ I would check more than whether a source can be found: does retrieval omit relev
 
 The model comparison also taught me that better evidence coverage on a small sample does not establish suitable throughput for bulk processing. Quality, long inputs, concurrency and throughput should be evaluated against the real workload.
 
-At the time of writing, much of this collection has been ingested and indexed. Topic-based knowledge organization remains the next step; I cannot describe it as an already completed and validated personal Wiki.
+The collection has now been ingested and indexed. The identified encoded-content noise still needs correction before proceeding with topic-based knowledge organization; I cannot describe it as an already completed and validated personal Wiki.
 
 My desired workflow leaves routine maintenance to the assistant: capture new conversations, process material worth keeping and integrate relevant knowledge into existing pages. Users should focus on accurate understanding and useful results rather than continually rearranging folders.
 
