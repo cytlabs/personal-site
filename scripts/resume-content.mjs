@@ -11,7 +11,8 @@ export async function readResumeContent({ root, cases, base = '' }) {
     github: site.github,
     wechat: 'xiamudewx',
     sections: [
-      { id: 'capabilities', title: '专业能力' },
+      { id: 'summary', title: '个人简介' },
+      { id: 'capabilities', title: '核心技能' },
       { id: 'experience', title: '工作经历' },
       { id: 'projects', title: '项目经历' },
     ],
@@ -19,7 +20,7 @@ export async function readResumeContent({ root, cases, base = '' }) {
       const item = cases.find(c => c.slug === entry.slug && c.publish !== false);
       if (!item) throw new Error(`Resume references unknown or unpublished project: ${entry.slug}`);
       return {
-        ...entry, title: item.title, start: item.period.start,
+        ...entry, title: entry.title || item.title, start: entry.start || item.period.start,
         role: entry.role || item.overview.find(field => field.label === '我的责任')?.value || item.kind,
         url: `${base}/cases/${item.slug}/`,
       };

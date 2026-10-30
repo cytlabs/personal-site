@@ -263,8 +263,8 @@ test('web resume includes current personal details and concise experience titles
   assert.ok(about.querySelector('.identity-card').textContent.includes('雨桐'));
   assert.equal(doc.querySelector('.resume-contact a[href^="mailto:"]').textContent, 'cytlabss@gmail.com');
   assert.equal(doc.querySelector('.resume-contact a[href="https://www.xiamu.cc/"]').textContent, 'xiamu.cc');
-  assert.equal(doc.querySelectorAll('.resume-contact > * > svg[aria-hidden="true"][focusable="false"]').length, 6);
-  assert.deepEqual([...doc.querySelector('.resume-contact').children].map(item => item.textContent), ['cytlabss@gmail.com', 'xiamudewx', 'github.com/cytlabs', 'xiamu.cc', '本科', '7年']);
+  assert.equal(doc.querySelectorAll('.resume-contact > * > svg[aria-hidden="true"][focusable="false"]').length, 7);
+  assert.deepEqual([...doc.querySelector('.resume-contact').children].map(item => item.textContent), ['cytlabss@gmail.com', 'xiamudewx', 'github.com/cytlabs', 'xiamu.cc', '本科', '7年', 'CSDN']);
   assert.ok([...doc.querySelector('.resume-contact').children].every(item => item.getAttribute('aria-label') && item.getAttribute('title')));
   const englishContacts = documentAt('en/resume').querySelector('.resume-contact');
   assert.equal(englishContacts.children[3].getAttribute('aria-label'), 'Personal website: xiamu.cc');
@@ -272,26 +272,40 @@ test('web resume includes current personal details and concise experience titles
   assert.equal(englishContacts.children[5].textContent, '7 years');
   assert.equal(documentAt('en/resume').querySelector('.resume-contact a[href="https://www.xiamu.cc/"]').textContent, 'xiamu.cc');
   assert.equal(doc.querySelector('.resume-contact').children[4].textContent, '本科');
-  assert.equal(doc.querySelector('.resume-contact').lastElementChild.textContent, '7年');
+  assert.equal(doc.querySelector('.resume-contact').children[5].textContent, '7年');
+  assert.equal(doc.querySelector('.resume-contact a[href="https://blog.csdn.net/cyt0906"]').textContent, 'CSDN');
   assert.equal(doc.querySelector('.resume-summary'), null);
   assert.equal(doc.querySelector('#resume-education'), null);
   assert.equal(doc.querySelector('#resume-collaboration'), null);
   assert.deepEqual([...doc.querySelectorAll('.resume-section h2')].map(e => e.textContent),
-    ['专业能力', '工作经历', '项目经历']);
+    ['个人简介', '核心技能', '工作经历', '项目经历']);
   assert.equal(doc.querySelector('.resume-header').firstElementChild.tagName, 'H1');
   assert.ok(doc.querySelector('h1').nextElementSibling.classList.contains('resume-contact'));
   assert.deepEqual([...doc.querySelectorAll('#resume-experience time')].map(t => t.dateTime),
-    ['2024-06', '2021-08', '2024-03', '2019-11', '2021-06']);
+    ['2024-06', '2021-12', '2024-03', '2019-11', '2021-12']);
   assert.equal(doc.querySelector('#resume-experience .resume-role'), null);
   assert.deepEqual([...doc.querySelectorAll('#resume-experience h3')].map(e => e.textContent),
-    ['全栈开发', 'DevOps', '基础运维']);
-  assert.equal(doc.querySelectorAll('#resume-projects .resume-entry').length, 3);
+    ['全栈开发', '上海龙田｜运维／DevOps', '运维工程师']);
+  assert.equal(doc.querySelectorAll('#resume-projects .resume-entry').length, 4);
   const section = doc.querySelector('#resume-projects');
   assert.ok(section.firstElementChild.querySelector('a[href="/cases/"]'));
   assert.deepEqual([...section.querySelectorAll('.resume-date time')].map(t => t.dateTime),
-    ['2026-10', '2026-09', '2026-07']);
-  for (const link of doc.querySelectorAll('#resume-projects .resume-entry a')) {
-    assert.ok(cases.some(c => new URL(link.getAttribute('href'), 'https://example.com').pathname === `/cases/${c.slug}/`));
+    ['2026', '2026', '2024', '2024']);
+  assert.deepEqual([...section.querySelectorAll('.resume-entry h3')].map(e => e.textContent),
+    ['鼎链｜猎头招聘 AI 工作流', 'YALA｜达人营销 AI 工作流', '多云资源管理平台', 'KeySafe｜密码管理工具']);
+  assert.equal(section.querySelector('a[href="https://github.com/cytlabs/keysafe"]').textContent, '项目代码');
+  assert.ok(!section.textContent.includes('Intent'));
+  assert.ok(doc.querySelector('#resume-capabilities').textContent.includes('Python、Go、Gin'));
+  assert.ok(doc.querySelector('#resume-capabilities').textContent.includes('AWS、阿里云'));
+  const approved = JSON.parse(fs.readFileSync(path.join(root, 'content/resume.json')));
+  assert.deepEqual([...doc.querySelectorAll('#resume-summary p')].map(e => e.textContent), approved.summary);
+  for (const [i, entry] of approved.experiences.entries()) {
+    const rendered = doc.querySelectorAll('#resume-experience .resume-entry')[i];
+    assert.deepEqual([...rendered.querySelectorAll('li')].map(e => e.textContent), entry.bullets);
+    if (entry.description) assert.equal(rendered.querySelector('p').textContent, entry.description);
+  }
+  for (const [i, entry] of approved.projects.entries()) {
+    assert.deepEqual([...section.querySelectorAll('.resume-entry')[i].querySelectorAll('li')].map(e => e.textContent), entry.bullets);
   }
   const printButton = doc.querySelector('[data-print-resume]');
   assert.equal(printButton.textContent, '打印简历');
@@ -353,8 +367,8 @@ test('resume image exports current content without controls or changing the live
       assert.equal(clone.window.document.querySelector('.site-header'), null);
       assert.equal(current.querySelector('.resume-case-link'), null);
       assert.ok(current.textContent.includes('修改后最新的简历内容'));
-      assert.equal(current.querySelectorAll('.resume-section').length, 3);
-      assert.equal(current.querySelectorAll('.resume-entry').length, 6);
+      assert.equal(current.querySelectorAll('.resume-section').length, 4);
+      assert.equal(current.querySelectorAll('.resume-entry').length, 7);
       assert.ok(current.classList.contains('resume-image-sheet'));
       assert.ok(options.scale > 1 && options.scale <= 2);
       assert.ok(880 * 2500 * options.scale ** 2 <= 5_000_001);
