@@ -239,5 +239,18 @@
       "Knowledge management"
     ],
     "sourceHash": "7e7a1e61d8cb1fd55461ca9e0d688db36f6bbcc2edb267194b2e7c8587d38ee8"
+  },
+  "bounded-autonomous-ai-development": {
+    "title": "Let AI develop autonomously—but within constraints",
+    "summary": "I want AI to take on an entire software project without waiting for me after each module. The answer is not a single instruction to keep running, but an engineering system of specifications, task dependencies, isolated sessions, tests and recoverable state.",
+    "category": "AI practice",
+    "tags": [
+      "AI coding",
+      "Agent",
+      "Autonomous development",
+      "Engineering process",
+      "Codex"
+    ],
+    "sourceHash": "3b86f41570bead61f32b93189a64b4dbf583de0e01b8dab9b1b3a46058607a01"
   }
 }
