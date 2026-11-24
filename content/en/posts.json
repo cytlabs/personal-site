@@ -1,4 +1,14 @@
 {
+  "understanding-a-makeshift-world": {
+    "title": "The World Is a Makeshift Operation, and I'm Starting to Understand",
+    "summary": "The world isn't as perfectly put together as we imagined, and we're part of it too. Some imperfections exist because the necessary conditions aren't yet in place; some are trade-offs that had to be made at the time; and some really do need someone to make a serious effort to fix them.",
+    "category": "Personal reflections",
+    "tags": [
+      "Personal reflections",
+      "AI"
+    ],
+    "sourceHash": "d55ef8a60956b02961a43b64451648e6683ba78da532d1637065e6922861ef88"
+  },
   "cloud-workspace-from-phone": {
     "title": "How I want to work from a phone",
     "summary": "I want my phone to become the entry point for work: give instructions through conversation, let AI execute in the cloud, and open a cloud desktop when I need to work directly. A server, a cloud desktop and shared working materials are the foundation I am building.",
