@@ -1,4 +1,15 @@
 {
+  "rethinking-ai-collaboration": {
+    "title": "Using More AI Has Made Me Rethink What We Can't Skip",
+    "summary": "Reflections on product rework, Skills and workbenches: what AI can take on, and why understanding, trade-offs and checking results in the real world still call for our participation.",
+    "category": "Personal reflections",
+    "tags": [
+      "AI",
+      "Skill",
+      "Human-AI collaboration"
+    ],
+    "sourceHash": "ba9156746a8f58a132b00539a2fad6b82f13c03db3fbb4ead1d59643df925f88"
+  },
   "understanding-a-makeshift-world": {
     "title": "The World Is a Makeshift Operation, and I'm Starting to Understand",
     "summary": "The world isn't as perfectly put together as we imagined, and we're part of it too. Some imperfections exist because the necessary conditions aren't yet in place; some are trade-offs that had to be made at the time; and some really do need someone to make a serious effort to fix them.",
